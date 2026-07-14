@@ -8,7 +8,7 @@ const Knowledge = () => {
     {
       title: 'How to perfect your Deadlift form',
       description: 'Our head coach breaks down the mechanics of a safe and effective deadlift.',
-      thumbnail: '/images/knowledge_thumbnail_1.png',
+      thumbnail: '/information_video/VIDEO 1/BÌA.png',
       src: '/information_video/VIDEO 1/VIDE0 1.mov',
       duration: '4:20'
     },
@@ -18,12 +18,19 @@ const Knowledge = () => {
       thumbnail: '/information_video/VIDEO 2/BÌA.png',
       src: '/information_video/VIDEO 2/VIDE0 2.mp4',
       duration: '6:15'
+    },
+    {
+      title: 'Maximize your muscle growth',
+      description: 'Learn the optimal training frequency and volume to build muscle effectively.',
+      thumbnail: '/information_video/VIDE0 3/BÌA.png',
+      src: '/information_video/VIDE0 3/VIDEP 3.mp4',
+      duration: '5:45'
     }
   ]
 
   return (
     <section id='Knowledge' className='py-24 bg-transparent'>
-      <div className='container mx-auto max-w-7xl px-4'>
+      <div className='w-full max-w-[1600px] mx-auto px-4 lg:px-8'>
         <div className='flex flex-col md:flex-row justify-between items-end mb-16'>
           <div className='max-w-2xl'>
             <p className='text-[#C5A059] text-lg tracking-widest uppercase mb-4 font-semibold'>
@@ -35,10 +42,10 @@ const Knowledge = () => {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12'>
           {videos.map((video, index) => (
             <div key={index} className='group'>
-              <div className='relative h-[350px] md:h-[450px] rounded-2xl overflow-hidden mb-6 shadow-xl border border-gray-200 bg-black'>
+              <div className='relative h-[400px] md:h-[500px] xl:h-[650px] rounded-3xl overflow-hidden mb-8 shadow-2xl border border-gray-200 bg-black'>
                 {playingIndex === index ? (
                   <video
                     src={video.src}
@@ -66,13 +73,10 @@ const Knowledge = () => {
                         <Icon icon='tabler:player-play-filled' className='text-5xl ml-2' />
                       </div>
                     </div>
-                    <div className='absolute bottom-5 right-5 bg-black/80 text-white px-4 py-1.5 rounded-lg text-sm font-bold tracking-wider'>
-                      {video.duration}
-                    </div>
                   </>
                 )}
               </div>
-              <h3 className='text-2xl font-bold mb-3 text-[#1a1a1a] group-hover:text-[#C5A059] transition-colors cursor-pointer' onClick={() => setPlayingIndex(index)}>
+              <h3 className='text-2xl lg:text-3xl font-bold mb-4 text-[#1a1a1a] group-hover:text-[#C5A059] transition-colors cursor-pointer' onClick={() => setPlayingIndex(index)}>
                 {video.title}
               </h3>
               <p className='text-gray-700 text-lg leading-relaxed'>{video.description}</p>

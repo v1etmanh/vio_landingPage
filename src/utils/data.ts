@@ -9,10 +9,13 @@ import { footerlinks } from '@/app/types/footerlinks'
 // header nav-links data
 export const headerData: HeaderItem[] = [
   { label: 'About Us', href: '#About' },
-  { label: 'Team', href: '#Team' },
-  { label: 'FAQ', href: '#FAQ' },
-  { label: 'Blog', href: '#Blog' },
-  { label: 'Docs', href: '/documentation' },
+  { label: 'Standards', href: '#Standards' },
+  { label: 'Services', href: '#Services' },
+  { label: 'Pricing', href: '#Pricing' },
+  { label: 'Reviews', href: '#Reviews' },
+  { label: 'Studio', href: '#Studio' },
+  { label: 'Expertise', href: '#Knowledge' },
+  { label: 'Contact', href: '#Contact' },
 ]
 
 // about data

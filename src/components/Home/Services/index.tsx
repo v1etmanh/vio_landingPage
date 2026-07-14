@@ -1,62 +1,71 @@
 import React from 'react'
-import { Icon } from '@iconify/react'
 
 const Services = () => {
-  const services = [
+  const items = [
     {
-      title: 'Personal Training',
-      description: 'Achieve your goals faster with customized plans and 1-on-1 expert guidance.',
-      imgSrc: '/landscape/gym_01.jpg',
-      link: '/services#pt',
+      title: 'Free Weight Zone',
+      tag: 'HAMMER STRENGTH DUMBBELLS',
+      imgSrc: '/dung_cu/Screenshot 2026-07-15 000755.png',
+      span: 'md:col-span-2 md:row-span-2',
+      titleSize: 'text-3xl md:text-5xl font-serif',
     },
     {
-      title: 'Strength & Conditioning',
-      description: 'Access premium, heavy-duty equipment for serious lifters and athletes.',
-      imgSrc: '/landscape/gym_02.jpg',
-      link: '/services#strength',
+      title: 'Functional Area',
+      tag: 'VERSATILE WORKOUT SPACE',
+      imgSrc: '/dung_cu/Screenshot 2026-07-15 000815.png',
+      span: 'md:col-span-1 md:row-span-1',
+      titleSize: 'text-2xl font-serif',
     },
     {
-      title: 'Group Classes',
-      description: 'Sweat it out in high-energy classes designed for all fitness levels.',
-      imgSrc: '/landscape/gym_03.jpg',
-      link: '/services#group',
+      title: 'Cardio Deck',
+      tag: 'IMPULSE TREADMILLS',
+      imgSrc: '/dung_cu/Screenshot 2026-07-15 000836.png',
+      span: 'md:col-span-1 md:row-span-1',
+      titleSize: 'text-2xl font-serif',
     },
+    {
+      title: 'Pin-Loaded Machines',
+      tag: 'TARGETED MUSCLE FOCUS',
+      imgSrc: '/dung_cu/Screenshot 2026-07-15 002352.png',
+      span: 'md:col-span-1 md:row-span-1',
+      titleSize: 'text-2xl md:text-3xl font-serif',
+    },
+    {
+      title: 'Performance Floor',
+      tag: 'FREE-WEIGHT PLATFORM',
+      imgSrc: '/dung_cu/Screenshot 2026-07-15 002417.png',
+      span: 'md:col-span-2 md:row-span-1',
+      titleSize: 'text-2xl md:text-3xl font-serif',
+    }
   ]
 
   return (
-    <section id='Services' className='py-20'>
-      <div className='container mx-auto max-w-7xl px-4'>
-        <div className='flex flex-col md:flex-row justify-between items-end mb-12'>
-          <div className='max-w-2xl'>
-            <p className='text-primary text-lg tracking-widest uppercase mb-4 font-semibold'>
-              Our Services
-            </p>
-            <h2 className='text-4xl md:text-5xl font-bold'>
-              Everything you need to succeed.
-            </h2>
-          </div>
-          <a href='/services' className='mt-6 md:mt-0 text-primary font-semibold flex items-center hover:underline'>
-            View all services <Icon icon='tabler:arrow-right' className='ml-2' />
-          </a>
-        </div>
-
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-          {services.map((service, index) => (
-            <a href={service.link} key={index} className='group cursor-pointer'>
-              <div className='relative h-[400px] rounded-2xl overflow-hidden mb-6'>
-                <img
-                  src={service.imgSrc}
-                  alt={service.title}
-                 
-                  className='object-cover transition-transform duration-700 group-hover:scale-105'
-                />
-                <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent' />
-                <div className='absolute bottom-0 left-0 p-8'>
-                  <h3 className='text-white text-2xl font-bold mb-2'>{service.title}</h3>
-                  <p className='text-white/80 line-clamp-2'>{service.description}</p>
-                </div>
+    <section id='Services' className='py-8 bg-[#1A1A1A]'>
+      <div className='w-full px-4 md:px-6'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 h-auto md:h-[90vh] min-h-[800px]'>
+          {items.map((item, index) => (
+            <div key={index} className={`relative group overflow-hidden rounded-2xl ${item.span}`}>
+              <img
+                src={item.imgSrc}
+                alt={item.title}
+                className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
+              />
+              <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20' />
+              
+              {/* Top Right Tag */}
+              <div className='absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 border border-white/10'>
+                <p className='text-white/90 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]'>
+                  {item.tag}
+                </p>
               </div>
-            </a>
+
+              {/* Bottom Left Title */}
+              <div className='absolute bottom-6 left-6 pr-6'>
+                <h3 className={`text-white ${item.titleSize}`}>
+                  {item.title}
+                </h3>
+              </div>
+            </div>
           ))}
         </div>
       </div>

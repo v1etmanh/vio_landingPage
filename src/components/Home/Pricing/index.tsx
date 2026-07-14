@@ -4,84 +4,109 @@ import { Icon } from '@iconify/react'
 const Pricing = () => {
   const plans = [
     {
-      name: 'ESSENTIAL',
-      prefix: 'AURORA',
-      price: '$199',
-      period: '/ MO',
+      name: 'DAY PASS',
+      prefix: 'FLEXIBLE',
+      priceVND: '200K',
+      priceUSD: '$8',
+      period: '/ DAY',
       features: [
         'Unlimited Gym Access',
-        'Group Classes',
-        'Sauna & Steam Room',
-        'Locker Service',
-        'Guest Passes',
+        'Air-conditioned luxury training space',
       ],
       isPopular: false,
-      btnText: 'JOIN ESSENTIAL',
+      btnText: 'GET DAY PASS',
       bgImage: "url('/images/pricing/essential.png')",
     },
     {
-      name: 'PRESTIGE',
-      prefix: 'AURORA',
-      price: '$349',
-      period: '/ MO',
+      name: 'SHORT TERM',
+      prefix: 'VISITOR',
+      priceVND: '500K',
+      priceUSD: '$20',
+      period: '/ 3 DAYS',
       features: [
         'Unlimited Gym Access',
-        'Group Classes',
-        'Sauna & Steam Room',
-        'Locker Service',
-        'Guest Passes',
-        'Personal Training Sessions',
-        'Nutrition Coaching',
-        'Spa Access',
-        'Priority Booking & Spa Access',
-        '1x Guest Pass/Week',
+        'Air-conditioned luxury training space',
+      ],
+      isPopular: false,
+      btnText: 'GET SHORT TERM',
+      bgImage: "url('/images/pricing/abstract_white.png')",
+    },
+    {
+      name: 'WEEKLY PASS',
+      prefix: 'TRAVELER',
+      priceVND: '900K',
+      priceUSD: '$36',
+      period: '/ 1 WK',
+      features: [
+        '2 Weeks: 1.25M VND / $50',
+        'Unlimited Gym Access',
+        'Air-conditioned luxury training space',
       ],
       isPopular: true,
-      btnText: 'SELECT PRESTIGE',
+      btnText: 'GET WEEKLY PASS',
       bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
     },
     {
-      name: 'ELITE',
-      prefix: 'AURORA',
-      price: '$599',
-      period: '/ MO',
+      name: 'MEMBERSHIP',
+      prefix: 'COMMITTED',
+      priceVND: '1.65M',
+      priceUSD: '$66',
+      period: '/ 1 MO',
       features: [
+        '2 Months: 2.9M VND / $116',
+        '3 Months: 3.9M VND / $156',
+        '4 Months: 4.8M VND / $192',
+        '5 Months: 5.7M VND / $228',
+        '6 Months: 6.6M VND / $264',
         'Unlimited Gym Access',
-        'Group Classes',
-        'Sauna & Steam Room',
-        'Personal Training Sessions',
-        'Nutrition Coaching',
-        'Spa Access',
-        'Priority Booking',
-        'Towel Service',
+        'Air-conditioned luxury space',
       ],
       isPopular: false,
-      btnText: 'JOIN ELITE',
+      btnText: 'JOIN MEMBERSHIP',
       bgImage: "url('/images/pricing/elite.png')",
+    },
+    {
+      name: 'LONG TERM',
+      prefix: 'LIFESTYLE',
+      priceVND: '10.2M',
+      priceUSD: '$408',
+      period: '/ 12 MO',
+      features: [
+        'Unlimited Gym Access',
+        'Air-conditioned luxury training space',
+      ],
+      isPopular: false,
+      btnText: 'JOIN LONG TERM',
+      bgImage: "url('/images/pricing/abstract_gold.png')",
     },
   ]
 
+  const getCardStyle = (index) => {
+    // Center card (Index 2)
+    if (index === 2) return 'border-[2px] border-[#C5A059] shadow-[0_0_40px_rgba(197,160,89,0.4)] xl:scale-[1.15] z-30 xl:-translate-y-8 bg-[#1a1a1a] min-h-[580px]'
+    // Inner neighbors (Index 1 & 3)
+    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 xl:scale-100 xl:translate-y-6 bg-[#151515] min-h-[540px]'
+    // Outer neighbors (Index 0 & 4)
+    return 'border border-gray-600 shadow-xl z-10 xl:scale-95 xl:translate-y-16 opacity-90 hover:opacity-100 bg-[#111] min-h-[500px]'
+  }
+
   return (
-    <section id='Pricing' className='py-24 bg-transparent relative z-10'>
-      <div className='container mx-auto max-w-[1300px] px-4'>
-        <div className='text-center max-w-4xl mx-auto mb-20'>
+    <section id='Pricing' className='py-32 bg-transparent relative z-10'>
+      <div className='w-full max-w-[1700px] mx-auto px-4 lg:px-8'>
+        <div className='text-center max-w-4xl mx-auto mb-32'>
           <p className='text-gray-600 text-lg tracking-[0.2em] uppercase mb-4 font-medium' style={{ fontFamily: 'Georgia, serif' }}>
-            Pricing Plans
+            VIO FITNESS - MEMBERSHIP PACKAGES
           </p>
           <h2 className='text-5xl md:text-6xl font-bold mb-6 text-[#1a1a1a] tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>
             ELEVATE YOUR FITNESS JOURNEY
           </h2>
         </div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 items-center mb-12'>
+        <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
           {plans.map((plan, index) => (
             <div 
               key={index} 
-              className={`relative rounded-xl overflow-hidden transition-all duration-300 flex flex-col ${
-                plan.isPopular 
-                  ? 'border-[2px] border-[#C5A059] shadow-[0_0_30px_rgba(197,160,89,0.3)] min-h-[680px] lg:scale-105 z-20' 
-                  : 'border border-gray-600 shadow-2xl min-h-[600px] z-10'
-              }`}
+              className={`relative rounded-xl overflow-hidden transition-all duration-500 flex flex-col ${getCardStyle(index)}`}
             >
               {/* Abstract Background Layer */}
               <div 
@@ -89,35 +114,39 @@ const Pricing = () => {
                 style={{ backgroundImage: plan.bgImage }}
               ></div>
               {/* Dark Gradient Overlay for readability */}
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/80 to-[#151515]"></div>
+              <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/85 to-[#111]"></div>
 
               {/* Content Layer */}
-              <div className='relative z-10 p-10 flex flex-col h-full'>
+              <div className='relative z-10 p-6 xl:p-8 flex flex-col h-full'>
                 {plan.isPopular && (
-                  <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[#2a2a2a] border border-[#C5A059] text-[#C5A059] px-6 py-1.5 rounded-b-md text-xs font-bold uppercase tracking-widest'>
+                  <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[#2a2a2a] border border-[#C5A059] text-[#C5A059] px-6 py-2 rounded-b-md text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-lg'>
                     Most Popular
                   </div>
                 )}
                 
-                <div className={`text-center ${plan.isPopular ? 'mt-6' : 'mt-2'} mb-8 pb-8 border-b border-gray-600/50`}>
-                  <p className='text-gray-300 tracking-widest text-sm mb-2' style={{ fontFamily: 'Georgia, serif' }}>{plan.prefix}</p>
-                  <h3 className='text-3xl font-bold text-white mb-6' style={{ fontFamily: 'Georgia, serif' }}>{plan.name}</h3>
+                <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
+                  <p className='text-gray-300 tracking-widest text-[11px] mb-2 uppercase' style={{ fontFamily: 'Georgia, serif' }}>{plan.prefix}</p>
+                  <h3 className='text-2xl lg:text-3xl font-bold text-white mb-6' style={{ fontFamily: 'Georgia, serif' }}>{plan.name}</h3>
                   <div className='flex items-baseline justify-center text-white'>
-                    <span className='text-5xl md:text-[54px] font-bold tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>{plan.price}</span>
-                    <span className='text-gray-400 ml-1 text-lg font-medium tracking-wide'>{plan.period}</span>
+                    <span className='text-4xl lg:text-5xl font-bold tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>{plan.priceVND}</span>
+                    <span className='text-gray-400 ml-2 text-sm font-medium tracking-wide'>{plan.period}</span>
+                  </div>
+                  <div className='flex items-baseline justify-center text-[#C5A059] mt-2'>
+                    <span className='text-xl lg:text-2xl font-bold tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>{plan.priceUSD}</span>
+                    <span className='text-[#C5A059]/70 ml-1 text-xs font-medium tracking-wide'>{plan.period}</span>
                   </div>
                 </div>
                 
-                <ul className='space-y-4 mb-10 flex-grow'>
+                <ul className='space-y-4 mb-8 flex-grow'>
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className='flex items-center text-gray-200 text-[15px]'>
-                      <Icon icon='tabler:check' className='text-[#C5A059] text-xl mr-4 flex-shrink-0' />
-                      {feature}
+                    <li key={idx} className='flex items-start text-gray-200 text-sm xl:text-[15px]'>
+                      <Icon icon='tabler:check' className='text-[#C5A059] text-xl mr-3 flex-shrink-0 mt-0.5' />
+                      <span className="leading-relaxed">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <button className={`w-full py-4 rounded font-bold text-sm tracking-widest uppercase transition-all duration-300 ${
+                <button className={`w-full py-4 rounded font-bold text-sm tracking-widest uppercase transition-all duration-300 mt-auto ${
                   plan.isPopular 
                     ? 'bg-transparent border border-[#C5A059] text-white hover:bg-[#C5A059] hover:text-black shadow-[0_0_15px_rgba(197,160,89,0.2)]' 
                     : 'bg-white text-black hover:bg-gray-200'
@@ -127,6 +156,14 @@ const Pricing = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className='text-center mt-12 bg-white/80 backdrop-blur-sm p-6 rounded-2xl max-w-xl mx-auto shadow-lg border border-gray-200'>
+          <h4 className='text-[#1a1a1a] font-bold text-lg mb-2'>Payment Methods Accepted</h4>
+          <div className='flex justify-center items-center gap-3 text-gray-700'>
+            <Icon icon='ph:credit-card-duotone' className='text-3xl text-[#C5A059]' />
+            <span className='font-medium'>Thanh toán bằng Thẻ Tín Dụng (Credit Card)</span>
+          </div>
         </div>
       </div>
     </section>

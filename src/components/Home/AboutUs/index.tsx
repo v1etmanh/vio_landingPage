@@ -35,7 +35,7 @@ const Aboutus = () => {
 
   return (
     <section id='About' className='py-20 bg-transparent overflow-hidden'>
-      <div className='container mx-auto max-w-7xl px-4 lg:px-8'>
+      <div className='container mx-auto max-w-[1700px] px-4 md:px-8 lg:px-12'>
         
         {/* Heading Above */}
         <motion.div 
@@ -59,7 +59,7 @@ const Aboutus = () => {
           className="flex overflow-x-auto gap-8 pb-12 snap-x hide-scrollbar"
         >
           {images.map((img, idx) => (
-            <div key={idx} className="min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[450px] md:h-[650px] lg:h-[700px] rounded-3xl border-[3px] border-[#FFD700]/30 hover:border-[#FFD700] hover:shadow-[0_0_25px_rgba(255,215,0,0.5)] shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500 overflow-hidden snap-center flex-shrink-0 group cursor-pointer bg-white">
+            <div key={idx} className="min-w-[90vw] md:min-w-[90vw] lg:min-w-[1200px] xl:min-w-[1400px] 2xl:min-w-[1500px] h-[450px] md:h-[650px] lg:h-[750px] xl:h-[800px] rounded-3xl border-[3px] border-[#FFD700]/30 hover:border-[#FFD700] hover:shadow-[0_0_25px_rgba(255,215,0,0.5)] shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500 overflow-hidden snap-center flex-shrink-0 group cursor-pointer bg-white">
               <img
                 src={img}
                 alt={`VIO Fitness Space ${idx + 1}`}

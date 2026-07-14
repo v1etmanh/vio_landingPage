@@ -27,7 +27,7 @@ const Hero = () => {
       <div className='absolute inset-0 w-full h-full z-[-1]'>
         <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10' />
         <img
-          src='/landscape/gym_01.jpg'
+          src='/landscape/gym_05.jpg'
           alt='Gym Background'
           className='w-full h-full object-cover'
         />

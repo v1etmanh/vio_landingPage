@@ -1,116 +1,126 @@
-import { Key, useEffect, useRef, useState } from 'react'
-import { HeaderItem } from '@/app/types/menu'
+import { useEffect, useRef, useState } from 'react'
 import Logo from './Logo'
-import HeaderLink from './Navigation/HeaderLink'
-import MobileHeaderLink from './Navigation/MobileHeaderLink'
 import { headerData } from '@/app/utils/data'
+import { Icon } from '@iconify/react'
 
 const Header: React.FC = () => {
-  const [navbarOpen, setNavbarOpen] = useState(false)
-  const [sticky, setSticky] = useState(false)
-
-  const mobileMenuRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = () => {
-    setSticky(window.scrollY >= 80)
-  }
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
-      mobileMenuRef.current &&
-      !mobileMenuRef.current.contains(event.target as Node) &&
-      navbarOpen
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node) &&
+      dropdownOpen
     ) {
-      setNavbarOpen(false)
+      setDropdownOpen(false)
     }
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [navbarOpen])
+  }, [dropdownOpen])
 
   useEffect(() => {
-    if (navbarOpen) {
+    if (dropdownOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
     }
-  }, [navbarOpen])
+  }, [dropdownOpen])
 
   return (
-    <header
-      className={`fixed top-0 z-40 w-full transition-all duration-300 border-b border-black/10 ${
-        sticky ? ' shadow-lg bg-white' : 'shadow-none'
-      }`}>
-      <div className='lg:py-0 py-2'>
-        <div className='container mx-auto max-w-(--breakpoint-xl) flex items-center justify-between px-4'>
-          <div
-            className={`pr-16 lg:border-r border-black/10 duration-300 ${
-              sticky ? 'py-3' : 'py-7'
-            }`}>
+    <header className='absolute top-0 left-0 right-0 z-50 w-full border-b border-black/10 bg-transparent'>
+      <div className='container mx-auto px-4 md:px-8 max-w-[1600px]'>
+        <div className='flex items-center justify-between py-6 md:py-8'>
+          <div>
             <Logo />
           </div>
-          <nav className='hidden lg:flex grow items-center gap-8 justify-center'>
-            {headerData.map((item, index) => (
-              <HeaderLink key={index} item={item} />
-            ))}
-          </nav>
-          <div
-            className={`flex items-center gap-4 pl-16 lg:border-l border-black/10 duration-300 ${
-              sticky ? 'py-3' : 'py-7'
-            }`}>
-            <a
-              href='#Contact'
-              className='hidden lg:block bg-primary text-white hover:bg-darkmode px-6 py-3 rounded-full font-semibold hover:cursor-pointer transition-colors duration-300'>
-              Book a Trial
-            </a>
+          
+          <div className='relative'>
             <button
-              onClick={() => setNavbarOpen(!navbarOpen)}
-              className='block lg:hidden p-2 rounded-lg'
-              aria-label='Toggle mobile menu'>
-              <span className='block w-6 h-0.5 bg-darkmode'></span>
-              <span className='block w-6 h-0.5 bg-darkmode mt-1.5'></span>
-              <span className='block w-6 h-0.5 bg-darkmode mt-1.5'></span>
+              onClick={() => setDropdownOpen(true)}
+              className='flex items-center gap-2 bg-[#C5A059] text-black px-5 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-[#b08d4a] shadow-lg'
+            >
+              MENU
+              <Icon icon='ph:list-bold' className='text-lg md:text-xl' />
             </button>
           </div>
         </div>
-        {navbarOpen && (
-          <div className='fixed top-0 left-0 w-full h-full bg-black/50 z-40' />
-        )}
-        <div
-          ref={mobileMenuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-darkmode shadow-lg transform transition-transform duration-300 max-w-xs ${
-            navbarOpen ? 'translate-x-0' : 'translate-x-full'
-          } z-50`}>
-          <div className='flex items-center justify-between p-4'>
-            <h2 className='text-lg font-bold text-white'>
-              <Logo />
-            </h2>
-            <button
-              onClick={() => setNavbarOpen(false)}
-              className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 absolute top-0 right-0 mr-8 mt-8 dark:invert"
-              aria-label='Close menu Modal'></button>
-          </div>
-          <nav className='flex flex-col items-start p-4'>
-            {headerData.map(
-              (item: HeaderItem, index: Key | null | undefined) => (
-                <MobileHeaderLink key={index} item={item} />
-              )
-            )}
-            <div className='mt-8 w-full'>
+      </div>
+
+      {/* Offcanvas Menu Overlay */}
+      {dropdownOpen && (
+        <div className='fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity' />
+      )}
+
+      {/* Offcanvas Menu Panel */}
+      <div
+        ref={dropdownRef}
+        className={`fixed top-0 right-0 h-full w-full sm:w-[450px] md:w-[500px] bg-white shadow-2xl z-[70] transform transition-transform duration-500 ease-in-out flex flex-col ${
+          dropdownOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{ borderTopLeftRadius: '2rem', borderBottomLeftRadius: '2rem' }}
+      >
+        <div className='flex-1 overflow-y-auto px-8 md:px-12 py-10 relative scrollbar-hide'>
+          {/* Close Button */}
+          <button
+            onClick={() => setDropdownOpen(false)}
+            className='absolute top-8 right-8 w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-black hover:bg-gray-200 transition-colors z-10'
+          >
+            <Icon icon='ph:x-bold' className='text-xl' />
+          </button>
+
+          {/* Menu Links */}
+          <nav className='flex flex-col gap-6 mt-16 mb-12'>
+            {headerData.map((item: any, index: number) => (
               <a
-                href='#Contact'
-                className='block w-full text-center bg-primary text-white px-4 py-3 rounded-full font-bold hover:bg-white hover:text-primary transition-colors'
-                onClick={() => setNavbarOpen(false)}>
-                Book a Trial
+                key={index}
+                href={item.href}
+                onClick={() => setDropdownOpen(false)}
+                className='text-[22px] md:text-[26px] text-[#1a1a1a] hover:text-[#C5A059] font-medium transition-colors w-fit'
+              >
+                {item.label}
               </a>
-            </div>
+            ))}
           </nav>
+
+          {/* Social & Action Buttons */}
+          <div className='flex items-center gap-4 mb-8 flex-wrap'>
+            <a href='#Contact' onClick={() => setDropdownOpen(false)} className='px-6 py-2.5 bg-gray-100 rounded-full text-sm font-semibold text-[#1a1a1a] hover:bg-gray-200 transition-colors flex items-center gap-2'>
+              Book Trial <Icon icon='ph:sparkle-fill' />
+            </a>
+            <a href='#' className='w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-[#1a1a1a] hover:bg-gray-200 transition-colors'>
+              <Icon icon='ph:instagram-logo-fill' className='text-lg' />
+            </a>
+            <a href='#' className='w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-[#1a1a1a] hover:bg-gray-200 transition-colors'>
+              <Icon icon='ph:facebook-logo-fill' className='text-lg' />
+            </a>
+            <a href='#' className='w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-[#1a1a1a] hover:bg-gray-200 transition-colors'>
+              <Icon icon='ph:tiktok-logo-fill' className='text-lg' />
+            </a>
+          </div>
+
+          {/* Banner Image */}
+          <a 
+            href='#Contact' 
+            onClick={() => setDropdownOpen(false)}
+            className='relative block w-full h-[180px] rounded-2xl overflow-hidden group shadow-lg mt-auto cursor-pointer'
+          >
+            <img 
+              src='/banner-image.png' 
+              alt='Contact Us' 
+              className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-110'
+            />
+            <div className='absolute inset-0 bg-gradient-to-r from-black/60 to-transparent'></div>
+            <div className='absolute top-6 left-6 flex items-center gap-2 text-white'>
+              <span className='text-xl font-bold tracking-wide'>Contact Us</span>
+              <Icon icon='ph:arrow-up-right-bold' className='text-xl' />
+            </div>
+          </a>
         </div>
       </div>
     </header>

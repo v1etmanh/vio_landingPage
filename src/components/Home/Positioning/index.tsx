@@ -39,7 +39,7 @@ const Positioning = () => {
 
   return (
     <section className='py-24 bg-transparent relative z-10'>
-      <div className='container mx-auto max-w-[1400px] px-4'>
+      <div className='container mx-auto max-w-[1700px] px-4 md:px-8 lg:px-12'>
         <div className='text-center max-w-4xl mx-auto mb-16'>
           <h2 className='text-5xl md:text-6xl font-bold mb-6 text-[#101b2b] tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>
             You will love VIO if...
@@ -50,11 +50,11 @@ const Positioning = () => {
           </p>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16'>
           {profiles.map((profile, index) => (
             <div 
               key={index} 
-              className='relative flex flex-col items-center text-center p-8 rounded-[2rem] border-2 border-white shadow-[0_15px_35px_rgba(0,0,0,0.1),inset_0_0_60px_rgba(255,255,255,0.9)] bg-gradient-to-b from-white/60 via-gray-100/30 to-white/60 backdrop-blur-xl min-h-[520px] hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15),inset_0_0_80px_rgba(255,255,255,1)] transition-all duration-500 group'
+              className='relative flex flex-col items-center text-center p-10 xl:p-12 rounded-[2.5rem] border-2 border-white shadow-[0_15px_35px_rgba(0,0,0,0.1),inset_0_0_60px_rgba(255,255,255,0.9)] bg-gradient-to-b from-white/60 via-gray-100/30 to-white/60 backdrop-blur-xl min-h-[860px] justify-center hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15),inset_0_0_80px_rgba(255,255,255,1)] transition-all duration-500 group'
             >
               {/* Golden Icon Combination */}
               <div className='relative mb-10 mt-6'>
