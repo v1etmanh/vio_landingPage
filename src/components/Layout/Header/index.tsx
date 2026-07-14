@@ -6,6 +6,7 @@ import HeaderLink from './Navigation/HeaderLink'
 import MobileHeaderLink from './Navigation/MobileHeaderLink'
 import { headerData } from '@/app/utils/data'
 import Button from '../../ui/Button'
+import { Icon } from '@iconify/react'
 
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
@@ -66,16 +67,26 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div
-            className={`flex items-center gap-4 pl-16 lg:border-l border-black/5 duration-300 ${
+            className={`flex items-center gap-3 pl-8 lg:pl-16 lg:border-l border-black/5 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
+            <a href="tel:0961119495" className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">
+              <Icon icon="tabler:phone-filled" className="text-xl" />
+              <span className="text-lg">0961119495</span>
+            </a>
             <Button
               variant="primary"
               size="sm"
-              className='hidden lg:inline-flex rounded-full tracking-wide shadow-sm hover:shadow-md'
+              className='hidden lg:inline-flex rounded-sm uppercase font-heading tracking-wider shadow-sm hover:shadow-md bg-primary text-white'
               onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
-              Book a Trial
+              Đăng ký tập thử
             </Button>
+            
+            {/* Mobile Pinned Hotline */}
+            <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
+              <Icon icon="tabler:phone-filled" className="text-lg" />
+            </a>
+
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
@@ -113,12 +124,12 @@ const Header: React.FC = () => {
               <Button
                 variant="primary"
                 size="md"
-                className='w-full rounded-full'
+                className='w-full rounded-sm uppercase font-heading tracking-wider bg-primary text-white'
                 onClick={() => {
                   document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)
                 }}>
-                Book a Trial
+                Đăng ký tập thử
               </Button>
             </div>
           </nav>

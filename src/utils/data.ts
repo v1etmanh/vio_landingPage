@@ -8,11 +8,12 @@ import { footerlinks } from '@/app/types/footerlinks'
 
 // header nav-links data
 export const headerData: HeaderItem[] = [
-  { label: 'About Us', href: '#About' },
-  { label: 'Team', href: '#Team' },
-  { label: 'FAQ', href: '#FAQ' },
-  { label: 'Blog', href: '#Blog' },
-  { label: 'Docs', href: '/documentation' },
+  { label: 'Về chúng tôi', href: '#About' },
+  { label: 'Dịch vụ', href: '#Services' },
+  { label: 'Bảng giá', href: '#Pricing' },
+  { label: 'HLV', href: '#Trainers' },
+  { label: 'Đánh giá', href: '#Reviews' },
+  { label: 'Liên hệ', href: '#Contact' },
 ]
 
 // about data
@@ -21,21 +22,21 @@ export const Aboutdata: aboutdata[] = [
     heading: 'About us.',
     imgSrc: '/landscape/gym_01.jpg',
     paragraph:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+      'We are VIO FITNESS, a top-tier fitness center located in Da Nang providing the best environment to achieve your health goals.',
     link: 'Learn more',
   },
   {
     heading: 'Services.',
     imgSrc: '/landscape/gym_02.jpg',
     paragraph:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+      'From personal training to group classes, we offer a variety of services tailored to your fitness journey.',
     link: 'Learn more',
   },
   {
-    heading: 'Our Works.',
+    heading: 'Our Space.',
     imgSrc: '/landscape/gym_03.jpg',
     paragraph:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem',
+      'Check out our state-of-the-art facilities and see the transformations of our dedicated members.',
     link: 'Learn more',
   },
 ]
@@ -43,33 +44,33 @@ export const Aboutdata: aboutdata[] = [
 // work-data
 export const WorkData: workdata[] = [
   {
-    profession: 'Co-founder',
-    name: 'John Doe',
+    profession: 'Personal Trainer',
+    name: 'Alex',
     imgSrc: '/landscape/gym_04.jpg',
   },
   {
-    profession: 'Co-founder',
-    name: 'John Doe',
+    profession: 'Personal Trainer',
+    name: 'Sarah',
     imgSrc: '/landscape/gym_05.jpg',
   },
   {
-    profession: 'Co-founder',
-    name: 'John Doe',
+    profession: 'Yoga Instructor',
+    name: 'Michael',
     imgSrc: '/landscape/gym_06.jpg',
   },
   {
-    profession: 'Co-founder',
-    name: 'John Doe',
+    profession: 'Nutritionist',
+    name: 'Emily',
     imgSrc: '/landscape/gym_07.jpg',
   },
   {
-    profession: 'Co-founder',
-    name: 'John Doe',
+    profession: 'Strength Coach',
+    name: 'David',
     imgSrc: '/landscape/gym_08.jpg',
   },
   {
-    profession: 'Co-founder',
-    name: 'John Doe',
+    profession: 'Fitness Expert',
+    name: 'Jessica',
     imgSrc: '/landscape/gym_09.jpg',
   },
 ]
@@ -77,19 +78,19 @@ export const WorkData: workdata[] = [
 // featured data
 export const FeaturedData: featureddata[] = [
   {
-    heading: 'Brand design for a computer brand.',
+    heading: 'High intensity workout session.',
     imgSrc: '/landscape/gym_10.jpg',
   },
   {
-    heading: 'Mobile app 3d wallpaper.',
+    heading: 'Modern equipment and facilities.',
     imgSrc: '/landscape/gym_11.jpg',
   },
   {
-    heading: 'Brand design for a computer brand.',
+    heading: 'Yoga and mindfulness classes.',
     imgSrc: '/landscape/gym_12.jpg',
   },
   {
-    heading: 'Mobile app 3d wallpaper.',
+    heading: 'Strength and conditioning area.',
     imgSrc: '/landscape/gym_13.jpg',
   },
 ]
@@ -97,47 +98,47 @@ export const FeaturedData: featureddata[] = [
 // plans data
 export const PlansData = [
   {
-    heading: 'Startup',
+    heading: 'Basic',
     price: {
       monthly: 19,
       yearly: 190,
     },
-    user: 'per user',
+    user: 'per month',
     features: {
-      profiles: '5 Social Profiles',
-      posts: '5 Scheduled Posts Per Profile',
-      templates: '400+ Templated',
-      view: 'Calendar View',
-      support: '24/7 Support',
+      profiles: 'Gym Access',
+      posts: 'Free Weights Area',
+      templates: 'Cardio Equipment',
+      view: 'Locker Rooms',
+      support: 'Standard Support',
     },
   },
   {
-    heading: 'Business',
+    heading: 'Premium',
     price: {
       monthly: 29,
       yearly: 290,
     },
-    user: 'per user',
+    user: 'per month',
     features: {
-      profiles: '10 Social Profiles',
-      posts: '5 Scheduled Posts Per Profile',
-      templates: '600+ Templated',
-      view: 'Calendar View',
-      support: '24/7 VIP Support',
+      profiles: 'All Basic Features',
+      posts: 'Group Classes',
+      templates: 'Yoga Studio Access',
+      view: 'Sauna & Spa',
+      support: 'Premium Support',
     },
   },
   {
-    heading: 'Agency',
+    heading: 'VIP',
     price: {
       monthly: 59,
       yearly: 590,
     },
-    user: 'per user',
+    user: 'per month',
     features: {
-      profiles: '100 Social Profiles',
-      posts: '100 Scheduled Posts Per Profile',
-      templates: '800+ Templated',
-      view: 'Calendar View',
+      profiles: 'All Premium Features',
+      posts: 'Personal Training Sessions',
+      templates: 'Nutrition Plan',
+      view: 'Private Lockers',
       support: '24/7 VIP Support',
     },
   },
@@ -147,49 +148,49 @@ export const PlansData = [
 export const TestimonialsData: testimonials[] = [
   {
     name: 'Robert Fox',
-    profession: 'CEO, Parkview Int.Ltd',
+    profession: 'Member',
     comment:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour',
+      'VIO FITNESS has completely transformed my lifestyle. The trainers are excellent and the equipment is top notch.',
     imgSrc: '/landscape/gym_14.jpg',
     rating: 5,
   },
   {
     name: 'Leslie Alexander',
-    profession: 'CEO, Parkview Int.Ltd',
+    profession: 'Member',
     comment:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour',
+      'Amazing atmosphere! It’s the best gym in Da Nang with a very supportive community.',
     imgSrc: '/landscape/gym_15.jpg',
     rating: 4,
   },
   {
     name: 'Cody Fisher',
-    profession: 'CEO, Parkview Int.Ltd',
+    profession: 'Member',
     comment:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour',
+      'I have seen great results since joining. The group classes are intense and really fun.',
     imgSrc: '/landscape/gym_16.jpg',
     rating: 4,
   },
   {
-    name: 'Robert Fox',
-    profession: 'CEO, Parkview Int.Ltd',
+    name: 'Jenny Wilson',
+    profession: 'Member',
     comment:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour',
+      'Clean facilities, great location, and very knowledgeable personal trainers. Highly recommended.',
     imgSrc: '/landscape/gym_17.jpg',
     rating: 4,
   },
   {
-    name: 'Leslie Alexander',
-    profession: 'CEO, Parkview Int.Ltd',
+    name: 'Cameron Williamson',
+    profession: 'Member',
     comment:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour',
+      'VIO FITNESS is the best place to work out. I love their cardio section and the huge free weight area.',
     imgSrc: '/landscape/gym_18.jpg',
     rating: 4,
   },
   {
-    name: 'Cody Fisher',
-    profession: 'CEO, Parkview Int.Ltd',
+    name: 'Eleanor Pena',
+    profession: 'Member',
     comment:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour',
+      'The yoga studio here is so relaxing, and the premium amenities are a big plus. Five stars!',
     imgSrc: '/landscape/gym_19.jpg',
     rating: 4,
   },
@@ -199,50 +200,50 @@ export const TestimonialsData: testimonials[] = [
 export const ArticlesData: articles[] = [
   {
     time: '5 min',
-    heading: 'We Launch Delia',
-    heading2: 'Webflow this Week!',
-    name: 'Published on Startupon',
-    date: 'february 19, 2025',
+    heading: 'Top 5 Cardio Exercises',
+    heading2: 'To Burn Fat Fast',
+    name: 'Published on VIO FITNESS',
+    date: 'February 19, 2025',
     imgSrc: '/landscape/gym_20.jpg',
   },
   {
     time: '5 min',
-    heading: 'We Launch Delia',
-    heading2: 'Webflow this Week!',
-    name: 'Published on Startupon',
-    date: 'february 19, 2025',
+    heading: 'Beginner\'s Guide',
+    heading2: 'To Strength Training',
+    name: 'Published on VIO FITNESS',
+    date: 'February 19, 2025',
     imgSrc: '/landscape/gym_21.jpg',
   },
   {
     time: '5 min',
-    heading: 'We Launch Delia',
-    heading2: 'Webflow this Week!',
-    name: 'Published on Startupon',
-    date: 'february 19, 2025',
+    heading: 'How to Build',
+    heading2: 'A Healthy Diet Plan',
+    name: 'Published on VIO FITNESS',
+    date: 'February 19, 2025',
     imgSrc: '/landscape/gym_22.jpg',
   },
   {
     time: '5 min',
-    heading: 'We Launch Delia',
-    heading2: 'Webflow this Week!',
-    name: 'Published on Startupon',
-    date: 'february 19, 2025',
+    heading: 'The Importance of',
+    heading2: 'Rest and Recovery',
+    name: 'Published on VIO FITNESS',
+    date: 'February 19, 2025',
     imgSrc: '/landscape/gym_23.jpg',
   },
   {
     time: '5 min',
-    heading: 'We Launch Delia',
-    heading2: 'Webflow this Week!',
-    name: 'Published on Startupon',
-    date: 'february 19, 2025',
+    heading: 'Yoga Poses',
+    heading2: 'For Better Flexibility',
+    name: 'Published on VIO FITNESS',
+    date: 'February 19, 2025',
     imgSrc: '/landscape/gym_24.jpg',
   },
   {
     time: '5 min',
-    heading: 'We Launch Delia',
-    heading2: 'Webflow this Week!',
-    name: 'Published on Startupon',
-    date: 'february 19, 2025',
+    heading: 'Staying Motivated',
+    heading2: 'During Winter',
+    name: 'Published on VIO FITNESS',
+    date: 'February 19, 2025',
     imgSrc: '/landscape/gym_25.jpg',
   },
 ]
@@ -250,36 +251,36 @@ export const ArticlesData: articles[] = [
 // footer links data
 export const FooterLinksData: footerlinks[] = [
   {
-    section: 'Menu',
+    section: 'Khám phá',
     links: [
-      { label: 'About Us', href: '#About' },
-      { label: 'Team', href: '#Team' },
-      { label: 'FAQ', href: '#FAQ' },
-      { label: 'Blog', href: '#Blog' },
+      { label: 'Về chúng tôi', href: '#About' },
+      { label: 'Dịch vụ', href: '#Services' },
+      { label: 'Bảng giá', href: '#Pricing' },
+      { label: 'HLV cá nhân', href: '#Trainers' },
     ],
   },
   {
-    section: 'Category',
+    section: 'Tiện ích',
     links: [
-      { label: 'Design', href: '/' },
-      { label: 'Mockup', href: '/' },
-      { label: 'View all', href: '/' },
-      { label: 'Log In', href: '/' },
+      { label: 'Khu tập tạ', href: '#Services' },
+      { label: 'Phòng xông hơi', href: '#Services' },
+      { label: 'Quầy Protein', href: '#Services' },
+      { label: 'Khu phục hồi', href: '#Services' },
     ],
   },
   {
-    section: 'Pages',
+    section: 'Chính sách',
     links: [
-      { label: '404', href: '/' },
-      { label: 'Instructions', href: '/' },
-      { label: 'License', href: '/' },
+      { label: 'Điều khoản sử dụng', href: '/' },
+      { label: 'Bảo mật thông tin', href: '/' },
+      { label: 'Chính sách hội viên', href: '/' },
     ],
   },
   {
-    section: 'Others',
+    section: 'Liên hệ',
     links: [
-      { label: 'Styleguide', href: '/' },
-      { label: 'Changelog', href: '/' },
+      { label: 'Hotline: 0961119495', href: 'tel:0961119495' },
+      { label: '15 Trần Phú, Đà Nẵng', href: '/' },
     ],
   },
 ]

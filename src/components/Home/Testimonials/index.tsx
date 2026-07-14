@@ -55,8 +55,8 @@ const Testimonials = () => {
   }
 
   return (
-    <section id='Reviews' className='py-20'>
-      <div className='container mx-auto max-w-7xl px-4'>
+    <section id='Reviews' className='py-24'>
+      <div className='container mx-auto max-w-7xl px-6 lg:px-12'>
         <div className='text-center max-w-3xl mx-auto mb-16'>
           <div className='flex justify-center items-center gap-4 mb-4'>
             <Icon icon='logos:google-icon' className='text-3xl' />

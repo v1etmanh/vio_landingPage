@@ -43,6 +43,9 @@
   --color-darkmode: #2A2522; /* Dark brownish black */
   --color-deep-slate: #1c1916;
 
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Oswald', sans-serif;
+
   --text-80: 5rem;
   --text-65: 4.063rem;
 
@@ -74,15 +77,15 @@
   }
 
   h1 {
-    @apply text-black text-6xl sm:text-80 font-bold sm:leading-24 leading-20;
+    @apply text-black text-6xl sm:text-[5rem] lg:text-[7rem] font-bold sm:leading-none leading-tight;
   }
 
   h2 {
-    @apply text-black text-5xl lg:text-65 font-bold;
+    @apply text-black text-5xl lg:text-7xl font-bold;
   }
 
   h3 {
-    @apply text-black text-4xl lg:text-6xl font-semibold;
+    @apply text-black text-4xl lg:text-5xl font-semibold;
   }
 
   h4 {
@@ -110,6 +113,13 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-color: #fafafa;
+  font-family: var(--font-sans);
+  color: #1A1A1A;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
 }
 
 .bg-joinus {

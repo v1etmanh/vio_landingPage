@@ -1,91 +1,134 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import BlurText from './BlurText'
 import Button from '../../ui/Button'
 
 const Hero = () => {
   const { scrollY } = useScroll()
-  const backgroundY = useTransform(scrollY, [0, 500], ['0%', '20%'])
-  const opacity = useTransform(scrollY, [0, 500], [1, 0])
-
-  const containerVariants = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: '50%', opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-    },
-  }
+  const backgroundY = useTransform(scrollY, [0, 600], ['0%', '15%'])
 
   return (
-    <section className='relative overflow-hidden z-1 h-screen min-h-[700px] flex items-center justify-start -mt-24 pt-24'>
-      {/* Background Image with Parallax */}
-      <motion.div 
-        className='absolute inset-0 w-full h-full z-[-1]'
-        style={{ y: backgroundY, opacity }}
+    <section
+      id='Home'
+      className='relative w-full min-h-screen flex items-center overflow-hidden -mt-[80px]'
+    >
+      {/* ── Full-bleed Background Photo ── */}
+      <motion.div
+        className='absolute inset-0 w-full h-full z-0'
+        style={{ y: backgroundY }}
       >
-        <div className='absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/20 z-10' />
-        <motion.img
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          src='/landscape/gym_01.jpg'
-          alt='Gym Background'
-          className='w-full h-full object-cover'
+        <img
+          src='/images/Bản sao của KSP02428-HDR-Edit.jpg'
+          alt='VIO Fitness interior — khu vực cardio'
+          className='w-full h-full object-cover object-center scale-105'
         />
+        {/* Dark gradient from bottom-up for text readability */}
+        <div className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20' />
+        {/* Subtle left vignette for better text contrast */}
+        <div className='absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent' />
       </motion.div>
 
-      <div className='container mx-auto px-6 lg:px-12 relative z-20 text-left'>
-        <motion.div
-          variants={containerVariants}
-          initial='hidden'
-          animate='visible'
-          className='max-w-3xl'
-        >
-          <div className='mb-6'>
-            <BlurText
-              text="ELEVATE YOUR FITNESS JOURNEY"
-              delay={200}
-              animateBy="words"
-              direction="top"
-              className='text-white text-6xl md:text-[5rem] lg:text-[6rem] font-extrabold uppercase leading-[1.05] tracking-tight flex-col'
-            />
-          </div>
-          
-          <div className='overflow-hidden mb-12'>
-            <motion.p 
-              variants={itemVariants} 
-              className='text-white/90 text-lg md:text-xl font-light max-w-lg leading-relaxed border-l-4 border-primary pl-6 py-2'
-            >
-              A premium, international-standard space in the heart of the city. Join us to transform your body and mind.
-            </motion.p>
-          </div>
+      {/* ── Content ── */}
+      <div className='relative z-10 w-full pt-[80px]'>
+        <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-20 lg:py-32'>
+          <div className='max-w-2xl'>
 
-          <div className='overflow-hidden pt-4'>
-            <motion.div variants={itemVariants}>
-              <a href={'#Contact'}>
-                <Button size="lg" variant="primary" className="group">
-                  <span className='tracking-wide'>BOOK A VISIT</span>
-                  <span className='ml-3 text-xl transition-transform duration-300 group-hover:translate-x-2'>→</span>
-                </Button>
+            {/* Eyebrow */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className='text-[var(--color-primary)] text-sm font-bold tracking-[0.25em] uppercase mb-4'
+            >
+              15 Trần Phú · Hải Châu · Đà Nẵng
+            </motion.p>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
+              className='text-white font-heading text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight mb-6'
+            >
+              Phòng gym <br />
+              <span className='text-[var(--color-primary)]'>chuẩn quốc tế</span> <br />
+              giữa lòng Đà Nẵng
+            </motion.h1>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className='text-white/80 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-lg border-l-4 border-[var(--color-primary)] pl-5'
+            >
+              PT cá nhân hóa 1-1 cùng HLV chuyên nghiệp. Trang bị toàn bộ máy <strong className='text-white font-semibold'>Panatta & Hammer Strength</strong> — tiêu chuẩn các phòng gym quốc tế hàng đầu.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className='flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10'
+            >
+              {/* Primary CTA */}
+              <a href='#Contact' id='hero-cta-primary'>
+                <button className='inline-flex items-center gap-3 bg-[#C0392B] hover:bg-[#a93226] text-white font-heading font-bold uppercase tracking-wider text-sm px-7 py-4 transition-colors duration-200'>
+                  Đặt lịch tham quan miễn phí
+                  <span className='text-lg'>→</span>
+                </button>
+              </a>
+
+              {/* Secondary CTA */}
+              <a href='#Pricing' id='hero-cta-secondary'>
+                <button className='inline-flex items-center gap-3 border-2 border-white/70 hover:border-white text-white font-heading font-bold uppercase tracking-wider text-sm px-7 py-4 transition-colors duration-200 hover:bg-white/10'>
+                  Xem bảng giá
+                </button>
               </a>
             </motion.div>
-          </div>
-        </motion.div>
-      </div>
 
-      {/* Decorative gradient orb */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0 translate-x-1/3 translate-y-1/3" />
+            {/* Trust row */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className='flex flex-wrap items-center gap-4 text-white/70 text-sm'
+            >
+              {/* Stars */}
+              <div className='flex items-center gap-1.5'>
+                <div className='flex text-yellow-400 text-base'>
+                  {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
+                </div>
+                <span className='text-white font-semibold'>5.0</span>
+                <span className='text-white/60'>· 99+ đánh giá</span>
+              </div>
+
+              <span className='text-white/30 hidden sm:block'>|</span>
+
+              {/* Google badge */}
+              <div className='flex items-center gap-1.5'>
+                <svg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                  <path d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z' fill='#4285F4'/>
+                  <path d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z' fill='#34A853'/>
+                  <path d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z' fill='#FBBC05'/>
+                  <path d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z' fill='#EA4335'/>
+                </svg>
+                <span className='text-white/70'>Google</span>
+              </div>
+
+              <span className='text-white/30 hidden sm:block'>|</span>
+
+              {/* Facebook badge */}
+              <div className='flex items-center gap-1.5'>
+                <svg width='16' height='16' viewBox='0 0 24 24' fill='#1877F2' xmlns='http://www.w3.org/2000/svg'>
+                  <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'/>
+                </svg>
+                <span className='text-white/70'>Facebook</span>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
