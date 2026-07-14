@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
+import Button from '../../ui/Button'
 
 const Positioning = () => {
   const profiles = [
@@ -78,12 +79,12 @@ const Positioning = () => {
         </div>
 
         <div className='flex justify-center'>
-          <button className='bg-gradient-to-r from-[#B48F44] via-[#E2C779] to-[#B48F44] hover:from-[#9D7A35] hover:via-[#D1B463] hover:to-[#9D7A35] text-[#1a1a1a] px-10 py-4 rounded-md shadow-lg transition-all hover:shadow-xl flex items-center gap-3 font-semibold group'>
+          <Button variant="primary" size="lg" className="flex items-center gap-3 group shadow-md hover:shadow-lg">
             <span className="tracking-wide text-sm md:text-base">EXPLORE VIO MEMBERSHIPS</span>
-            <span className="font-light mx-1">|</span>
+            <span className="font-light mx-1 opacity-60">|</span>
             <span className="font-medium text-sm md:text-base">Find Your Fit</span>
             <Icon icon="tabler:arrow-right" className="text-xl group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Button>
         </div>
       </div>
     </section>

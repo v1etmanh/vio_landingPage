@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
+import Button from '../../ui/Button'
 
 const Joinus = () => {
   return (
@@ -16,12 +17,12 @@ const Joinus = () => {
               Join VIO Fitness today and experience the difference of a truly premium training environment. First trial is on us!
             </p>
             <div className='flex flex-wrap gap-4'>
-              <button className='bg-primary text-white text-xl font-semibold py-4 px-10 rounded-full hover:bg-white hover:text-primary transition-all duration-300'>
+              <Button variant="primary" size="lg" className="rounded-full">
                 Book a Free Trial
-              </button>
-              <button className='bg-transparent border-2 border-white text-white text-xl font-semibold py-4 px-10 rounded-full hover:bg-white hover:text-darkmode transition-all duration-300'>
+              </Button>
+              <Button variant="outline" size="lg" className="rounded-full">
                 Contact Us
-              </button>
+              </Button>
             </div>
           </div>
 

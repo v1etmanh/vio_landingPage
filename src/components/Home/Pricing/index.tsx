@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
+import Button from '../../ui/Button'
 
 const Pricing = () => {
   const plans = [
@@ -117,13 +118,13 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                <button className={`w-full py-4 rounded font-bold text-sm tracking-widest uppercase transition-all duration-300 ${
-                  plan.isPopular 
-                    ? 'bg-transparent border border-[#C5A059] text-white hover:bg-[#C5A059] hover:text-black shadow-[0_0_15px_rgba(197,160,89,0.2)]' 
-                    : 'bg-white text-black hover:bg-gray-200'
-                }`}>
+                <Button 
+                  variant={plan.isPopular ? 'primary' : 'secondary'} 
+                  size="lg" 
+                  className="w-full tracking-widest uppercase text-sm"
+                >
                   {plan.btnText}
-                </button>
+                </Button>
               </div>
             </div>
           ))}

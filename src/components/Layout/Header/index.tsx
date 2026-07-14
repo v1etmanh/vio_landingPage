@@ -1,9 +1,11 @@
 import { Key, useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { HeaderItem } from '@/app/types/menu'
 import Logo from './Logo'
 import HeaderLink from './Navigation/HeaderLink'
 import MobileHeaderLink from './Navigation/MobileHeaderLink'
 import { headerData } from '@/app/utils/data'
+import Button from '../../ui/Button'
 
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
@@ -43,15 +45,18 @@ const Header: React.FC = () => {
   }, [navbarOpen])
 
   return (
-    <header
-      className={`fixed top-0 z-40 w-full transition-all duration-300 border-b border-black/10 ${
-        sticky ? ' shadow-lg bg-white' : 'shadow-none'
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 z-40 w-full transition-colors duration-500 border-b ${
+        sticky ? 'shadow-sm bg-white/85 backdrop-blur-md border-black/5' : 'shadow-none border-transparent bg-transparent'
       }`}>
-      <div className='lg:py-0 py-2'>
+      <div className='lg:py-0 py-1'>
         <div className='container mx-auto max-w-(--breakpoint-xl) flex items-center justify-between px-4'>
           <div
-            className={`pr-16 lg:border-r border-black/10 duration-300 ${
-              sticky ? 'py-3' : 'py-7'
+            className={`pr-16 lg:border-r border-black/5 duration-300 ${
+              sticky ? 'py-2' : 'py-3'
             }`}>
             <Logo />
           </div>
@@ -61,14 +66,16 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div
-            className={`flex items-center gap-4 pl-16 lg:border-l border-black/10 duration-300 ${
-              sticky ? 'py-3' : 'py-7'
+            className={`flex items-center gap-4 pl-16 lg:border-l border-black/5 duration-300 ${
+              sticky ? 'py-2' : 'py-3'
             }`}>
-            <a
-              href='#Contact'
-              className='hidden lg:block bg-primary text-white hover:bg-darkmode px-6 py-3 rounded-full font-semibold hover:cursor-pointer transition-colors duration-300'>
+            <Button
+              variant="primary"
+              size="sm"
+              className='hidden lg:inline-flex rounded-full tracking-wide shadow-sm hover:shadow-md'
+              onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
               Book a Trial
-            </a>
+            </Button>
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
@@ -103,17 +110,21 @@ const Header: React.FC = () => {
               )
             )}
             <div className='mt-8 w-full'>
-              <a
-                href='#Contact'
-                className='block w-full text-center bg-primary text-white px-4 py-3 rounded-full font-bold hover:bg-white hover:text-primary transition-colors'
-                onClick={() => setNavbarOpen(false)}>
+              <Button
+                variant="primary"
+                size="md"
+                className='w-full rounded-full'
+                onClick={() => {
+                  document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
+                  setNavbarOpen(false)
+                }}>
                 Book a Trial
-              </a>
+              </Button>
             </div>
           </nav>
         </div>
       </div>
-    </header>
+    </motion.header>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Icon } from '@iconify/react'
+import Button from '../../ui/Button'
 
 const Aboutus = () => {
   const images = [
@@ -91,13 +92,13 @@ const Aboutus = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            <button className="bg-[#2A2522] text-white px-8 py-4 rounded-xl flex items-center hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+            <Button variant="dark" className="px-8 py-3 rounded-xl flex items-center hover:shadow-lg hover:-translate-y-0.5 group">
               <div className="flex flex-col text-left">
                 <span className="font-bold text-lg tracking-wide">EXPERIENCE VIO</span>
                 <span className="text-sm font-light text-gray-300">Join Today</span>
               </div>
-              <Icon icon="tabler:chevron-right" className="ml-6 text-2xl text-gray-400" />
-            </button>
+              <Icon icon="tabler:chevron-right" className="ml-6 text-2xl text-gray-400 group-hover:text-white transition-colors" />
+            </Button>
           </motion.div>
         </div>
 
