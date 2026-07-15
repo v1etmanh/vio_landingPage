@@ -43,6 +43,7 @@ const StudioInMotion = () => {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
+          arrows: false
         }
       }
     ]
@@ -101,8 +102,8 @@ const StudioInMotion = () => {
   return (
     <section id='Studio' className='py-32 bg-transparent relative z-10 overflow-hidden'>
       <div className='w-full px-6 md:px-12 lg:px-20'>
-        <div className='flex flex-col md:flex-row justify-between items-end mb-16'>
-          <h2 className='text-6xl md:text-[80px] xl:text-[100px] font-black text-[#1a1a1a] tracking-tighter uppercase leading-[0.9]'>
+        <div className='flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16'>
+          <h2 className='text-4xl sm:text-6xl md:text-[80px] xl:text-[100px] font-black text-[#1a1a1a] tracking-tighter uppercase leading-[0.9]'>
             STUDIO <br className='hidden md:block' />IN MOTION.
           </h2>
           <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold tracking-widest uppercase mt-8 md:mt-0 pb-2 border-b-2 border-transparent hover:border-[#1a1a1a] transition-all'>

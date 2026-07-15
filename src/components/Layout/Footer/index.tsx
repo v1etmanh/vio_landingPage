@@ -2,9 +2,9 @@ import { Icon } from '@iconify/react'
 
 const Footer = () => {
   return (
-    <footer className='bg-[#111111] text-[#B0B0B0] py-20' id='Contact'>
+    <footer className='bg-[#111111] text-[#B0B0B0] py-12 md:py-20' id='Contact'>
       <div className='container mx-auto max-w-[1600px] px-4 md:px-8 lg:px-12'>
-        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 lg:gap-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-12 lg:gap-16'>
           
           {/* Column 1 */}
           <div className='flex flex-col'>

@@ -5,7 +5,7 @@ const Joinus = () => {
   return (
     <section id='Contact' className='py-32 bg-transparent relative overflow-hidden'>
       <div className='container mx-auto max-w-[1600px] px-6 md:px-12 lg:px-20 relative z-10'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center'>
           
           {/* Left Side */}
           <div>
@@ -15,10 +15,10 @@ const Joinus = () => {
             </div>
             
             <h2 className='mb-10 leading-[1]'>
-              <span className='block text-[#1a1a1a] text-[56px] md:text-[80px] font-serif mb-2'>
+              <span className='block text-[#1a1a1a] text-4xl md:text-[56px] font-serif mb-2'>
                 Ready to <span className='italic text-[#C5A059]'>train</span>
               </span>
-              <span className='block text-[#1a1a1a] text-[60px] md:text-[90px] font-black uppercase tracking-tight mt-4'>
+              <span className='block text-[#1a1a1a] text-[40px] md:text-[60px] lg:text-[90px] font-black uppercase tracking-tight mt-4'>
                 WITH US?
               </span>
             </h2>
@@ -28,10 +28,10 @@ const Joinus = () => {
             </p>
             
             <div className='flex flex-wrap items-center gap-4'>
-              <button className='bg-[#C5A059] text-[#1a1a1a] text-[11px] font-bold tracking-[0.2em] py-4 px-10 uppercase hover:bg-[#b08d4a] transition-colors flex items-center gap-3'>
+              <button className='bg-[#C5A059] text-[#1a1a1a] text-[11px] font-bold tracking-[0.2em] py-3 px-6 md:py-4 md:px-10 uppercase hover:bg-[#b08d4a] transition-colors flex items-center gap-3'>
                 Visit Us Today <Icon icon='ph:arrow-right-bold' className='text-base' />
               </button>
-              <button className='bg-transparent border border-black/20 text-[#1a1a1a] text-[11px] font-bold tracking-[0.2em] py-4 px-10 uppercase hover:bg-black/5 hover:border-black/40 transition-colors flex items-center gap-3'>
+              <button className='bg-transparent border border-black/20 text-[#1a1a1a] text-[11px] font-bold tracking-[0.2em] py-3 px-6 md:py-4 md:px-10 uppercase hover:bg-black/5 hover:border-black/40 transition-colors flex items-center gap-3'>
                 <Icon icon='ph:whatsapp-logo-light' className='text-xl' /> Whatsapp
               </button>
             </div>
@@ -43,7 +43,7 @@ const Joinus = () => {
             <div className='absolute -top-[1px] -left-[1px] w-12 h-12 border-t-[3px] border-l-[3px] border-[#C5A059] z-20 pointer-events-none'></div>
             <div className='absolute -bottom-[1px] -right-[1px] w-12 h-12 border-b-[3px] border-r-[3px] border-[#C5A059] z-20 pointer-events-none'></div>
             
-            <div className='border border-white/10 p-10 md:p-16 bg-[#13110E]/90 backdrop-blur-sm relative z-10'>
+            <div className='border border-white/10 p-6 md:p-16 bg-[#13110E]/90 backdrop-blur-sm relative z-10'>
               {/* Logo */}
               <div className='flex items-center gap-4 mb-16'>
                 <div className='w-12 h-12 flex items-center justify-center'>

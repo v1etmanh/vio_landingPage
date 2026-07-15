@@ -44,7 +44,7 @@ const Services = () => {
       <div className='w-full px-4 md:px-6'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 h-auto md:h-[90vh] min-h-[800px]'>
           {items.map((item, index) => (
-            <div key={index} className={`relative group overflow-hidden rounded-none ${item.span}`}>
+            <div key={index} className={`relative group overflow-hidden rounded-none min-h-[300px] md:min-h-0 ${item.span}`}>
               <img
                 src={item.imgSrc}
                 alt={item.title}

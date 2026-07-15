@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           <div className='relative'>
             <button
               onClick={() => setDropdownOpen(true)}
-              className='flex items-center gap-2 bg-[#C5A059] text-black px-5 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-[#b08d4a] shadow-lg'
+              className='flex items-center gap-2 bg-[#C5A059] text-black px-4 py-2 md:px-7 md:py-3.5 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-[#b08d4a] shadow-lg'
             >
               MENU
               <Icon icon='ph:list-bold' className='text-lg md:text-xl' />
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
       {/* Offcanvas Menu Panel */}
       <div
         ref={dropdownRef}
-        className={`fixed top-0 right-0 h-full w-full sm:w-[450px] md:w-[500px] bg-white shadow-2xl z-[70] transform transition-transform duration-500 ease-in-out flex flex-col ${
+        className={`fixed top-0 right-0 h-full w-[85vw] sm:w-[450px] md:w-[500px] bg-white shadow-2xl z-[70] transform transition-transform duration-500 ease-in-out flex flex-col ${
           dropdownOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ borderTopLeftRadius: '2rem', borderBottomLeftRadius: '2rem' }}

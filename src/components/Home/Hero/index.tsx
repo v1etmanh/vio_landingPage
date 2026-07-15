@@ -22,7 +22,7 @@ const Hero = () => {
   }
 
   return (
-    <section className='relative overflow-hidden z-1 h-screen min-h-[700px] flex items-center justify-start -mt-24 pt-24'>
+    <section className='relative overflow-hidden z-1 h-screen min-h-[100dvh] md:min-h-[700px] flex items-center justify-start -mt-24 pt-24'>
       {/* Background Image */}
       <div className='absolute inset-0 w-full h-full z-[-1]'>
         <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10' />
@@ -41,7 +41,7 @@ const Hero = () => {
           className='max-w-3xl'
         >
           <div className='overflow-hidden mb-6'>
-            <motion.h1 variants={itemVariants} className='text-white text-6xl md:text-[5rem] lg:text-[6rem] font-extrabold uppercase leading-[1.05] tracking-tight'>
+            <motion.h1 variants={itemVariants} className='text-white text-5xl md:text-[5rem] lg:text-[6rem] font-extrabold uppercase leading-[1.05] tracking-tight'>
               <span className='block'>ELEVATE</span>
               <span className='block'>YOUR</span>
               <span className='block'>FITNESS</span>
@@ -58,7 +58,7 @@ const Hero = () => {
           <div className='overflow-hidden'>
             <motion.div variants={itemVariants}>
               <a href={'#Contact'}>
-                <button className='group relative inline-flex items-center justify-center px-12 py-4 text-xl font-medium text-white transition-all duration-300 bg-transparent rounded-lg border-2 border-[#C5A059] hover:bg-[#C5A059]/10 shadow-[0_0_20px_rgba(197,160,89,0.5)]'>
+                <button className='group relative inline-flex items-center justify-center text-lg px-8 py-3 md:text-xl md:px-12 md:py-4 font-medium text-white transition-all duration-300 bg-transparent rounded-lg border-2 border-[#C5A059] hover:bg-[#C5A059]/10 shadow-[0_0_20px_rgba(197,160,89,0.5)]'>
                   BOOK A VISIT 
                   <span className='ml-3 text-2xl transition-transform group-hover:translate-x-1'>→</span>
                 </button>
