@@ -10,7 +10,7 @@ const TrustBar = () => {
 
   return (
     <section className='relative z-20 -mt-32 md:-mt-36 mx-2 md:mx-auto w-[98%] max-w-[1600px]'>
-      <div className='bg-[#161310]/95 backdrop-blur-2xl border border-[#302A22] shadow-[0_10px_40px_rgba(0,0,0,0.5)] rounded-[2rem] px-4 md:px-6 py-4 md:py-5'>
+      <div className='bg-[#161310]/95 backdrop-blur-2xl border border-[#302A22] shadow-[0_10px_40px_rgba(0,0,0,0.5)] rounded-none px-4 md:px-6 py-4 md:py-5'>
         <div className='grid grid-cols-2 md:grid-cols-4 gap-y-6 md:gap-y-0 md:divide-x md:divide-[#302A22]'>
           {stats.map((stat, index) => (
             <div key={index} className='flex flex-col justify-center px-3 md:px-8 text-left'>

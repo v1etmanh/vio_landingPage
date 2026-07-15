@@ -45,7 +45,7 @@ const Knowledge = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12'>
           {videos.map((video, index) => (
             <div key={index} className='group'>
-              <div className='relative h-[400px] md:h-[500px] xl:h-[650px] rounded-3xl overflow-hidden mb-8 shadow-2xl border border-gray-200 bg-black'>
+              <div className='relative h-[400px] md:h-[500px] xl:h-[650px] rounded-none overflow-hidden mb-8 shadow-2xl border border-gray-200 bg-black'>
                 {playingIndex === index ? (
                   <video
                     src={video.src}

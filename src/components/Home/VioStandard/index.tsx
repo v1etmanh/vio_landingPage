@@ -68,7 +68,7 @@ const VioStandard = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className='bg-transparent hover:bg-white/60 backdrop-blur-sm border border-[#E8E3D9] hover:border-transparent rounded-3xl p-10 xl:p-12 transition-all duration-300 hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:-translate-y-2 group flex flex-col h-full min-h-[420px] cursor-pointer'
+              className='bg-transparent hover:bg-white/60 backdrop-blur-sm border border-[#E8E3D9] hover:border-transparent rounded-none p-10 xl:p-12 transition-all duration-300 hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:-translate-y-2 group flex flex-col h-full min-h-[420px] cursor-pointer'
             >
               <div className='flex justify-between items-start mb-14'>
                 <span className='font-serif italic text-5xl text-[#C5A059] group-hover:scale-110 transition-transform duration-300'>

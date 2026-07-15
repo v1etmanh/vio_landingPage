@@ -106,7 +106,7 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <div 
               key={index} 
-              className={`relative rounded-xl overflow-hidden transition-all duration-500 flex flex-col ${getCardStyle(index)}`}
+              className={`relative rounded-none overflow-hidden transition-all duration-500 flex flex-col ${getCardStyle(index)}`}
             >
               {/* Abstract Background Layer */}
               <div 
@@ -158,7 +158,7 @@ const Pricing = () => {
           ))}
         </div>
 
-        <div className='text-center mt-12 bg-white/80 backdrop-blur-sm p-6 rounded-2xl max-w-xl mx-auto shadow-lg border border-gray-200'>
+        <div className='text-center mt-12 bg-white/80 backdrop-blur-sm p-6 rounded-none max-w-xl mx-auto shadow-lg border border-gray-200'>
           <h4 className='text-[#1a1a1a] font-bold text-lg mb-2'>Payment Methods Accepted</h4>
           <div className='flex justify-center items-center gap-3 text-gray-700'>
             <Icon icon='ph:credit-card-duotone' className='text-3xl text-[#C5A059]' />

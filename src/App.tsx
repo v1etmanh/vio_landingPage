@@ -13,10 +13,12 @@ import Join from './components/Home/Joinus'
 import Map from './components/Home/Map'
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
+import WavyBackground from './components/Layout/WavyBackground'
 
 function App() {
   return (
     <>
+      <WavyBackground />
       <Header />
       <main>
         <Hero />

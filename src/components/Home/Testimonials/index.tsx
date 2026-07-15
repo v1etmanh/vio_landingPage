@@ -186,7 +186,7 @@ const Testimonials = () => {
           <Slider ref={sliderRef} {...settings} className='testimonial-slider -mx-4'>
           {reviews.map((review, index) => (
             <div key={index} className='px-4 pb-12 h-full'>
-              <div className='bg-white/90 backdrop-blur-sm border-2 border-gray-300 p-8 md:p-12 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] h-[460px] flex flex-col justify-between'>
+              <div className='bg-white/90 backdrop-blur-sm border-2 border-gray-300 p-8 md:p-12 rounded-none shadow-[0_10px_40px_rgba(0,0,0,0.04)] h-[460px] flex flex-col justify-between'>
                 <div>
                   <div className='flex justify-between items-start mb-8'>
                     <div className='flex text-[#C5A059] text-lg'>

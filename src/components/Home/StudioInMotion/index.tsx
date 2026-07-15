@@ -55,7 +55,7 @@ const StudioInMotion = () => {
 
     return (
       <div className='px-3 xl:px-4'>
-        <div className='w-full rounded-2xl overflow-hidden bg-[#1a1a1a] relative aspect-[9/16] shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-[1.02]'>
+        <div className='w-full rounded-none overflow-hidden bg-[#1a1a1a] relative aspect-[9/16] shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-[1.02]'>
           {!isLoaded ? (
             <div 
               className='absolute inset-0 flex items-center justify-center cursor-pointer group'
