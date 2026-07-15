@@ -58,7 +58,7 @@ const Hero = () => {
           <div className='overflow-hidden'>
             <motion.div variants={itemVariants}>
               <a href={'#Contact'}>
-                <button className='group relative inline-flex items-center justify-center px-12 py-4 text-xl font-medium text-white transition-all duration-300 bg-transparent rounded-lg border-2 border-[#FFD700] hover:bg-[#FFD700]/10 shadow-[0_0_20px_rgba(255,215,0,0.5)]'>
+                <button className='group relative inline-flex items-center justify-center px-12 py-4 text-xl font-medium text-white transition-all duration-300 bg-transparent rounded-lg border-2 border-[#C5A059] hover:bg-[#C5A059]/10 shadow-[0_0_20px_rgba(197,160,89,0.5)]'>
                   BOOK A VISIT 
                   <span className='ml-3 text-2xl transition-transform group-hover:translate-x-1'>→</span>
                 </button>
