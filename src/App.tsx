@@ -22,9 +22,9 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <TrustBar />
         <Aboutus />
         <VioStandard />
+        <TrustBar />
         <Positioning />
         <Services />
         <Pricing />
