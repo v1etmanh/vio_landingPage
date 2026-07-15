@@ -115,20 +115,21 @@ const Testimonials = () => {
             }
          }
       }
-    }, 500); // 0.5s speed as requested
+    }, 3000); 
     
     return () => clearInterval(interval);
   }, [isHovered, direction]);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: false, // Controlled manually now
+    autoplay: false, 
     pauseOnHover: false,
-    speed: 500, // Smooth transition time
+    speed: 3000, 
+    cssEase: 'linear',
     responsive: [
       {
         breakpoint: 1600,
@@ -185,29 +186,31 @@ const Testimonials = () => {
         <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
           <Slider ref={sliderRef} {...settings} className='testimonial-slider -mx-4'>
           {reviews.map((review, index) => (
-            <div key={index} className='px-4 pb-12 h-full'>
-              <div className='bg-white/90 backdrop-blur-sm border-2 border-gray-300 p-8 md:p-12 rounded-none shadow-[0_10px_40px_rgba(0,0,0,0.04)] h-[460px] flex flex-col justify-between'>
+            <div key={index} className='px-3 md:px-4 pb-12 h-full'>
+              <div className='bg-white/90 backdrop-blur-sm border-2 border-gray-300 p-6 md:p-8 lg:p-10 rounded-none shadow-[0_10px_40px_rgba(0,0,0,0.04)] h-[480px] flex flex-col justify-between'>
                 <div>
-                  <div className='flex justify-between items-start mb-8'>
-                    <div className='flex text-[#C5A059] text-lg'>
+                  <div className='flex justify-between items-start mb-6'>
+                    <div className='flex text-[#C5A059] text-base md:text-lg'>
                       {Array.from({ length: review.rating }).map((_, i) => (
                         <Icon key={i} icon='ic:round-star' />
                       ))}
                     </div>
-                    <Icon icon='ph:quotes-light' className='text-5xl text-[#E8E3D9]' />
+                    <Icon icon='ph:quotes-light' className='text-4xl md:text-5xl text-[#E8E3D9]' />
                   </div>
-                  <p className='text-[#4A453F] leading-relaxed text-[16px] italic font-serif mb-6 overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 6, WebkitBoxOrient: 'vertical' }}>
+                  <p className='text-[#4A453F] leading-relaxed text-[14px] md:text-[16px] italic font-serif mb-6 overflow-hidden text-ellipsis' style={{ display: '-webkit-box', WebkitLineClamp: 8, WebkitBoxOrient: 'vertical' }}>
                     "{review.comment}"
                   </p>
                 </div>
 
-                <div className='flex items-center pt-8 border-t border-[#F7F5F0]'>
-                  <div className='w-14 h-14 rounded-full mr-5 bg-[#7B6349] text-white flex items-center justify-center font-bold text-xl flex-shrink-0'>
+                <div className='flex items-center pt-6 border-t border-[#F7F5F0] mt-auto'>
+                  <div className='w-12 h-12 md:w-14 md:h-14 rounded-full mr-4 bg-[#7B6349] text-white flex items-center justify-center font-bold text-lg md:text-xl flex-shrink-0'>
                     {review.initials}
                   </div>
-                  <div>
-                    <h5 className='font-bold text-[#1A1A1A] text-lg mb-1'>{review.name}</h5>
-                    <span className='text-[10px] tracking-[0.2em] font-bold text-[#8A857F] uppercase'>{review.sub}</span>
+                  <div className='overflow-hidden'>
+                    <h5 className='font-bold text-[#1A1A1A] text-base md:text-lg mb-1 truncate'>{review.name}</h5>
+                    <span className='text-[9px] lg:text-[10px] tracking-[0.1em] lg:tracking-[0.2em] font-bold text-[#8A857F] uppercase block leading-snug break-words'>
+                      {review.sub}
+                    </span>
                   </div>
                 </div>
               </div>
