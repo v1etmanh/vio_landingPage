@@ -6,8 +6,6 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 const Testimonials = () => {
-  const [isHovered, setIsHovered] = useState(false)
-  const [direction, setDirection] = useState<'next' | 'prev'>('next')
   const sliderRef = useRef<any>(null)
 
   const reviews = [
@@ -90,45 +88,18 @@ const Testimonials = () => {
     }
   ]
 
-  useEffect(() => {
-    if (isHovered) return;
-    const interval = setInterval(() => {
-      if (sliderRef.current && sliderRef.current.innerSlider) {
-         const state = sliderRef.current.innerSlider.state;
-         const currentSlide = state.currentSlide;
-         const slideCount = state.slideCount;
-         const slidesToShow = state.slidesToShow;
-         
-         if (direction === 'next') {
-            if (currentSlide >= slideCount - slidesToShow) {
-               setDirection('prev');
-               sliderRef.current.slickPrev();
-            } else {
-               sliderRef.current.slickNext();
-            }
-         } else {
-            if (currentSlide <= 0) {
-               setDirection('next');
-               sliderRef.current.slickNext();
-            } else {
-               sliderRef.current.slickPrev();
-            }
-         }
-      }
-    }, 3000); 
-    
-    return () => clearInterval(interval);
-  }, [isHovered, direction]);
+  // Custom useEffect removed, using built-in autoplay instead
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: false, 
-    pauseOnHover: false,
-    speed: 3000, 
+    autoplay: true, 
+    pauseOnHover: true,
+    autoplaySpeed: 0,
+    speed: 8000, 
     cssEase: 'linear',
     responsive: [
       {
@@ -183,7 +154,7 @@ const Testimonials = () => {
           </div>
         </div>
 
-        <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div>
           <Slider ref={sliderRef} {...settings} className='testimonial-slider -mx-4'>
           {reviews.map((review, index) => (
             <div key={index} className='px-3 md:px-4 pb-12 h-full'>

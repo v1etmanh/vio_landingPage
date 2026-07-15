@@ -54,7 +54,7 @@ const Positioning = () => {
           {profiles.map((profile, index) => (
             <div 
               key={index} 
-              className='relative flex flex-col items-center text-center p-10 xl:p-12 rounded-none border-2 border-white shadow-[0_15px_35px_rgba(0,0,0,0.1),inset_0_0_60px_rgba(255,255,255,0.9)] bg-gradient-to-b from-white/60 via-gray-100/30 to-white/60 backdrop-blur-xl min-h-[860px] justify-center hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15),inset_0_0_80px_rgba(255,255,255,1)] transition-all duration-500 group'
+              className='relative flex flex-col items-center text-center p-6 md:p-10 xl:p-12 rounded-3xl border border-[#D0CACA] shadow-[0_10px_30px_rgba(0,0,0,0.08)] bg-gradient-to-b from-gray-200/80 via-gray-100/90 to-gray-200/80 backdrop-blur-xl min-h-[auto] md:min-h-[600px] lg:min-h-[860px] justify-center hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-500 group'
             >
               {/* Golden Icon Combination */}
               <div className='relative mb-10 mt-6'>

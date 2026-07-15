@@ -45,7 +45,7 @@ const Knowledge = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12'>
           {videos.map((video, index) => (
             <div key={index} className='group'>
-              <div className='relative h-[400px] md:h-[500px] xl:h-[650px] rounded-none overflow-hidden mb-8 shadow-2xl border border-gray-200 bg-black'>
+              <div className='relative h-[240px] sm:h-[300px] md:h-[350px] xl:h-[500px] rounded-none overflow-hidden mb-6 md:mb-8 shadow-2xl border border-gray-200 bg-black'>
                 {playingIndex === index ? (
                   <video
                     src={video.src}
@@ -76,10 +76,10 @@ const Knowledge = () => {
                   </>
                 )}
               </div>
-              <h3 className='text-2xl lg:text-3xl font-bold mb-4 text-[#1a1a1a] group-hover:text-[#C5A059] transition-colors cursor-pointer' onClick={() => setPlayingIndex(index)}>
+              <h3 className='text-xl lg:text-3xl font-bold mb-3 md:mb-4 text-[#1a1a1a] group-hover:text-[#C5A059] transition-colors cursor-pointer' onClick={() => setPlayingIndex(index)}>
                 {video.title}
               </h3>
-              <p className='text-gray-700 text-lg leading-relaxed'>{video.description}</p>
+              <p className='text-gray-700 text-base md:text-lg leading-relaxed'>{video.description}</p>
             </div>
           ))}
         </div>
