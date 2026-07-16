@@ -29,14 +29,12 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <TrustBar />
+        <Services />
+        <Pricing />
         <StudioInMotion />
         <Knowledge />
-        <Pricing />
-        <Aboutus />
-        <VioStandard />
-        <TrustBar />
         <Positioning />
-        <Services />
         <Testimonial />
         <Join />
         <Map />

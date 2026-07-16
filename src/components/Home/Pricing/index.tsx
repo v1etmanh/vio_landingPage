@@ -1,229 +1,170 @@
-import React, { useRef } from 'react'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-
-interface Plan {
-  label: string        // tier label (eyebrow)
-  name: string         // tier name (big)
-  price: string
-  note: string         // e.g. "/tháng" or "Liên hệ"
-  features: string[]
-  isPopular: boolean
-  cta: string
-  href: string
-}
-
-const plans: Plan[] = [
-  {
-    label: 'Gói',
-    name: 'Cơ Bản',
-    price: 'Liên hệ',
-    note: 'để biết giá',
-    features: [
-      'Tập không giới hạn giờ',
-      'Tủ đồ thông minh cá nhân',
-      'Khu vực cardio & máy Panatta',
-      'Phòng xông hơi (Sauna)',
-      'Wi-Fi tốc độ cao',
-      'Hỗ trợ từ đội ngũ tại phòng gym',
-    ],
-    isPopular: false,
-    cta: 'Đăng ký ngay',
-    href: '#Contact',
-  },
-  {
-    label: 'Gói',
-    name: 'PT Cá Nhân',
-    price: 'Liên hệ',
-    note: 'để biết giá',
-    features: [
-      'Tất cả quyền lợi gói Cơ Bản',
-      'HLV cá nhân đồng hành 1-1',
-      'Lịch tập được thiết kế riêng',
-      'Theo dõi chỉ số cơ thể định kỳ',
-      'Tư vấn dinh dưỡng cùng PT',
-      'Khu boxing & functional area',
-      'Ưu tiên đặt lịch giờ cao điểm',
-    ],
-    isPopular: true,
-    cta: 'Đăng ký ngay',
-    href: '#Contact',
-  },
-  {
-    label: 'Gói',
-    name: 'VIP Trị Liệu',
-    price: 'Liên hệ',
-    note: 'để biết giá',
-    features: [
-      'Tất cả quyền lợi gói PT Cá Nhân',
-      'Liệu trình phục hồi & trị liệu',
-      'Massage therapy chuyên sâu',
-      'Khu Recovery Zone độc quyền',
-      'Protein bar & smoothie miễn phí',
-      'Locker VIP khoá điện tử riêng',
-      'Ưu đãi đặc biệt cho thành viên lâu năm',
-    ],
-    isPopular: false,
-    cta: 'Đăng ký ngay',
-    href: '#Contact',
-  },
-]
-
-const CheckIcon = () => (
-  <svg
-    className='flex-shrink-0 w-4 h-4 mt-0.5'
-    viewBox='0 0 16 16'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <path
-      d='M3 8L6.5 11.5L13 4.5'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    />
-  </svg>
-)
+import React from 'react'
+import { Icon } from '@iconify/react'
+import Button from '../../ui/Button'
 
 const Pricing = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
-  const cardsRef = useRef<HTMLDivElement>(null)
-  const redLineRef = useRef<HTMLDivElement>(null)
+  const plans = [
+    {
+      name: 'DAY PASS',
+      prefix: 'FLEXIBLE',
+      priceVND: '200K',
+      priceUSD: '$8',
+      period: '/ DAY',
+      features: [
+        'Unlimited Gym Access',
+        'Air-conditioned luxury training space',
+      ],
+      isPopular: false,
+      btnText: 'GET DAY PASS',
+      bgImage: "url('/images/pricing/essential.png')",
+    },
+    {
+      name: 'SHORT TERM',
+      prefix: 'VISITOR',
+      priceVND: '500K',
+      priceUSD: '$20',
+      period: '/ 3 DAYS',
+      features: [
+        'Unlimited Gym Access',
+        'Air-conditioned luxury training space',
+      ],
+      isPopular: false,
+      btnText: 'GET SHORT TERM',
+      bgImage: "url('/images/pricing/abstract_white.png')",
+    },
+    {
+      name: 'WEEKLY PASS',
+      prefix: 'TRAVELER',
+      priceVND: '900K',
+      priceUSD: '$36',
+      period: '/ 1 WK',
+      features: [
+        '2 Weeks: 1.25M VND / $50',
+        'Unlimited Gym Access',
+        'Air-conditioned luxury training space',
+      ],
+      isPopular: true,
+      btnText: 'GET WEEKLY PASS',
+      bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
+    },
+    {
+      name: 'MEMBERSHIP',
+      prefix: 'COMMITTED',
+      priceVND: '1.65M',
+      priceUSD: '$66',
+      period: '/ 1 MO',
+      features: [
+        '2 Months: 2.9M VND / $116',
+        '3 Months: 3.9M VND / $156',
+        '4 Months: 4.8M VND / $192',
+        '5 Months: 5.7M VND / $228',
+        '6 Months: 6.6M VND / $264',
+        'Unlimited Gym Access',
+        'Air-conditioned luxury space',
+      ],
+      isPopular: false,
+      btnText: 'JOIN MEMBERSHIP',
+      bgImage: "url('/images/pricing/elite.png')",
+    },
+    {
+      name: 'LONG TERM',
+      prefix: 'LIFESTYLE',
+      priceVND: '10.2M',
+      priceUSD: '$408',
+      period: '/ 12 MO',
+      features: [
+        'Unlimited Gym Access',
+        'Air-conditioned luxury training space',
+      ],
+      isPopular: false,
+      btnText: 'JOIN LONG TERM',
+      bgImage: "url('/images/pricing/abstract_gold.png')",
+    },
+  ]
 
-  useGSAP(() => {
-    // Header fade-up
-    gsap.fromTo(
-      headerRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1, y: 0, duration: 0.9, ease: 'expo.out',
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' }
-      }
-    )
-
-    // Red line sweep
-    gsap.fromTo(
-      redLineRef.current,
-      { scaleX: 0, transformOrigin: 'left center' },
-      {
-        scaleX: 1, duration: 1, ease: 'expo.out',
-        scrollTrigger: { trigger: headerRef.current, start: 'top 75%' }
-      }
-    )
-
-    // Cards stagger
-    const cards = cardsRef.current?.querySelectorAll('.pricing-card')
-    if (cards) {
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 60, scale: 0.97 },
-        {
-          opacity: 1, y: 0, scale: 1,
-          duration: 0.75, ease: 'expo.out',
-          stagger: 0.12,
-          scrollTrigger: { trigger: cardsRef.current, start: 'top 80%' }
-        }
-      )
-    }
-  }, { scope: sectionRef })
+  const getCardStyle = (index) => {
+    // Center card (Index 2)
+    if (index === 2) return 'border-[2px] border-[#C5A059] shadow-[0_0_40px_rgba(197,160,89,0.4)] xl:scale-[1.15] z-30 xl:-translate-y-8 bg-[#1a1a1a] min-h-[580px]'
+    // Inner neighbors (Index 1 & 3)
+    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 xl:scale-100 xl:translate-y-6 bg-[#151515] min-h-[540px]'
+    // Outer neighbors (Index 0 & 4)
+    return 'border border-gray-600 shadow-xl z-10 xl:scale-95 xl:translate-y-16 opacity-90 hover:opacity-100 bg-[#111] min-h-[500px]'
+  }
 
   return (
-    <section id='Pricing' className='py-24 relative z-10' ref={sectionRef}>
-      <div className='container mx-auto max-w-7xl px-6 lg:px-12'>
-
-        {/* Section Header */}
-        <div className='text-center mb-16 relative' ref={headerRef}>
-          {/* Animated red underline */}
-          <div ref={redLineRef} className='absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-24 bg-[#C0392B] scale-x-0 origin-left mb-[-20px]' />
-          <p className='text-[var(--color-primary)] text-sm font-bold tracking-[0.25em] uppercase mb-4'>
-            Bảng Giá
+    <section id='Pricing' className='py-32 bg-transparent relative z-10'>
+      <div className='w-full max-w-[1700px] mx-auto px-4 lg:px-8'>
+        <div className='text-center max-w-4xl mx-auto mb-32'>
+          <p className='text-gray-600 text-lg tracking-[0.2em] uppercase mb-4 font-medium' style={{ fontFamily: 'Georgia, serif' }}>
+            VIO FITNESS - MEMBERSHIP PACKAGES
           </p>
-          <h2 className='font-heading text-5xl md:text-6xl font-bold uppercase text-[var(--color-darkmode)] leading-tight'>
-            Chọn Gói Tập <br className='hidden md:block' />
-            Phù Hợp Với Bạn
+          <h2 className='text-5xl md:text-6xl font-bold mb-6 text-[#1a1a1a] tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>
+            ELEVATE YOUR FITNESS JOURNEY
           </h2>
-          <p className='mt-5 text-[var(--color-darkmode)]/60 text-lg max-w-xl mx-auto'>
-            Mọi gói đều bao gồm đầy đủ cơ sở vật chất 3 tầng. Liên hệ trực tiếp để nhận tư vấn và giá ưu đãi tốt nhất.
-          </p>
         </div>
 
-        {/* Cards */}
-        <div ref={cardsRef} className='grid grid-cols-1 lg:grid-cols-3 gap-6 items-start lg:items-stretch'>
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className={`pricing-card relative flex flex-col rounded-none transition-all duration-300 ${
-                plan.isPopular
-                  ? 'border-2 border-[#C0392B] shadow-[0_8px_40px_rgba(192,57,43,0.25)] lg:scale-[1.04] z-20 bg-[var(--color-darkmode)]'
-                  : 'border border-[var(--color-darkmode)]/20 shadow-lg bg-[var(--color-darkmode)]/90 z-10'
-              }`}
+        <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
+          {plans.map((plan, index) => (
+            <div 
+              key={index} 
+              className={`relative rounded-none overflow-hidden transition-all duration-500 flex flex-col ${getCardStyle(index)}`}
             >
-              {/* Popular badge */}
-              {plan.isPopular && (
-                <div className='absolute -top-[1px] left-1/2 -translate-x-1/2 bg-[#C0392B] text-white text-[10px] font-heading font-bold uppercase tracking-[0.2em] px-5 py-1.5 z-30'>
-                  Phổ biến nhất
+              {/* Abstract Background Layer */}
+              <div 
+                className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 hover:scale-110"
+                style={{ backgroundImage: plan.bgImage }}
+              ></div>
+              {/* Dark Gradient Overlay for readability */}
+              <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/85 to-[#111]"></div>
+
+              {/* Content Layer */}
+              <div className='relative z-10 p-6 xl:p-8 flex flex-col h-full'>
+                {plan.isPopular && (
+                  <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[#2a2a2a] border border-[#C5A059] text-[#C5A059] px-6 py-2 rounded-b-md text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-lg'>
+                    Most Popular
+                  </div>
+                )}
+                
+                <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
+                  <p className='text-gray-300 tracking-widest text-[11px] mb-2 uppercase' style={{ fontFamily: 'Georgia, serif' }}>{plan.prefix}</p>
+                  <h3 className='text-2xl lg:text-3xl font-bold text-white mb-6' style={{ fontFamily: 'Georgia, serif' }}>{plan.name}</h3>
+                  <div className='flex items-baseline justify-center text-white'>
+                    <span className='text-4xl lg:text-5xl font-bold tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>{plan.priceVND}</span>
+                    <span className='text-gray-400 ml-2 text-sm font-medium tracking-wide'>{plan.period}</span>
+                  </div>
+                  <div className='flex items-baseline justify-center text-[#C5A059] mt-2'>
+                    <span className='text-xl lg:text-2xl font-bold tracking-tight' style={{ fontFamily: 'Georgia, serif' }}>{plan.priceUSD}</span>
+                    <span className='text-[#C5A059]/70 ml-1 text-xs font-medium tracking-wide'>{plan.period}</span>
+                  </div>
                 </div>
-              )}
+                
+                <ul className='space-y-4 mb-8 flex-grow'>
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className='flex items-start text-gray-200 text-sm xl:text-[15px]'>
+                      <Icon icon='tabler:check' className='text-[#C5A059] text-xl mr-3 flex-shrink-0 mt-0.5' />
+                      <span className="leading-relaxed">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              {/* Card header */}
-              <div className={`p-8 pb-6 border-b border-white/10 ${plan.isPopular ? 'pt-10' : ''}`}>
-                <p className='text-white/40 text-xs font-bold tracking-[0.2em] uppercase mb-1'>
-                  {plan.label}
-                </p>
-                <h3 className='font-heading text-3xl font-bold uppercase text-white mb-5'>
-                  {plan.name}
-                </h3>
-                <div className='flex items-end gap-2'>
-                  <span className='font-heading text-4xl font-bold text-white'>
-                    {plan.price}
-                  </span>
-                  <span className='text-white/40 text-sm pb-1'>{plan.note}</span>
-                </div>
-              </div>
-
-              {/* Features */}
-              <ul className='p-8 space-y-4 flex-grow'>
-                {plan.features.map((f, idx) => (
-                  <li key={idx} className='flex items-start gap-3 text-white/80 text-[15px] leading-snug'>
-                    <span className={plan.isPopular ? 'text-[#C0392B]' : 'text-[var(--color-primary)]'}>
-                      <CheckIcon />
-                    </span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
-              <div className='p-8 pt-0'>
-                <a href={plan.href} id={`pricing-cta-${i}`} className='block'>
-                  <button
-                    className={`w-full font-heading font-bold uppercase tracking-widest text-sm py-4 transition-colors duration-200 ${
-                      plan.isPopular
-                        ? 'bg-[#C0392B] hover:bg-[#a93226] text-white'
-                        : 'border-2 border-white/40 hover:border-white text-white hover:bg-white/10'
-                    }`}
-                  >
-                    {plan.cta}
-                  </button>
-                </a>
+                <Button 
+                  variant={plan.isPopular ? 'outline' : 'secondary'}
+                  className={`w-full mt-auto ${plan.isPopular ? 'border-[#C5A059] text-[#C5A059] hover:bg-[#C5A059] hover:text-black shadow-[0_0_15px_rgba(197,160,89,0.2)]' : ''}`}
+                >
+                  {plan.btnText}
+                </Button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom note */}
-        <p className='text-center mt-10 text-[var(--color-darkmode)]/50 text-sm'>
-          * Giá chính thức sẽ được tư vấn cụ thể theo nhu cầu và lộ trình tập luyện của bạn.
-          <a href='tel:0961119495' className='ml-2 text-[#C0392B] font-semibold hover:underline'>
-            Gọi ngay: 0961 119 495
-          </a>
-        </p>
-
+        <div className='text-center mt-12 bg-white/80 backdrop-blur-sm p-6 rounded-none max-w-xl mx-auto shadow-lg border border-gray-200'>
+          <h4 className='text-[#1a1a1a] font-bold text-lg mb-2'>Payment Methods Accepted</h4>
+          <div className='flex justify-center items-center gap-3 text-gray-700'>
+            <Icon icon='ph:credit-card-duotone' className='text-3xl text-[#C5A059]' />
+            <span className='font-medium'>Thanh toán bằng Thẻ Tín Dụng (Credit Card)</span>
+          </div>
+        </div>
       </div>
     </section>
   )

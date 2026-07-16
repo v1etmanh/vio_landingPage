@@ -76,19 +76,7 @@ const Footer = () => {
   return (
     <footer id='Contact' className='bg-[var(--color-deep-slate)] text-white'>
 
-      {/* Google Maps embed */}
-      <div className='w-full h-[400px]'>
-        <iframe
-          src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.7362513029293!2d108.22060427604329!3d16.07917068460181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421908d1e57315%3A0x11b76a5229896e5b!2sVIO%20FITNESS%20%26%20GYM%20DA%20NANG!5e0!3m2!1sen!2s!4v1784045394376!5m2!1sen!2s'
-          width='100%'
-          height='400'
-          style={{ border: 0, display: 'block' }}
-          allowFullScreen
-          loading='lazy'
-          referrerPolicy='strict-origin-when-cross-origin'
-          title='VIO FITNESS & GYM ĐÀ NẴNG'
-        />
-      </div>
+
 
       {/* Main footer grid */}
       <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-16'>
