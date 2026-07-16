@@ -39,4 +39,7 @@ dist-ssr
 .vite
 
 # Large Media Files
-public/information_video/
+*.mp4
+*.MP4
+*.mov
+*.MOV
