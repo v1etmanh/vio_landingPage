@@ -31,7 +31,7 @@ const Hero = () => {
 
       {/* ── Content ── */}
       <div className='relative z-10 w-full pt-[80px]'>
-        <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-20 lg:py-32'>
+        <div className='container mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 py-20 lg:py-32'>
           <div className='max-w-2xl'>
 
             {/* Eyebrow */}
@@ -49,7 +49,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className='text-white font-heading text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight mb-6'
+              className='text-white font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight mb-6'
             >
               Phòng gym <br />
               <span className='text-[var(--color-primary)]'>chuẩn quốc tế</span> <br />

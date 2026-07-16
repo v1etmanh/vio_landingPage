@@ -56,13 +56,13 @@ const Testimonials = () => {
 
   return (
     <section id='Reviews' className='py-24'>
-      <div className='container mx-auto max-w-7xl px-6 lg:px-12'>
+      <div className='container mx-auto max-w-7xl px-4 sm:px-6 lg:px-12'>
         <div className='text-center max-w-3xl mx-auto mb-16'>
           <div className='flex justify-center items-center gap-4 mb-4'>
             <Icon icon='logos:google-icon' className='text-3xl' />
             <span className='text-2xl font-bold text-gray-700'>Reviews</span>
           </div>
-          <h2 className='text-4xl md:text-5xl font-bold mb-6'>
+          <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold mb-6'>
             What our members say.
           </h2>
           <div className='flex items-center justify-center gap-2'>

@@ -32,7 +32,7 @@ const VioStandard = () => {
 
   return (
     <section id='Standards' className='py-24 bg-transparent relative z-10'>
-      <div className='container mx-auto max-w-[1700px] px-4 md:px-8 lg:px-12'>
+      <div className='container mx-auto max-w-[1700px] px-4 sm:px-6 md:px-8 lg:px-12'>
         
         {/* Header Section */}
         <div className='flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8'>
@@ -44,10 +44,10 @@ const VioStandard = () => {
               </span>
             </div>
             <h2 className='flex flex-col leading-[0.9]'>
-              <span className='font-serif italic text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] text-[#332E29] font-light'>
+              <span className='font-serif italic text-5xl sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] text-[#332E29] font-light'>
                 The Vio
               </span>
-              <span className='font-black text-[4rem] md:text-[6rem] lg:text-[7rem] text-[#1A1A1A] tracking-tighter uppercase'>
+              <span className='font-black text-[3.5rem] sm:text-[4rem] md:text-[6rem] lg:text-[7rem] text-[#1A1A1A] tracking-tighter uppercase'>
                 STANDARD.
               </span>
             </h2>

@@ -93,17 +93,17 @@ const Pricing = () => {
 
   return (
     <section id='Pricing' className='py-32 bg-transparent relative z-10'>
-      <div className='w-full max-w-[1700px] mx-auto px-4 lg:px-8'>
+      <div className='w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center max-w-4xl mx-auto mb-32'>
           <p className='text-gray-600 text-lg tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
             VIO FITNESS - MEMBERSHIP PACKAGES
           </p>
-          <h2 className='text-5xl md:text-6xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
+          <h2 className='text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
             ELEVATE YOUR FITNESS JOURNEY
           </h2>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
           {plans.map((plan, index) => (
             <div
               key={index}

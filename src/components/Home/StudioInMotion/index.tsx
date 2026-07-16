@@ -58,18 +58,18 @@ const StudioInMotion = () => {
       <div className='px-3 xl:px-4'>
         <div className='w-full rounded-none overflow-hidden bg-[var(--color-darkmode)] relative aspect-[9/16] shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-[1.02]'>
           {!isLoaded ? (
-            <div 
+            <div
               className='absolute inset-0 flex items-center justify-center cursor-pointer group'
               onClick={() => setIsLoaded(true)}
             >
               {/* Dark overlay for contrast */}
               <div className='absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500'></div>
-              
+
               {/* Brutalist Tag */}
               <div className='absolute top-6 left-6 bg-[var(--color-primary)] text-white text-[11px] font-bold px-4 py-2 rounded-none shadow-xl uppercase tracking-widest z-10'>
                 REEL 0{index + 1}
               </div>
-              
+
               {/* Rigid Play Button */}
               <div className='absolute inset-0 flex items-center justify-center z-10'>
                 <div className='w-24 h-16 bg-white/10 backdrop-blur-md border-[2px] border-white flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:border-[var(--color-primary)] transition-all duration-300 group-hover:scale-105 shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-none'>
@@ -78,12 +78,12 @@ const StudioInMotion = () => {
               </div>
             </div>
           ) : (
-            <iframe 
-              src={`https://www.facebook.com/plugins/video.php?href=${videoUrl}&show_text=false&width=400`} 
+            <iframe
+              src={`https://www.facebook.com/plugins/video.php?href=${videoUrl}&show_text=false&width=400`}
               className='w-full h-full border-none overflow-hidden'
-              scrolling="no" 
-              frameBorder="0" 
-              allowFullScreen={true} 
+              scrolling="no"
+              frameBorder="0"
+              allowFullScreen={true}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             ></iframe>
           )}
@@ -94,9 +94,9 @@ const StudioInMotion = () => {
 
   return (
     <section id='Studio' className='py-32 bg-[var(--color-darkmode)] relative z-10 overflow-hidden border-t border-white/5'>
-      <div className='w-full max-w-[1700px] mx-auto px-6 md:px-12 lg:px-8'>
+      <div className='w-full max-w-[1700px] mx-auto px-4 sm:px-6 md:px-12 lg:px-8'>
         <div className='flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 border-b border-gray-600/50 pb-8'>
-          <h2 className='text-5xl sm:text-6xl md:text-[80px] xl:text-[90px] font-black text-white font-heading tracking-tight uppercase leading-[0.95]'>
+          <h2 className='text-4xl sm:text-5xl md:text-[80px] xl:text-[90px] font-black text-white font-heading tracking-tight uppercase leading-[0.95]'>
             STUDIO <br className='hidden md:block' />IN MOTION.
           </h2>
           <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold font-sans tracking-[0.2em] uppercase mt-8 md:mt-0 text-gray-300 hover:text-[var(--color-primary)] transition-colors'>

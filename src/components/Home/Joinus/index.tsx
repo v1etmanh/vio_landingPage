@@ -109,7 +109,7 @@ const Joinus = () => {
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      <div className='relative container mx-auto max-w-7xl px-6 lg:px-12'>
+      <div className='relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-12'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-28 items-start'>
 
           {/* ── LEFT: CTA copy ──────────────────────────────────────── */}
@@ -126,7 +126,7 @@ const Joinus = () => {
             {/* Headline */}
             <motion.h2
               variants={fadeUp}
-              className='font-heading font-bold uppercase text-white leading-[0.92] text-5xl md:text-6xl xl:text-7xl mb-8'
+              className='font-heading font-bold uppercase text-white leading-[0.92] text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-8'
             >
               Sẵn Sàng<br />
               <span className='text-[#C0392B]'>Bứt Phá</span><br />

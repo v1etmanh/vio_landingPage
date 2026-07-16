@@ -30,19 +30,19 @@ const Knowledge = () => {
 
   return (
     <section id='Knowledge' className='py-24 bg-[#151210] relative z-10 border-t border-white/5'>
-      <div className='w-full max-w-[1600px] mx-auto px-4 lg:px-8'>
+      <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex flex-col md:flex-row justify-between items-end mb-16 border-b border-gray-600/50 pb-8'>
           <div className='max-w-2xl'>
             <p className='text-[var(--color-primary)] text-lg tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
               Expertise
             </p>
-            <h2 className='text-5xl md:text-6xl font-black text-white font-heading uppercase tracking-tight'>
+            <h2 className='text-4xl sm:text-5xl md:text-6xl font-black text-white font-heading uppercase tracking-tight'>
               Learn from the pros.
             </h2>
           </div>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 xl:gap-12'>
           {videos.map((video, index) => (
             <div key={index} className='group flex flex-col'>
               <div className='relative h-[240px] sm:h-[300px] md:h-[350px] xl:h-[450px] rounded-none overflow-hidden mb-6 md:mb-8 shadow-2xl border-[2px] border-white/10 group-hover:border-[var(--color-primary)]/50 transition-colors duration-500 bg-black'>
@@ -61,11 +61,11 @@ const Knowledge = () => {
                       className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 cursor-pointer'
                       onClick={() => setPlayingIndex(index)}
                     />
-                    <div 
-                      className='absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 cursor-pointer' 
+                    <div
+                      className='absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500 cursor-pointer'
                       onClick={() => setPlayingIndex(index)}
                     />
-                    <div 
+                    <div
                       className='absolute inset-0 flex items-center justify-center cursor-pointer z-10'
                       onClick={() => setPlayingIndex(index)}
                     >
