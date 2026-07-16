@@ -56,7 +56,7 @@ const StudioInMotion = () => {
 
     return (
       <div className='px-3 xl:px-4'>
-        <div className='w-full rounded-none overflow-hidden bg-[#1a1a1a] relative aspect-[9/16] shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-[1.02]'>
+        <div className='w-full rounded-none overflow-hidden bg-[var(--color-darkmode)] relative aspect-[9/16] shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-[1.02]'>
           {!isLoaded ? (
             <div 
               className='absolute inset-0 flex items-center justify-center cursor-pointer group'
@@ -76,11 +76,11 @@ const StudioInMotion = () => {
                 </div>
               </div>
               <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70'></div>
-              <div className='absolute top-4 left-4 bg-[#C5A059] text-black text-xs font-bold px-3 py-1 rounded shadow-md uppercase tracking-wider'>
+              <div className='absolute top-4 left-4 bg-[var(--color-primary)] text-[var(--color-darkmode)] text-xs font-bold px-3 py-1 rounded shadow-md uppercase tracking-wider'>
                 Reel 0{index + 1}
               </div>
               
-              <div className='w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border-[3px] border-white flex items-center justify-center z-10 group-hover:bg-[#C5A059]/90 group-hover:border-[#C5A059] transition-all duration-300 group-hover:scale-110 shadow-[0_0_30px_rgba(0,0,0,0.5)]'>
+              <div className='w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border-[3px] border-white flex items-center justify-center z-10 group-hover:bg-[var(--color-primary)]/90 group-hover:border-[var(--color-primary)] transition-all duration-300 group-hover:scale-110 shadow-[0_0_30px_rgba(0,0,0,0.5)]'>
                 <Icon icon='ph:play-fill' className='text-white text-3xl ml-1.5' />
               </div>
             </div>
@@ -103,12 +103,12 @@ const StudioInMotion = () => {
     <section id='Studio' className='py-32 bg-transparent relative z-10 overflow-hidden'>
       <div className='w-full px-6 md:px-12 lg:px-20'>
         <div className='flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16'>
-          <h2 className='text-4xl sm:text-6xl md:text-[80px] xl:text-[100px] font-black text-[#1a1a1a] tracking-tighter uppercase leading-[0.9]'>
+          <h2 className='text-4xl sm:text-6xl md:text-[80px] xl:text-[100px] font-black text-[var(--color-darkmode)] tracking-tighter uppercase leading-[0.9]'>
             STUDIO <br className='hidden md:block' />IN MOTION.
           </h2>
-          <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold tracking-widest uppercase mt-8 md:mt-0 pb-2 border-b-2 border-transparent hover:border-[#1a1a1a] transition-all'>
+          <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold tracking-widest uppercase mt-8 md:mt-0 pb-2 border-b-2 border-transparent hover:border-[var(--color-darkmode)] transition-all'>
             SEE ALL REELS
-            <Icon icon='ph:arrow-right-bold' className='text-[#C5A059] text-lg group-hover:translate-x-2 transition-transform' />
+            <Icon icon='ph:arrow-right-bold' className='text-[var(--color-primary)] text-lg group-hover:translate-x-2 transition-transform' />
           </a>
         </div>
 
@@ -126,7 +126,7 @@ const StudioInMotion = () => {
         .studio-slider .slick-next {
           width: 48px;
           height: 48px;
-          background: #1a1a1a;
+          background: var(--color-darkmode);
           border-radius: 50%;
           z-index: 20;
           transition: all 0.3s ease;
@@ -139,7 +139,7 @@ const StudioInMotion = () => {
         }
         .studio-slider .slick-prev:hover,
         .studio-slider .slick-next:hover {
-          background: #C5A059;
+          background: var(--color-primary);
         }
         .studio-slider .slick-prev:before,
         .studio-slider .slick-next:before {
