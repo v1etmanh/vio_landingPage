@@ -75,9 +75,9 @@ const Header: React.FC = () => {
               <span className="text-lg">0961119495</span>
             </a>
             <Button
-              variant="primary"
+              variant="secondary"
               size="sm"
-              className='hidden lg:inline-flex rounded-sm uppercase font-heading tracking-wider shadow-sm hover:shadow-md bg-primary text-white'
+              className='hidden lg:inline-flex'
               onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
               Đăng ký tập thử
             </Button>
@@ -122,9 +122,9 @@ const Header: React.FC = () => {
             )}
             <div className='mt-8 w-full'>
               <Button
-                variant="primary"
+                variant="secondary"
                 size="md"
-                className='w-full rounded-sm uppercase font-heading tracking-wider bg-primary text-white'
+                className='w-full'
                 onClick={() => {
                   document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)

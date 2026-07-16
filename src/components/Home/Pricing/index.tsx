@@ -105,12 +105,12 @@ const Pricing = () => {
 
         <div className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
           {plans.map((plan, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`relative rounded-none overflow-hidden transition-all duration-500 flex flex-col ${getCardStyle(index)}`}
             >
               {/* Abstract Background Layer */}
-              <div 
+              <div
                 className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 hover:scale-110"
                 style={{ backgroundImage: plan.bgImage }}
               ></div>
@@ -124,7 +124,7 @@ const Pricing = () => {
                     Most Popular
                   </div>
                 )}
-                
+
                 <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
                   <p className='text-gray-300 tracking-widest text-[11px] mb-2 uppercase font-sans font-bold'>{plan.prefix}</p>
                   <h3 className='text-2xl lg:text-3xl font-bold text-white mb-6'>{plan.name}</h3>
@@ -137,7 +137,7 @@ const Pricing = () => {
                     <span className='text-[var(--color-primary)]/70 ml-1 text-xs font-medium tracking-wide font-sans'>{plan.period}</span>
                   </div>
                 </div>
-                
+
                 <ul className='space-y-4 mb-8 flex-grow'>
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className='flex items-start text-gray-200 text-sm xl:text-[15px]'>
@@ -147,7 +147,7 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                <Button 
+                <Button
                   variant={plan.isPopular ? 'outline' : 'secondary'}
                   className={`w-full mt-auto ${plan.isPopular ? 'border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white shadow-[0_0_15px_rgba(140,120,83,0.2)]' : ''}`}
                 >

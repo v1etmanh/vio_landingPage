@@ -62,26 +62,19 @@ const StudioInMotion = () => {
               className='absolute inset-0 flex items-center justify-center cursor-pointer group'
               onClick={() => setIsLoaded(true)}
             >
-              {/* Fake UI resembling Facebook Reel for facade */}
-              <div className='absolute top-6 left-6 right-6 flex justify-between items-start z-10'>
-                <div className='flex items-center gap-3'>
-                  <div className='w-10 h-10 rounded-full bg-black flex items-center justify-center border border-gray-600 shadow-md'>
-                    <span className='text-[12px] text-white font-bold'>VIO</span>
-                  </div>
-                  <span className='text-white text-sm font-bold drop-shadow-lg'>Vio Fitness</span>
-                </div>
-                <div className='flex flex-col items-center gap-1'>
-                  <Icon icon='ph:share-network-bold' className='text-white text-2xl drop-shadow-lg' />
-                  <span className='text-white text-[11px] drop-shadow-lg font-medium'>Chia sẻ</span>
-                </div>
-              </div>
-              <div className='absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70'></div>
-              <div className='absolute top-4 left-4 bg-[var(--color-primary)] text-[var(--color-darkmode)] text-xs font-bold px-3 py-1 rounded shadow-md uppercase tracking-wider'>
-                Reel 0{index + 1}
+              {/* Dark overlay for contrast */}
+              <div className='absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500'></div>
+              
+              {/* Brutalist Tag */}
+              <div className='absolute top-6 left-6 bg-[var(--color-primary)] text-white text-[11px] font-bold px-4 py-2 rounded-none shadow-xl uppercase tracking-widest z-10'>
+                REEL 0{index + 1}
               </div>
               
-              <div className='w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border-[3px] border-white flex items-center justify-center z-10 group-hover:bg-[var(--color-primary)]/90 group-hover:border-[var(--color-primary)] transition-all duration-300 group-hover:scale-110 shadow-[0_0_30px_rgba(0,0,0,0.5)]'>
-                <Icon icon='ph:play-fill' className='text-white text-3xl ml-1.5' />
+              {/* Rigid Play Button */}
+              <div className='absolute inset-0 flex items-center justify-center z-10'>
+                <div className='w-24 h-16 bg-white/10 backdrop-blur-md border-[2px] border-white flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:border-[var(--color-primary)] transition-all duration-300 group-hover:scale-105 shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-none'>
+                  <Icon icon='ph:play-fill' className='text-white text-3xl ml-1.5' />
+                </div>
               </div>
             </div>
           ) : (
@@ -100,15 +93,17 @@ const StudioInMotion = () => {
   }
 
   return (
-    <section id='Studio' className='py-32 bg-transparent relative z-10 overflow-hidden'>
-      <div className='w-full px-6 md:px-12 lg:px-20'>
-        <div className='flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16'>
-          <h2 className='text-4xl sm:text-6xl md:text-[80px] xl:text-[100px] font-black text-[var(--color-darkmode)] tracking-tighter uppercase leading-[0.9]'>
+    <section id='Studio' className='py-32 bg-[var(--color-darkmode)] relative z-10 overflow-hidden border-t border-white/5'>
+      <div className='w-full max-w-[1700px] mx-auto px-6 md:px-12 lg:px-8'>
+        <div className='flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 border-b border-gray-600/50 pb-8'>
+          <h2 className='text-5xl sm:text-6xl md:text-[80px] xl:text-[90px] font-black text-white font-heading tracking-tight uppercase leading-[0.95]'>
             STUDIO <br className='hidden md:block' />IN MOTION.
           </h2>
-          <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold tracking-widest uppercase mt-8 md:mt-0 pb-2 border-b-2 border-transparent hover:border-[var(--color-darkmode)] transition-all'>
+          <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold font-sans tracking-[0.2em] uppercase mt-8 md:mt-0 text-gray-300 hover:text-[var(--color-primary)] transition-colors'>
             SEE ALL REELS
-            <Icon icon='ph:arrow-right-bold' className='text-[var(--color-primary)] text-lg group-hover:translate-x-2 transition-transform' />
+            <div className='w-10 h-10 border border-white/20 flex items-center justify-center rounded-none group-hover:border-[var(--color-primary)] group-hover:bg-[var(--color-primary)] transition-all duration-300'>
+              <Icon icon='ph:arrow-right-bold' className='text-white text-lg group-hover:translate-x-1 transition-transform' />
+            </div>
           </a>
         </div>
 
@@ -124,10 +119,11 @@ const StudioInMotion = () => {
       <style>{`
         .studio-slider .slick-prev,
         .studio-slider .slick-next {
-          width: 48px;
-          height: 48px;
-          background: var(--color-darkmode);
-          border-radius: 50%;
+          width: 56px;
+          height: 64px;
+          background: #221e1a;
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 0;
           z-index: 20;
           transition: all 0.3s ease;
         }

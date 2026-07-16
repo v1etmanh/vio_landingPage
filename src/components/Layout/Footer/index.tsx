@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from '../../ui/Button'
 
 // ── Social SVGs ─────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
@@ -222,13 +223,14 @@ const Footer = () => {
                   className='w-full bg-white/5 border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[var(--color-primary)] transition-colors duration-200'
                   id='footer-input-phone'
                 />
-                <button
+                <Button
                   type='submit'
                   id='footer-submit-btn'
-                  className='w-full bg-[#C0392B] hover:bg-[#a93226] text-white font-heading font-bold uppercase tracking-widest text-sm py-3.5 transition-colors duration-200'
+                  variant='primary'
+                  className='w-full'
                 >
                   Gửi yêu cầu tư vấn
-                </button>
+                </Button>
               </form>
             ) : (
               <div className='border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 p-5 text-center'>

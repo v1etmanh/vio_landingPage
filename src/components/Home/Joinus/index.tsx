@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Button from '../../ui/Button'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -139,17 +140,17 @@ const Joinus = () => {
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeUp} className='flex flex-col sm:flex-row gap-4'>
+            <motion.div variants={fadeUp} className='flex flex-col sm:flex-row gap-4 mt-8'>
               <a href='#Contact' id='join-cta-trial'>
-                <button className='inline-flex items-center gap-3 bg-[#C0392B] hover:bg-[#a93226] text-white font-heading font-bold uppercase tracking-wider text-sm px-8 py-4 transition-colors duration-200'>
+                <Button variant="primary">
                   Đặt lịch tập thử miễn phí
                   <span>→</span>
-                </button>
+                </Button>
               </a>
               <a href='tel:0961119495' id='join-cta-call'>
-                <button className='inline-flex items-center gap-3 border border-white/25 hover:border-white/60 text-white font-heading font-bold uppercase tracking-wider text-sm px-8 py-4 transition-colors duration-200 hover:bg-white/5'>
+                <Button variant="outline">
                   Gọi ngay
-                </button>
+                </Button>
               </a>
             </motion.div>
 
