@@ -95,10 +95,10 @@ const Pricing = () => {
     <section id='Pricing' className='py-32 bg-transparent relative z-10'>
       <div className='w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center max-w-4xl mx-auto mb-32'>
-          <p className='text-gray-600 text-lg tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
+          <p className='text-gray-600 text-xs sm:text-sm md:text-lg tracking-[0.1em] sm:tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
             VIO FITNESS - MEMBERSHIP PACKAGES
           </p>
-          <h2 className='text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
+          <h2 className='text-3xl sm:text-4xl md:text-6xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
             ELEVATE YOUR FITNESS JOURNEY
           </h2>
         </div>

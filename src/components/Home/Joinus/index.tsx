@@ -126,7 +126,7 @@ const Joinus = () => {
             {/* Headline */}
             <motion.h2
               variants={fadeUp}
-              className='font-heading font-bold uppercase text-white leading-[0.92] text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-8'
+              className='font-heading font-bold uppercase text-white leading-[0.92] text-3xl sm:text-4xl md:text-6xl xl:text-7xl mb-8'
             >
               Sẵn Sàng<br />
               <span className='text-[#C0392B]'>Bứt Phá</span><br />
@@ -140,27 +140,34 @@ const Joinus = () => {
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeUp} className='flex flex-col sm:flex-row gap-4 mt-8'>
-              <a href='#Contact' id='join-cta-trial'>
-                <Button variant="primary">
-                  Đặt lịch tập thử miễn phí
-                  <span>→</span>
-                </Button>
-              </a>
-              <a href='tel:0961119495' id='join-cta-call'>
-                <Button variant="outline">
-                  Gọi ngay
-                </Button>
-              </a>
+            <motion.div variants={fadeIn} className='flex flex-col sm:flex-row items-center gap-4 mt-6 sm:mt-10'>
+              <Button 
+                href='#Contact'
+                id='join-cta-trial'
+                variant='primary'
+                icon='tabler:arrow-right'
+                className='w-full sm:w-auto'
+              >
+                Tham Gia Ngay
+              </Button>
+              <Button 
+                href='tel:0961119495'
+                id='join-cta-call'
+                variant='outline'
+                icon='tabler:phone'
+                className='w-full sm:w-auto'
+              >
+                096 111 94 95
+              </Button>
             </motion.div>
 
             {/* Divider */}
             <motion.div variants={fadeIn} className='mt-16 pt-10 border-t border-white/10'>
               <p className='text-white/30 text-xs uppercase tracking-[0.25em] font-bold'>Thiết bị đối tác</p>
-              <div className='mt-4 flex items-center gap-6'>
-                <span className='font-heading text-white/20 text-sm font-bold uppercase tracking-widest hover:text-white/50 transition-colors cursor-default'>Panatta</span>
-                <span className='text-white/10'>·</span>
-                <span className='font-heading text-white/20 text-sm font-bold uppercase tracking-widest hover:text-white/50 transition-colors cursor-default'>Hammer Strength</span>
+              <div className='mt-4 flex flex-row items-center gap-2 sm:gap-6 justify-between sm:justify-start w-full overflow-hidden'>
+                <span className='font-heading text-white/20 text-[10px] sm:text-sm font-bold uppercase tracking-widest hover:text-white/50 transition-colors cursor-default whitespace-nowrap'>Panatta</span>
+                <span className='text-white/10 text-xs sm:text-base'>·</span>
+                <span className='font-heading text-white/20 text-[10px] sm:text-sm font-bold uppercase tracking-widest hover:text-white/50 transition-colors cursor-default whitespace-nowrap'>Hammer Strength</span>
               </div>
             </motion.div>
           </motion.div>

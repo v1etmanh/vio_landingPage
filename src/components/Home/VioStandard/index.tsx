@@ -44,10 +44,10 @@ const VioStandard = () => {
               </span>
             </div>
             <h2 className='flex flex-col leading-[0.9]'>
-              <span className='font-serif italic text-5xl sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] text-[#332E29] font-light'>
+              <span className='font-serif italic text-4xl sm:text-5xl md:text-[5.5rem] lg:text-[6.5rem] text-[#332E29] font-light'>
                 The Vio
               </span>
-              <span className='font-black text-[3.5rem] sm:text-[4rem] md:text-[6rem] lg:text-[7rem] text-[#1A1A1A] tracking-tighter uppercase'>
+              <span className='font-black text-5xl sm:text-[4rem] md:text-[6rem] lg:text-[7rem] text-[#1A1A1A] tracking-tighter uppercase'>
                 STANDARD.
               </span>
             </h2>
@@ -92,22 +92,25 @@ const VioStandard = () => {
 
         {/* Bottom Section */}
         <div className='flex flex-col lg:flex-row justify-between items-start lg:items-center pt-8 border-t border-[#E8E3D9] gap-6'>
-          <div className='flex flex-wrap items-center gap-6 md:gap-10'>
+          <div className='flex flex-row items-center justify-between w-full lg:w-auto gap-2 sm:gap-6 md:gap-10 overflow-hidden'>
             {['NO CONTRACTS', 'NO HIDDEN FEES', 'NO HARD-SELLING'].map((text, idx) => (
-              <div key={idx} className='flex items-center gap-3'>
-                <Icon icon='ph:check-bold' className='text-[#C5A059] text-xl' />
-                <span className='font-bold text-sm tracking-[0.15em] text-[#4A453F]'>
+              <div key={idx} className='flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-center sm:text-left'>
+                <Icon icon='ph:check-bold' className='text-[#C5A059] text-sm sm:text-xl' />
+                <span className='font-bold text-[8px] sm:text-sm tracking-[0.05em] sm:tracking-[0.15em] text-[#4A453F] leading-tight whitespace-nowrap sm:whitespace-normal'>
                   {text}
                 </span>
               </div>
             ))}
           </div>
           
-          <a href='#Contact' className='group flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer'>
-            <span className='font-bold text-sm tracking-[0.15em] text-[#1A1A1A]'>
+          <a href='#Contact' className='group flex items-center gap-4 cursor-pointer'>
+            <span className='relative font-bold text-sm tracking-[0.15em] text-[#1A1A1A] overflow-hidden py-1'>
               SEE ALL THE FACILITY
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#C5A059] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
             </span>
-            <Icon icon='tabler:arrow-right' className='text-[#C5A059] text-xl group-hover:translate-x-2 transition-transform duration-300' />
+            <div className="w-10 h-10 rounded-full border border-[#C5A059]/30 flex items-center justify-center group-hover:bg-[#C5A059] group-hover:shadow-[0_5px_15px_rgba(197,160,89,0.4)] transition-all duration-500">
+              <Icon icon='tabler:arrow-right' className='text-[#C5A059] group-hover:text-white text-xl transition-colors duration-500' />
+            </div>
           </a>
         </div>
         

@@ -1,20 +1,23 @@
 import React from 'react';
+import { Icon } from '@iconify/react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'dark' | 'white';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'dark' | 'white' | 'gold';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
+  href?: string;
+  icon?: string;
   children: React.ReactNode;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', className = '', children, ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+  ({ variant = 'primary', size = 'md', className = '', href, icon, children, ...props }, ref) => {
     
     // Unified Base styles: Sharp corners, bold, uppercase, tracking-wider, flex layout
-    const baseStyles = 'inline-flex items-center justify-center gap-3 font-heading font-bold uppercase tracking-wider transition-all duration-300 ease-out focus:outline-none hover:-translate-y-0.5 active:translate-y-0';
+    const baseStyles = 'group relative inline-flex items-center justify-center font-heading font-bold uppercase tracking-[0.15em] transition-all duration-500 overflow-hidden';
     
     // Sizing
     const sizeStyles = {
@@ -25,21 +28,49 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Variants (based on brand colors)
     const variantStyles = {
-      primary: 'bg-[#C0392B] text-white hover:bg-[#E74C3C] hover:shadow-[0_0_20px_rgba(192,57,43,0.5)] border border-transparent',
-      secondary: 'bg-[#8C7853] text-white hover:bg-[#A69068] hover:shadow-[0_0_20px_rgba(140,120,83,0.5)] border border-transparent',
-      outline: 'bg-transparent text-white border-2 border-white/25 hover:border-white/80 hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]',
-      ghost: 'bg-transparent text-white hover:bg-white/10 hover:shadow-sm border border-transparent',
-      dark: 'bg-[#2A2522] text-white hover:bg-[#3E3733] hover:shadow-[0_0_15px_rgba(0,0,0,0.5)] border border-transparent',
-      white: 'bg-white text-[#2A2522] hover:bg-gray-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] border border-transparent'
+      primary: 'bg-[#C0392B] text-white hover:shadow-[0_10px_40px_rgba(192,57,43,0.4)]',
+      secondary: 'bg-[#2A2522] text-white border border-white/10 hover:border-white/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]',
+      outline: 'bg-transparent text-white border border-white/30 hover:border-white hover:bg-white/5',
+      ghost: 'bg-transparent text-white hover:bg-white/10',
+      dark: 'bg-[#1A1A1A] text-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.4)]',
+      white: 'bg-white text-black hover:shadow-[0_10px_30px_rgba(255,255,255,0.3)]',
+      gold: 'bg-[#C5A059] text-white hover:shadow-[0_10px_40px_rgba(197,160,89,0.4)]'
     };
+
+    const content = (
+      <>
+        {/* Shine effect on hover */}
+        <div className="absolute inset-0 -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
+        
+        <span className="relative z-10 flex items-center gap-3">
+          {children}
+          {icon && (
+            <Icon icon={icon} className="text-xl group-hover:translate-x-1.5 transition-transform duration-300" />
+          )}
+        </span>
+      </>
+    );
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          ref={ref as React.Ref<HTMLAnchorElement>}
+          className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+          {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+        >
+          {content}
+        </a>
+      );
+    }
 
     return (
       <button
-        ref={ref}
+        ref={ref as React.Ref<HTMLButtonElement>}
         className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
         {...props}
       >
-        {children}
+        {content}
       </button>
     );
   }

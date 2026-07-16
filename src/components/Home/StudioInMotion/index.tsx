@@ -96,18 +96,21 @@ const StudioInMotion = () => {
     <section id='Studio' className='py-32 bg-[var(--color-darkmode)] relative z-10 overflow-hidden border-t border-white/5'>
       <div className='w-full max-w-[1700px] mx-auto px-4 sm:px-6 md:px-12 lg:px-8'>
         <div className='flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 border-b border-gray-600/50 pb-8'>
-          <h2 className='text-4xl sm:text-5xl md:text-[80px] xl:text-[90px] font-black text-white font-heading tracking-tight uppercase leading-[0.95]'>
+          <h2 className='text-3xl sm:text-5xl md:text-[80px] xl:text-[90px] font-black text-white font-heading tracking-tight uppercase leading-[0.95]'>
             STUDIO <br className='hidden md:block' />IN MOTION.
           </h2>
-          <a href='#' className='group flex items-center gap-3 text-sm xl:text-base font-bold font-sans tracking-[0.2em] uppercase mt-8 md:mt-0 text-gray-300 hover:text-[var(--color-primary)] transition-colors'>
-            SEE ALL REELS
-            <div className='w-10 h-10 border border-white/20 flex items-center justify-center rounded-none group-hover:border-[var(--color-primary)] group-hover:bg-[var(--color-primary)] transition-all duration-300'>
-              <Icon icon='ph:arrow-right-bold' className='text-white text-lg group-hover:translate-x-1 transition-transform' />
+          <a href='#' className='group flex items-center gap-4 cursor-pointer mt-8 md:mt-0'>
+            <span className='relative font-bold text-sm xl:text-base tracking-[0.2em] uppercase text-gray-300 overflow-hidden py-1 group-hover:text-white transition-colors duration-300'>
+              XEM THÊM
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--color-primary)] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+            </span>
+            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:border-[var(--color-primary)] group-hover:shadow-[0_5px_15px_rgba(192,57,43,0.4)] transition-all duration-500">
+              <Icon icon='tabler:arrow-right' className='text-gray-300 group-hover:text-white text-xl transition-colors duration-500' />
             </div>
           </a>
         </div>
 
-        <div className='-mx-3 xl:-mx-4 mt-12 studio-slider'>
+        <div className='-mx-3 xl:-mx-4 mt-12 studio-slider w-full overflow-hidden sm:overflow-visible'>
           <Slider {...settings}>
             {videoIds.map((id, index) => (
               <FacebookReel key={id} videoId={id} index={index} />

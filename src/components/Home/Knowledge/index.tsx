@@ -36,7 +36,7 @@ const Knowledge = () => {
             <p className='text-[var(--color-primary)] text-lg tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
               Expertise
             </p>
-            <h2 className='text-4xl sm:text-5xl md:text-6xl font-black text-white font-heading uppercase tracking-tight'>
+            <h2 className='text-3xl sm:text-5xl md:text-6xl font-black text-white font-heading uppercase tracking-tight'>
               Learn from the pros.
             </h2>
           </div>

@@ -39,7 +39,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className='text-[var(--color-primary)] text-sm font-bold tracking-[0.25em] uppercase mb-4'
+              className='text-[var(--color-primary)] text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.25em] uppercase mb-4'
             >
               15 Trần Phú · Hải Châu · Đà Nẵng
             </motion.p>
@@ -49,7 +49,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className='text-white font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight mb-6'
+              className='text-white font-heading text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[1.05] tracking-tight mb-6'
             >
               Phòng gym <br />
               <span className='text-[var(--color-primary)]'>chuẩn quốc tế</span> <br />
@@ -61,7 +61,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className='text-white/80 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-lg border-l-4 border-[var(--color-primary)] pl-5'
+              className='text-white/80 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-10 max-w-lg border-l-4 border-[var(--color-primary)] pl-5'
             >
               PT cá nhân hóa 1-1 cùng HLV chuyên nghiệp. Trang bị toàn bộ máy <strong className='text-white font-semibold'>Panatta & Hammer Strength</strong> — tiêu chuẩn các phòng gym quốc tế hàng đầu.
             </motion.p>
@@ -96,22 +96,22 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.85 }}
-              className='flex flex-wrap items-center gap-4 text-white/70 text-sm mt-10'
+              className='flex flex-row items-center justify-center lg:justify-start gap-2 sm:gap-4 text-white/70 text-[10px] sm:text-sm mt-10 whitespace-nowrap w-full lg:w-auto overflow-hidden'
             >
               {/* Stars */}
-              <div className='flex items-center gap-1.5'>
-                <div className='flex text-yellow-400 text-base'>
+              <div className='flex items-center gap-1 sm:gap-1.5'>
+                <div className='flex text-yellow-400 text-xs sm:text-base'>
                   {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
                 </div>
-                <span className='text-white font-semibold'>5.0</span>
-                <span className='text-white/60'>· 99+ đánh giá</span>
+                <span className='text-white font-semibold ml-1 sm:ml-0'>5.0</span>
+                <span className='text-white/60 hidden sm:inline'>· 99+ đánh giá</span>
               </div>
 
-              <span className='text-white/30 hidden sm:block'>|</span>
+              <span className='text-white/30'>|</span>
 
               {/* Google badge */}
-              <div className='flex items-center gap-1.5'>
-                <svg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <div className='flex items-center gap-1 sm:gap-1.5'>
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z' fill='#4285F4' />
                   <path d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z' fill='#34A853' />
                   <path d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z' fill='#FBBC05' />
@@ -120,11 +120,11 @@ const Hero = () => {
                 <span className='text-white/70'>Google</span>
               </div>
 
-              <span className='text-white/30 hidden sm:block'>|</span>
+              <span className='text-white/30'>|</span>
 
               {/* Facebook badge */}
-              <div className='flex items-center gap-1.5'>
-                <svg width='16' height='16' viewBox='0 0 24 24' fill='#1877F2' xmlns='http://www.w3.org/2000/svg'>
+              <div className='flex items-center gap-1 sm:gap-1.5'>
+                <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox='0 0 24 24' fill='#1877F2' xmlns='http://www.w3.org/2000/svg'>
                   <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' />
                 </svg>
                 <span className='text-white/70'>Facebook</span>

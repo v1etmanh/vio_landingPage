@@ -83,7 +83,7 @@ export default function Services() {
         <p className="services-eyebrow mb-2 text-2xl font-bold uppercase tracking-wide text-[var(--color-primary)] font-heading">
           Hơn Cả Một Phòng Tập.
         </p>
-        <h2 className="services-heading-line mb-6 font-heading text-4xl sm:text-5xl font-black uppercase leading-tight text-white md:text-6xl tracking-tight">
+        <h2 className="services-heading-line mb-6 font-heading text-3xl sm:text-5xl font-black uppercase leading-tight text-white md:text-6xl tracking-tight">
           Một Nơi Để Thuộc Về.
         </h2>
         <p className="services-lede mx-auto max-w-2xl text-base leading-relaxed text-white/70">
@@ -91,25 +91,28 @@ export default function Services() {
         </p>
 
         {/* Stats Pill */}
-        <div className="mt-12 inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 rounded-3xl sm:rounded-full border border-white/20 px-6 sm:px-8 py-4">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Icon icon="tabler:crown" className="text-2xl sm:text-3xl text-white" />
+        <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-center gap-4 sm:gap-6 rounded-2xl sm:rounded-full border border-white/20 px-6 sm:px-8 py-6 sm:py-4 w-full sm:w-auto mx-auto bg-white/5 sm:bg-transparent">
+          <div className="flex items-center gap-3">
+            <Icon icon="tabler:crown" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              10+ Năm<br />Kinh Nghiệm
+              10+ Năm<br className="hidden sm:block" /> <span className="sm:hidden">Kinh Nghiệm</span>
+              <span className="hidden sm:inline">Kinh Nghiệm</span>
             </span>
           </div>
           <span className="hidden sm:block text-white/30 text-xl font-light">/</span>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Icon icon="tabler:device-laptop" className="text-2xl sm:text-3xl text-white" />
+          <div className="flex items-center gap-3">
+            <Icon icon="tabler:device-laptop" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              5000+<br />Phiên Tập
+              5000+<br className="hidden sm:block" /> <span className="sm:hidden">Phiên Tập</span>
+              <span className="hidden sm:inline">Phiên Tập</span>
             </span>
           </div>
           <span className="hidden sm:block text-white/30 text-xl font-light">/</span>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Icon icon="tabler:ticket" className="text-2xl sm:text-3xl text-white" />
+          <div className="flex items-center gap-3">
+            <Icon icon="tabler:ticket" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              140+<br />Sự Kiện
+              140+<br className="hidden sm:block" /> <span className="sm:hidden">Sự Kiện</span>
+              <span className="hidden sm:inline">Sự Kiện</span>
             </span>
           </div>
         </div>
@@ -171,12 +174,9 @@ export default function Services() {
 
       {/* Closing link into the next step */}
       <div className="mx-auto flex justify-center px-4 mt-12 pb-12">
-        <a href="#Contact">
-          <Button variant="white">
-            Đặt Lịch Tham Quan
-            <span className="text-lg">→</span>
-          </Button>
-        </a>
+        <Button variant="white" href="#Contact" icon="tabler:arrow-right">
+          Đặt Lịch Tham Quan
+        </Button>
       </div>
     </section>
   )
