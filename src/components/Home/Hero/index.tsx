@@ -1,7 +1,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Button from '../../ui/Button'
+import { useLanguage } from '@/app/context/useLanguage'
+import { REVIEWS_CONFIG } from '@/app/config/reviews'
+import { BUSINESS } from '@/app/config/business'
 
 const Hero = () => {
+  const { isVietnamese } = useLanguage()
   const { scrollY } = useScroll()
   const backgroundY = useTransform(scrollY, [0, 600], ['0%', '15%'])
 
@@ -38,7 +42,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className='text-[var(--color-primary)] text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.25em] uppercase mb-4'
             >
-              15 Trần Phú · Hải Châu · Đà Nẵng
+              {BUSINESS.address}
             </motion.p>
 
             {/* Headline */}
@@ -72,9 +76,9 @@ const Hero = () => {
             >
               <div className='flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start'>
                 {/* Primary CTA */}
-                <a href='#Contact' id='hero-cta-primary'>
+                <a href='#TrialForm' id='hero-cta-primary'>
                   <Button variant="primary">
-                    Đặt lịch tại đây
+                    {isVietnamese ? 'Tập thử miễn phí' : 'Book a free trial'}
                     <span className='text-lg'>→</span>
                   </Button>
                 </a>
@@ -82,7 +86,7 @@ const Hero = () => {
                 {/* Secondary CTA */}
                 <a href='#Services' id='hero-cta-secondary'>
                   <Button variant="outline">
-                    Khám phá dịch vụ
+                    {isVietnamese ? 'Khám phá dịch vụ' : 'Explore facilities'}
                   </Button>
                 </a>
               </div>
@@ -100,8 +104,8 @@ const Hero = () => {
                 <div className='flex text-yellow-400 text-xs sm:text-base'>
                   {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
                 </div>
-                <span className='text-white font-semibold ml-1 sm:ml-0'>5.0</span>
-                <span className='text-white/60 hidden sm:inline'>· 99+ đánh giá</span>
+                <span className='text-white font-semibold ml-1 sm:ml-0'>{REVIEWS_CONFIG.score}</span>
+                <span className='text-white/60 hidden sm:inline'>· {REVIEWS_CONFIG.countLabel}</span>
               </div>
 
               <span className='text-white/30'>|</span>

@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import { Icon } from '@iconify/react'
 import Button from '../../ui/Button'
-import ScrollStack, { ScrollStackItem } from '../../ui/ScrollStack'
 
 // Single accent token for the whole section. Everything gold you see
 // (tag numerals, divider, thread line, thread nodes, counter) reads from
@@ -118,37 +117,23 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Desktop: Stacking Cards using ScrollStack */}
-      <div className="relative mx-auto hidden max-w-7xl px-4 lg:block">
-        <ScrollStack useWindowScroll={true} itemDistance={150}>
-          {services.map((item, index) => (
-            <ScrollStackItem
-              key={item.id}
-              itemClassName="flex bg-[#221e1a] border border-white/10 p-0 overflow-hidden shadow-2xl"
-            >
-              <div className="w-1/2 relative h-full bg-[#111]">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading={index === 0 ? "eager" : "lazy"}
-                  onLoad={() => window.dispatchEvent(new Event('resize'))}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#221e1a]" />
-              </div>
-              <div className="w-1/2 flex items-center p-16">
-                <div>
-                  <h3 className="font-heading text-4xl font-bold uppercase leading-[0.95] text-white xl:text-5xl">
-                    {item.title}
-                  </h3>
-                  <div className="my-6 h-px w-12" style={{ backgroundColor: THREAD }} />
-                  <p className="mb-4 text-lg leading-relaxed text-white/80">{item.description}</p>
-                  <p className="text-sm leading-relaxed text-white/50">{item.detail}</p>
-                </div>
-              </div>
-            </ScrollStackItem>
-          ))}
-        </ScrollStack>
+      {/* Desktop: lightweight editorial grid. Avoids scroll-jacking and keeps the conversion page fast. */}
+      <div className="relative mx-auto hidden max-w-7xl grid-cols-2 gap-6 px-4 lg:grid">
+        {services.map((item, index) => (
+          <article key={item.id} className={`overflow-hidden border border-white/10 bg-[#221e1a] ${index === 0 ? 'col-span-2 grid grid-cols-2' : ''}`}>
+            <div className={`relative bg-[#111] ${index === 0 ? 'min-h-[430px]' : 'h-72'}`}>
+              <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#221e1a]/70 to-transparent" />
+            </div>
+            <div className="p-8 xl:p-10">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: THREAD }}>{item.tag}</p>
+              <h3 className="font-heading text-3xl font-bold uppercase leading-[0.95] text-white xl:text-4xl">{item.title}</h3>
+              <div className="my-6 h-px w-12" style={{ backgroundColor: THREAD }} />
+              <p className="mb-4 leading-relaxed text-white/80">{item.description}</p>
+              <p className="text-sm leading-relaxed text-white/50">{item.detail}</p>
+            </div>
+          </article>
+        ))}
       </div>
 
       {/* Mobile: stacked layout */}
@@ -174,7 +159,7 @@ export default function Services() {
 
       {/* Closing link into the next step */}
       <div className="mx-auto flex justify-center px-4 mt-12 pb-12">
-        <Button variant="white" href="#Contact" icon="tabler:arrow-right">
+        <Button variant="white" href="#TrialForm" icon="tabler:arrow-right">
           Đặt Lịch Tham Quan
         </Button>
       </div>

@@ -7,8 +7,11 @@ import MobileHeaderLink from './Navigation/MobileHeaderLink'
 import { headerData } from '@/app/utils/data'
 import Button from '../../ui/Button'
 import { Icon } from '@iconify/react'
+import { useLanguage } from '@/app/context/useLanguage'
+import { BUSINESS } from '@/app/config/business'
 
 const Header: React.FC = () => {
+  const { language, setLanguage } = useLanguage()
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
 
@@ -69,20 +72,28 @@ const Header: React.FC = () => {
             className={`flex items-center gap-3 pl-8 lg:pl-16 lg:border-l border-black/5 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
-            <a href="tel:0961119495" className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">
+            <a href={`tel:${BUSINESS.phone}`} className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">
               <Icon icon="tabler:phone-filled" className="text-xl" />
-              <span className="text-lg">0961119495</span>
+              <span className="text-lg">{BUSINESS.phoneDisplay}</span>
             </a>
             <Button
               variant="secondary"
               size="sm"
               className='hidden lg:inline-flex'
-              onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
+              onClick={() => document.getElementById('TrialForm')?.scrollIntoView({ behavior: 'smooth' })}>
               Đăng ký tập thử
             </Button>
+            <button
+              type='button'
+              aria-label='Chuyển ngôn ngữ'
+              onClick={() => setLanguage(language === 'vi' ? 'en' : 'vi')}
+              className='hidden lg:inline-flex min-w-12 items-center justify-center border border-black/15 px-2 py-2 text-xs font-bold uppercase text-darkmode transition hover:border-primary hover:text-primary'
+            >
+              {language === 'vi' ? 'EN' : 'VI'}
+            </button>
             
             {/* Mobile Pinned Hotline */}
-            <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
+            <a href={`tel:${BUSINESS.phone}`} className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
               <Icon icon="tabler:phone-filled" className="text-lg" />
             </a>
 
@@ -116,7 +127,7 @@ const Header: React.FC = () => {
           <nav className='flex flex-col items-start p-4'>
             {headerData.map(
               (item: HeaderItem, index: Key | null | undefined) => (
-                <MobileHeaderLink key={index} item={item} />
+                <MobileHeaderLink key={index} item={item} onNavigate={() => setNavbarOpen(false)} />
               )
             )}
             <div className='mt-8 w-full'>
@@ -125,11 +136,18 @@ const Header: React.FC = () => {
                 size="md"
                 className='w-full'
                 onClick={() => {
-                  document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById('TrialForm')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)
                 }}>
                 Đăng ký tập thử
               </Button>
+              <button
+                type='button'
+                onClick={() => setLanguage(language === 'vi' ? 'en' : 'vi')}
+                className='mt-4 w-full border border-white/20 px-4 py-3 text-sm font-bold uppercase text-white'
+              >
+                {language === 'vi' ? 'English' : 'Tiếng Việt'}
+              </button>
             </div>
           </nav>
         </div>

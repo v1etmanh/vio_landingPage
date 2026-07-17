@@ -130,10 +130,3 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-transform: uppercase;
 }
-
-.bg-joinus {
-  background-image: url('/images/joinus/horn.svg'),
-    url('/images/joinus/paint.svg');
-  background-repeat: no-repeat, no-repeat;
-  background-position: 90% 100%, 2% 18%;
-}

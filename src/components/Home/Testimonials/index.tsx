@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
-import { GOOGLE_RATING } from '@/app/config/business'
+import { REVIEWS_CONFIG } from '@/app/config/reviews'
 
 const Testimonials = () => {
   return (
@@ -15,7 +15,7 @@ const Testimonials = () => {
             Hội viên nói gì về VIO.
           </h2>
           <div className='flex items-center justify-center gap-2 mb-8'>
-            <span className='text-3xl font-bold'>{GOOGLE_RATING.score}</span>
+            <span className='text-3xl font-bold'>{REVIEWS_CONFIG.score}</span>
             <div className='flex text-[#fbbc04] text-2xl'>
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
@@ -23,10 +23,10 @@ const Testimonials = () => {
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
             </div>
-            <span className='text-gray-500'>({GOOGLE_RATING.countLabel})</span>
+            <span className='text-gray-500'>({REVIEWS_CONFIG.countLabel})</span>
           </div>
           <a
-            href={GOOGLE_RATING.mapsUrl}
+            href={REVIEWS_CONFIG.mapsUrl}
             target='_blank'
             rel='noreferrer'
             id='reviews-google-link'
@@ -35,6 +35,7 @@ const Testimonials = () => {
             <Icon icon='logos:google-maps' className='text-xl' />
             Xem tất cả đánh giá trên Google Maps
           </a>
+          <p className='mt-4 text-xs text-gray-500'>{REVIEWS_CONFIG.note} {REVIEWS_CONFIG.lastVerifiedAt}</p>
         </div>
       </div>
     </section>

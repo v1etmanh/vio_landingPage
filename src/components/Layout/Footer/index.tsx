@@ -1,4 +1,6 @@
 import React from 'react'
+import { BUSINESS } from '@/app/config/business'
+import { trackEvent } from '@/app/utils/analytics'
 
 // ── Social SVGs ─────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
@@ -52,13 +54,11 @@ const quickLinks = [
   { label: 'Dịch vụ', href: '#Services' },
   { label: 'Bảng giá', href: '#Pricing' },
   { label: 'Huấn luyện viên', href: '#Trainers' },
-  { label: 'Đánh giá', href: '#Testimonials' },
-  { label: 'Liên hệ', href: '#Contact' },
+  { label: 'Đánh giá', href: '#Reviews' },
+  { label: 'Đăng ký tập thử', href: '#TrialForm' },
 ]
 
-const hours = [
-  { day: 'Thứ 2 – Chủ nhật', time: '05:30 – 20:30' },
-]
+const hours = [{ day: 'Thứ 2 – Chủ nhật', time: `${BUSINESS.hours.open} – ${BUSINESS.hours.close}` }]
 
 // ── Footer ───────────────────────────────────────────────────────────────────
 const Footer = () => {
@@ -85,7 +85,7 @@ const Footer = () => {
             {/* Social icons */}
             <div className='flex items-center gap-3'>
               <a
-                href='https://www.facebook.com/viofitnessdanang'
+                href={BUSINESS.socials.facebook}
                 target='_blank'
                 rel='noreferrer'
                 id='footer-facebook'
@@ -95,7 +95,7 @@ const Footer = () => {
                 <FacebookIcon />
               </a>
               <a
-                href='https://www.tiktok.com/@vio.gymfitness'
+                href={BUSINESS.socials.tiktok}
                 target='_blank'
                 rel='noreferrer'
                 id='footer-tiktok'
@@ -105,7 +105,7 @@ const Footer = () => {
                 <TikTokIcon />
               </a>
               <a
-                href='https://www.instagram.com/vio.gymfitness?igsh=MTc5djl0amFyNXBmYw=='
+                href={BUSINESS.socials.instagram}
                 target='_blank'
                 rel='noreferrer'
                 id='footer-instagram'
@@ -146,24 +146,24 @@ const Footer = () => {
               <li className='flex items-start gap-3 text-white/70 text-sm'>
                 <span className='text-[var(--color-primary)] mt-0.5'><MapPinIcon /></span>
                 <a
-                  href='https://maps.app.goo.gl/oF3KHEfNwWbVswZa7'
+                  href={BUSINESS.mapsUrl}
                   target='_blank'
                   rel='noreferrer'
                   className='hover:text-white transition-colors leading-relaxed'
                 >
-                  15 Trần Phú – 02 Nguyễn Du,<br />Hải Châu, Đà Nẵng
+                  {BUSINESS.address}
                 </a>
               </li>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
                 <span className='text-[var(--color-primary)] mt-0.5'><PhoneIcon /></span>
-                <a href='tel:0961119495' className='hover:text-white transition-colors'>
-                  0961 119 495
+                <a href={`tel:${BUSINESS.phone}`} className='hover:text-white transition-colors'>
+                  {BUSINESS.phoneDisplay}
                 </a>
               </li>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
                 <span className='text-[var(--color-primary)] mt-0.5'><MailIcon /></span>
-                <a href='mailto:viofitness0961119495@gmail.com' className='hover:text-white transition-colors break-all'>
-                  viofitness0961119495@gmail.com
+                <a href={`mailto:${BUSINESS.email}`} className='hover:text-white transition-colors break-all'>
+                  {BUSINESS.email}
                 </a>
               </li>
               <li className='pt-2 border-t border-white/10'>
@@ -193,25 +193,20 @@ const Footer = () => {
             </p>
             <div className='space-y-3'>
               <a
-                href='https://zalo.me/0961119495'
-                target='_blank'
-                rel='noreferrer'
+                href='#TrialForm'
                 id='footer-zalo-cta'
+                onClick={() => trackEvent('footer_trial_clicked', { channel: 'zalo' })}
                 className='flex items-center justify-center gap-2 w-full bg-[var(--color-primary)] text-[#1a1a1a] font-heading font-bold uppercase tracking-wider text-sm px-4 py-3 hover:opacity-90 transition-opacity duration-200'
               >
-                Nhắn Zalo ngay
+                Điền form đăng ký
               </a>
               <a
-                href={
-                  'https://wa.me/84961119495?text=' +
-                  encodeURIComponent('[WEB-FT] Xin chào VIO Fitness! Tôi muốn đăng ký tập thử miễn phí.')
-                }
-                target='_blank'
-                rel='noreferrer'
+                href='#TrialForm'
                 id='footer-whatsapp-cta'
+                onClick={() => trackEvent('footer_trial_clicked', { channel: 'whatsapp' })}
                 className='flex items-center justify-center gap-2 w-full border border-white/25 text-white/80 font-heading font-bold uppercase tracking-wider text-sm px-4 py-3 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors duration-200'
               >
-                WhatsApp
+                Free trial in English
               </a>
             </div>
           </div>
@@ -223,7 +218,7 @@ const Footer = () => {
       <div className='border-t border-white/10'>
         <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 text-sm'>
           <p>© {new Date().getFullYear()} VIO FITNESS & GYM ĐÀ NẴNG. All rights reserved.</p>
-          <p className='text-white/30 text-xs'>15 Trần Phú – 02 Nguyễn Du, Hải Châu, Đà Nẵng</p>
+          <p className='text-white/30 text-xs'>{BUSINESS.address}</p>
         </div>
       </div>
 

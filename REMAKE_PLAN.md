@@ -190,7 +190,7 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 6. Bỏ lưu PII vào localStorage → sessionStorage, không lưu SĐT; bỏ luôn trường SĐT khỏi form.
 7. Thêm hệ đo lường: event đặt tên rõ + mã nguồn trong tin nhắn chat để đo lead thật.
 8. i18n: toggle là giải pháp conversion; tách URL /vi/ /en/ + hreflang là nâng cấp SEO có điều kiện (domain riêng).
-9. Thêm IntroScreen (2.8s) và **dọn asset 869MB** vào Phase 0 — trước đây bỏ sót/đặt sai phase.
+9. Loại bỏ IntroScreen (2.8s) để khách vào thẳng nội dung và **dọn asset 869MB** trong Phase 0.
 10. Xóa form footer giả + fix link `#` — thêm vào Phase 0.
 11. Kênh theo ngôn ngữ: VI→Zalo, EN→WhatsApp (thay vì tất cả qua WhatsApp). Đính chính: Zalo không prefill được tin nhắn → dùng clipboard + toast.
 12. Review Google: chuyển từ "copy review vào site" → snapshot + link + testimonial có phép (tôn trọng policy attribution).
@@ -198,3 +198,14 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 14. Thêm Phase -1 (truth gate) và gate cụ thể cho từng phase; Lighthouse là lab gate, bổ sung theo dõi CWV field data p75 sau deploy.
 15. ExerciseGym một entity duy nhất trong JSON-LD.
 16. Hợp nhất animation về một hệ chính (Framer), thay react-slick bằng giải pháp nhẹ, LazyMotion dùng đúng cách (`m.*`).
+
+---
+
+## 10. Trạng thái thực thi — 17/07/2026
+
+- **Phase 0 — hoàn thành:** bỏ IntroScreen/form giả, chuẩn hóa dữ liệu doanh nghiệp và SEO, `dist/` còn khoảng 15.3 MiB.
+- **Phase 1 — hoàn thành trên mã nguồn:** form 3 trường, VI → Zalo, EN → WhatsApp, IG phụ, lưu nháp bằng sessionStorage, gắn mã nguồn và analytics, CTA mobile, tự điền gói quan tâm, toggle ngôn ngữ cho luồng conversion. Bundle chính khoảng 126.5 KB gzip.
+- **Phase 2 — hoàn thành có điều kiện:** đã có placeholder HLV trung thực và ba Member Stories đã xác nhận consent. Chưa tự host video vì repo chưa có file video/poster nguồn; hiện dùng link Facebook chính chủ để tránh tải lại hoặc giả lập nội dung.
+- **Phase 3 — hoàn thành phần có thể kiểm chứng cục bộ:** bỏ scroll stack nặng và CSS slick không dùng; typecheck, lint và build đều đạt. Lighthouse, kiểm thử iPhone/Android thật và CWV sau 28 ngày chỉ thực hiện được khi có môi trường deploy/thiết bị thật.
+
+**Quyết định lệch có chủ đích:** CTA mobile cuộn đến một form duy nhất thay vì mở thêm modal chứa form trùng lặp. Cách này giữ một nguồn state, tránh hai form có dữ liệu lệch nhau và vẫn đạt mục tiêu giảm ma sát trên mobile.

@@ -17,6 +17,7 @@ export const BUSINESS = {
   socials: {
     facebook: 'https://www.facebook.com/viofitnessdanang',
     instagram: 'https://www.instagram.com/vio.gymfitness',
+    instagramDm: 'https://ig.me/m/vio.gymfitness',
     tiktok: 'https://www.tiktok.com/@viofitness.dn',
     zalo: 'https://zalo.me/0961119495',
     whatsapp: 'https://wa.me/84961119495',

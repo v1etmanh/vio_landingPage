@@ -13,7 +13,7 @@ export const headerData: HeaderItem[] = [
   { label: 'Bảng giá', href: '#Pricing' },
   { label: 'HLV', href: '#Trainers' },
   { label: 'Đánh giá', href: '#Reviews' },
-  { label: 'Liên hệ', href: '#Contact' },
+  { label: 'Đăng ký tập thử', href: '#TrialForm' },
 ]
 
 // about data
