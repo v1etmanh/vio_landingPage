@@ -83,7 +83,7 @@ export default function Services() {
           const content = locale.services.items[item.id]
           return <article key={item.id} className={`overflow-hidden border border-white/10 bg-[#221e1a] ${index === 0 ? 'col-span-2 grid grid-cols-2' : ''}`}>
             <div className={`relative bg-[#111] ${index === 0 ? 'min-h-[430px]' : 'h-72'}`}>
-              <img src={item.image} alt={content.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+              <img src={item.image} alt={content.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#221e1a]/70 to-transparent" />
             </div>
             <div className="p-8 xl:p-10">
@@ -104,7 +104,7 @@ export default function Services() {
           return <div key={item.id} className="mb-16">
             <div className="relative h-[60vh] w-full overflow-hidden" style={{ border: `1px solid ${THREAD}` }}>
               <div className="absolute inset-0 overflow-hidden">
-                <img src={item.image} alt={content.title} className="h-full w-full object-cover" />
+                <img src={item.image} alt={content.title} className="h-full w-full object-cover" loading="lazy" decoding="async" />
               </div>
             </div>
             <div className="mt-6">

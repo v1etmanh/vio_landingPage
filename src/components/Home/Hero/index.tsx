@@ -23,6 +23,9 @@ const Hero = () => {
         <img
           src='/images/Bản sao của KSP02428-HDR-Edit.jpg'
           alt={locale.hero.alt}
+          loading='eager'
+          fetchPriority='high'
+          decoding='async'
           className='w-full h-full object-cover object-center scale-105'
         />
         {/* Dark gradient from bottom-up for text readability */}
