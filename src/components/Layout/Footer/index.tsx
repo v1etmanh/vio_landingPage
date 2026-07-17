@@ -1,6 +1,8 @@
 import React from 'react'
 import { BUSINESS } from '@/app/config/business'
 import { trackEvent } from '@/app/utils/analytics'
+import { useLocale } from '@/app/context/useLocale'
+import { useLanguage } from '@/app/context/useLanguage'
 
 // ── Social SVGs ─────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
@@ -48,20 +50,19 @@ const MailIcon = () => (
   </svg>
 )
 
-// ── Quick links ──────────────────────────────────────────────────────────────
-const quickLinks = [
-  { label: 'Về chúng tôi', href: '#About' },
-  { label: 'Dịch vụ', href: '#Services' },
-  { label: 'Bảng giá', href: '#Pricing' },
-  { label: 'Huấn luyện viên', href: '#Trainers' },
-  { label: 'Đánh giá', href: '#Reviews' },
-  { label: 'Đăng ký tập thử', href: '#TrialForm' },
-]
-
-const hours = [{ day: 'Thứ 2 – Chủ nhật', time: `${BUSINESS.hours.open} – ${BUSINESS.hours.close}` }]
-
 // ── Footer ───────────────────────────────────────────────────────────────────
 const Footer = () => {
+  const locale = useLocale()
+  const { language, isVietnamese } = useLanguage()
+  const quickLinks = [
+    { label: locale.header.about, href: '#About' },
+    { label: locale.header.services, href: '#Services' },
+    { label: locale.header.pricing, href: '#Pricing' },
+    { label: locale.header.trainers, href: '#Trainers' },
+    { label: locale.header.reviews, href: '#Reviews' },
+    { label: locale.header.trial, href: '#TrialForm' },
+  ]
+  const hours = [{ day: locale.footer.hoursDay, time: `${BUSINESS.hours.open} – ${BUSINESS.hours.close}` }]
   return (
     <footer id='Contact' className='bg-[var(--color-deep-slate)] text-white'>
 
@@ -80,7 +81,7 @@ const Footer = () => {
               & GYM ĐÀ NẴNG
             </p>
             <p className='text-white/50 text-sm leading-relaxed mb-6'>
-              Phòng gym 3 tầng chuẩn quốc tế tại trung tâm Đà Nẵng. Nơi hội tụ thiết bị đỉnh cao và HLV chuyên nghiệp.
+              {locale.positioning.body.replace(/^(Ba|Three)/, String(BUSINESS.floors))}
             </p>
             {/* Social icons */}
             <div className='flex items-center gap-3'>
@@ -120,7 +121,7 @@ const Footer = () => {
           {/* COL 2 — Quick links */}
           <div>
             <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-6'>
-              Liên kết nhanh
+              {locale.footer.quickLinks}
             </p>
             <ul className='space-y-3'>
               {quickLinks.map((link, i) => (
@@ -140,7 +141,7 @@ const Footer = () => {
           {/* COL 3 — Contact info */}
           <div>
             <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-6'>
-              Thông tin liên hệ
+              {locale.footer.contact}
             </p>
             <ul className='space-y-4'>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
@@ -169,7 +170,7 @@ const Footer = () => {
               <li className='pt-2 border-t border-white/10'>
                 <p className='flex items-start gap-3 text-white/40 text-xs uppercase tracking-widest mb-3 font-bold'>
                   <span className='text-[var(--color-primary)]'><ClockIcon /></span>
-                  Giờ mở cửa
+                  {locale.footer.hours}
                 </p>
                 <ul className='space-y-1.5 pl-6'>
                   {hours.map((h, i) => (
@@ -186,27 +187,31 @@ const Footer = () => {
           {/* COL 4 — Đăng ký tập thử */}
           <div>
             <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-2'>
-              Đăng ký tập thử miễn phí
+              {locale.footer.trialTitle}
             </p>
             <p className='text-white/50 text-sm mb-6 leading-relaxed'>
-              Buổi tập thử đầu tiên hoàn toàn miễn phí — kèm đo InBody và HLV hướng dẫn làm quen máy.
+              {locale.footer.trialBody}
             </p>
             <div className='space-y-3'>
               <a
-                href='#TrialForm'
+                href={BUSINESS.socials.zalo}
+                target='_blank'
+                rel='noreferrer'
                 id='footer-zalo-cta'
-                onClick={() => trackEvent('footer_trial_clicked', { channel: 'zalo' })}
+                onClick={() => trackEvent('zalo_outbound_clicked', { language, source: 'WEB-FT' })}
                 className='flex items-center justify-center gap-2 w-full bg-[var(--color-primary)] text-[#1a1a1a] font-heading font-bold uppercase tracking-wider text-sm px-4 py-3 hover:opacity-90 transition-opacity duration-200'
               >
-                Điền form đăng ký
+                {locale.footer.zaloButton}
               </a>
               <a
-                href='#TrialForm'
+                href={`${BUSINESS.socials.whatsapp}?text=${encodeURIComponent(isVietnamese ? '[WEB-FT] Xin chào VIO Fitness! Em muốn đăng ký tập thử miễn phí.' : '[WEB-FT] Hello VIO Fitness! I would like to book a free trial.')}`}
+                target='_blank'
+                rel='noreferrer'
                 id='footer-whatsapp-cta'
-                onClick={() => trackEvent('footer_trial_clicked', { channel: 'whatsapp' })}
+                onClick={() => trackEvent('whatsapp_outbound_clicked', { language, source: 'WEB-FT' })}
                 className='flex items-center justify-center gap-2 w-full border border-white/25 text-white/80 font-heading font-bold uppercase tracking-wider text-sm px-4 py-3 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors duration-200'
               >
-                Free trial in English
+                {locale.footer.whatsappButton}
               </a>
             </div>
           </div>
@@ -217,7 +222,7 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className='border-t border-white/10'>
         <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 text-sm'>
-          <p>© {new Date().getFullYear()} VIO FITNESS & GYM ĐÀ NẴNG. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {BUSINESS.name}. {locale.footer.rights}</p>
           <p className='text-white/30 text-xs'>{BUSINESS.address}</p>
         </div>
       </div>

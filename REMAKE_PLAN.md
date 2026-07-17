@@ -201,11 +201,11 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 
 ---
 
-## 10. Trạng thái thực thi — 17/07/2026
+## 10. Trạng thái thực thi — 18/07/2026
 
-- **Phase 0 — hoàn thành:** bỏ IntroScreen/form giả, chuẩn hóa dữ liệu doanh nghiệp và SEO, `dist/` còn khoảng 15.3 MiB.
-- **Phase 1 — hoàn thành trên mã nguồn:** form 3 trường, VI → Zalo, EN → WhatsApp, IG phụ, lưu nháp bằng sessionStorage, gắn mã nguồn và analytics, CTA mobile, tự điền gói quan tâm, toggle ngôn ngữ cho luồng conversion. Bundle chính khoảng 126.5 KB gzip.
-- **Phase 2 — hoàn thành có điều kiện:** đã có placeholder HLV trung thực và ba Member Stories đã xác nhận consent. Chưa tự host video vì repo chưa có file video/poster nguồn; hiện dùng link Facebook chính chủ để tránh tải lại hoặc giả lập nội dung.
-- **Phase 3 — hoàn thành phần có thể kiểm chứng cục bộ:** bỏ scroll stack nặng và CSS slick không dùng; typecheck, lint và build đều đạt. Lighthouse, kiểm thử iPhone/Android thật và CWV sau 28 ngày chỉ thực hiện được khi có môi trường deploy/thiết bị thật.
+- **Phase 0 — hoàn thành:** bỏ IntroScreen/form giả, chuẩn hóa dữ liệu doanh nghiệp và SEO, allow-list asset còn khoảng 6.2 MiB trong `dist/`.
+- **Phase 1 — hoàn thành trên mã nguồn:** form 3 trường, VI → Zalo, EN → WhatsApp, IG phụ, lưu nháp bằng sessionStorage, gắn mã nguồn và analytics, CTA mobile, tự điền gói quan tâm, toggle ngôn ngữ cho luồng conversion. Bundle chính khoảng 116 KB gzip.
+- **Phase 2 — hoàn thành có điều kiện:** đã có placeholder HLV trung thực, dữ liệu HLV đọc từ `src/config/media.ts`, locale VI/EN cho toàn bộ section và ba Member Stories đã xác nhận consent. Chưa tự host video vì repo chưa có file video/poster nguồn; hiện dùng link Facebook chính chủ để tránh tải lại hoặc giả lập nội dung. Khi có file, chỉ cần điền `videoSrc` + `poster` trong config.
+- **Phase 3 — hoàn thành phần có thể kiểm chứng cục bộ:** bỏ scroll stack nặng, CSS slick và dependency GSAP/Lenis không dùng; dùng `LazyMotion` + `m.*`, tôn trọng reduced-motion, dọn source/assets chết; typecheck, lint, build và smoke test preview đều đạt. Lighthouse, kiểm thử iPhone/Android thật và CWV sau 28 ngày chỉ thực hiện được khi có môi trường deploy/thiết bị thật.
 
-**Quyết định lệch có chủ đích:** CTA mobile cuộn đến một form duy nhất thay vì mở thêm modal chứa form trùng lặp. Cách này giữ một nguồn state, tránh hai form có dữ liệu lệch nhau và vẫn đạt mục tiêu giảm ma sát trên mobile.
+**Quyết định triển khai:** CTA mobile mở modal form dùng chung state với form chính. Người dùng không mất dữ liệu nháp khi chuyển giữa modal và section; nút đóng và `aria-modal` giữ luồng bàn phím rõ ràng.

@@ -14,6 +14,10 @@ export const BUSINESS = {
   email: 'viofitness0961119495@gmail.com',
   hours: { open: '05:30', close: '20:30', label: 'Thứ 2 – Chủ nhật: 05:30 – 20:30' },
   floors: 3,
+  offer: {
+    vi: 'Miễn phí buổi tập + đo InBody miễn phí',
+    en: 'Free trial session + free InBody scan',
+  },
   socials: {
     facebook: 'https://www.facebook.com/viofitnessdanang',
     instagram: 'https://www.instagram.com/vio.gymfitness',

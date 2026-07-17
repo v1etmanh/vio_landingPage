@@ -1,4 +1,5 @@
 import React from 'react'
+import { LazyMotion, domAnimation } from 'framer-motion'
 import Hero from './components/Home/Hero'
 import Pricing from './components/Home/Pricing'
 import TrustBar from './components/Home/TrustBar'
@@ -17,21 +18,23 @@ import { LanguageProvider } from './context/LanguageContext'
 function App() {
   return (
     <LanguageProvider>
-      <Header />
-      <main>
-        <Hero />
-        <TrustBar />
-        <Testimonial />
-        <Positioning />
-        <Services />
-        <Trainers />
-        <MemberStories />
-        <Pricing />
-        <TrialForm />
-        <Map />
-      </main>
-      <Footer />
-      <FloatingActions />
+      <LazyMotion features={domAnimation}>
+        <Header />
+        <main>
+          <Hero />
+          <TrustBar />
+          <Testimonial />
+          <Positioning />
+          <Services />
+          <Trainers />
+          <MemberStories />
+          <Pricing />
+          <TrialForm />
+          <Map />
+        </main>
+        <Footer />
+        <FloatingActions />
+      </LazyMotion>
     </LanguageProvider>
   )
 }

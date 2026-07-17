@@ -1,17 +1,27 @@
 import { Key, useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { HeaderItem } from '@/app/types/menu'
 import Logo from './Logo'
 import HeaderLink from './Navigation/HeaderLink'
 import MobileHeaderLink from './Navigation/MobileHeaderLink'
-import { headerData } from '@/app/utils/data'
 import Button from '../../ui/Button'
 import { Icon } from '@iconify/react'
 import { useLanguage } from '@/app/context/useLanguage'
 import { BUSINESS } from '@/app/config/business'
+import { useLocale } from '@/app/context/useLocale'
 
 const Header: React.FC = () => {
   const { language, setLanguage } = useLanguage()
+  const locale = useLocale()
+  const reduceMotion = useReducedMotion()
+  const headerData: HeaderItem[] = [
+    { label: locale.header.about, href: '#About' },
+    { label: locale.header.services, href: '#Services' },
+    { label: locale.header.pricing, href: '#Pricing' },
+    { label: locale.header.trainers, href: '#Trainers' },
+    { label: locale.header.reviews, href: '#Reviews' },
+    { label: locale.header.trial, href: '#TrialForm' },
+  ]
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
 
@@ -45,12 +55,15 @@ const Header: React.FC = () => {
     } else {
       document.body.style.overflow = ''
     }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [navbarOpen])
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+    <m.header
+      initial={reduceMotion ? false : { y: -100, opacity: 0 }}
+      animate={reduceMotion ? undefined : { y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 z-40 w-full transition-colors duration-500 border-b ${
         sticky ? 'shadow-sm bg-white/85 backdrop-blur-md border-black/5' : 'shadow-none border-transparent bg-transparent'
@@ -72,8 +85,8 @@ const Header: React.FC = () => {
             className={`flex items-center gap-3 pl-8 lg:pl-16 lg:border-l border-black/5 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
-            <a href={`tel:${BUSINESS.phone}`} className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">
-              <Icon icon="tabler:phone-filled" className="text-xl" />
+            <a href={`tel:${BUSINESS.phone}`} aria-label={locale.header.phoneLabel} className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">
+              <Icon icon="tabler:phone-filled" className="text-xl" aria-hidden="true" />
               <span className="text-lg">{BUSINESS.phoneDisplay}</span>
             </a>
             <Button
@@ -81,11 +94,11 @@ const Header: React.FC = () => {
               size="sm"
               className='hidden lg:inline-flex'
               onClick={() => document.getElementById('TrialForm')?.scrollIntoView({ behavior: 'smooth' })}>
-              Đăng ký tập thử
+              {locale.header.trial}
             </Button>
             <button
               type='button'
-              aria-label='Chuyển ngôn ngữ'
+              aria-label={locale.header.language}
               onClick={() => setLanguage(language === 'vi' ? 'en' : 'vi')}
               className='hidden lg:inline-flex min-w-12 items-center justify-center border border-black/15 px-2 py-2 text-xs font-bold uppercase text-darkmode transition hover:border-primary hover:text-primary'
             >
@@ -93,14 +106,14 @@ const Header: React.FC = () => {
             </button>
             
             {/* Mobile Pinned Hotline */}
-            <a href={`tel:${BUSINESS.phone}`} className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
-              <Icon icon="tabler:phone-filled" className="text-lg" />
+            <a href={`tel:${BUSINESS.phone}`} aria-label={locale.header.phoneLabel} className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
+              <Icon icon="tabler:phone-filled" className="text-lg" aria-hidden="true" />
             </a>
 
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
-              aria-label='Toggle mobile menu'>
+              aria-label={locale.header.menu}>
               <span className='block w-6 h-0.5 bg-darkmode'></span>
               <span className='block w-6 h-0.5 bg-darkmode mt-1.5'></span>
               <span className='block w-6 h-0.5 bg-darkmode mt-1.5'></span>
@@ -122,9 +135,9 @@ const Header: React.FC = () => {
             <button
               onClick={() => setNavbarOpen(false)}
               className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 absolute top-0 right-0 mr-8 mt-8 dark:invert"
-              aria-label='Close menu Modal'></button>
+              aria-label={locale.header.close}></button>
           </div>
-          <nav className='flex flex-col items-start p-4'>
+          <nav aria-label={locale.header.menu} className='flex flex-col items-start p-4'>
             {headerData.map(
               (item: HeaderItem, index: Key | null | undefined) => (
                 <MobileHeaderLink key={index} item={item} onNavigate={() => setNavbarOpen(false)} />
@@ -139,20 +152,20 @@ const Header: React.FC = () => {
                   document.getElementById('TrialForm')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)
                 }}>
-                Đăng ký tập thử
+                {locale.header.trial}
               </Button>
               <button
                 type='button'
                 onClick={() => setLanguage(language === 'vi' ? 'en' : 'vi')}
                 className='mt-4 w-full border border-white/20 px-4 py-3 text-sm font-bold uppercase text-white'
               >
-                {language === 'vi' ? 'English' : 'Tiếng Việt'}
+                {locale.header.language}
               </button>
             </div>
           </nav>
         </div>
       </div>
-    </motion.header>
+    </m.header>
   )
 }
 

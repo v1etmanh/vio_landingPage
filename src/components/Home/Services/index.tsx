@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useLocale } from '@/app/context/useLocale'
 import { Icon } from '@iconify/react'
 import Button from '../../ui/Button'
 
@@ -8,85 +8,48 @@ import Button from '../../ui/Button'
 const THREAD = '#C9A66B'
 
 interface ServiceItem {
-  id: number
-  title: string
-  subtitle: string
-  tag: string
-  description: string
-  detail: string
+  id: 'equipment' | 'functional' | 'recovery' | 'sauna' | 'nutrition'
   image: string
 }
 
 const servicesData: ServiceItem[] = [
   {
-    id: 1,
-    title: 'Thiết Bị Đỉnh Cao',
-    subtitle: 'Panatta & Hammer Strength',
-    tag: '01 · TRANG THIẾT BỊ',
-    description:
-      'Hệ thống máy tập nhập khẩu nguyên chiếc từ Ý và Mỹ, bố trí theo từng nhóm cơ để bạn tập đúng kỹ thuật và rút ngắn thời gian đạt kết quả.',
-    detail: 'Đội kỹ thuật hiệu chỉnh toàn bộ thiết bị mỗi tuần để đảm bảo độ chính xác khi tập luyện.',
+    id: 'equipment',
     image: '/images/Bản sao của KSP02409-HDR-Edit.jpg',
   },
   {
-    id: 2,
-    title: 'Khu Vực Chức Năng',
-    subtitle: 'Boxing & Functional Training',
-    tag: '02 · TẦNG 2',
-    description:
-      'Không gian riêng cho boxing và functional training với thảm đấm bốc, dây kéo và dụng cụ cân bằng, đủ rộng để bạn di chuyển tự do trong từng bài tập.',
-    detail: 'Phù hợp với mọi trình độ, từ người mới bắt đầu đến vận động viên thi đấu.',
+    id: 'functional',
     image: '/images/Bản sao của KSP02428-HDR-Edit.jpg',
   },
   {
-    id: 3,
-    title: 'Phục Hồi Và Trị Liệu',
-    subtitle: 'Personal Training & Therapy',
-    tag: '03 · CHĂM SÓC',
-    description:
-      'Khu trị liệu riêng biệt có huấn luyện viên cá nhân và chuyên gia phục hồi chức năng, hỗ trợ giảm đau, phục hồi chấn thương và duy trì sức bền lâu dài.',
-    detail: 'Liệu trình được thiết kế riêng cho từng người, kết hợp massage trị liệu và kéo giãn cơ chuyên sâu.',
+    id: 'recovery',
     image: '/images/Bản sao của KSP02444-HDR-Edit.jpg',
   },
   {
-    id: 4,
-    title: 'Phòng Xông Hơi',
-    subtitle: 'Premium Dry Sauna',
-    tag: '04 · THƯ GIÃN',
-    description:
-      'Phòng sauna khô cao cấp giúp thanh lọc cơ thể, giảm căng thẳng và hỗ trợ phục hồi cơ bắp sau mỗi buổi tập, trong không gian riêng tư và sạch sẽ tuyệt đối.',
-    detail: 'Gỗ thông Phần Lan nhập khẩu, duy trì nhiệt độ ổn định 80 đến 90 độ C theo chuẩn quốc tế.',
+    id: 'sauna',
     image: '/images/Bản sao của KSP02464-HDR-Edit.jpg',
   },
   {
-    id: 5,
-    title: 'Nạp Năng Lượng',
-    subtitle: 'Protein Bar & Smoothie',
-    tag: '05 · DINH DƯỠNG',
-    description:
-      'Quầy dinh dưỡng ngay trong phòng gym phục vụ protein shake, sinh tố trái cây tươi và snack lành mạnh để bạn nạp năng lượng ngay sau buổi tập.',
-    detail: 'Thực đơn được tư vấn bởi chuyên gia dinh dưỡng, không phẩm màu và không chất bảo quản.',
+    id: 'nutrition',
     image: '/images/Bản sao của KSP02479-HDR-Edit.jpg',
   },
 ]
 
 export default function Services() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
-  const services = servicesData
+  const locale = useLocale()
 
   return (
-    <section id="Services" ref={sectionRef} className="relative py-24 bg-[var(--color-darkmode)] text-white overflow-hidden">
+    <section id="Services" className="relative overflow-hidden bg-[var(--color-darkmode)] py-24 text-white">
       {/* Combined Header & Stats Pill (About Us + Services) */}
-      <div ref={headerRef} className="mx-auto max-w-4xl px-4 pb-16 pt-12 text-center flex flex-col items-center">
+      <div className="mx-auto flex max-w-4xl flex-col items-center px-4 pb-16 pt-12 text-center">
         <p className="services-eyebrow mb-2 text-2xl font-bold uppercase tracking-wide text-[var(--color-primary)] font-heading">
-          Hơn Cả Một Phòng Tập.
+          {locale.services.eyebrow}
         </p>
         <h2 className="services-heading-line mb-6 font-heading text-3xl sm:text-5xl font-black uppercase leading-tight text-white md:text-6xl tracking-tight">
-          Một Nơi Để Thuộc Về.
+          {locale.services.title}
         </h2>
         <p className="services-lede mx-auto max-w-2xl text-base leading-relaxed text-white/70">
-          Chúng tôi không chỉ là một phòng tập. Chúng tôi là không gian được xây dựng cho mọi hành trình — dù bạn mới bắt đầu hay đang tìm cách vượt qua giới hạn của bản thân. Ở đây, không quan trọng sự hoàn hảo. Điều quan trọng là sự tiến bộ theo cách của bạn.
+          {locale.services.body}
         </p>
 
         {/* Stats Pill */}
@@ -94,24 +57,21 @@ export default function Services() {
           <div className="flex items-center gap-3">
             <Icon icon="tabler:crown" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              Thiết Bị<br className="hidden sm:block" /> <span className="sm:hidden">Mới 100%</span>
-              <span className="hidden sm:inline">Mới 100%</span>
+              {locale.services.equipment}
             </span>
           </div>
           <span className="hidden sm:block text-white/30 text-xl font-light">/</span>
           <div className="flex items-center gap-3">
             <Icon icon="tabler:building" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              3 Tầng<br className="hidden sm:block" /> <span className="sm:hidden">Không Gian</span>
-              <span className="hidden sm:inline">Không Gian</span>
+              {locale.services.floors}
             </span>
           </div>
           <span className="hidden sm:block text-white/30 text-xl font-light">/</span>
           <div className="flex items-center gap-3">
             <Icon icon="tabler:user-check" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              PT Kèm<br className="hidden sm:block" /> <span className="sm:hidden">Riêng 1-1</span>
-              <span className="hidden sm:inline">Riêng 1-1</span>
+              {locale.services.personal}
             </span>
           </div>
         </div>
@@ -119,48 +79,50 @@ export default function Services() {
 
       {/* Desktop: lightweight editorial grid. Avoids scroll-jacking and keeps the conversion page fast. */}
       <div className="relative mx-auto hidden max-w-7xl grid-cols-2 gap-6 px-4 lg:grid">
-        {services.map((item, index) => (
-          <article key={item.id} className={`overflow-hidden border border-white/10 bg-[#221e1a] ${index === 0 ? 'col-span-2 grid grid-cols-2' : ''}`}>
+        {servicesData.map((item, index) => {
+          const content = locale.services.items[item.id]
+          return <article key={item.id} className={`overflow-hidden border border-white/10 bg-[#221e1a] ${index === 0 ? 'col-span-2 grid grid-cols-2' : ''}`}>
             <div className={`relative bg-[#111] ${index === 0 ? 'min-h-[430px]' : 'h-72'}`}>
-              <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+              <img src={item.image} alt={content.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#221e1a]/70 to-transparent" />
             </div>
             <div className="p-8 xl:p-10">
-              <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: THREAD }}>{item.tag}</p>
-              <h3 className="font-heading text-3xl font-bold uppercase leading-[0.95] text-white xl:text-4xl">{item.title}</h3>
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: THREAD }}>{content.tag}</p>
+              <h3 className="font-heading text-3xl font-bold uppercase leading-[0.95] text-white xl:text-4xl">{content.title}</h3>
               <div className="my-6 h-px w-12" style={{ backgroundColor: THREAD }} />
-              <p className="mb-4 leading-relaxed text-white/80">{item.description}</p>
-              <p className="text-sm leading-relaxed text-white/50">{item.detail}</p>
+              <p className="mb-4 leading-relaxed text-white/80">{content.description}</p>
+              <p className="text-sm leading-relaxed text-white/50">{content.detail}</p>
             </div>
           </article>
-        ))}
+        })}
       </div>
 
       {/* Mobile: stacked layout */}
       <div className="mx-auto block max-w-md px-4 lg:hidden">
-        {services.map((item) => (
-          <div key={item.id} className="mb-16">
+        {servicesData.map((item) => {
+          const content = locale.services.items[item.id]
+          return <div key={item.id} className="mb-16">
             <div className="relative h-[60vh] w-full overflow-hidden" style={{ border: `1px solid ${THREAD}` }}>
               <div className="absolute inset-0 overflow-hidden">
-                <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
+                <img src={item.image} alt={content.title} className="h-full w-full object-cover" />
               </div>
             </div>
             <div className="mt-6">
               <h3 className="font-heading text-3xl font-bold uppercase leading-[0.95] text-white">
-                {item.title}
+                {content.title}
               </h3>
               <div className="my-5 h-px w-12" style={{ backgroundColor: THREAD }} />
-              <p className="mb-3 text-base leading-relaxed text-white/80">{item.description}</p>
-              <p className="text-sm leading-relaxed text-white/50">{item.detail}</p>
+              <p className="mb-3 text-base leading-relaxed text-white/80">{content.description}</p>
+              <p className="text-sm leading-relaxed text-white/50">{content.detail}</p>
             </div>
           </div>
-        ))}
+        })}
       </div>
 
       {/* Closing link into the next step */}
       <div className="mx-auto flex justify-center px-4 mt-12 pb-12">
         <Button variant="white" href="#TrialForm" icon="tabler:arrow-right">
-          Đặt Lịch Tham Quan
+          {locale.services.cta}
         </Button>
       </div>
     </section>

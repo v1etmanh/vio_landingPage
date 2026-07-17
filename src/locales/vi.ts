@@ -1,9 +1,32 @@
 export const vi = {
   languageName: 'Tiếng Việt',
-  trial: {
-    eyebrow: 'Bắt đầu thật đơn giản',
-    title: 'Đăng ký buổi tập thử miễn phí',
-    body: 'Điền 3 thông tin ngắn để VIO mở đúng kênh chat cho bạn.',
-    cta: 'Tập thử miễn phí',
+  header: {
+    about: 'Về chúng tôi', services: 'Dịch vụ', pricing: 'Bảng giá', trainers: 'HLV', reviews: 'Đánh giá', trial: 'Đăng ký tập thử', language: 'English', phoneLabel: 'Gọi VIO Fitness', menu: 'Mở menu', close: 'Đóng menu',
   },
+  hero: {
+    alt: 'Không gian tập luyện VIO Fitness tại Đà Nẵng', titleBefore: 'Phòng gym', titleAccent: 'chuẩn quốc tế', titleAfter: 'giữa lòng Đà Nẵng', description: 'PT cá nhân hóa 1-1 cùng HLV chuyên nghiệp. Trang bị toàn bộ máy Panatta & Hammer Strength — tiêu chuẩn các phòng gym quốc tế hàng đầu.', primary: 'Tập thử miễn phí', secondary: 'Khám phá dịch vụ', google: 'Google', facebook: 'Facebook',
+  },
+  trust: { panatta: 'PANATTA SPORT', hammer: 'HAMMER STRENGTH', premium: 'PREMIUM GYM', international: 'TIÊU CHUẨN QUỐC TẾ', personal: 'PT CÁ NHÂN', sauna: 'SAUNA & PHỤC HỒI', recovery: 'KHU PHỤC HỒI', boxing: 'KHU BOXING', openDays: 'MỞ CỬA 7 NGÀY/TUẦN' },
+  reviews: { label: 'Đánh giá', heading: 'Hội viên nói gì về VIO.', button: 'Xem tất cả đánh giá trên Google Maps', verified: 'Điểm đánh giá được xác minh lần cuối theo thông tin chủ phòng cung cấp.' },
+  positioning: { eyebrow: 'Về VIO', title: 'Không theo đuổi sự đông đúc. Tập trung vào chất lượng.', body: 'Ba tầng không gian, thiết bị được chọn kỹ và đội ngũ luôn sẵn sàng hỗ trợ để bạn tập trung vào tiến bộ của chính mình.', cta: 'Tìm gói phù hợp' },
+  services: {
+    eyebrow: 'Hơn cả một phòng tập.', title: 'Một nơi để thuộc về.', body: 'Chúng tôi không chỉ là một phòng tập. Chúng tôi là không gian được xây dựng cho mọi hành trình — dù bạn mới bắt đầu hay đang tìm cách vượt qua giới hạn của bản thân. Ở đây, không quan trọng sự hoàn hảo. Điều quan trọng là sự tiến bộ theo cách của bạn.', equipment: 'Thiết bị mới 100%', floors: '3 tầng không gian', personal: 'PT kèm riêng 1-1', cta: 'Đặt lịch tham quan',
+    items: {
+      equipment: { tag: '01 · TRANG THIẾT BỊ', title: 'Thiết bị đỉnh cao', description: 'Hệ thống máy tập Panatta và Hammer Strength, bố trí theo từng nhóm cơ để bạn tập đúng kỹ thuật và rút ngắn thời gian đạt kết quả.', detail: 'Đội kỹ thuật hiệu chỉnh toàn bộ thiết bị mỗi tuần để đảm bảo độ chính xác khi tập luyện.' },
+      functional: { tag: '02 · TẦNG 2', title: 'Khu vực chức năng', description: 'Không gian riêng cho boxing và functional training với thảm đấm bốc, dây kéo và dụng cụ cân bằng, đủ rộng để bạn di chuyển tự do trong từng bài tập.', detail: 'Phù hợp với mọi trình độ, từ người mới bắt đầu đến vận động viên thi đấu.' },
+      recovery: { tag: '03 · CHĂM SÓC', title: 'Phục hồi và trị liệu', description: 'Khu trị liệu riêng biệt có huấn luyện viên cá nhân và chuyên gia phục hồi chức năng, hỗ trợ giảm đau, phục hồi chấn thương và duy trì sức bền lâu dài.', detail: 'Liệu trình được thiết kế riêng cho từng người, kết hợp massage trị liệu và kéo giãn cơ chuyên sâu.' },
+      sauna: { tag: '04 · THƯ GIÃN', title: 'Phòng xông hơi', description: 'Phòng sauna khô cao cấp giúp thanh lọc cơ thể, giảm căng thẳng và hỗ trợ phục hồi cơ bắp sau mỗi buổi tập, trong không gian riêng tư và sạch sẽ tuyệt đối.', detail: 'Gỗ thông Phần Lan nhập khẩu, duy trì nhiệt độ ổn định theo thông tin tiện ích VIO cung cấp.' },
+      nutrition: { tag: '05 · DINH DƯỠNG', title: 'Nạp năng lượng', description: 'Quầy dinh dưỡng ngay trong phòng gym phục vụ protein shake, sinh tố trái cây tươi và snack lành mạnh để bạn nạp năng lượng ngay sau buổi tập.', detail: 'Hỏi đội ngũ VIO để biết thực đơn và tình trạng phục vụ hiện tại.' },
+    },
+  },
+  trainers: { eyebrow: 'Đồng hành cùng bạn', title: 'Đội ngũ HLV đang được cập nhật', body: 'VIO đang hoàn thiện hồ sơ từng HLV để giới thiệu đúng chuyên môn và phong cách huấn luyện. Bạn có thể đăng ký tập thử để được đội ngũ tư vấn trực tiếp.', cta: 'Đăng ký tư vấn', verified: 'HLV đã xác minh' },
+  stories: { eyebrow: 'Cộng đồng VIO', title: 'Người thật. Hành trình thật.', body: 'Xem các video học viên do VIO cung cấp. Mỗi câu chuyện đều được chia sẻ với sự đồng ý của người xuất hiện trong video.', video: 'Video học viên', watch: 'Xem câu chuyện' },
+  pricing: { eyebrow: 'VIO FITNESS · GÓI HỘI VIÊN', title: 'Nâng tầm hành trình tập luyện', popular: 'Phổ biến nhất', paymentTitle: 'Phương thức thanh toán', paymentMethods: 'Tiền mặt · Thẻ · Chuyển khoản', choose: 'Chọn gói này', trial: 'Đăng ký tập thử', periodDay: '/ NGÀY', periodDays: '/ 3 NGÀY', periodWeek: '/ TUẦN', periodMonth: '/ THÁNG', periodYear: '/ 12 THÁNG', plans: { dayPass: { prefix: 'LINH HOẠT', features: ['Tập gym không giới hạn', 'Không gian tập có điều hòa'] }, shortTerm: { prefix: 'KHÁCH VÃNG LAI', features: ['Tập gym không giới hạn', 'Không gian tập có điều hòa'] }, weeklyPass: { prefix: 'NGƯỜI DU LỊCH', features: ['2 tuần: 1.25M VND / $50', 'Tập gym không giới hạn', 'Không gian tập có điều hòa'] }, membership: { prefix: 'CAM KẾT', features: ['2 tháng: 2.9M VND / $116', '3 tháng: 3.9M VND / $156', '6 tháng: 6.6M VND / $264', 'Tập gym không giới hạn'] }, longTerm: { prefix: 'LỐI SỐNG', features: ['Tập gym không giới hạn', 'Không gian tập có điều hòa'] } } },
+  map: { title: 'VIO Fitness', directions: 'Chỉ đường', frameTitle: 'Bản đồ vị trí VIO Fitness' },
+  footer: { quickLinks: 'Liên kết nhanh', contact: 'Thông tin liên hệ', hours: 'Giờ mở cửa', hoursDay: 'Thứ 2 – Chủ nhật', trialTitle: 'Đăng ký tập thử miễn phí', trialBody: 'Buổi tập thử đầu tiên hoàn toàn miễn phí — kèm đo InBody và HLV hướng dẫn làm quen máy.', zaloButton: 'Nhắn Zalo ngay', whatsappButton: 'WhatsApp', rights: 'Mọi quyền được bảo lưu', phoneLabel: 'Hotline', emailLabel: 'Email' },
+  trial: { eyebrow: 'Bắt đầu thật đơn giản', title: 'Đăng ký buổi tập thử miễn phí', body: 'Điền 3 thông tin ngắn. VIO sẽ mở đúng kênh chat để bạn gửi yêu cầu cho đội ngũ.', name: 'Tên của bạn', goal: 'Mục tiêu tập', time: 'Khung giờ muốn đến', choose: 'Chọn mục tiêu', timePlaceholder: 'Ví dụ: 17:00–19:00', zalo: 'Đăng ký qua Zalo', instagram: 'Nhắn qua Instagram', call: 'Gọi hotline', copied: 'Đã copy tin nhắn. Dán vào chat Zalo/Instagram nhé!', copyFailed: 'Không thể tự copy. Vui lòng nhập lại 3 thông tin trong cửa sổ chat.', required: 'Vui lòng nhập tên, mục tiêu và khung giờ.', offer: 'Miễn phí buổi tập + đo InBody miễn phí' },
+  goals: { muscle: 'Tăng cơ', weightLoss: 'Giảm cân', beginner: 'Mới bắt đầu', personalTraining: 'PT 1-1', traveller: 'Khách du lịch' },
 } as const
+
+type Widen<T> = T extends string ? string : T extends readonly (infer U)[] ? Widen<U>[] : T extends object ? { [K in keyof T]: Widen<T[K]> } : T
+export type Locale = Widen<typeof vi>
