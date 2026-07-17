@@ -137,7 +137,7 @@ const Header: React.FC = () => {
               className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 absolute top-0 right-0 mr-8 mt-8 dark:invert"
               aria-label={locale.header.close}></button>
           </div>
-          <nav aria-label={locale.header.menu} className='flex flex-col items-start p-4'>
+          <nav aria-label={locale.header.mobileNavigation} className='flex flex-col items-start p-4'>
             {headerData.map(
               (item: HeaderItem, index: Key | null | undefined) => (
                 <MobileHeaderLink key={index} item={item} onNavigate={() => setNavbarOpen(false)} />

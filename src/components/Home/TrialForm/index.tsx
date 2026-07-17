@@ -197,7 +197,7 @@ const TrialForm = () => {
         <div className='max-h-[90vh] w-full max-w-xl overflow-y-auto bg-[var(--color-deep-slate)] p-5 text-white shadow-2xl sm:p-8'>
           <div className='mb-5 flex items-start justify-between gap-4'>
             <h2 id='trial-modal-title' className='font-heading text-2xl font-bold uppercase'>{labels.title}</h2>
-            <button ref={closeButtonRef} type='button' onClick={() => setIsModalOpen(false)} className='border border-white/20 px-3 py-2 text-sm' aria-label={locale.header.close}>×</button>
+            <button ref={closeButtonRef} type='button' onClick={() => setIsModalOpen(false)} className='border border-white/20 px-3 py-2 text-sm' aria-label={labels.close}>×</button>
           </div>
           {renderForm('border border-white/10 bg-white/[0.04] p-5')}
         </div>
