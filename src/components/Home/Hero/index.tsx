@@ -1,7 +1,4 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Button from '../../ui/Button'
 
 const Hero = () => {

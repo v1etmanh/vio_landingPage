@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Button from '../../ui/Button'
+import React from 'react'
 
 // ── Social SVGs ─────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
@@ -58,22 +57,11 @@ const quickLinks = [
 ]
 
 const hours = [
-  { day: 'Thứ 2 – Thứ 6', time: '05:30 – 22:30' },
-  { day: 'Thứ 7', time: '06:00 – 21:00' },
-  { day: 'Chủ nhật', time: '07:00 – 20:00' },
+  { day: 'Thứ 2 – Chủ nhật', time: '05:30 – 20:30' },
 ]
 
 // ── Footer ───────────────────────────────────────────────────────────────────
 const Footer = () => {
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email.trim()) setSubmitted(true)
-  }
-
   return (
     <footer id='Contact' className='bg-[var(--color-deep-slate)] text-white'>
 
@@ -97,7 +85,7 @@ const Footer = () => {
             {/* Social icons */}
             <div className='flex items-center gap-3'>
               <a
-                href='https://www.facebook.com/vio.gymfitness'
+                href='https://www.facebook.com/viofitnessdanang'
                 target='_blank'
                 rel='noreferrer'
                 id='footer-facebook'
@@ -174,8 +162,8 @@ const Footer = () => {
               </li>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
                 <span className='text-[var(--color-primary)] mt-0.5'><MailIcon /></span>
-                <a href='mailto:info@viofitness.vn' className='hover:text-white transition-colors'>
-                  info@viofitness.vn
+                <a href='mailto:viofitness0961119495@gmail.com' className='hover:text-white transition-colors break-all'>
+                  viofitness0961119495@gmail.com
                 </a>
               </li>
               <li className='pt-2 border-t border-white/10'>
@@ -195,53 +183,37 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* COL 4 — Newsletter / Tư vấn */}
+          {/* COL 4 — Đăng ký tập thử */}
           <div>
             <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-2'>
-              Đăng ký tư vấn
+              Đăng ký tập thử miễn phí
             </p>
             <p className='text-white/50 text-sm mb-6 leading-relaxed'>
-              Để lại thông tin — đội ngũ VIO sẽ liên hệ tư vấn gói tập phù hợp nhất cho bạn.
+              Buổi tập thử đầu tiên hoàn toàn miễn phí — kèm đo InBody và HLV hướng dẫn làm quen máy.
             </p>
-
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className='space-y-3' id='footer-consult-form'>
-                <input
-                  type='text'
-                  placeholder='Họ và tên'
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  className='w-full bg-white/5 border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[var(--color-primary)] transition-colors duration-200'
-                  id='footer-input-name'
-                />
-                <input
-                  type='tel'
-                  placeholder='Số điện thoại *'
-                  required
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className='w-full bg-white/5 border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[var(--color-primary)] transition-colors duration-200'
-                  id='footer-input-phone'
-                />
-                <Button
-                  type='submit'
-                  id='footer-submit-btn'
-                  variant='primary'
-                  className='w-full'
-                >
-                  Gửi yêu cầu tư vấn
-                </Button>
-              </form>
-            ) : (
-              <div className='border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 p-5 text-center'>
-                <p className='text-[var(--color-primary)] font-heading font-bold uppercase tracking-wider text-sm mb-1'>
-                  Đã nhận!
-                </p>
-                <p className='text-white/60 text-sm'>
-                  VIO sẽ liên hệ với bạn trong thời gian sớm nhất.
-                </p>
-              </div>
-            )}
+            <div className='space-y-3'>
+              <a
+                href='https://zalo.me/0961119495'
+                target='_blank'
+                rel='noreferrer'
+                id='footer-zalo-cta'
+                className='flex items-center justify-center gap-2 w-full bg-[var(--color-primary)] text-[#1a1a1a] font-heading font-bold uppercase tracking-wider text-sm px-4 py-3 hover:opacity-90 transition-opacity duration-200'
+              >
+                Nhắn Zalo ngay
+              </a>
+              <a
+                href={
+                  'https://wa.me/84961119495?text=' +
+                  encodeURIComponent('[WEB-FT] Xin chào VIO Fitness! Tôi muốn đăng ký tập thử miễn phí.')
+                }
+                target='_blank'
+                rel='noreferrer'
+                id='footer-whatsapp-cta'
+                className='flex items-center justify-center gap-2 w-full border border-white/25 text-white/80 font-heading font-bold uppercase tracking-wider text-sm px-4 py-3 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors duration-200'
+              >
+                WhatsApp
+              </a>
+            </div>
           </div>
 
         </div>
@@ -251,11 +223,7 @@ const Footer = () => {
       <div className='border-t border-white/10'>
         <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 text-sm'>
           <p>© {new Date().getFullYear()} VIO FITNESS & GYM ĐÀ NẴNG. All rights reserved.</p>
-          <div className='flex items-center gap-6'>
-            <a href='#' className='hover:text-white/70 transition-colors'>Chính sách riêng tư</a>
-            <span className='text-white/20'>|</span>
-            <a href='#' className='hover:text-white/70 transition-colors'>Điều khoản sử dụng</a>
-          </div>
+          <p className='text-white/30 text-xs'>15 Trần Phú – 02 Nguyễn Du, Hải Châu, Đà Nẵng</p>
         </div>
       </div>
 

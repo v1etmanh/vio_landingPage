@@ -95,24 +95,24 @@ export default function Services() {
           <div className="flex items-center gap-3">
             <Icon icon="tabler:crown" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              10+ Năm<br className="hidden sm:block" /> <span className="sm:hidden">Kinh Nghiệm</span>
-              <span className="hidden sm:inline">Kinh Nghiệm</span>
+              Thiết Bị<br className="hidden sm:block" /> <span className="sm:hidden">Mới 100%</span>
+              <span className="hidden sm:inline">Mới 100%</span>
             </span>
           </div>
           <span className="hidden sm:block text-white/30 text-xl font-light">/</span>
           <div className="flex items-center gap-3">
-            <Icon icon="tabler:device-laptop" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
+            <Icon icon="tabler:building" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              5000+<br className="hidden sm:block" /> <span className="sm:hidden">Phiên Tập</span>
-              <span className="hidden sm:inline">Phiên Tập</span>
+              3 Tầng<br className="hidden sm:block" /> <span className="sm:hidden">Không Gian</span>
+              <span className="hidden sm:inline">Không Gian</span>
             </span>
           </div>
           <span className="hidden sm:block text-white/30 text-xl font-light">/</span>
           <div className="flex items-center gap-3">
-            <Icon icon="tabler:ticket" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
+            <Icon icon="tabler:user-check" className="text-2xl sm:text-3xl text-[var(--color-primary)] sm:text-white" />
             <span className="text-left text-xs sm:text-sm font-bold leading-tight tracking-wider text-white uppercase">
-              140+<br className="hidden sm:block" /> <span className="sm:hidden">Sự Kiện</span>
-              <span className="hidden sm:inline">Sự Kiện</span>
+              PT Kèm<br className="hidden sm:block" /> <span className="sm:hidden">Riêng 1-1</span>
+              <span className="hidden sm:inline">Riêng 1-1</span>
             </span>
           </div>
         </div>

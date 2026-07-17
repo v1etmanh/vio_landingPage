@@ -43,3 +43,6 @@ dist-ssr
 *.MP4
 *.mov
 *.MOV
+
+# Raw/unused assets kept locally, not deployed
+assets_source/

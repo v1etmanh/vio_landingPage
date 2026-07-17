@@ -8,21 +8,21 @@ const Knowledge = () => {
     {
       title: 'How to perfect your Deadlift form',
       description: 'Our head coach breaks down the mechanics of a safe and effective deadlift.',
-      thumbnail: '/information_video/VIDEO 1/BÌA.png',
+      thumbnail: '/information_video/VIDEO 1/BÌA.jpg',
       src: '/information_video/VIDEO 1/VIDE0 1.mov',
       duration: '4:20'
     },
     {
       title: 'Nutrition myths busted',
       description: 'Stop wasting time on fad diets. Here is what science actually says about fat loss.',
-      thumbnail: '/information_video/VIDEO 2/BÌA.png',
+      thumbnail: '/information_video/VIDEO 2/BÌA.jpg',
       src: '/information_video/VIDEO 2/VIDE0 2.mp4',
       duration: '6:15'
     },
     {
       title: 'Maximize your muscle growth',
       description: 'Learn the optimal training frequency and volume to build muscle effectively.',
-      thumbnail: '/information_video/VIDE0 3/BÌA.png',
+      thumbnail: '/information_video/VIDE0 3/BÌA.jpg',
       src: '/information_video/VIDE0 3/VIDEP 3.mp4',
       duration: '5:45'
     }
