@@ -21,6 +21,7 @@ const FloatingActions = () => {
     >
       <button
         type='button'
+        aria-label={locale.hero.primary}
         onClick={() => {
           trackEvent('sticky_trial_clicked', { language })
           window.dispatchEvent(new Event('vio-open-trial-modal'))

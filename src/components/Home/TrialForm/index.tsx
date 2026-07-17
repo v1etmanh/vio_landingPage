@@ -21,6 +21,8 @@ const TrialForm = () => {
   const [hasStarted, setHasStarted] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const saved = sessionStorage.getItem('vio-trial-draft')
@@ -45,7 +47,10 @@ const TrialForm = () => {
   }, [])
 
   useEffect(() => {
-    const openModal = () => setIsModalOpen(true)
+    const openModal = () => {
+      previouslyFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+      setIsModalOpen(true)
+    }
     window.addEventListener('vio-open-trial-modal', openModal)
     return () => window.removeEventListener('vio-open-trial-modal', openModal)
   }, [])
@@ -54,7 +59,27 @@ const TrialForm = () => {
     if (!isModalOpen) return
     const previousOverflow = document.body.style.overflow
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsModalOpen(false)
+      if (event.key === 'Escape') {
+        setIsModalOpen(false)
+        return
+      }
+
+      if (event.key !== 'Tab' || !modalRef.current) return
+      const focusable = Array.from(
+        modalRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href]'
+        )
+      )
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
     }
     document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', closeOnEscape)
@@ -62,6 +87,7 @@ const TrialForm = () => {
     return () => {
       document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', closeOnEscape)
+      previouslyFocusedRef.current?.focus()
     }
   }, [isModalOpen])
 
@@ -167,7 +193,7 @@ const TrialForm = () => {
       </div>
       </section>
       {isModalOpen && (
-      <div className='fixed inset-0 z-[1000] flex items-end justify-center bg-black/70 p-4 sm:items-center' role='dialog' aria-modal='true' aria-labelledby='trial-modal-title'>
+      <div ref={modalRef} className='fixed inset-0 z-[1000] flex items-end justify-center bg-black/70 p-4 sm:items-center' role='dialog' aria-modal='true' aria-labelledby='trial-modal-title'>
         <div className='max-h-[90vh] w-full max-w-xl overflow-y-auto bg-[var(--color-deep-slate)] p-5 text-white shadow-2xl sm:p-8'>
           <div className='mb-5 flex items-start justify-between gap-4'>
             <h2 id='trial-modal-title' className='font-heading text-2xl font-bold uppercase'>{labels.title}</h2>
