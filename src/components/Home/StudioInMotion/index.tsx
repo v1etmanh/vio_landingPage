@@ -49,35 +49,12 @@ const StudioInMotion = () => {
     ]
   }
 
-  // Facade pattern component for faster load
   const FacebookReel = ({ videoId, index }: { videoId: string, index: number }) => {
-    const [isLoaded, setIsLoaded] = useState(false);
     const videoUrl = encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`);
 
     return (
       <div className='px-3 xl:px-4'>
         <div className='w-full rounded-none overflow-hidden bg-[var(--color-darkmode)] relative aspect-[9/16] shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-[1.02]'>
-          {!isLoaded ? (
-            <div
-              className='absolute inset-0 flex items-center justify-center cursor-pointer group'
-              onClick={() => setIsLoaded(true)}
-            >
-              {/* Dark overlay for contrast */}
-              <div className='absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500'></div>
-
-              {/* Brutalist Tag */}
-              <div className='absolute top-6 left-6 bg-[var(--color-primary)] text-white text-[11px] font-bold px-4 py-2 rounded-none shadow-xl uppercase tracking-widest z-10'>
-                REEL 0{index + 1}
-              </div>
-
-              {/* Rigid Play Button */}
-              <div className='absolute inset-0 flex items-center justify-center z-10'>
-                <div className='w-24 h-16 bg-white/10 backdrop-blur-md border-[2px] border-white flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:border-[var(--color-primary)] transition-all duration-300 group-hover:scale-105 shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-none'>
-                  <Icon icon='ph:play-fill' className='text-white text-3xl ml-1.5' />
-                </div>
-              </div>
-            </div>
-          ) : (
             <iframe
               src={`https://www.facebook.com/plugins/video.php?href=${videoUrl}&show_text=false&width=400`}
               className='w-full h-full border-none overflow-hidden'
@@ -85,8 +62,8 @@ const StudioInMotion = () => {
               frameBorder="0"
               allowFullScreen={true}
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              loading="lazy"
             ></iframe>
-          )}
         </div>
       </div>
     )

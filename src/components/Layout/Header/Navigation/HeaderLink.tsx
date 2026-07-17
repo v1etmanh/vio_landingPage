@@ -21,8 +21,8 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
     >
       <a
         href={item.href}
-        className={`text-lg flex hover:text-black capitalized  ${
-          path === item.href ? "text-black/75 " : " text-black/75 "
+        className={`text-[18px] font-medium flex hover:text-black capitalized transition-colors ${
+          path === item.href ? "text-black " : " text-black/80 "
         }`}
       >
         {item.label}

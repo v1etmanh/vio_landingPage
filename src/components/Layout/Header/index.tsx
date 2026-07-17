@@ -74,13 +74,13 @@ const Header: React.FC = () => {
               <Icon icon="tabler:phone-filled" className="text-xl" />
               <span className="text-lg">0961119495</span>
             </a>
-            <Button
-              variant="secondary"
-              size="sm"
-              className='hidden lg:inline-flex'
-              onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
-              Đăng ký tập thử
-            </Button>
+            <a href="#Contact" className="hidden lg:inline-flex">
+              <button
+                className="bg-[#B88A4A] hover:bg-[#a67b40] text-white font-medium h-[48px] px-6 rounded-[8px] transition-colors shadow-sm"
+                onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                Đăng ký tập thử
+              </button>
+            </a>
             
             {/* Mobile Pinned Hotline */}
             <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
@@ -121,16 +121,14 @@ const Header: React.FC = () => {
               )
             )}
             <div className='mt-8 w-full'>
-              <Button
-                variant="secondary"
-                size="md"
-                className='w-full'
+              <button
+                className="w-full bg-[#B88A4A] hover:bg-[#a67b40] text-white font-medium h-[48px] px-6 rounded-[8px] transition-colors shadow-sm"
                 onClick={() => {
                   document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)
                 }}>
                 Đăng ký tập thử
-              </Button>
+              </button>
             </div>
           </nav>
         </div>
