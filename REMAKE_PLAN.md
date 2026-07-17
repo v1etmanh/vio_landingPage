@@ -1,6 +1,6 @@
 # VIO FITNESS — Kế hoạch Remake UI Landing Page (v2)
 
-*Cập nhật: 17/07/2026 — bản v2 sau vòng phản biện (Codex debate) + xác minh trực tiếp trên repo và xác nhận của chủ phòng.*
+*Cập nhật: 18/07/2026 — bản v2 sau vòng phản biện (Codex debate) + xác minh trực tiếp trên repo và xác nhận của chủ phòng.*
 *Repo: `vio_landingPage` (Vite + React 19 + TS + Tailwind 4) · Site: https://vio-landing-page-seven.vercel.app/*
 
 ---
@@ -17,7 +17,7 @@ Mọi thông tin hiển thị trên site phải nằm trong bảng này. Không 
 | Bảng giá | Giá trên website đúng (Day 200K → Năm 10.2M) | Chủ phòng xác nhận | 17/07/2026 |
 | Thanh toán | **Tiền mặt + thẻ + chuyển khoản** | Chủ phòng xác nhận | 17/07/2026 |
 | Email liên hệ | **viofitness0961119495@gmail.com** | Chủ phòng cung cấp | 17/07/2026 |
-| Video học viên | 3 video FB: [video 1](https://www.facebook.com/share/r/1BTJHCnGT8/) · [video 2](https://www.facebook.com/share/r/1EgMQbZDMB/) · [video 3](https://www.facebook.com/share/r/1M7chDDrsd/) — **cần xác nhận học viên đồng ý** trước khi lên site | Chủ phòng cung cấp | 17/07/2026 |
+| Video học viên | 3 video FB: [video 1](https://www.facebook.com/share/r/1BTJHCnGT8/) · [video 2](https://www.facebook.com/share/r/1EgMQbZDMB/) · [video 3](https://www.facebook.com/share/r/1M7chDDrsd/) — **đã xác nhận quyền sử dụng**, nhưng repo chưa có file gốc để tự host | Chủ phòng cung cấp | 17/07/2026 |
 | HLV | **Placeholder tạm** (khung section làm sẵn, chủ phòng bổ sung ảnh + tên sau) | Chủ phòng | Chờ bổ sung |
 | Kênh chốt sale | **VI → Zalo · EN → WhatsApp (+84 961 119 495) · IG @vio.gymfitness phụ** | Chủ phòng chọn | 17/07/2026 |
 | GG Maps listing | "VIO FITNESS & GYM DA NANG" (kgmid `/g/11ms606l_z`) | Đã resolve link share | 17/07/2026 |
@@ -142,7 +142,7 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 ### Phase -1 — Truth & Git gate *(nửa buổi, cần bạn)*
 - Tạo feature branch `feat/remake-ui` trong repo `vio_landingPage`; xác nhận không dính repo cha lồng nhau trên máy bạn.
 - ~~Email · chuyển khoản · video FB~~ → **đã cung cấp 17/07/2026** (xem bảng mục 0).
-- Còn chờ: **HLV** (placeholder trước, bổ sung ảnh/tên sau) · **đồng ý của học viên trong 3 video** (cần trước Phase 2) · **chốt offer tập thử** (mặc định dùng đề xuất mục 4.9: miễn phí buổi tập + đo InBody, nếu bạn không phản đối) · testimonial khách cho phép dùng.
+- Đã chốt: **quyền sử dụng của học viên trong 3 video** và **offer tập thử miễn phí + đo InBody**. Còn thiếu để nâng cấp Phase 2: ảnh/tên/chuyên môn HLV, file video gốc và testimonial có phép dạng văn bản.
 - Hoàn thiện bảng dữ kiện mục 0 — mọi claim lên site phải có nguồn + ngày.
 
 ### Phase 0 — Deploy-safe baseline *(1 buổi, mình làm)*
