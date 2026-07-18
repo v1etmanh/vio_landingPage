@@ -106,34 +106,6 @@ const MemberStories = () => {
           ))}
         </div>
 
-        <div className='mt-5 flex items-center justify-center gap-3' aria-label={locale.stories.video}>
-          <button
-            type='button'
-            onClick={() => setIsPaused((current) => !current)}
-            className='inline-flex min-h-11 min-w-11 items-center justify-center border border-[var(--color-vio-line)] text-[var(--color-vio-text)] outline-none transition-colors duration-200 hover:border-[var(--color-vio-gold)] hover:text-[var(--color-vio-gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-vio-gold)]'
-            aria-pressed={isPaused}
-            aria-label={isPaused ? locale.stories.play : locale.stories.pause}
-          >
-            <Icon icon={isPaused ? 'tabler:player-play-filled' : 'tabler:player-pause-filled'} className='text-lg' aria-hidden='true' />
-          </button>
-          <div className='flex items-center gap-2' role='group' aria-label={locale.stories.video}>
-            {MEMBER_STORIES.map((story, index) => (
-              <button
-                key={story.id}
-                type='button'
-                onClick={() => {
-                  setActiveIndex(index)
-                  setIsPaused(true)
-                }}
-                className='flex min-h-11 min-w-11 items-center justify-center outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-vio-gold)]'
-                aria-pressed={activeIndex === index}
-                aria-label={`${locale.stories.slide} ${index + 1}`}
-              >
-                <span className={`h-2 w-2 rounded-full transition-transform duration-200 ${activeIndex === index ? 'scale-125 bg-[var(--color-vio-gold)]' : 'bg-[var(--color-vio-line)]'}`} aria-hidden='true' />
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
