@@ -1,9 +1,54 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import SliderModule from 'react-slick'
 const Slider = (SliderModule as any).default || SliderModule;
 import { Icon } from '@iconify/react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const StudioInMotion = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    gsap.set([headerRef.current?.children, sliderRef.current], {
+      y: 50,
+      opacity: 0,
+      force3D: true
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none none',
+        invalidateOnRefresh: true,
+      }
+    });
+
+    if (headerRef.current?.children) {
+      tl.to(headerRef.current.children, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out'
+      });
+    }
+
+    tl.to(sliderRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: 'power3.out'
+    }, "-=0.4");
+
+  }, { scope: sectionRef });
+
   const videoIds = [
     '26590822753873665',
     '4330502083861415',
@@ -53,11 +98,11 @@ const StudioInMotion = () => {
     const videoUrl = encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`);
 
     return (
-      <div className='px-3 xl:px-4 group'>
+      <div className='px-3 xl:px-4 group py-4'>
         <div className='w-full rounded-none overflow-hidden bg-black relative aspect-[9/16] border border-white/10 group-hover:border-white/30 transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.8)]'>
             <iframe
               src={`https://www.facebook.com/plugins/video.php?href=${videoUrl}&show_text=false&width=400`}
-              className='w-full h-full border-none overflow-hidden'
+              className='w-full h-full border-none overflow-hidden bg-black'
               scrolling="no"
               frameBorder="0"
               allowFullScreen={true}
@@ -70,9 +115,9 @@ const StudioInMotion = () => {
   }
 
   return (
-    <section id='Studio' className='py-24 lg:py-32 bg-[var(--color-darkmode)] relative z-10 overflow-hidden border-t border-white/5'>
+    <section id='Studio' ref={sectionRef} className='py-24 lg:py-32 bg-[var(--color-darkmode)] relative z-10 overflow-hidden border-t border-white/5'>
       <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-8'>
-        <div className='flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8'>
+        <div ref={headerRef} className='flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8'>
           <div className='max-w-2xl'>
             <p className='text-[#C5A059] text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 font-bold'>
               SOCIAL HIGHLIGHTS
@@ -92,7 +137,7 @@ const StudioInMotion = () => {
           </a>
         </div>
 
-        <div className='-mx-3 xl:-mx-4 mt-12 studio-slider w-full overflow-hidden sm:overflow-visible'>
+        <div ref={sliderRef} className='-mx-3 xl:-mx-4 mt-12 studio-slider w-full overflow-hidden sm:overflow-visible'>
           <Slider {...settings}>
             {videoIds.map((id, index) => (
               <FacebookReel key={id} videoId={id} index={index} />

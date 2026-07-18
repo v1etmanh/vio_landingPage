@@ -1,12 +1,66 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Icon } from '@iconify/react'
 import SliderModule from 'react-slick'
 const Slider = (SliderModule as any).default || SliderModule;
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Button from '../../ui/Button'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Testimonials = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    // Hardware acceleration
+    gsap.set([headerRef.current?.children, sliderRef.current, ctaRef.current], {
+      y: 50,
+      opacity: 0,
+      force3D: true
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none none',
+        invalidateOnRefresh: true,
+      }
+    });
+
+    if (headerRef.current?.children) {
+      tl.to(headerRef.current.children, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out'
+      });
+    }
+
+    tl.to(sliderRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: 'power3.out'
+    }, "-=0.4");
+
+    tl.to(ctaRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, "-=0.6");
+
+  }, { scope: sectionRef });
+
   const reviews = [
     {
       name: 'AKEMI MEDIA',
@@ -63,63 +117,66 @@ const Testimonials = () => {
   }
 
   return (
-    <section id='Reviews' className='py-24'>
-      <div className='container mx-auto max-w-7xl px-4 sm:px-6 lg:px-12'>
-        <div className='text-center max-w-3xl mx-auto mb-16'>
+    <section id='Reviews' ref={sectionRef} className='py-24 lg:py-32 overflow-hidden bg-white'>
+      <div className='container mx-auto max-w-[1600px] px-4 sm:px-6 md:px-12 lg:px-8'>
+        <div ref={headerRef} className='text-center max-w-3xl mx-auto mb-16 sm:mb-20'>
           <div className='flex justify-center items-center gap-4 mb-4'>
-            <Icon icon='logos:google-icon' className='text-3xl' />
-            <span className='text-2xl font-bold text-gray-700'>Reviews</span>
+            <Icon icon='logos:google-icon' className='text-2xl sm:text-3xl' />
+            <span className='text-xl sm:text-2xl font-bold text-gray-700 tracking-wider uppercase font-heading'>Reviews</span>
           </div>
-          <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold mb-6'>
-            What our members say.
+          <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-heading tracking-tighter uppercase leading-[0.9] text-gray-900'>
+            WHAT OUR <br className="hidden sm:block" />MEMBERS SAY.
           </h2>
-          <div className='flex items-center justify-center gap-2'>
-            <span className='text-3xl font-bold'>4.9</span>
-            <div className='flex text-[#fbbc04] text-2xl'>
+          <div className='flex flex-wrap items-center justify-center gap-2'>
+            <span className='text-3xl sm:text-4xl font-bold font-heading text-gray-900'>4.9</span>
+            <div className='flex text-[#fbbc04] text-xl sm:text-2xl'>
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star-half' />
             </div>
-            <span className='text-gray-500'>(124 reviews)</span>
+            <span className='text-gray-500 font-medium text-sm sm:text-base ml-2'>(124 reviews)</span>
           </div>
         </div>
 
-        <Slider {...settings} className='testimonial-slider'>
-          {reviews.map((review, index) => (
-            <div key={index} className='px-4 pb-10'>
-              <div className='bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full'>
-                <div className='flex items-center mb-4'>
-                  <div className='w-12 h-12 rounded-full overflow-hidden mr-4 bg-gray-200'>
-                    <img src={review.avatar} alt={review.name} width={48} height={48} className='object-cover' />
-                  </div>
-                  <div>
-                    <h5 className='font-bold text-lg'>{review.name}</h5>
-                    <div className='flex items-center gap-2'>
-                      <div className='flex text-[#fbbc04] text-sm'>
-                        {Array.from({ length: review.rating }).map((_, i) => (
-                          <Icon key={i} icon='ic:round-star' />
-                        ))}
-                      </div>
-                      <span className='text-gray-400 text-sm'>{review.time}</span>
+        <div ref={sliderRef} className='w-full'>
+          <Slider {...settings} className='testimonial-slider'>
+            {reviews.map((review, index) => (
+              <div key={index} className='px-4 pb-10'>
+                <div className='bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 h-full'>
+                  <div className='flex flex-wrap items-center mb-4 gap-3'>
+                    <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gray-200 shrink-0'>
+                      <img src={review.avatar} alt={review.name} className='w-full h-full object-cover' />
                     </div>
+                    <div className='flex-grow'>
+                      <h5 className='font-bold text-base sm:text-lg text-gray-900'>{review.name}</h5>
+                      <div className='flex items-center gap-2 flex-wrap'>
+                        <div className='flex text-[#fbbc04] text-xs sm:text-sm'>
+                          {Array.from({ length: review.rating }).map((_, i) => (
+                            <Icon key={i} icon='ic:round-star' />
+                          ))}
+                        </div>
+                        <span className='text-gray-400 text-xs sm:text-sm'>{review.time}</span>
+                      </div>
+                    </div>
+                    <Icon icon='logos:google-icon' className='text-xl sm:text-2xl opacity-50 shrink-0 hidden sm:block' />
                   </div>
-                  <Icon icon='logos:google-icon' className='ml-auto text-2xl opacity-50' />
+                  <p className='text-gray-600 leading-relaxed text-sm sm:text-base'>"{review.comment}"</p>
                 </div>
-                <p className='text-gray-600 leading-relaxed'>"{review.comment}"</p>
               </div>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        </div>
 
-        <div className='mt-12 flex justify-center'>
+        <div ref={ctaRef} className='mt-8 sm:mt-12 flex justify-center px-4'>
           <Button 
             variant="dark"
             href="https://maps.app.goo.gl/pCEQfgEn4dRgezyh9" 
             target="_blank" 
             rel="noopener noreferrer"
             icon="logos:google-icon"
+            className="w-full sm:w-auto text-center justify-center"
           >
             Xem thêm đánh giá trên Google
           </Button>

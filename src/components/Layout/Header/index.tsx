@@ -51,12 +51,12 @@ const Header: React.FC = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 z-40 w-full transition-colors duration-500 border-b ${
-        sticky ? 'shadow-sm bg-white/85 backdrop-blur-md border-black/5' : 'shadow-none border-transparent bg-transparent'
+        sticky ? 'shadow-sm bg-black/90 backdrop-blur-md border-white/10' : 'shadow-none border-transparent bg-transparent'
       }`}>
       <div className='lg:py-0 py-1'>
-        <div className='container mx-auto max-w-(--breakpoint-xl) flex items-center justify-between px-4'>
+        <div className='container mx-auto max-w-[1600px] flex items-center justify-between px-4'>
           <div
-            className={`pr-16 lg:border-r border-black/5 duration-300 ${
+            className={`pr-16 lg:border-r border-white/10 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
             <Logo />
@@ -67,23 +67,25 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div
-            className={`flex items-center gap-3 pl-8 lg:pl-16 lg:border-l border-black/5 duration-300 ${
+            className={`flex items-center gap-4 pl-8 lg:pl-16 lg:border-l border-white/10 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
-            <a href="tel:0961119495" className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">
+            <a href="tel:0961119495" className="hidden lg:flex items-center gap-2 text-white/80 hover:text-white font-semibold transition-colors">
               <Icon icon="tabler:phone-filled" className="text-xl" />
-              <span className="text-lg">0961119495</span>
+              <span className="text-lg tracking-wider">0961119495</span>
             </a>
-            <a href="#Contact" className="hidden lg:inline-flex">
-              <button
-                className="bg-[#B88A4A] hover:bg-[#a67b40] text-white font-medium h-[48px] px-6 rounded-[8px] transition-colors shadow-sm"
-                onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            <div className="hidden lg:block">
+              <Button
+                variant="gold"
+                size="sm"
+                onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Đăng ký tập thử
-              </button>
-            </a>
+              </Button>
+            </div>
             
             {/* Mobile Pinned Hotline */}
-            <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white shadow-md">
+            <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-[#C5A059] text-white shadow-md">
               <Icon icon="tabler:phone-filled" className="text-lg" />
             </a>
 
@@ -91,27 +93,27 @@ const Header: React.FC = () => {
               onClick={() => setNavbarOpen(!navbarOpen)}
               className='block lg:hidden p-2 rounded-lg'
               aria-label='Toggle mobile menu'>
-              <span className='block w-6 h-0.5 bg-darkmode'></span>
-              <span className='block w-6 h-0.5 bg-darkmode mt-1.5'></span>
-              <span className='block w-6 h-0.5 bg-darkmode mt-1.5'></span>
+              <span className='block w-6 h-[2px] bg-white'></span>
+              <span className='block w-6 h-[2px] bg-white mt-1.5'></span>
+              <span className='block w-6 h-[2px] bg-white mt-1.5'></span>
             </button>
           </div>
         </div>
         {navbarOpen && (
-          <div className='fixed top-0 left-0 w-full h-full bg-black/50 z-40' />
+          <div className='fixed top-0 left-0 w-full h-full bg-black/80 backdrop-blur-sm z-40' />
         )}
         <div
           ref={mobileMenuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-darkmode shadow-lg transform transition-transform duration-300 max-w-xs ${
+          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-black border-l border-white/10 shadow-2xl transform transition-transform duration-300 max-w-xs ${
             navbarOpen ? 'translate-x-0' : 'translate-x-full'
           } z-50`}>
-          <div className='flex items-center justify-between p-4'>
+          <div className='flex items-center justify-between p-4 border-b border-white/10'>
             <h2 className='text-lg font-bold text-white'>
               <Logo />
             </h2>
             <button
               onClick={() => setNavbarOpen(false)}
-              className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 absolute top-0 right-0 mr-8 mt-8 dark:invert"
+              className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 dark:invert opacity-70 hover:opacity-100 transition-opacity"
               aria-label='Close menu Modal'></button>
           </div>
           <nav className='flex flex-col items-start p-4'>
@@ -121,14 +123,16 @@ const Header: React.FC = () => {
               )
             )}
             <div className='mt-8 w-full'>
-              <button
-                className="w-full bg-[#B88A4A] hover:bg-[#a67b40] text-white font-medium h-[48px] px-6 rounded-[8px] transition-colors shadow-sm"
+              <Button
+                variant="gold"
+                size="md"
+                className="w-full justify-center"
                 onClick={() => {
                   document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)
                 }}>
                 Đăng ký tập thử
-              </button>
+              </Button>
             </div>
           </nav>
         </div>
