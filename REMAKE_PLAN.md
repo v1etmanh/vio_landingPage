@@ -227,3 +227,5 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 **UI follow-up (18/07/2026):** Header no longer uses vertical divider borders between logo, navigation, and utility actions. The trial form section now uses a lighter paper-toned background while retaining a dark, high-contrast form panel for readability.
 
 **Member Stories follow-up (18/07/2026):** Desktop story cards now use equal-width grid columns with one shared 9:16 height and baseline. The mobile horizontal snap rail remains unchanged.
+
+**Services motion follow-up (18/07/2026):** Added a restrained Framer Motion reveal for the brand-story section: title scale reveal, staggered proof points, image scale-in, and content follow-through. Motion is viewport-triggered, transform/opacity based, and resolves to the static layout when reduced motion is enabled.
