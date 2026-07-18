@@ -179,17 +179,17 @@ const TrialForm = () => {
 
   return (
     <>
-      <section id='TrialForm' className='bg-[var(--color-deep-slate)] py-24 text-white'>
+      <section id='TrialForm' className='bg-[var(--color-vio-paper)] py-24 text-[var(--color-darkmode)]'>
       <div className='container mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-12'>
         <div>
           <p className='mb-4 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-primary)]'>{labels.eyebrow}</p>
-          <h2 className='font-heading text-4xl font-bold uppercase leading-tight sm:text-5xl'>{labels.title}</h2>
-          <p className='mt-6 max-w-md text-lg leading-relaxed text-white/65'>{labels.body}</p>
+          <h2 className='font-heading text-4xl font-bold uppercase leading-tight text-[var(--color-darkmode)] sm:text-5xl'>{labels.title}</h2>
+          <p className='mt-6 max-w-md text-lg leading-relaxed text-black/60'>{labels.body}</p>
           <p className='mt-8 inline-flex items-center gap-2 border border-[var(--color-primary)]/40 px-4 py-3 text-sm font-semibold text-[var(--color-primary)]'>
             <Icon icon='tabler:gift' aria-hidden='true' /> {BUSINESS.offer[language]}
           </p>
         </div>
-        {renderForm('border border-white/10 bg-white/[0.04] p-6 sm:p-8')}
+        {renderForm('border border-[var(--color-vio-line)] bg-[var(--color-vio-surface)] p-6 text-white shadow-sm sm:p-8')}
       </div>
       </section>
       {isModalOpen && (

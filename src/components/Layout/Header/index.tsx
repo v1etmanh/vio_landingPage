@@ -65,13 +65,13 @@ const Header: React.FC = () => {
       initial={reduceMotion ? false : { y: -100, opacity: 0 }}
       animate={reduceMotion ? undefined : { y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 z-40 w-full transition-colors duration-500 border-b ${
-        sticky ? 'shadow-sm bg-white/85 backdrop-blur-md border-black/5' : 'shadow-none border-transparent bg-transparent'
+      className={`fixed top-0 z-40 w-full transition-colors duration-500 ${
+        sticky ? 'shadow-sm bg-white/90 backdrop-blur-md' : 'shadow-none bg-transparent'
       }`}>
       <div className='lg:py-0 py-1'>
         <div className='container mx-auto max-w-(--breakpoint-xl) flex items-center justify-between px-4'>
           <div
-            className={`pr-16 lg:border-r border-black/5 duration-300 ${
+            className={`pr-4 lg:pr-8 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
             <Logo />
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div
-            className={`flex items-center gap-3 pl-8 lg:pl-16 lg:border-l border-black/5 duration-300 ${
+            className={`flex items-center gap-3 pl-4 lg:pl-8 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
             <a href={`tel:${BUSINESS.phone}`} aria-label={locale.header.phoneLabel} className="hidden lg:flex items-center gap-2 text-darkmode hover:text-primary font-semibold transition-colors">

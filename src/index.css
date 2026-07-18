@@ -42,6 +42,14 @@
   --color-border: #dbdbdb;
   --color-darkmode: #2A2522; /* Dark brownish black */
   --color-deep-slate: #1c1916;
+  --color-vio-canvas: oklch(0.16 0.012 65);
+  --color-vio-paper: oklch(0.94 0.022 82);
+  --color-vio-surface: oklch(0.205 0.016 65);
+  --color-vio-surface-high: oklch(0.25 0.02 65);
+  --color-vio-line: oklch(0.4 0.025 70);
+  --color-vio-text: oklch(0.96 0.01 75);
+  --color-vio-muted: oklch(0.74 0.025 75);
+  --color-vio-gold: oklch(0.7 0.08 75);
 
   --font-sans: 'Inter', sans-serif;
   --font-heading: 'Oswald', sans-serif;
@@ -81,6 +89,7 @@
 
   section {
     @apply py-20;
+    scroll-margin-top: 6rem;
   }
 
   h1 {

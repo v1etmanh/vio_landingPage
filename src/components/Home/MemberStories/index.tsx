@@ -6,24 +6,53 @@ const MemberStories = () => {
   const locale = useLocale()
 
   return (
-    <section id='MemberStories' className='bg-[var(--color-darkmode)] py-24 text-white'>
+    <section id='MemberStories' className='overflow-hidden bg-[var(--color-vio-canvas)] py-24 text-[var(--color-vio-text)] lg:py-32'>
       <div className='container mx-auto max-w-7xl px-4 sm:px-6 lg:px-12'>
-        <div className='mb-10 max-w-2xl'>
-          <p className='mb-4 text-xs font-bold uppercase tracking-[0.3em] text-[var(--color-primary)]'>{locale.stories.eyebrow}</p>
-          <h2 className='font-heading text-4xl font-bold uppercase leading-tight sm:text-5xl'>{locale.stories.title}</h2>
-          <p className='mt-5 text-lg leading-relaxed text-white/60'>{locale.stories.body}</p>
+        <div className='mb-12 max-w-3xl lg:mb-16'>
+          <h2 className='text-wrap-balance font-heading text-4xl font-bold uppercase leading-[1.1] text-[var(--color-vio-text)] sm:text-5xl lg:text-6xl'>{locale.stories.title}</h2>
+          <p className='mt-5 max-w-2xl text-base leading-relaxed text-[var(--color-vio-muted)] sm:text-lg'>{locale.stories.body}</p>
         </div>
-        <div className='grid gap-5 md:grid-cols-3'>
+
+        <div className='grid auto-cols-[82%] grid-flow-col gap-4 overflow-x-auto pb-4 snap-x snap-mandatory md:auto-cols-auto md:grid-flow-row md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-[1.14fr_1fr_1fr] lg:gap-6'>
           {MEMBER_STORIES.map((story, index) => (
-            <article key={story.id} className='group overflow-hidden border border-white/10 bg-white/[0.04] transition hover:border-[var(--color-primary)] hover:bg-white/[0.08]'>
+            <article key={story.id} className={`snap-start ${index === 1 ? 'lg:mt-12' : index === 2 ? 'lg:mt-24' : ''}`}>
               {story.videoSrc ? (
-                <video className='aspect-[9/16] w-full object-cover' controls preload='none' poster={story.poster || undefined}>
+                <video className='aspect-[9/16] w-full border border-[var(--color-vio-line)] object-cover' controls preload='none' poster={story.poster || undefined}>
                   <source src={story.videoSrc} type='video/mp4' />
                 </video>
               ) : (
-                <a href={story.href} target='_blank' rel='noreferrer' className='flex min-h-56 flex-col justify-between p-6' aria-label={`${locale.stories.watch}: ${locale.stories.video} ${index + 1}`}>
-                  <span className='flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-primary)] text-[var(--color-darkmode)] transition group-hover:scale-105'><Icon icon='tabler:player-play-filled' className='text-2xl' aria-hidden='true' /></span>
-                  <span className='mt-12 flex items-center justify-between font-bold uppercase tracking-wider text-white'>{locale.stories.video} {String(index + 1).padStart(2, '0')}<Icon icon='tabler:arrow-up-right' className='text-[var(--color-primary)]' aria-hidden='true' /></span>
+                <a
+                  href={story.href}
+                  target='_blank'
+                  rel='noreferrer'
+                  className='group relative block aspect-[9/16] overflow-hidden border border-[var(--color-vio-line)] bg-[var(--color-vio-surface)] outline-none transition-colors duration-200 hover:border-[var(--color-vio-gold)] focus-visible:border-[var(--color-vio-gold)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] active:translate-y-0.5'
+                  aria-label={`${locale.stories.watch}: ${locale.stories.video} ${index + 1}`}
+                >
+                  <img
+                    src={story.poster}
+                    alt=''
+                    className='absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none'
+                    loading='lazy'
+                    decoding='async'
+                  />
+                  <div className='absolute inset-0 bg-gradient-to-t from-[var(--color-vio-canvas)] via-transparent to-[var(--color-vio-canvas)]/20' aria-hidden='true' />
+
+                  <span className='absolute left-5 top-5 inline-flex min-h-11 items-center gap-2 border border-[var(--color-vio-text)]/25 bg-[var(--color-vio-canvas)]/80 px-3 text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-vio-text)]'>
+                    <Icon icon='tabler:brand-facebook-filled' className='text-lg text-[var(--color-vio-gold)]' aria-hidden='true' />
+                    Facebook Reel
+                  </span>
+
+                  <span className='absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--color-vio-gold)] text-[var(--color-vio-canvas)] transition-transform duration-200 group-hover:scale-105 group-active:scale-95 motion-reduce:transition-none' aria-hidden='true'>
+                    <Icon icon='tabler:player-play-filled' className='ml-1 text-2xl' />
+                  </span>
+
+                  <span className='absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-6'>
+                    <span>
+                      <span className='block text-xs font-bold uppercase tracking-[0.1em] text-[var(--color-vio-gold)]'>{locale.stories.video}</span>
+                      <span className='mt-2 block font-heading text-2xl font-bold uppercase leading-tight'>{locale.stories.watch}</span>
+                    </span>
+                    <Icon icon='tabler:arrow-up-right' className='mb-1 text-2xl text-[var(--color-vio-gold)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none' aria-hidden='true' />
+                  </span>
                 </a>
               )}
             </article>

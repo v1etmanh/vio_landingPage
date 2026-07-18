@@ -1,7 +1,7 @@
 export const MEMBER_STORIES = [
-  { id: 'student-01', href: 'https://www.facebook.com/share/r/1BTJHCnGT8/', videoSrc: '', poster: '', consentConfirmedAt: '2026-07-17' },
-  { id: 'student-02', href: 'https://www.facebook.com/share/r/1EgMQbZDMB/', videoSrc: '', poster: '', consentConfirmedAt: '2026-07-17' },
-  { id: 'student-03', href: 'https://www.facebook.com/share/r/1M7chDDrsd/', videoSrc: '', poster: '', consentConfirmedAt: '2026-07-17' },
+  { id: 'student-01', href: 'https://www.facebook.com/share/r/1BTJHCnGT8/', videoSrc: '', poster: '/images/member-stories/story-01.jpg', consentConfirmedAt: '2026-07-17' },
+  { id: 'student-02', href: 'https://www.facebook.com/share/r/1EgMQbZDMB/', videoSrc: '', poster: '/images/member-stories/story-02.jpg', consentConfirmedAt: '2026-07-17' },
+  { id: 'student-03', href: 'https://www.facebook.com/share/r/1M7chDDrsd/', videoSrc: '', poster: '/images/member-stories/story-03.jpg', consentConfirmedAt: '2026-07-17' },
 ] as const
 
 // Keep this empty until the owner supplies a verified name, photo and specialty.
