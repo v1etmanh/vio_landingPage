@@ -229,3 +229,5 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 **Member Stories follow-up (18/07/2026):** Desktop story cards now use equal-width grid columns with one shared 9:16 height and baseline. The mobile horizontal snap rail remains unchanged.
 
 **Services motion follow-up (18/07/2026):** Added a restrained Framer Motion reveal for the brand-story section: title scale reveal, staggered proof points, image scale-in, and content follow-through. Motion is viewport-triggered, transform/opacity based, and resolves to the static layout when reduced motion is enabled.
+
+**Stories and pricing interaction follow-up (18/07/2026):** Member Stories now reveal cards in a short stagger with a restrained hover lift. Pricing cards support click or keyboard focus, enlarge the selected plan without changing layout flow, dim alternatives, and provide an explicit close control.

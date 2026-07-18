@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { Icon } from '@iconify/react'
+import { m, useReducedMotion } from 'framer-motion'
 import { PRICING_PLANS, type PricingPlan } from '@/app/config/pricing'
 import { useLocale } from '@/app/context/useLocale'
 
 const Pricing = () => {
   const locale = useLocale()
+  const reduceMotion = useReducedMotion()
+  const [focusedPlanId, setFocusedPlanId] = useState<string | null>(null)
   const featuredPlan = PRICING_PLANS.find((plan) => plan.isPopular) ?? PRICING_PLANS[0]
   const compactPlans = PRICING_PLANS.filter((plan) => plan.id !== featuredPlan.id)
 
@@ -31,10 +35,47 @@ const Pricing = () => {
   const PlanCard = ({ plan, featured = false }: { plan: PricingPlan; featured?: boolean }) => {
     const copy = planCopy(plan.id)
     const period = periodCopy(plan.id)
+    const focused = focusedPlanId === plan.id
+    const hasFocus = focusedPlanId !== null
+    const toggleFocus = () => setFocusedPlanId((current) => current === plan.id ? null : plan.id)
+
     return (
-      <article className={`relative isolate flex overflow-hidden border bg-[var(--color-vio-surface)] ${featured ? 'border-[var(--color-vio-gold)]' : 'h-full border-[var(--color-vio-line)]'}`}>
+      <m.article
+        initial={false}
+        animate={{
+          scale: reduceMotion ? 1 : focused ? 1.035 : hasFocus ? 0.97 : 1,
+          opacity: reduceMotion ? 1 : hasFocus && !focused ? 0.62 : 1,
+        }}
+        transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
+        onClick={toggleFocus}
+        onKeyDown={(event) => {
+          if (event.target !== event.currentTarget) return
+          if (event.key !== 'Enter' && event.key !== ' ') return
+          event.preventDefault()
+          toggleFocus()
+        }}
+        tabIndex={0}
+        role='group'
+        aria-label={`${plan.name}. ${focused ? locale.pricing.clearFocus : locale.pricing.focusPlan}`}
+        className={`relative isolate flex overflow-hidden border bg-[var(--color-vio-surface)] outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] ${focused ? 'z-20 border-[var(--color-vio-gold)]' : 'z-0'} ${featured ? 'border-[var(--color-vio-gold)]' : 'h-full border-[var(--color-vio-line)]'}`}
+        data-plan-id={plan.id}
+        data-plan-focused={focused ? 'true' : 'false'}
+      >
         <div className='absolute inset-0 -z-20 bg-cover bg-center opacity-20' style={{ backgroundImage: plan.backgroundImage }} aria-hidden='true' />
         <div className='absolute inset-0 -z-10 bg-[var(--color-vio-canvas)]/75' aria-hidden='true' />
+        {focused && (
+          <button
+            type='button'
+            onClick={(event) => {
+              event.stopPropagation()
+              setFocusedPlanId(null)
+            }}
+            className='absolute right-4 top-4 z-10 inline-flex min-h-11 min-w-11 items-center justify-center border border-[var(--color-vio-gold)] bg-[var(--color-vio-canvas)]/85 text-[var(--color-vio-text)] outline-none transition-colors duration-200 hover:bg-[var(--color-vio-gold)] hover:text-[var(--color-vio-canvas)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-vio-gold)]'
+            aria-label={locale.pricing.clearFocus}
+          >
+            <Icon icon='tabler:x' className='text-xl' aria-hidden='true' />
+          </button>
+        )}
         <div className={`flex w-full flex-col p-6 sm:p-8 ${featured ? 'lg:p-10' : ''}`}>
           <div className='flex items-start justify-between gap-4'>
             <div>
@@ -65,14 +106,18 @@ const Pricing = () => {
 
           <a
             href='#TrialForm'
-            onClick={() => selectPlan(plan)}
+            onClick={(event) => {
+              event.stopPropagation()
+              selectPlan(plan)
+              setFocusedPlanId(plan.id)
+            }}
             id={`pricing-cta-${plan.id}`}
             className={`inline-flex min-h-12 w-full items-center justify-center px-5 text-center font-heading text-sm font-bold uppercase tracking-[0.1em] outline-none transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] active:translate-y-0.5 ${featured ? 'bg-[var(--color-vio-gold)] text-[var(--color-vio-canvas)] hover:bg-[var(--color-vio-text)]' : 'border border-[var(--color-vio-line)] text-[var(--color-vio-text)] hover:border-[var(--color-vio-gold)] hover:text-[var(--color-vio-gold)]'}`}
           >
             {plan.id === 'day-pass' ? locale.pricing.trial : locale.pricing.choose}
           </a>
         </div>
-      </article>
+      </m.article>
     )
   }
 
