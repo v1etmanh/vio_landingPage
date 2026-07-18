@@ -111,7 +111,7 @@ const Pricing = () => {
 
   const getAnimClasses = (index: number) => {
     if (isVisible) return 'opacity-100 translate-x-0 translate-y-0 scale-100'
-    
+
     // Initial state (Not visible)
     if (index === 2) {
       return 'opacity-0 translate-y-12 xl:translate-y-0 scale-95 xl:scale-[0.85]'
@@ -151,7 +151,7 @@ const Pricing = () => {
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
           {plans.map((plan, index) => (
-            <div 
+            <div
               key={index}
               className={`transition-all duration-[1000ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${getAnimClasses(index)}`}
               style={{ transitionDelay: `${getDelay(index)}ms` }}

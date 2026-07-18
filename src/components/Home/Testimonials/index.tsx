@@ -8,26 +8,33 @@ import 'slick-carousel/slick/slick-theme.css'
 const Testimonials = () => {
   const reviews = [
     {
-      name: 'John Smith',
-      time: '2 months ago',
+      name: 'AKEMI MEDIA',
+      time: '1 month ago',
       rating: 5,
-      comment: 'Best gym in Da Nang for expats. The equipment is top-notch, and the staff is incredibly friendly and speaks good English. Highly recommend the PT sessions!',
+      comment: 'One of the best gyms I’ve been to in Da Nang. So clean, vibey and has every piece of equipment you can think of. Awesome sauna too.',
       avatar: '/images/testimonial/user1.svg'
     },
     {
-      name: 'Sarah Connor',
-      time: '1 week ago',
+      name: 'Niko gangadean',
+      time: '2 months ago',
       rating: 5,
-      comment: 'Very clean and spacious. I love that it never feels too crowded even during peak hours. The heavy lifting section has everything you need.',
+      comment: 'Vio Fitness is a wonderful gym. Plenty of machines, great free weight options, all very clean and functional. It is the perfect temperature with fans running and good AirCon. Not too crowded, and incredible service. Henry was the one upfront at the time and was incredibly helpful and attentive.',
       avatar: '/images/testimonial/user2.svg'
     },
     {
-      name: 'Michael Nguyen',
-      time: '3 months ago',
-      rating: 4,
-      comment: 'Great atmosphere and modern machines. The only minor issue is parking can be a bit tight sometimes, but overall a premium experience.',
+      name: 'Hai Ha Thanh',
+      time: '3 weeks ago',
+      rating: 5,
+      comment: 'Great gym with a clean and modern environment. The equipment is new and well-maintained, with everything you need for a full workout. I especially like that they have a sauna, which is perfect for relaxing after training. The drinks are also delicious and provide great energy for workouts. Friendly atmosphere and a very comfortable place to work out. Highly recommended!',
       avatar: '/images/testimonial/user3.svg'
     },
+    {
+      name: 'Mikalil Kuncekli',
+      time: '1 month ago',
+      rating: 5,
+      comment: 'I have trained in many gyms across Asia, but this is by far the friendliest, nicest, and most welcoming gym I’ve ever been to. The atmosphere is amazing and the staff are incredibly kind and helpful.',
+      avatar: '/images/testimonial/user1.svg'
+    }
   ]
 
   const settings = {
@@ -104,6 +111,18 @@ const Testimonials = () => {
             </div>
           ))}
         </Slider>
+
+        <div className='mt-12 flex justify-center'>
+          <a 
+            href='https://maps.app.goo.gl/pCEQfgEn4dRgezyh9' 
+            target='_blank' 
+            rel='noopener noreferrer'
+            className='inline-flex items-center gap-3 px-8 py-4 bg-[#111] text-white rounded-full font-bold text-lg hover:bg-black transition-transform hover:-translate-y-1'
+          >
+            <Icon icon='logos:google-icon' className='text-2xl bg-white rounded-full p-1' />
+            Xem thêm đánh giá trên Google
+          </a>
+        </div>
       </div>
       <style>{`
         .testimonial-slider .slick-dots li button:before {

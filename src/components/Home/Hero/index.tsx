@@ -17,11 +17,11 @@ const Hero = () => {
       >
         {/* Base bright image */}
         <img
-          src='/images/Bản sao của KSP02428-HDR-Edit.jpg'
-          alt='VIO Fitness interior — khu vực cardio'
+          src='/images/KSP02404-HDR-Edit.jpg'
+          alt='VIO Fitness interior'
           className='absolute inset-0 w-full h-full object-cover object-center scale-105'
         />
-        
+
         {/* MULTIPLY MASK: Darkens everything EXCEPT the white text, which becomes fully transparent (showing the bright image) */}
         <div className='absolute inset-0 bg-[#555555]' style={{ mixBlendMode: 'multiply' }}>
           {/* Aligned to the right but spaced away from the edge, with increased letter spacing */}
@@ -37,9 +37,9 @@ const Hero = () => {
       {/* ── Content ── */}
       <div className='relative z-10 w-full pt-[80px]'>
         <div className='container mx-auto max-w-[1700px] px-4 sm:px-6 lg:px-12 py-12 lg:py-24'>
-          
+
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-8 items-center'>
-            
+
             {/* LEFT COLUMN: TEXT CONTENT */}
             <div className='max-w-2xl'>
               {/* Eyebrow */}
@@ -105,7 +105,7 @@ const Hero = () => {
                     ĐẶT LỊCH NGAY
                   </button>
                 </a>
-                
+
                 {/* Secondary CTA */}
                 <a href='#Services' className="w-full sm:w-auto">
                   <button className='w-full sm:w-auto h-[56px] px-[36px] bg-transparent border border-white text-white hover:bg-white/10 font-bold rounded-[10px] flex items-center justify-center gap-2 transition-colors'>
@@ -120,7 +120,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.85 }}
-                className='flex flex-col gap-2 text-white/80 mt-12'
+                className='flex flex-wrap items-center gap-x-4 gap-y-2 text-white/80 mt-12'
               >
                 <div className='flex items-center gap-2'>
                   <div className='flex text-[#B79B6C] text-xl'>
@@ -128,16 +128,22 @@ const Hero = () => {
                   </div>
                   <span className='text-white font-bold text-lg'>5.0</span>
                 </div>
-                <div className="text-sm font-light text-white/60 mb-2">99+ đánh giá</div>
+                
+                <div className="text-sm font-light text-white/60">
+                  (99+ đánh giá)
+                </div>
+
+                <div className='hidden sm:block text-white/20'>|</div>
+
                 <div className='flex items-center gap-4'>
                   <div className='flex items-center gap-1.5'>
                     <Icon icon="logos:google-icon" className="text-lg" />
-                    <span className='text-xs font-semibold'>Google</span>
+                    <span className='text-sm font-semibold'>Google</span>
                   </div>
                   <span className='text-white/20'>|</span>
                   <div className='flex items-center gap-1.5'>
                     <Icon icon="logos:facebook" className="text-lg" />
-                    <span className='text-xs font-semibold'>Facebook</span>
+                    <span className='text-sm font-semibold'>Facebook</span>
                   </div>
                 </div>
               </motion.div>
