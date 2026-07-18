@@ -3,6 +3,20 @@
 *Cập nhật: 18/07/2026 — bản v2 sau vòng phản biện (Codex debate) + xác minh trực tiếp trên repo và xác nhận của chủ phòng.*
 *Repo: `vio_landingPage` (Vite + React 19 + TS + Tailwind 4) · Site: https://vio-landing-page-seven.vercel.app/*
 
+> ## ✅ TRẠNG THÁI: Phase 0–3 ĐÃ HOÀN THÀNH trên branch `feat/remake-ui` (18/07/2026)
+>
+> Gate cuối đã pass: lint 0 warning · `tsc --noEmit` sạch · build pass · bundle JS **116.6KB gzip** (mục tiêu <150KB, giảm từ 195KB) · `public/` **5.8MB** (từ 869MB) · robots.txt + sitemap.xml đã thêm.
+>
+> Đã triển khai: form tập thử 3 trường → VI-Zalo (copy clipboard) / EN-WhatsApp (prefill) / IG, mã nguồn [WEB-VI-A]/[WEB-EN-A], analytics events, sticky CTA + modal (focus-trap, Esc), i18n VI/EN toggle + đổi `<html lang>`, section Trainers placeholder trung thực, Member Stories 3 video FB (có consent 17/07/2026), thanh toán Tiền mặt·Thẻ·Chuyển khoản, Map + landmark chợ Hàn + nút chỉ đường, hợp nhất animation về Framer (`m.*` + LazyMotion, gỡ GSAP/Lenis/react-slick), tôn trọng `prefers-reduced-motion`.
+>
+> **Việc còn lại (cần chủ phòng / sau deploy):**
+> 1. QA hình ảnh trên thiết bị thật (iPhone + Android) → merge `feat/remake-ui` vào `master` → Vercel deploy.
+> 2. Bổ sung ảnh + tên HLV vào `src/config/media.ts` (TRAINERS) khi có.
+> 3. (Tùy chọn, nên làm) Tải 3 video FB về, nén 720p, đặt vào `public/videos/` và điền `videoSrc`/`poster` trong `src/config/media.ts` — hiện đang mở link FB trực tiếp.
+> 4. Mua domain riêng → cập nhật canonical/OG/sitemap URL.
+> 5. Mỗi quý: xác minh lại số review GBP, cập nhật `lastVerifiedAt` trong `src/config/reviews.ts`.
+> 6. Sau deploy 28 ngày: kiểm tra Core Web Vitals field data (p75) trong Search Console.
+
 ---
 
 ## 0. Bảng dữ kiện đã xác minh (claim → nguồn → ngày)
