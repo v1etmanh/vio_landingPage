@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Icon } from '@iconify/react'
 import { m, useReducedMotion } from 'framer-motion'
 import { MEMBER_STORIES } from '@/app/config/media'
@@ -6,6 +7,24 @@ import { useLocale } from '@/app/context/useLocale'
 const MemberStories = () => {
   const locale = useLocale()
   const reduceMotion = useReducedMotion()
+  const railRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    if (reduceMotion || isPaused || MEMBER_STORIES.length < 2) return
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % MEMBER_STORIES.length)
+    }, 4500)
+    return () => window.clearInterval(timer)
+  }, [isPaused, reduceMotion])
+
+  useEffect(() => {
+    if (reduceMotion || !railRef.current || !window.matchMedia('(max-width: 767px)').matches) return
+    const activeCard = railRef.current.children[activeIndex] as HTMLElement | undefined
+    if (!activeCard) return
+    railRef.current.scrollTo({ left: activeCard.offsetLeft - 16, behavior: 'smooth' })
+  }, [activeIndex, reduceMotion])
 
   return (
     <section id='MemberStories' className='overflow-hidden bg-[var(--color-vio-canvas)] py-24 text-[var(--color-vio-text)] lg:py-32'>
@@ -21,7 +40,16 @@ const MemberStories = () => {
           <p className='mt-5 max-w-2xl text-base leading-relaxed text-[var(--color-vio-muted)] sm:text-lg'>{locale.stories.body}</p>
         </m.div>
 
-        <div className='grid auto-cols-[82%] grid-flow-col gap-4 overflow-x-auto pb-4 snap-x snap-mandatory md:auto-cols-auto md:grid-flow-row md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6'>
+        <div
+          ref={railRef}
+          className='grid auto-cols-[82%] grid-flow-col gap-4 overflow-x-auto pb-4 snap-x snap-mandatory md:auto-cols-auto md:grid-flow-row md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6'
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocusCapture={() => setIsPaused(true)}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsPaused(false)
+          }}
+        >
           {MEMBER_STORIES.map((story, index) => (
             <m.article
               key={story.id}
@@ -29,9 +57,15 @@ const MemberStories = () => {
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={reduceMotion ? undefined : { y: -6 }}
               whileTap={reduceMotion ? undefined : { scale: 0.985 }}
+              animate={{
+                opacity: reduceMotion ? 1 : activeIndex === index ? 1 : 0.76,
+                scale: reduceMotion ? 1 : activeIndex === index ? 1.012 : 0.988,
+              }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.55, delay: Math.min(index * 0.08, 0.16), ease: [0.16, 1, 0.3, 1] }}
               className='snap-start'
+              aria-current={activeIndex === index ? 'true' : undefined}
+              onPointerDown={() => setActiveIndex(index)}
             >
               {story.videoSrc ? (
                 <m.video className='aspect-[9/16] w-full border border-[var(--color-vio-line)] object-cover' controls preload='none' poster={story.poster || undefined}>
@@ -75,6 +109,35 @@ const MemberStories = () => {
               )}
             </m.article>
           ))}
+        </div>
+
+        <div className='mt-5 flex items-center justify-center gap-3' aria-label={locale.stories.video}>
+          <button
+            type='button'
+            onClick={() => setIsPaused((current) => !current)}
+            className='inline-flex min-h-11 min-w-11 items-center justify-center border border-[var(--color-vio-line)] text-[var(--color-vio-text)] outline-none transition-colors duration-200 hover:border-[var(--color-vio-gold)] hover:text-[var(--color-vio-gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-vio-gold)]'
+            aria-pressed={isPaused}
+            aria-label={isPaused ? locale.stories.play : locale.stories.pause}
+          >
+            <Icon icon={isPaused ? 'tabler:player-play-filled' : 'tabler:player-pause-filled'} className='text-lg' aria-hidden='true' />
+          </button>
+          <div className='flex items-center gap-2' role='group' aria-label={locale.stories.video}>
+            {MEMBER_STORIES.map((story, index) => (
+              <button
+                key={story.id}
+                type='button'
+                onClick={() => {
+                  setActiveIndex(index)
+                  setIsPaused(true)
+                }}
+                className='flex min-h-11 min-w-11 items-center justify-center outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-vio-gold)]'
+                aria-pressed={activeIndex === index}
+                aria-label={`${locale.stories.slide} ${index + 1}`}
+              >
+                <span className={`h-2 w-2 rounded-full transition-transform duration-200 ${activeIndex === index ? 'scale-125 bg-[var(--color-vio-gold)]' : 'bg-[var(--color-vio-line)]'}`} aria-hidden='true' />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
