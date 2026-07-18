@@ -1,0 +1,14 @@
+.git
+.vercel
+node_modules
+dist
+assets_source
+coverage
+.env
+.env.*
+*.local
+*.log
+*.mp4
+*.MP4
+*.mov
+*.MOV

@@ -235,3 +235,5 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 **Stories autoplay follow-up (18/07/2026):** Member Stories auto-advance every 4.5 seconds when motion is allowed, pause on hover/focus, and scroll the mobile rail to the active story without changing the desktop three-card composition. Visible pause and slide controls were removed at the owner's request.
 
 **Motion stability follow-up (18/07/2026):** Removed competing transform animations from Stories and Membership cards. Scroll reveal is isolated from hover/focus state, Stories now use opacity-only active highlighting, and Membership zoom uses one CSS transition over the `scale` property.
+
+**Deployment follow-up (18/07/2026):** Branch `feat/remake-ui` was pushed and deployed as a separate Vercel project at `https://vio-landing-page-remake.vercel.app`. GitHub auto-deploy is not connected for the active Vercel account; manual deploy and rollback commands are documented in `docs/deployment.md`.

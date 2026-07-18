@@ -46,3 +46,5 @@ dist-ssr
 
 # Raw/unused assets kept locally, not deployed
 assets_source/
+
+.vercel
