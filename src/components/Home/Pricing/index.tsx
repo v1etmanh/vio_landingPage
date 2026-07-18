@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Icon } from '@iconify/react'
-import { m, useReducedMotion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
 import { PRICING_PLANS, type PricingPlan } from '@/app/config/pricing'
 import { useLocale } from '@/app/context/useLocale'
 
@@ -40,13 +40,7 @@ const Pricing = () => {
     const toggleFocus = () => setFocusedPlanId((current) => current === plan.id ? null : plan.id)
 
     return (
-      <m.article
-        initial={false}
-        animate={{
-          scale: reduceMotion ? 1 : focused ? 1.035 : hasFocus ? 0.97 : 1,
-          opacity: reduceMotion ? 1 : hasFocus && !focused ? 0.62 : 1,
-        }}
-        transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
+      <article
         onClick={toggleFocus}
         onKeyDown={(event) => {
           if (event.target !== event.currentTarget) return
@@ -57,7 +51,7 @@ const Pricing = () => {
         tabIndex={0}
         role='group'
         aria-label={`${plan.name}. ${focused ? locale.pricing.clearFocus : locale.pricing.focusPlan}`}
-        className={`relative isolate flex overflow-hidden border bg-[var(--color-vio-surface)] outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] ${focused ? 'z-20 border-[var(--color-vio-gold)]' : 'z-0'} ${featured ? 'border-[var(--color-vio-gold)]' : 'h-full border-[var(--color-vio-line)]'}`}
+        className={`relative isolate flex overflow-hidden border bg-[var(--color-vio-surface)] outline-none transition-[opacity,scale,border-color] duration-300 ease-out motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] ${focused ? `z-20 border-[var(--color-vio-gold)] ${reduceMotion ? '' : 'scale-[1.02]'}` : 'z-0'} ${hasFocus && !focused && !reduceMotion ? 'opacity-60' : ''} ${featured ? 'border-[var(--color-vio-gold)]' : 'h-full border-[var(--color-vio-line)]'}`}
         data-plan-id={plan.id}
         data-plan-focused={focused ? 'true' : 'false'}
       >
@@ -117,7 +111,7 @@ const Pricing = () => {
             {plan.id === 'day-pass' ? locale.pricing.trial : locale.pricing.choose}
           </a>
         </div>
-      </m.article>
+      </article>
     )
   }
 

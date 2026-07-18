@@ -55,31 +55,25 @@ const MemberStories = () => {
               key={story.id}
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={reduceMotion ? undefined : { y: -6 }}
-              whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-              animate={{
-                opacity: reduceMotion ? 1 : activeIndex === index ? 1 : 0.76,
-                scale: reduceMotion ? 1 : activeIndex === index ? 1.012 : 0.988,
-              }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.55, delay: Math.min(index * 0.08, 0.16), ease: [0.16, 1, 0.3, 1] }}
               className='snap-start'
               aria-current={activeIndex === index ? 'true' : undefined}
               onPointerDown={() => setActiveIndex(index)}
             >
-              {story.videoSrc ? (
-                <m.video className='aspect-[9/16] w-full border border-[var(--color-vio-line)] object-cover' controls preload='none' poster={story.poster || undefined}>
-                  <source src={story.videoSrc} type='video/mp4' />
-                </m.video>
-              ) : (
-                <m.a
-                  href={story.href}
-                  target='_blank'
-                  rel='noreferrer'
-                  whileHover={reduceMotion ? undefined : { borderColor: 'var(--color-vio-gold)' }}
-                  className='group relative block aspect-[9/16] overflow-hidden border border-[var(--color-vio-line)] bg-[var(--color-vio-surface)] outline-none transition-colors duration-200 hover:border-[var(--color-vio-gold)] focus-visible:border-[var(--color-vio-gold)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] active:translate-y-0.5'
-                  aria-label={`${locale.stories.watch}: ${locale.stories.video} ${index + 1}`}
-                >
+              <div className={`transition-[opacity,border-color] duration-300 ease-out motion-reduce:transition-none ${reduceMotion || activeIndex === index ? 'opacity-100' : 'opacity-70'}`}>
+                {story.videoSrc ? (
+                  <video className='aspect-[9/16] w-full border border-[var(--color-vio-line)] object-cover' controls preload='none' poster={story.poster || undefined}>
+                    <source src={story.videoSrc} type='video/mp4' />
+                  </video>
+                ) : (
+                  <a
+                    href={story.href}
+                    target='_blank'
+                    rel='noreferrer'
+                    className='group relative block aspect-[9/16] overflow-hidden border border-[var(--color-vio-line)] bg-[var(--color-vio-surface)] outline-none transition-[border-color,transform] duration-300 ease-out hover:-translate-y-1 hover:border-[var(--color-vio-gold)] focus-visible:border-[var(--color-vio-gold)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-vio-gold)] active:translate-y-0.5 motion-reduce:transition-none'
+                    aria-label={`${locale.stories.watch}: ${locale.stories.video} ${index + 1}`}
+                  >
                   <img
                     src={story.poster}
                     alt=''
@@ -105,8 +99,9 @@ const MemberStories = () => {
                     </span>
                     <Icon icon='tabler:arrow-up-right' className='mb-1 text-2xl text-[var(--color-vio-gold)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transition-none' aria-hidden='true' />
                   </span>
-                </m.a>
-              )}
+                  </a>
+                )}
+              </div>
             </m.article>
           ))}
         </div>
