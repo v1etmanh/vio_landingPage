@@ -56,7 +56,7 @@ const Header: React.FC = () => {
       <div className='lg:py-0 py-1'>
         <div className='container mx-auto max-w-[1600px] flex items-center justify-between px-4'>
           <div
-            className={`pr-16 lg:border-r border-white/10 duration-300 ${
+            className={`pr-16 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
             <Logo />
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
             ))}
           </nav>
           <div
-            className={`flex items-center gap-4 pl-8 lg:pl-16 lg:border-l border-white/10 duration-300 ${
+            className={`flex items-center gap-4 pl-8 lg:pl-16 duration-300 ${
               sticky ? 'py-2' : 'py-3'
             }`}>
             <a href="tel:0961119495" className="hidden lg:flex items-center gap-2 text-white/80 hover:text-white font-semibold transition-colors">

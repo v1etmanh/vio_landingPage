@@ -128,15 +128,15 @@ const Testimonials = () => {
             WHAT OUR <br className="hidden sm:block" />MEMBERS SAY.
           </h2>
           <div className='flex flex-wrap items-center justify-center gap-2'>
-            <span className='text-3xl sm:text-4xl font-bold font-heading text-gray-900'>4.9</span>
+            <span className='text-3xl sm:text-4xl font-bold font-heading text-gray-900'>5.0</span>
             <div className='flex text-[#fbbc04] text-xl sm:text-2xl'>
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
-              <Icon icon='ic:round-star-half' />
+              <Icon icon='ic:round-star' />
             </div>
-            <span className='text-gray-500 font-medium text-sm sm:text-base ml-2'>(124 reviews)</span>
+            <span className='text-gray-500 font-medium text-sm sm:text-base ml-2'>(99+ reviews)</span>
           </div>
         </div>
 
