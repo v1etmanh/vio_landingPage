@@ -13,9 +13,9 @@ const MemberStories = () => {
           <p className='mt-5 max-w-2xl text-base leading-relaxed text-[var(--color-vio-muted)] sm:text-lg'>{locale.stories.body}</p>
         </div>
 
-        <div className='grid auto-cols-[82%] grid-flow-col gap-4 overflow-x-auto pb-4 snap-x snap-mandatory md:auto-cols-auto md:grid-flow-row md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-[1.14fr_1fr_1fr] lg:gap-6'>
+        <div className='grid auto-cols-[82%] grid-flow-col gap-4 overflow-x-auto pb-4 snap-x snap-mandatory md:auto-cols-auto md:grid-flow-row md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6'>
           {MEMBER_STORIES.map((story, index) => (
-            <article key={story.id} className={`snap-start ${index === 1 ? 'lg:mt-12' : index === 2 ? 'lg:mt-24' : ''}`}>
+            <article key={story.id} className='snap-start'>
               {story.videoSrc ? (
                 <video className='aspect-[9/16] w-full border border-[var(--color-vio-line)] object-cover' controls preload='none' poster={story.poster || undefined}>
                   <source src={story.videoSrc} type='video/mp4' />

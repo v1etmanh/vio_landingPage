@@ -225,3 +225,5 @@ Form xuất hiện ở section #8 + **sticky CTA mobile** "Tập thử miễn ph
 **Quyết định triển khai:** CTA mobile mở modal form dùng chung state với form chính. Người dùng không mất dữ liệu nháp khi chuyển giữa modal và section; nút đóng và `aria-modal` giữ luồng bàn phím rõ ràng.
 
 **UI follow-up (18/07/2026):** Header no longer uses vertical divider borders between logo, navigation, and utility actions. The trial form section now uses a lighter paper-toned background while retaining a dark, high-contrast form panel for readability.
+
+**Member Stories follow-up (18/07/2026):** Desktop story cards now use equal-width grid columns with one shared 9:16 height and baseline. The mobile horizontal snap rail remains unchanged.
