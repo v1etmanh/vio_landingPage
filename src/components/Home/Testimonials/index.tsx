@@ -4,6 +4,7 @@ import SliderModule from 'react-slick'
 const Slider = (SliderModule as any).default || SliderModule;
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import Button from '../../ui/Button'
 
 const Testimonials = () => {
   const reviews = [
@@ -11,7 +12,7 @@ const Testimonials = () => {
       name: 'AKEMI MEDIA',
       time: '1 month ago',
       rating: 5,
-      comment: 'One of the best gyms I’ve been to in Da Nang. So clean, vibey and has every piece of equipment you can think of. Awesome sauna too.',
+      comment: 'One of the best gyms I’ve been to in Da Nang. So clean, vibey and has every piece of equipment you can think of. Awesome sauna too. The staff is always welcoming, and the overall atmosphere really pushes you to train harder. Highly recommend this place to anyone looking for a premium workout experience in the city.',
       avatar: '/images/testimonial/user1.svg'
     },
     {
@@ -32,7 +33,7 @@ const Testimonials = () => {
       name: 'Mikalil Kuncekli',
       time: '1 month ago',
       rating: 5,
-      comment: 'I have trained in many gyms across Asia, but this is by far the friendliest, nicest, and most welcoming gym I’ve ever been to. The atmosphere is amazing and the staff are incredibly kind and helpful.',
+      comment: 'I have trained in many gyms across Asia, but this is by far the friendliest, nicest, and most welcoming gym I’ve ever been to. The atmosphere is amazing and the staff are incredibly kind and helpful. The equipment is top-notch and the layout is very spacious, meaning you never feel crowded even during peak hours.',
       avatar: '/images/testimonial/user1.svg'
     }
   ]
@@ -113,15 +114,15 @@ const Testimonials = () => {
         </Slider>
 
         <div className='mt-12 flex justify-center'>
-          <a 
-            href='https://maps.app.goo.gl/pCEQfgEn4dRgezyh9' 
-            target='_blank' 
-            rel='noopener noreferrer'
-            className='inline-flex items-center gap-3 px-8 py-4 bg-[#111] text-white rounded-full font-bold text-lg hover:bg-black transition-transform hover:-translate-y-1'
+          <Button 
+            variant="dark"
+            href="https://maps.app.goo.gl/pCEQfgEn4dRgezyh9" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            icon="logos:google-icon"
           >
-            <Icon icon='logos:google-icon' className='text-2xl bg-white rounded-full p-1' />
             Xem thêm đánh giá trên Google
-          </a>
+          </Button>
         </div>
       </div>
       <style>{`

@@ -138,8 +138,8 @@ const Pricing = () => {
   }
 
   return (
-    <section id='Pricing' ref={sectionRef} className='py-32 bg-transparent relative z-10 overflow-hidden'>
-      <div className='w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8'>
+    <section id='Pricing' ref={sectionRef} className='py-24 lg:py-32 bg-transparent relative z-10 overflow-hidden'>
+      <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center max-w-4xl mx-auto mb-32'>
           <p className='text-gray-600 text-xs sm:text-sm md:text-lg tracking-[0.1em] sm:tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
             VIO FITNESS - MEMBERSHIP PACKAGES

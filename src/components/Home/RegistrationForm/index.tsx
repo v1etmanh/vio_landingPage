@@ -39,8 +39,8 @@ export const RegistrationForm: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-white relative z-10">
-      <div className="container mx-auto max-w-[1400px] px-4 sm:px-6 md:px-8 lg:px-12">
+    <section className="py-24 lg:py-32 bg-white relative z-10">
+      <div className="container mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-0 overflow-hidden bg-[#111111] border border-white/5">
           
           {/* Left Column: Visual / Value Prop */}

@@ -88,20 +88,21 @@ export default function Services() {
         end: `+=${services.length * 100}%`, // Each slide gets 100% of viewport height scroll
         pin: true,
         scrub: 1, // Smooth playback for GSAP scrollTrigger
+        invalidateOnRefresh: true,
       }
     });
 
-    // Initial setups for GSAP to avoid FOUC and set initial state
-    gsap.set(".service-bg", { opacity: 0, scale: 1 });
+    // Initial setups for GSAP to avoid FOUC and force hardware acceleration
+    gsap.set(".service-bg", { opacity: 0, scale: 1, force3D: true });
     gsap.set(".service-bg-0", { opacity: 1, scale: 1.05 });
 
-    gsap.set(".service-text-wrapper", { opacity: 0, pointerEvents: "none" });
+    gsap.set(".service-text-wrapper", { opacity: 0, pointerEvents: "none", force3D: true });
     gsap.set(".service-text-wrapper-0", { opacity: 1, pointerEvents: "auto" });
 
-    gsap.set(".service-text-wrapper-0 .service-line", { y: 0, opacity: 1 });
-    gsap.set(".service-text-wrapper:not(.service-text-wrapper-0) .service-line", { y: 60, opacity: 0 });
+    gsap.set(".service-text-wrapper-0 .service-line", { y: 0, opacity: 1, force3D: true });
+    gsap.set(".service-text-wrapper:not(.service-text-wrapper-0) .service-line", { y: 60, opacity: 0, force3D: true });
 
-    gsap.set(".service-dot", { backgroundColor: "transparent", opacity: 0.5, scale: 1 });
+    gsap.set(".service-dot", { backgroundColor: "transparent", opacity: 0.5, scale: 1, force3D: true });
     gsap.set(".service-dot-0", { backgroundColor: "white", opacity: 1, scale: 1.25 });
 
     // Build timeline steps
@@ -138,7 +139,6 @@ export default function Services() {
           <div
             key={item.id}
             className={`absolute inset-0 w-full h-full z-0 service-bg service-bg-${index}`}
-            style={{ willChange: "transform, opacity" }}
           >
             <img src={item.image} className="w-full h-full object-cover" alt={item.title} loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/80" />
@@ -151,7 +151,6 @@ export default function Services() {
             <div
               key={index}
               className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-white service-dot service-dot-${index}`}
-              style={{ willChange: "transform, opacity, background-color" }}
             />
           ))}
         </div>
@@ -161,19 +160,19 @@ export default function Services() {
           <div className="max-w-2xl text-right relative w-full h-[400px] flex items-center justify-end">
             {services.map((item, index) => (
               <div key={item.id} className={`absolute right-0 flex flex-col items-end service-text-wrapper service-text-wrapper-${index}`}>
-                <div className="text-[var(--color-primary)] font-bold tracking-widest text-xs md:text-sm uppercase mb-3 service-line" style={{ willChange: "transform, opacity" }}>
+                <div className="text-[var(--color-primary)] font-bold tracking-widest text-xs md:text-sm uppercase mb-3 service-line">
                   {item.tag}
                 </div>
-                <div className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-2 text-white leading-none service-line" style={{ willChange: "transform, opacity" }}>
+                <div className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-2 text-white leading-none service-line">
                   {item.title}
                 </div>
-                <div className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 text-white/90 service-line" style={{ willChange: "transform, opacity" }}>
+                <div className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 text-white/90 service-line">
                   {item.subtitle}
                 </div>
-                <div className="text-base md:text-lg text-white/80 mb-4 max-w-lg text-right service-line" style={{ willChange: "transform, opacity" }}>
+                <div className="text-base md:text-lg text-white/80 mb-4 max-w-lg text-right service-line">
                   {item.description}
                 </div>
-                <div className="text-sm md:text-base text-white/50 max-w-md text-right flex items-center justify-end gap-3 service-line" style={{ willChange: "transform, opacity" }}>
+                <div className="text-sm md:text-base text-white/50 max-w-md text-right flex items-center justify-end gap-3 service-line">
                   <div className="h-px w-8 bg-white/20" />
                   {item.detail}
                 </div>
