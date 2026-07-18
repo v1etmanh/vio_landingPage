@@ -111,7 +111,7 @@ const Pricing = () => {
 
   const getAnimClasses = (index: number) => {
     if (isVisible) return 'opacity-100 translate-x-0 translate-y-0 scale-100'
-    
+
     // Initial state (Not visible)
     if (index === 2) {
       return 'opacity-0 translate-y-12 xl:translate-y-0 scale-95 xl:scale-[0.85]'
@@ -138,8 +138,8 @@ const Pricing = () => {
   }
 
   return (
-    <section id='Pricing' ref={sectionRef} className='py-32 bg-transparent relative z-10 overflow-hidden'>
-      <div className='w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8'>
+    <section id='Pricing' ref={sectionRef} className='py-24 lg:py-32 bg-transparent relative z-10 overflow-hidden'>
+      <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center max-w-4xl mx-auto mb-32'>
           <p className='text-gray-600 text-xs sm:text-sm md:text-lg tracking-[0.1em] sm:tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
             VIO FITNESS - MEMBERSHIP PACKAGES
@@ -151,7 +151,7 @@ const Pricing = () => {
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
           {plans.map((plan, index) => (
-            <div 
+            <div
               key={index}
               className={`transition-all duration-[1000ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${getAnimClasses(index)}`}
               style={{ transitionDelay: `${getDelay(index)}ms` }}

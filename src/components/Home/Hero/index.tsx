@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Icon } from '@iconify/react'
+import Button from '../../ui/Button'
 
 const Hero = () => {
   const { scrollY } = useScroll()
@@ -17,29 +18,34 @@ const Hero = () => {
       >
         {/* Base bright image */}
         <img
-          src='/images/Bản sao của KSP02428-HDR-Edit.jpg'
-          alt='VIO Fitness interior — khu vực cardio'
+          src='/images/KSP02404-HDR-Edit.jpg'
+          alt='VIO Fitness interior'
           className='absolute inset-0 w-full h-full object-cover object-center scale-105'
         />
-        
-        {/* MULTIPLY MASK: Darkens everything EXCEPT the white text, which becomes fully transparent (showing the bright image) */}
-        <div className='absolute inset-0 bg-[#555555]' style={{ mixBlendMode: 'multiply' }}>
-          {/* Aligned to the right but spaced away from the edge, with increased letter spacing */}
-          <h1 className='absolute right-[5%] lg:right-[8%] top-1/2 -translate-y-1/2 text-white font-black text-[28vw] md:text-[24vw] xl:text-[26vw] tracking-[0.15em] select-none leading-none opacity-100'>
+
+        {/* Dark Gradient Overlay for the background image to make foreground text pop */}
+        <div className='absolute inset-0 pointer-events-none bg-gradient-to-r from-black/80 via-black/50 to-transparent' />
+
+        {/* Premium Massive Typography Watermark */}
+        <div className='absolute inset-0 flex items-center justify-end pr-[5%] lg:pr-[8%] pointer-events-none'>
+          <h1 
+            className='font-black text-[35vw] md:text-[28vw] xl:text-[30vw] tracking-tighter select-none leading-none mix-blend-overlay opacity-80'
+            style={{ 
+              color: 'transparent',
+              WebkitTextStroke: '3px rgba(255, 255, 255, 0.8)',
+            }}
+          >
             VIO
           </h1>
         </div>
-
-        {/* 90deg Gradient Overlay */}
-        <div className='absolute inset-0 pointer-events-none' style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.70), rgba(0,0,0,0.45), rgba(0,0,0,0.15))' }} />
       </motion.div>
 
       {/* ── Content ── */}
       <div className='relative z-10 w-full pt-[80px]'>
         <div className='container mx-auto max-w-[1700px] px-4 sm:px-6 lg:px-12 py-12 lg:py-24'>
-          
+
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-8 items-center'>
-            
+
             {/* LEFT COLUMN: TEXT CONTENT */}
             <div className='max-w-2xl'>
               {/* Eyebrow */}
@@ -70,12 +76,12 @@ const Hero = () => {
                 </div>
               </motion.h1>
 
-              {/* Subheadline List */}
+              {/* Subheadline List - Hidden on mobile for cleaner look */}
               <motion.ul
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className='text-white/90 text-[18px] md:text-[22px] font-light leading-[1.7] mb-10 max-w-[520px] flex flex-col gap-3'
+                className='hidden md:flex text-white/90 text-[18px] md:text-[22px] font-light leading-[1.7] mb-10 max-w-[520px] flex-col gap-3'
               >
                 <li className="flex items-start gap-3">
                   <Icon icon="ph:check-circle-fill" className="text-[#B79B6C] text-2xl shrink-0 mt-1" />
@@ -99,45 +105,47 @@ const Hero = () => {
                 className='flex flex-col sm:flex-row items-center gap-4'
               >
                 {/* Primary CTA */}
-                <a href='#Contact' className="w-full sm:w-auto">
-                  <button className='w-full sm:w-auto h-[56px] px-[36px] bg-[#DC2626] hover:bg-[#B91C1C] text-white font-bold rounded-[10px] flex items-center justify-center gap-2 transition-colors uppercase tracking-wider text-sm'>
-                    <Icon icon="tabler:calendar-event" className="text-xl" />
-                    ĐẶT LỊCH NGAY
-                  </button>
-                </a>
-                
-                {/* Secondary CTA */}
-                <a href='#Services' className="w-full sm:w-auto">
-                  <button className='w-full sm:w-auto h-[56px] px-[36px] bg-transparent border border-white text-white hover:bg-white/10 font-bold rounded-[10px] flex items-center justify-center gap-2 transition-colors'>
-                    Khám phá dịch vụ
-                    <Icon icon="tabler:arrow-right" className="text-xl" />
-                  </button>
-                </a>
+                <Button variant="gold" size="lg" className="w-full sm:w-auto text-sm uppercase tracking-wider h-[56px]" onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                  <Icon icon="tabler:calendar-event" className="text-xl" />
+                  ĐẶT LỊCH NGAY
+                </Button>
+
+                {/* Secondary CTA - Hidden on very small screens */}
+                <Button variant="outline" size="lg" className="hidden sm:flex w-full sm:w-auto h-[56px] bg-transparent border border-white text-white hover:bg-white/10" onClick={() => document.getElementById('Services')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Khám phá dịch vụ
+                  <Icon icon="tabler:arrow-right" className="text-xl" />
+                </Button>
               </motion.div>
 
-              {/* Rating block */}
+              {/* Rating block - Restored for social proof on mobile */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.85 }}
-                className='flex flex-col gap-2 text-white/80 mt-12'
+                className='flex flex-wrap items-center gap-x-3 md:gap-x-4 gap-y-2 text-white/80 mt-8 md:mt-12'
               >
-                <div className='flex items-center gap-2'>
-                  <div className='flex text-[#B79B6C] text-xl'>
+                <div className='flex items-center gap-1 md:gap-2'>
+                  <div className='flex text-[#B79B6C] text-lg md:text-xl'>
                     {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
                   </div>
-                  <span className='text-white font-bold text-lg'>5.0</span>
+                  <span className='text-white font-bold text-base md:text-lg'>5.0</span>
                 </div>
-                <div className="text-sm font-light text-white/60 mb-2">99+ đánh giá</div>
-                <div className='flex items-center gap-4'>
+                
+                <div className="text-xs md:text-sm font-light text-white/60">
+                  (99+ đánh giá)
+                </div>
+
+                <div className='hidden sm:block text-white/20'>|</div>
+
+                <div className='flex items-center gap-3 md:gap-4 w-full sm:w-auto mt-2 sm:mt-0'>
                   <div className='flex items-center gap-1.5'>
-                    <Icon icon="logos:google-icon" className="text-lg" />
-                    <span className='text-xs font-semibold'>Google</span>
+                    <Icon icon="logos:google-icon" className="text-base md:text-lg" />
+                    <span className='text-xs md:text-sm font-semibold'>Google</span>
                   </div>
                   <span className='text-white/20'>|</span>
                   <div className='flex items-center gap-1.5'>
-                    <Icon icon="logos:facebook" className="text-lg" />
-                    <span className='text-xs font-semibold'>Facebook</span>
+                    <Icon icon="logos:facebook" className="text-base md:text-lg" />
+                    <span className='text-xs md:text-sm font-semibold'>Facebook</span>
                   </div>
                 </div>
               </motion.div>
