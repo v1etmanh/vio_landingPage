@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import SliderModule from 'react-slick'
 const Slider = (SliderModule as any).default || SliderModule;
 import { Icon } from '@iconify/react'
@@ -9,6 +9,34 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const StudioInMotion = () => {
+  const [slidesToShow, setSlidesToShow] = useState(5)
+  const [showArrows, setShowArrows] = useState(true)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width < 768) {
+        setSlidesToShow(2)
+        setShowArrows(false)
+      } else if (width < 1024) {
+        setSlidesToShow(3)
+        setShowArrows(true)
+      } else if (width < 1366) {
+        setSlidesToShow(3)
+        setShowArrows(true)
+      } else if (width < 1800) {
+        setSlidesToShow(4)
+        setShowArrows(true)
+      } else {
+        setSlidesToShow(5)
+        setShowArrows(true)
+      }
+    }
+    
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const sliderRef = useRef<HTMLDivElement>(null)
@@ -62,44 +90,26 @@ const StudioInMotion = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1800,
-        settings: {
-          slidesToShow: 4,
-        }
-      },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 3,
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          arrows: false
-        }
-      }
-    ]
+    arrows: showArrows,
+    swipeToSlide: true,
   }
 
   const FacebookReel = ({ videoId, index }: { videoId: string, index: number }) => {
+    const [interacted, setInteracted] = useState(false)
     const videoUrl = encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`);
 
     return (
       <div className='px-3 xl:px-4 group py-4'>
         <div className='w-full rounded-none overflow-hidden bg-black relative aspect-[9/16] border border-white/10 group-hover:border-white/30 transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.8)]'>
+            {!interacted && (
+              <div 
+                className="absolute inset-0 z-10 cursor-pointer bg-transparent"
+                onClick={() => setInteracted(true)}
+                title="Tap to interact with video"
+              />
+            )}
             <iframe
               src={`https://www.facebook.com/plugins/video.php?href=${videoUrl}&show_text=false&width=400`}
               className='w-full h-full border-none overflow-hidden bg-black'
@@ -117,7 +127,7 @@ const StudioInMotion = () => {
   return (
     <section id='Studio' ref={sectionRef} className='py-24 lg:py-32 bg-[var(--color-darkmode)] relative z-10 overflow-hidden border-t border-white/5'>
       <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-8'>
-        <div ref={headerRef} className='flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8'>
+        <div ref={headerRef} className='flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-white/10 pb-8'>
           <div className='max-w-2xl'>
             <p className='text-[#C5A059] text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 font-bold'>
               SOCIAL HIGHLIGHTS

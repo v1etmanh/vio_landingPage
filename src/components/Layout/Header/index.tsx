@@ -10,13 +10,7 @@ import { Icon } from '@iconify/react'
 
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
-  const [sticky, setSticky] = useState(false)
-
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = () => {
-    setSticky(window.scrollY >= 80)
-  }
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -29,10 +23,8 @@ const Header: React.FC = () => {
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [navbarOpen])
@@ -50,15 +42,10 @@ const Header: React.FC = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 z-40 w-full transition-colors duration-500 border-b ${
-        sticky ? 'shadow-sm bg-black/90 backdrop-blur-md border-white/10' : 'shadow-none border-transparent bg-transparent'
-      }`}>
+      className="fixed top-0 z-50 w-full shadow-md bg-[#1A1A1A] border-b border-white/10">
       <div className='lg:py-0 py-1'>
         <div className='container mx-auto max-w-[1600px] flex items-center justify-between px-4'>
-          <div
-            className={`pr-16 duration-300 ${
-              sticky ? 'py-2' : 'py-3'
-            }`}>
+          <div className='lg:pr-16 py-2'>
             <Logo />
           </div>
           <nav className='hidden lg:flex grow items-center gap-8 justify-center'>
@@ -66,10 +53,7 @@ const Header: React.FC = () => {
               <HeaderLink key={index} item={item} />
             ))}
           </nav>
-          <div
-            className={`flex items-center gap-4 pl-8 lg:pl-16 duration-300 ${
-              sticky ? 'py-2' : 'py-3'
-            }`}>
+          <div className='flex items-center gap-2 sm:gap-4 lg:pl-16 py-2'>
             <a href="tel:0961119495" className="hidden lg:flex items-center gap-2 text-white/80 hover:text-white font-semibold transition-colors">
               <Icon icon="tabler:phone-filled" className="text-xl" />
               <span className="text-lg tracking-wider">0961119495</span>
@@ -85,13 +69,13 @@ const Header: React.FC = () => {
             </div>
             
             {/* Mobile Pinned Hotline */}
-            <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-[#C5A059] text-white shadow-md">
+            <a href="tel:0961119495" className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-[#C5A059] text-white shadow-md shrink-0">
               <Icon icon="tabler:phone-filled" className="text-lg" />
             </a>
 
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
-              className='block lg:hidden p-2 rounded-lg'
+              className='block lg:hidden p-2 rounded-lg shrink-0'
               aria-label='Toggle mobile menu'>
               <span className='block w-6 h-[2px] bg-white'></span>
               <span className='block w-6 h-[2px] bg-white mt-1.5'></span>
