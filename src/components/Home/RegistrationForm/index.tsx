@@ -5,15 +5,17 @@ import Button from '../../ui/Button';
 interface FormData {
   name: string;
   phone: string;
-  service: string;
+  goal: string;
+  bookingDate: string;
 }
 
-const SERVICES = [
-  'Thiết Bị Đỉnh Cao',
-  'Không Gian Luyện Tập',
-  'Phục Hồi Và Trị Liệu',
-  'Phòng Xông Hơi',
-  'Nạp Dinh Dưỡng'
+const GOALS = [
+  'Tăng Cơ / Giảm Mỡ',
+  'Mới Bắt Đầu Tập Luyện',
+  'Huấn Luyện Viên 1-1 (PT)',
+  'Duy Trì Sức Khoẻ',
+  'Khách Du Lịch (Ngắn Ngày)',
+  'Phục Hồi & Trị Liệu'
 ];
 
 const WHATSAPP_NUMBER = '84961119495'; // 0961 119 495
@@ -23,12 +25,14 @@ export const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
-    service: SERVICES[0]
+    goal: GOALS[0],
+    bookingDate: ''
   });
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Chào Vio Fitness, tôi muốn đăng ký tư vấn:\n- Tên: ${formData.name}\n- Số điện thoại: ${formData.phone}\n- Dịch vụ quan tâm: ${formData.service}`;
+    const formattedDate = formData.bookingDate ? formData.bookingDate.replace('T', ' ') : 'Chưa xác định';
+    const message = `Chào Vio Fitness, tôi muốn đăng ký tư vấn:\n- Tên: ${formData.name}\n- Số điện thoại: ${formData.phone}\n- Mục tiêu: ${formData.goal}\n- Lịch hẹn dự kiến: ${formattedDate}`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   }, [formData]);
@@ -86,58 +90,83 @@ export const RegistrationForm: React.FC = () => {
           {/* Right Column: Form */}
           <div className="lg:w-7/12 p-10 md:p-16 flex items-center bg-[#151515] relative border-l border-white/5">
             <div className="w-full max-w-lg mx-auto">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                 
-                <div className="flex flex-col gap-3">
-                  <label htmlFor="name" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                    Họ và tên
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20"
-                    placeholder="Nhập tên của bạn"
-                  />
+                {/* Form Header */}
+                <div className="mb-2">
+                  <h3 className="text-2xl font-heading font-bold text-white mb-2">Đăng Ký Buổi Tập</h3>
+                  <p className="text-white/50 text-sm font-light">Điền thông tin bên dưới, chuyên viên sẽ liên hệ sắp xếp lịch phù hợp nhất.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="flex flex-col gap-3">
+                    <label htmlFor="name" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
+                      Họ và tên
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20"
+                      placeholder="Nhập tên của bạn"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <label htmlFor="phone" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
+                      Số điện thoại
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20"
+                      placeholder="Nhập số điện thoại"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <label htmlFor="phone" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                    Số điện thoại
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20"
-                    placeholder="Nhập số điện thoại"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-3">
-                  <label htmlFor="service" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                    Dịch vụ quan tâm
+                  <label htmlFor="goal" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
+                    Mục tiêu tập luyện
                   </label>
                   <div className="relative">
                     <select
-                      id="service"
-                      name="service"
-                      value={formData.service}
+                      id="goal"
+                      name="goal"
+                      value={formData.goal}
                       onChange={handleChange}
                       className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors appearance-none cursor-pointer rounded-none"
                       style={{ colorScheme: 'dark' }}
                     >
-                      {SERVICES.map(s => (
+                      {GOALS.map(s => (
                         <option key={s} value={s} className="bg-[#151515] text-white">{s}</option>
                       ))}
                     </select>
                     <Icon icon="ph:caret-down" className="absolute right-0 top-1/2 -translate-y-[80%] text-white/50 pointer-events-none" />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <label htmlFor="bookingDate" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
+                    Lịch hẹn dự kiến (Tùy chọn)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="datetime-local"
+                      id="bookingDate"
+                      name="bookingDate"
+                      value={formData.bookingDate}
+                      onChange={handleChange}
+                      className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20 cursor-pointer"
+                      style={{ colorScheme: 'dark' }}
+                    />
                   </div>
                 </div>
 
@@ -148,7 +177,7 @@ export const RegistrationForm: React.FC = () => {
                     icon="logos:whatsapp-icon"
                     className="w-full !py-5"
                   >
-                    Đăng Ký Ngay
+                    Xác Nhận Đăng Ký
                   </Button>
                 </div>
                 
