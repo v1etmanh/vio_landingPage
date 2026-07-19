@@ -1,6 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Icon } from '@iconify/react'
 import Button from '../../ui/Button'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Pricing = () => {
   const plans = [
@@ -83,58 +88,57 @@ const Pricing = () => {
   ]
 
   const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          if (sectionRef.current) {
-            observer.unobserve(sectionRef.current)
-          }
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1280px)", () => {
+      // Desktop: Hardware-accelerated fan out animation
+      gsap.set('.pricing-card', { opacity: 0, y: 0, force3D: true });
+      gsap.set('.pricing-card-0, .pricing-card-1', { x: -80, scale: 0.85 });
+      gsap.set('.pricing-card-3, .pricing-card-4', { x: 80, scale: 0.85 });
+      gsap.set('.pricing-card-2', { scale: 0.85, y: 20 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 70%',
         }
-      },
-      { threshold: 0.2 }
-    )
+      });
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
+      tl.to('.pricing-card-0, .pricing-card-4', {
+        x: 0, y: 64, scale: 0.95, opacity: 0.9, duration: 0.8, ease: 'power3.out'
+      }, 0)
+      .to('.pricing-card-1, .pricing-card-3', {
+        x: 0, y: 24, scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out'
+      }, 0.1)
+      .to('.pricing-card-2', {
+        x: 0, y: -32, scale: 1.15, opacity: 1, duration: 0.8, ease: 'power3.out'
+      }, 0.2);
+    });
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
-    }
-  }, [])
+    mm.add("(max-width: 1279px)", () => {
+      // Mobile: Batch animation for smooth scrolling without simultaneous overloads
+      gsap.set('.pricing-card', { opacity: 0, y: 50, force3D: true });
+      
+      ScrollTrigger.batch('.pricing-card', {
+        start: 'top 85%',
+        onEnter: batch => gsap.to(batch, 
+          { opacity: 1, y: 0, stagger: 0.15, duration: 0.6, ease: 'power3.out', overwrite: true }
+        )
+      });
+    });
 
-  const getAnimClasses = (index: number) => {
-    if (isVisible) return 'opacity-100 translate-x-0 translate-y-0 scale-100'
-
-    // Initial state (Not visible)
-    if (index === 2) {
-      return 'opacity-0 translate-y-12 xl:translate-y-0 scale-95 xl:scale-[0.85]'
-    } else if (index < 2) {
-      return 'opacity-0 translate-y-12 xl:translate-y-0 xl:-translate-x-[60px]'
-    } else {
-      return 'opacity-0 translate-y-12 xl:translate-y-0 xl:translate-x-[60px]'
-    }
-  }
-
-  const getDelay = (index: number) => {
-    if (index === 0 || index === 4) return 0
-    if (index === 1 || index === 3) return 200
-    return 400
-  }
+    return () => mm.revert();
+  }, { scope: sectionRef });
 
   const getCardStyle = (index: number) => {
     // Center card (Index 2)
-    if (index === 2) return 'border-[2px] border-[var(--color-primary)] shadow-[0_0_40px_rgba(140,120,83,0.4)] xl:scale-[1.15] z-30 xl:-translate-y-8 bg-[var(--color-darkmode)] min-h-[580px]'
+    if (index === 2) return 'border-[2px] border-[var(--color-primary)] shadow-[0_0_40px_rgba(140,120,83,0.4)] z-30 bg-[var(--color-darkmode)] min-h-[580px]'
     // Inner neighbors (Index 1 & 3)
-    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 xl:scale-100 xl:translate-y-6 bg-[var(--color-deep-slate)] min-h-[540px]'
+    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 bg-[var(--color-deep-slate)] min-h-[540px]'
     // Outer neighbors (Index 0 & 4)
-    return 'border border-gray-600 shadow-xl z-10 xl:scale-95 xl:translate-y-16 opacity-90 hover:opacity-100 bg-black/90 min-h-[500px]'
+    return 'border border-gray-600 shadow-xl z-10 hover:opacity-100 bg-black/90 min-h-[500px]'
   }
 
   return (
@@ -149,15 +153,14 @@ const Pricing = () => {
           </h2>
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20 xl:pt-16 xl:pb-16'>
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`transition-all duration-[1000ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${getAnimClasses(index)}`}
-              style={{ transitionDelay: `${getDelay(index)}ms` }}
+              className={`pricing-card pricing-card-${index} will-change-transform opacity-0`}
             >
               <div
-                className={`relative rounded-none overflow-hidden transition-all duration-500 flex flex-col h-full ${getCardStyle(index)}`}
+                className={`relative rounded-none overflow-hidden flex flex-col h-full transition-shadow duration-500 hover:shadow-2xl hover:z-40 ${getCardStyle(index)}`}
               >
                 {/* Abstract Background Layer */}
                 <div

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 import SliderModule from 'react-slick'
 const Slider = (SliderModule as any).default || SliderModule;
@@ -12,6 +12,25 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const Testimonials = () => {
+  const [slidesToShow, setSlidesToShow] = useState(3)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSlidesToShow(1)
+      } else if (window.innerWidth < 1024) {
+        setSlidesToShow(2)
+      } else {
+        setSlidesToShow(3)
+      }
+    }
+    
+    // Set initial width
+    handleResize()
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const sliderRef = useRef<HTMLDivElement>(null)
@@ -95,25 +114,12 @@ const Testimonials = () => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 4000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
+    swipeToSlide: true,
   }
 
   return (
@@ -143,8 +149,8 @@ const Testimonials = () => {
         <div ref={sliderRef} className='w-full'>
           <Slider {...settings} className='testimonial-slider'>
             {reviews.map((review, index) => (
-              <div key={index} className='px-4 pb-10'>
-                <div className='bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 h-full'>
+              <div key={index} className='px-2 sm:px-4 pb-10'>
+                <div className='bg-white p-5 sm:p-8 rounded-2xl shadow-lg border border-gray-100'>
                   <div className='flex flex-wrap items-center mb-4 gap-3'>
                     <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gray-200 shrink-0'>
                       <img src={review.avatar} alt={review.name} className='w-full h-full object-cover' />
