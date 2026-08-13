@@ -9,25 +9,32 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const StudioInMotion = () => {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768)
   const [slidesToShow, setSlidesToShow] = useState(5)
   const [showArrows, setShowArrows] = useState(true)
+  const [mobileVideoIndex, setMobileVideoIndex] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
       if (width < 768) {
+        setIsMobile(true)
         setSlidesToShow(2)
         setShowArrows(false)
       } else if (width < 1024) {
+        setIsMobile(false)
         setSlidesToShow(3)
         setShowArrows(true)
       } else if (width < 1366) {
+        setIsMobile(false)
         setSlidesToShow(3)
         setShowArrows(true)
       } else if (width < 1800) {
+        setIsMobile(false)
         setSlidesToShow(4)
         setShowArrows(true)
       } else {
+        setIsMobile(false)
         setSlidesToShow(5)
         setShowArrows(true)
       }
@@ -96,7 +103,7 @@ const StudioInMotion = () => {
     swipeToSlide: true,
   }
 
-  const FacebookReel = ({ videoId, index }: { videoId: string, index: number }) => {
+  const FacebookReel = ({ videoId }: { videoId: string }) => {
     const [interacted, setInteracted] = useState(false)
     const videoUrl = encodeURIComponent(`https://www.facebook.com/watch/?v=${videoId}`);
 
@@ -148,11 +155,42 @@ const StudioInMotion = () => {
         </div>
 
         <div ref={sliderRef} className='-mx-3 xl:-mx-4 mt-12 studio-slider w-full overflow-hidden sm:overflow-visible'>
-          <Slider {...settings}>
-            {videoIds.map((id, index) => (
-              <FacebookReel key={id} videoId={id} index={index} />
-            ))}
-          </Slider>
+          {isMobile ? (
+            <div className='mx-auto w-full max-w-[360px]'>
+              <div className='relative'>
+                <FacebookReel key={videoIds[mobileVideoIndex]} videoId={videoIds[mobileVideoIndex]} />
+
+                <button
+                  type='button'
+                  onClick={() => setMobileVideoIndex(current => (current - 1 + videoIds.length) % videoIds.length)}
+                  className='group absolute left-5 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/65 text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#1A1A1A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A059]'
+                  aria-label='Xem video trước'
+                  title='Video trước'
+                >
+                  <Icon icon='tabler:arrow-left' className='text-lg transition-transform duration-300 group-hover:-translate-x-1' />
+                </button>
+                <button
+                  type='button'
+                  onClick={() => setMobileVideoIndex(current => (current + 1) % videoIds.length)}
+                  className='group absolute right-5 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/65 text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#1A1A1A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A059]'
+                  aria-label='Xem video tiếp theo'
+                  title='Video tiếp theo'
+                >
+                  <Icon icon='tabler:arrow-right' className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
+                </button>
+              </div>
+
+              <div className='px-3 pt-2 text-xs font-bold tracking-[0.2em] text-white/45 tabular-nums'>
+                {String(mobileVideoIndex + 1).padStart(2, '0')} / {String(videoIds.length).padStart(2, '0')}
+              </div>
+            </div>
+          ) : (
+            <Slider {...settings}>
+              {videoIds.map(id => (
+                <FacebookReel key={id} videoId={id} />
+              ))}
+            </Slider>
+          )}
         </div>
       </div>
 
