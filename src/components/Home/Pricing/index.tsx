@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Icon } from '@iconify/react'
 import Button from '../../ui/Button'
 import { useGSAP } from '@gsap/react'
@@ -8,6 +8,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const Pricing = () => {
+  const [activePlanIndex, setActivePlanIndex] = useState(0)
+  const mobileCardRef = useRef<HTMLDivElement>(null)
+
   const plans = [
     {
       name: 'DAY PASS',
@@ -89,6 +92,21 @@ const Pricing = () => {
 
   const sectionRef = useRef<HTMLElement>(null)
 
+  useEffect(() => {
+    const card = mobileCardRef.current
+    if (!card) return
+
+    gsap.fromTo(
+      card,
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out', overwrite: true }
+    )
+
+    return () => {
+      gsap.killTweensOf(card)
+    }
+  }, [activePlanIndex])
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
@@ -141,10 +159,71 @@ const Pricing = () => {
     return 'border border-gray-600 shadow-xl z-10 hover:opacity-100 bg-black/90 min-h-[500px]'
   }
 
+  type Plan = (typeof plans)[number]
+
+  const renderPlanCard = (
+    plan: Plan,
+    index: number,
+    wrapperClassName: string,
+    ref?: React.Ref<HTMLDivElement>
+  ) => (
+    <div
+      ref={ref}
+      className={`${wrapperClassName} pricing-card-${index}`}
+    >
+      <div
+        className={`relative rounded-none overflow-hidden flex flex-col h-full transition-shadow duration-500 hover:shadow-2xl hover:z-40 ${getCardStyle(index)}`}
+      >
+        <div
+          className='absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 hover:scale-110'
+          style={{ backgroundImage: plan.bgImage }}
+        />
+        <div className='absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/85 to-[#111]' />
+
+        <div className='relative z-10 p-6 xl:p-8 flex flex-col h-full'>
+          {plan.isPopular && (
+            <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[var(--color-darkmode)] border border-[var(--color-primary)] text-[var(--color-primary)] px-6 py-2 rounded-b-md text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-lg'>
+              Most Popular
+            </div>
+          )}
+
+          <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
+            <p className='text-gray-300 tracking-widest text-[11px] mb-2 uppercase font-sans font-bold'>{plan.prefix}</p>
+            <h3 className='text-2xl lg:text-3xl font-bold text-white mb-6'>{plan.name}</h3>
+            <div className='flex items-baseline justify-center text-white'>
+              <span className='text-4xl lg:text-5xl font-black tracking-tight'>{plan.priceVND}</span>
+              <span className='text-gray-400 ml-2 text-sm font-medium tracking-wide font-sans'>{plan.period}</span>
+            </div>
+            <div className='flex items-baseline justify-center text-[var(--color-primary)] mt-2'>
+              <span className='text-xl lg:text-2xl font-bold tracking-tight'>{plan.priceUSD}</span>
+              <span className='text-[var(--color-primary)]/70 ml-1 text-xs font-medium tracking-wide font-sans'>{plan.period}</span>
+            </div>
+          </div>
+
+          <ul className='space-y-4 mb-8 flex-grow'>
+            {plan.features.map((feature, featureIndex) => (
+              <li key={featureIndex} className='flex items-start text-gray-200 text-sm xl:text-[15px]'>
+                <Icon icon='tabler:check' className='text-[var(--color-primary)] text-xl mr-3 flex-shrink-0 mt-0.5' />
+                <span className='leading-relaxed font-sans'>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <Button
+            variant={plan.isPopular ? 'outline' : 'secondary'}
+            className={`w-full mt-auto ${plan.isPopular ? 'border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white shadow-[0_0_15px_rgba(140,120,83,0.2)]' : ''}`}
+          >
+            {plan.btnText}
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <section id='Pricing' ref={sectionRef} className='py-24 lg:py-32 bg-transparent relative z-10 overflow-hidden'>
       <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='text-center max-w-4xl mx-auto mb-32'>
+        <div className='text-center max-w-4xl mx-auto mb-10 xl:mb-32'>
           <p className='text-gray-600 text-xs sm:text-sm md:text-lg tracking-[0.1em] sm:tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
             VIO FITNESS - MEMBERSHIP PACKAGES
           </p>
@@ -153,63 +232,38 @@ const Pricing = () => {
           </h2>
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20 xl:pt-16 xl:pb-16'>
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className={`pricing-card pricing-card-${index} will-change-transform opacity-0`}
-            >
-              <div
-                className={`relative rounded-none overflow-hidden flex flex-col h-full transition-shadow duration-500 hover:shadow-2xl hover:z-40 ${getCardStyle(index)}`}
-              >
-                {/* Abstract Background Layer */}
-                <div
-                  className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 hover:scale-110"
-                  style={{ backgroundImage: plan.bgImage }}
-                ></div>
-                {/* Dark Gradient Overlay for readability */}
-                <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/85 to-[#111]"></div>
+        <div className='md:hidden mb-10 overflow-x-auto scrollbar-hide -mx-4 px-4' role='tablist' aria-label='Choose a pricing plan'>
+          <div className='flex min-w-max justify-center gap-2'>
+            {plans.map((plan, index) => {
+              const isActive = activePlanIndex === index
 
-                {/* Content Layer */}
-                <div className='relative z-10 p-6 xl:p-8 flex flex-col h-full'>
-                  {plan.isPopular && (
-                    <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[var(--color-darkmode)] border border-[var(--color-primary)] text-[var(--color-primary)] px-6 py-2 rounded-b-md text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-lg'>
-                      Most Popular
-                    </div>
-                  )}
+              return (
+                <button
+                  key={plan.name}
+                  type='button'
+                  role='tab'
+                  aria-selected={isActive}
+                  aria-controls='mobile-pricing-card'
+                  onClick={() => setActivePlanIndex(index)}
+                  className={`min-h-10 px-4 border text-[10px] font-bold tracking-[0.12em] uppercase whitespace-nowrap transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)] ${
+                    isActive
+                      ? 'border-[var(--color-primary)] bg-[var(--color-darkmode)] text-[var(--color-primary)]'
+                      : 'border-black/15 bg-white/40 text-[var(--color-darkmode)]/60'
+                  }`}
+                >
+                  {plan.name}
+                </button>
+              )
+            })}
+          </div>
+        </div>
 
-                  <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
-                    <p className='text-gray-300 tracking-widest text-[11px] mb-2 uppercase font-sans font-bold'>{plan.prefix}</p>
-                    <h3 className='text-2xl lg:text-3xl font-bold text-white mb-6'>{plan.name}</h3>
-                    <div className='flex items-baseline justify-center text-white'>
-                      <span className='text-4xl lg:text-5xl font-black tracking-tight'>{plan.priceVND}</span>
-                      <span className='text-gray-400 ml-2 text-sm font-medium tracking-wide font-sans'>{plan.period}</span>
-                    </div>
-                    <div className='flex items-baseline justify-center text-[var(--color-primary)] mt-2'>
-                      <span className='text-xl lg:text-2xl font-bold tracking-tight'>{plan.priceUSD}</span>
-                      <span className='text-[var(--color-primary)]/70 ml-1 text-xs font-medium tracking-wide font-sans'>{plan.period}</span>
-                    </div>
-                  </div>
+        <div id='mobile-pricing-card' ref={mobileCardRef} className='md:hidden mb-20 w-full max-w-md mx-auto' role='tabpanel'>
+          {renderPlanCard(plans[activePlanIndex], activePlanIndex, 'pricing-card-mobile')}
+        </div>
 
-                  <ul className='space-y-4 mb-8 flex-grow'>
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className='flex items-start text-gray-200 text-sm xl:text-[15px]'>
-                        <Icon icon='tabler:check' className='text-[var(--color-primary)] text-xl mr-3 flex-shrink-0 mt-0.5' />
-                        <span className="leading-relaxed font-sans">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button
-                    variant={plan.isPopular ? 'outline' : 'secondary'}
-                    className={`w-full mt-auto ${plan.isPopular ? 'border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white shadow-[0_0_15px_rgba(140,120,83,0.2)]' : ''}`}
-                  >
-                    {plan.btnText}
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className='hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20 xl:pt-16 xl:pb-16'>
+          {plans.map((plan, index) => renderPlanCard(plan, index, 'pricing-card will-change-transform opacity-0'))}
         </div>
 
       </div>
