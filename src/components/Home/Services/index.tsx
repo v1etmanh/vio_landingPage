@@ -30,7 +30,7 @@ const servicesData: ServiceItem[] = [
     description:
       'Hệ thống máy tập nhập khẩu nguyên chiếc từ Ý và Mỹ, bố trí theo từng nhóm cơ để bạn tập đúng kỹ thuật và rút ngắn thời gian đạt kết quả.',
     detail: 'Đội kỹ thuật hiệu chỉnh toàn bộ thiết bị mỗi tuần để đảm bảo độ chính xác khi tập luyện.',
-    image: '/images/KSP02428-HDR-Edit.jpg',
+    image: '/webp/images/KSP02428-HDR-Edit.webp',
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const servicesData: ServiceItem[] = [
     description:
       'Không gian tập luyện rộng rãi, thoáng mát với hệ thống lọc không khí và điều hoà hiện đại, mang lại cảm giác thoải mái nhất khi tập luyện.',
     detail: 'Thiết kế tối ưu để không bao giờ có cảm giác chật chội ngay cả vào giờ cao điểm.',
-    image: '/images/KSP02409-HDR-Edit.jpg',
+    image: '/webp/images/KSP02409-HDR-Edit.webp',
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ const servicesData: ServiceItem[] = [
     description:
       'Khu trị liệu riêng biệt có huấn luyện viên cá nhân và chuyên gia phục hồi chức năng, hỗ trợ giảm đau, phục hồi chấn thương và duy trì sức bền lâu dài.',
     detail: 'Liệu trình được thiết kế riêng cho từng người, kết hợp massage trị liệu và kéo giãn cơ chuyên sâu.',
-    image: '/images/KSP02574-Edit.jpg',
+    image: '/webp/images/KSP02574-Edit.webp',
   },
   {
     id: 4,
@@ -60,7 +60,7 @@ const servicesData: ServiceItem[] = [
     description:
       'Phòng sauna khô cao cấp giúp thanh lọc cơ thể, giảm căng thẳng và hỗ trợ phục hồi cơ bắp sau mỗi buổi tập, trong không gian riêng tư và sạch sẽ tuyệt đối.',
     detail: 'Gỗ thông Phần Lan nhập khẩu, duy trì nhiệt độ ổn định 80 đến 90 độ C theo chuẩn quốc tế.',
-    image: '/images/KSP02559-HDR-Edit.jpg',
+    image: '/webp/images/KSP02559-HDR-Edit.webp',
   },
   {
     id: 5,
@@ -70,7 +70,7 @@ const servicesData: ServiceItem[] = [
     description:
       'Quầy dinh dưỡng ngay trong phòng gym phục vụ protein shake, sinh tố trái cây tươi và snack lành mạnh để bạn nạp năng lượng ngay sau buổi tập.',
     detail: 'Thực đơn được tư vấn bởi chuyên gia dinh dưỡng, không phẩm màu và không chất bảo quản.',
-    image: '/images/KSP02474-HDR-Edit.jpg',
+    image: '/webp/images/KSP02474-HDR-Edit.webp',
   },
 ]
 

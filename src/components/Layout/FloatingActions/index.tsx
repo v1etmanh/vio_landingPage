@@ -45,7 +45,7 @@ const FloatingActions = () => {
           className='relative w-14 h-14 rounded-xl overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:scale-105 transition-all duration-200 block'
         >
           <img
-            src="/images/logo-zalo-vector.png"
+            src="/webp/images/logo-zalo-vector.webp"
             alt="Zalo"
             className="w-full h-full object-cover"
           />

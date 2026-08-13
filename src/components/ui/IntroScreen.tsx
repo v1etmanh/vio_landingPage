@@ -117,7 +117,7 @@ const IntroScreen = ({ onComplete }: { onComplete: () => void }) => {
           >
             {/* Logo */}
             <motion.img
-              src='/logo.png'
+              src='/webp/logo.webp'
               alt='VIO Fitness Logo'
               variants={logoVariants}
               className='w-20 h-20 object-contain'

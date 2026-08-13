@@ -52,7 +52,7 @@ export const RegistrationForm: React.FC = () => {
             {/* Gym Background Image */}
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
-              style={{ backgroundImage: 'url(/images/KSP02428-HDR-Edit.jpg)' }}
+              style={{ backgroundImage: 'url(/webp/images/KSP02428-HDR-Edit.webp)' }}
             />
             {/* Gradient Overlays */}
             <div className="absolute inset-0 bg-[#111]/40"></div>

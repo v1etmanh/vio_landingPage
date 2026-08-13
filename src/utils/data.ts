@@ -20,21 +20,21 @@ export const headerData: HeaderItem[] = [
 export const Aboutdata: aboutdata[] = [
   {
     heading: 'About us.',
-    imgSrc: '/landscape/gym_01.jpg',
+    imgSrc: '/webp/landscape/gym_01.webp',
     paragraph:
       'We are VIO FITNESS, a top-tier fitness center located in Da Nang providing the best environment to achieve your health goals.',
     link: 'Learn more',
   },
   {
     heading: 'Services.',
-    imgSrc: '/landscape/gym_02.jpg',
+    imgSrc: '/webp/landscape/gym_02.webp',
     paragraph:
       'From personal training to group classes, we offer a variety of services tailored to your fitness journey.',
     link: 'Learn more',
   },
   {
     heading: 'Our Space.',
-    imgSrc: '/landscape/gym_03.jpg',
+    imgSrc: '/webp/landscape/gym_03.webp',
     paragraph:
       'Check out our state-of-the-art facilities and see the transformations of our dedicated members.',
     link: 'Learn more',
@@ -46,32 +46,32 @@ export const WorkData: workdata[] = [
   {
     profession: 'Personal Trainer',
     name: 'Alex',
-    imgSrc: '/landscape/gym_04.jpg',
+    imgSrc: '/webp/landscape/gym_04.webp',
   },
   {
     profession: 'Personal Trainer',
     name: 'Sarah',
-    imgSrc: '/landscape/gym_05.jpg',
+    imgSrc: '/webp/landscape/gym_05.webp',
   },
   {
     profession: 'Yoga Instructor',
     name: 'Michael',
-    imgSrc: '/landscape/gym_06.jpg',
+    imgSrc: '/webp/landscape/gym_06.webp',
   },
   {
     profession: 'Nutritionist',
     name: 'Emily',
-    imgSrc: '/landscape/gym_07.jpg',
+    imgSrc: '/webp/landscape/gym_07.webp',
   },
   {
     profession: 'Strength Coach',
     name: 'David',
-    imgSrc: '/landscape/gym_08.jpg',
+    imgSrc: '/webp/landscape/gym_08.webp',
   },
   {
     profession: 'Fitness Expert',
     name: 'Jessica',
-    imgSrc: '/landscape/gym_09.jpg',
+    imgSrc: '/webp/landscape/gym_09.webp',
   },
 ]
 
@@ -79,19 +79,19 @@ export const WorkData: workdata[] = [
 export const FeaturedData: featureddata[] = [
   {
     heading: 'High intensity workout session.',
-    imgSrc: '/landscape/gym_10.jpg',
+    imgSrc: '/webp/landscape/gym_10.webp',
   },
   {
     heading: 'Modern equipment and facilities.',
-    imgSrc: '/landscape/gym_11.jpg',
+    imgSrc: '/webp/landscape/gym_11.webp',
   },
   {
     heading: 'Yoga and mindfulness classes.',
-    imgSrc: '/landscape/gym_12.jpg',
+    imgSrc: '/webp/landscape/gym_12.webp',
   },
   {
     heading: 'Strength and conditioning area.',
-    imgSrc: '/landscape/gym_13.jpg',
+    imgSrc: '/webp/landscape/gym_13.webp',
   },
 ]
 
@@ -151,7 +151,7 @@ export const TestimonialsData: testimonials[] = [
     profession: 'Member',
     comment:
       'VIO FITNESS has completely transformed my lifestyle. The trainers are excellent and the equipment is top notch.',
-    imgSrc: '/landscape/gym_14.jpg',
+    imgSrc: '/webp/landscape/gym_14.webp',
     rating: 5,
   },
   {
@@ -159,7 +159,7 @@ export const TestimonialsData: testimonials[] = [
     profession: 'Member',
     comment:
       'Amazing atmosphere! It’s the best gym in Da Nang with a very supportive community.',
-    imgSrc: '/landscape/gym_15.jpg',
+    imgSrc: '/webp/landscape/gym_15.webp',
     rating: 4,
   },
   {
@@ -167,7 +167,7 @@ export const TestimonialsData: testimonials[] = [
     profession: 'Member',
     comment:
       'I have seen great results since joining. The group classes are intense and really fun.',
-    imgSrc: '/landscape/gym_16.jpg',
+    imgSrc: '/webp/landscape/gym_16.webp',
     rating: 4,
   },
   {
@@ -175,7 +175,7 @@ export const TestimonialsData: testimonials[] = [
     profession: 'Member',
     comment:
       'Clean facilities, great location, and very knowledgeable personal trainers. Highly recommended.',
-    imgSrc: '/landscape/gym_17.jpg',
+    imgSrc: '/webp/landscape/gym_17.webp',
     rating: 4,
   },
   {
@@ -183,7 +183,7 @@ export const TestimonialsData: testimonials[] = [
     profession: 'Member',
     comment:
       'VIO FITNESS is the best place to work out. I love their cardio section and the huge free weight area.',
-    imgSrc: '/landscape/gym_18.jpg',
+    imgSrc: '/webp/landscape/gym_18.webp',
     rating: 4,
   },
   {
@@ -191,7 +191,7 @@ export const TestimonialsData: testimonials[] = [
     profession: 'Member',
     comment:
       'The yoga studio here is so relaxing, and the premium amenities are a big plus. Five stars!',
-    imgSrc: '/landscape/gym_19.jpg',
+    imgSrc: '/webp/landscape/gym_19.webp',
     rating: 4,
   },
 ]
@@ -204,7 +204,7 @@ export const ArticlesData: articles[] = [
     heading2: 'To Burn Fat Fast',
     name: 'Published on VIO FITNESS',
     date: 'February 19, 2025',
-    imgSrc: '/landscape/gym_20.jpg',
+    imgSrc: '/webp/landscape/gym_20.webp',
   },
   {
     time: '5 min',
@@ -212,7 +212,7 @@ export const ArticlesData: articles[] = [
     heading2: 'To Strength Training',
     name: 'Published on VIO FITNESS',
     date: 'February 19, 2025',
-    imgSrc: '/landscape/gym_21.jpg',
+    imgSrc: '/webp/landscape/gym_21.webp',
   },
   {
     time: '5 min',
@@ -220,7 +220,7 @@ export const ArticlesData: articles[] = [
     heading2: 'A Healthy Diet Plan',
     name: 'Published on VIO FITNESS',
     date: 'February 19, 2025',
-    imgSrc: '/landscape/gym_22.jpg',
+    imgSrc: '/webp/landscape/gym_22.webp',
   },
   {
     time: '5 min',
@@ -228,7 +228,7 @@ export const ArticlesData: articles[] = [
     heading2: 'Rest and Recovery',
     name: 'Published on VIO FITNESS',
     date: 'February 19, 2025',
-    imgSrc: '/landscape/gym_23.jpg',
+    imgSrc: '/webp/landscape/gym_23.webp',
   },
   {
     time: '5 min',
@@ -236,7 +236,7 @@ export const ArticlesData: articles[] = [
     heading2: 'For Better Flexibility',
     name: 'Published on VIO FITNESS',
     date: 'February 19, 2025',
-    imgSrc: '/landscape/gym_24.jpg',
+    imgSrc: '/webp/landscape/gym_24.webp',
   },
   {
     time: '5 min',
@@ -244,7 +244,7 @@ export const ArticlesData: articles[] = [
     heading2: 'During Winter',
     name: 'Published on VIO FITNESS',
     date: 'February 19, 2025',
-    imgSrc: '/landscape/gym_25.jpg',
+    imgSrc: '/webp/landscape/gym_25.webp',
   },
 ]
 

@@ -116,7 +116,7 @@ html {
 }
 
 body {
-  background-image: url('/global_background.png');
+  background-image: url('/webp/global_background.webp');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;

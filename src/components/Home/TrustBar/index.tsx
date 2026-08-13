@@ -2,24 +2,24 @@ import React from 'react'
 import LogoLoop from '../../ui/LogoLoop'
 
 const topLogos = [
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">PANATTA SPORT</span> },
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">HAMMER STRENGTH</span> },
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">PREMIUM GYM</span> },
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">INTERNATIONAL STANDARD</span> },
 ]
 
 const bottomLogos = [
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">PERSONAL TRAINING</span> },
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">SAUNA & SPA</span> },
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">RECOVERY ZONE</span> },
-  { src: "/logo.png", alt: "VIO Fitness" },
+  { src: "/webp/logo.webp", alt: "VIO Fitness" },
   { node: <span className="font-heading tracking-widest uppercase font-semibold text-lg text-[var(--color-darkmode)]/80 whitespace-nowrap">BOXING AREA</span> },
 ]
 

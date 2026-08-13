@@ -11,6 +11,26 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const getInitials = (name: string) => {
+  return name.trim().charAt(0).toUpperCase()
+}
+
+const getAvatarBg = (name: string) => {
+  const bgClasses = [
+    'bg-amber-600',
+    'bg-emerald-600',
+    'bg-blue-600',
+    'bg-purple-600',
+    'bg-indigo-600',
+    'bg-rose-600',
+  ]
+  let hash = 0
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return bgClasses[Math.abs(hash) % bgClasses.length]
+}
+
 const Testimonials = () => {
   const [slidesToShow, setSlidesToShow] = useState(3)
 
@@ -86,28 +106,24 @@ const Testimonials = () => {
       time: '1 month ago',
       rating: 5,
       comment: 'One of the best gyms I’ve been to in Da Nang. So clean, vibey and has every piece of equipment you can think of. Awesome sauna too. The staff is always welcoming, and the overall atmosphere really pushes you to train harder. Highly recommend this place to anyone looking for a premium workout experience in the city.',
-      avatar: '/images/testimonial/user1.svg'
     },
     {
       name: 'Niko gangadean',
       time: '2 months ago',
       rating: 5,
       comment: 'Vio Fitness is a wonderful gym. Plenty of machines, great free weight options, all very clean and functional. It is the perfect temperature with fans running and good AirCon. Not too crowded, and incredible service. Henry was the one upfront at the time and was incredibly helpful and attentive.',
-      avatar: '/images/testimonial/user2.svg'
     },
     {
       name: 'Hai Ha Thanh',
       time: '3 weeks ago',
       rating: 5,
       comment: 'Great gym with a clean and modern environment. The equipment is new and well-maintained, with everything you need for a full workout. I especially like that they have a sauna, which is perfect for relaxing after training. The drinks are also delicious and provide great energy for workouts. Friendly atmosphere and a very comfortable place to work out. Highly recommended!',
-      avatar: '/images/testimonial/user3.svg'
     },
     {
       name: 'Mikalil Kuncekli',
       time: '1 month ago',
       rating: 5,
       comment: 'I have trained in many gyms across Asia, but this is by far the friendliest, nicest, and most welcoming gym I’ve ever been to. The atmosphere is amazing and the staff are incredibly kind and helpful. The equipment is top-notch and the layout is very spacious, meaning you never feel crowded even during peak hours.',
-      avatar: '/images/testimonial/user1.svg'
     }
   ]
 
@@ -152,8 +168,8 @@ const Testimonials = () => {
               <div key={index} className='px-2 sm:px-4 pb-10'>
                 <div className='bg-white p-5 sm:p-8 rounded-2xl shadow-lg border border-gray-100'>
                   <div className='flex flex-wrap items-center mb-4 gap-3'>
-                    <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gray-200 shrink-0'>
-                      <img src={review.avatar} alt={review.name} className='w-full h-full object-cover' />
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 flex items-center justify-center font-bold text-white text-lg sm:text-xl font-heading shadow-md ${getAvatarBg(review.name)}`}>
+                      {getInitials(review.name)}
                     </div>
                     <div className='flex-grow'>
                       <h5 className='font-bold text-base sm:text-lg text-gray-900'>{review.name}</h5>

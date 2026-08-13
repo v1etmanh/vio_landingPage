@@ -4,7 +4,7 @@ const Logo: React.FC = () => {
   return (
     <a href='/' className='flex items-center gap-2 group'>
       <motion.img 
-        src='/logo.png' 
+        src='/webp/logo.webp' 
         alt='VIO FITNESS Logo' 
         className='h-10 lg:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105'
         initial={{ opacity: 0, scale: 0.8 }}

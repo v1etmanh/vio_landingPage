@@ -18,7 +18,7 @@ const Hero = () => {
       >
         {/* Base bright image */}
         <img
-          src='/images/KSP02404-HDR-Edit.jpg'
+          src='/webp/images/KSP02404-HDR-Edit.webp'
           alt='VIO Fitness interior'
           className='absolute inset-0 w-full h-full object-cover object-center scale-105'
         />
