@@ -5,10 +5,15 @@ import { Icon } from '@iconify/react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { SiteLanguage } from '../../../App'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const StudioInMotion = () => {
+interface StudioInMotionProps {
+  language: SiteLanguage
+}
+
+const StudioInMotion = ({ language }: StudioInMotionProps) => {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768)
   const [slidesToShow, setSlidesToShow] = useState(5)
   const [showArrows, setShowArrows] = useState(true)
@@ -47,6 +52,9 @@ const StudioInMotion = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const sliderRef = useRef<HTMLDivElement>(null)
+  const copy = language === 'vi'
+    ? { eyebrow: 'Khoảnh khắc tại VIO', title: <>VIO LUÔN<br className='hidden md:block' /> CHUYỂN ĐỘNG.</>, more: 'Xem thêm', previous: 'Xem video trước', next: 'Xem video tiếp theo' }
+    : { eyebrow: 'Social highlights', title: <>STUDIO <br className='hidden md:block' /> IN MOTION.</>, more: 'Explore more', previous: 'View previous video', next: 'View next video' }
 
   useGSAP(() => {
     gsap.set([headerRef.current?.children, sliderRef.current], {
@@ -137,15 +145,15 @@ const StudioInMotion = () => {
         <div ref={headerRef} className='flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-white/10 pb-8'>
           <div className='max-w-2xl'>
             <p className='text-[#C5A059] text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 font-bold'>
-              SOCIAL HIGHLIGHTS
+              {copy.eyebrow}
             </p>
             <h2 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white font-heading uppercase tracking-tighter leading-[0.9]'>
-              STUDIO <br className='hidden md:block' /> IN MOTION.
+              {copy.title}
             </h2>
           </div>
           <a href='#' className='group flex items-center gap-4 cursor-pointer mt-8 md:mt-0'>
             <span className='relative font-bold text-sm xl:text-base tracking-[0.2em] uppercase text-gray-300 overflow-hidden py-1 group-hover:text-white transition-colors duration-300'>
-              XEM THÊM
+              {copy.more}
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#C5A059] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
             </span>
             <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#C5A059] group-hover:border-[#C5A059] group-hover:shadow-[0_5px_15px_rgba(197,160,89,0.4)] transition-all duration-500">
@@ -164,8 +172,8 @@ const StudioInMotion = () => {
                   type='button'
                   onClick={() => setMobileVideoIndex(current => (current - 1 + videoIds.length) % videoIds.length)}
                   className='group absolute left-5 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/65 text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#1A1A1A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A059]'
-                  aria-label='Xem video trước'
-                  title='Video trước'
+                  aria-label={copy.previous}
+                  title={copy.previous}
                 >
                   <Icon icon='tabler:arrow-left' className='text-lg transition-transform duration-300 group-hover:-translate-x-1' />
                 </button>
@@ -173,8 +181,8 @@ const StudioInMotion = () => {
                   type='button'
                   onClick={() => setMobileVideoIndex(current => (current + 1) % videoIds.length)}
                   className='group absolute right-5 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-white/30 bg-black/65 text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#1A1A1A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A059]'
-                  aria-label='Xem video tiếp theo'
-                  title='Video tiếp theo'
+                  aria-label={copy.next}
+                  title={copy.next}
                 >
                   <Icon icon='tabler:arrow-right' className='text-lg transition-transform duration-300 group-hover:translate-x-1' />
                 </button>

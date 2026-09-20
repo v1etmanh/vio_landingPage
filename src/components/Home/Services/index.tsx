@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Icon } from '@iconify/react'
+import type { SiteLanguage } from '../../../App'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -74,10 +75,34 @@ const servicesData: ServiceItem[] = [
   },
 ]
 
-export default function Services() {
+const localizedServiceContent: Record<SiteLanguage, Array<Pick<ServiceItem, 'title' | 'subtitle' | 'tag' | 'description' | 'detail'>>> = {
+  vi: [
+    { title: 'Trang Thiết Bị', subtitle: '', tag: '01 · TRANG THIẾT BỊ', description: '100% máy móc nhập khẩu hiện đại, được thiết kế chính xác cho từng nhóm cơ và tối đa hóa độ an toàn trong mỗi buổi tập.', detail: '' },
+    { title: 'Không Gian Luyện Tập', subtitle: '', tag: '02 · KHÔNG GIAN', description: 'Không gian rộng rãi, cao cấp như spa, được thiết kế để đảm bảo sự riêng tư, tập trung và năng lượng.', detail: '' },
+    { title: 'Phục Hồi Và Trị Liệu', subtitle: '', tag: '03 · PHỤC HỒI', description: 'Liệu pháp kéo giãn chuyên biệt và giải phóng cân mạc, được hướng dẫn bởi HLV giàu kinh nghiệm, giúp phục hồi nhanh và giảm căng cơ.', detail: '' },
+    { title: 'Phòng Xông Hơi', subtitle: '', tag: '04 · THƯ GIÃN', description: 'Phòng xông hơi cao cấp giúp thanh lọc cơ thể, làm dịu cơ bắp mỏi và thư giãn sau buổi tập cường độ cao.', detail: '' },
+    { title: 'Nạp Dinh Dưỡng', subtitle: '', tag: '05 · DINH DƯỠNG', description: 'Quầy dinh dưỡng lành mạnh với Protein Shake pha tươi, tiếp năng lượng cho quá trình tăng cơ và chuyển đổi vóc dáng.', detail: '' },
+  ],
+  en: [
+    { title: 'Modern Equipment', subtitle: '', tag: '01 · EQUIPMENT', description: '100% modern imported machinery, precision-engineered for every muscle group and maximum workout safety.', detail: '' },
+    { title: 'Training Atmosphere', subtitle: '', tag: '02 · ATMOSPHERE', description: 'A spacious, premium spa-like atmosphere designed for ultimate privacy, focus, and energy.', detail: '' },
+    { title: 'Recovery & Therapy', subtitle: '', tag: '03 · RECOVERY', description: 'Specialized stretch therapy and myofascial release guided by expert coaches to speed up recovery and ease tension.', detail: '' },
+    { title: 'Sauna & Relaxation', subtitle: '', tag: '04 · RELAXATION', description: 'Premium sauna facilities to detoxify, soothe sore muscles, and unwind after an intense training session.', detail: '' },
+    { title: 'Nutrition & Refuel Bar', subtitle: '', tag: '05 · NUTRITION', description: 'Healthy nutrition bar featuring freshly blended Protein Shakes to power your gains and body transformation.', detail: '' },
+  ],
+}
+
+interface ServicesProps {
+  language: SiteLanguage
+}
+
+export default function Services({ language }: ServicesProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const services = servicesData
+  const services = servicesData.map((service, index) => ({
+    ...service,
+    ...localizedServiceContent[language][index],
+  }))
 
   useGSAP(() => {
     // Create a ScrollTrigger timeline that scrubs through the animations
@@ -166,16 +191,20 @@ export default function Services() {
                 <div className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-2 text-white leading-none service-line">
                   {item.title}
                 </div>
-                <div className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 text-white/90 service-line">
-                  {item.subtitle}
-                </div>
+                {item.subtitle && (
+                  <div className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 text-white/90 service-line">
+                    {item.subtitle}
+                  </div>
+                )}
                 <div className="text-base md:text-lg text-white/80 mb-4 max-w-lg text-right service-line">
                   {item.description}
                 </div>
-                <div className="text-sm md:text-base text-white/50 max-w-md text-right flex items-center justify-end gap-3 service-line">
-                  <div className="h-px w-8 bg-white/20" />
-                  {item.detail}
-                </div>
+                {item.detail && (
+                  <div className="text-sm md:text-base text-white/50 max-w-md text-right flex items-center justify-end gap-3 service-line">
+                    <div className="h-px w-8 bg-white/20" />
+                    {item.detail}
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -1,35 +1,72 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Icon } from '@iconify/react'
+import type { SiteLanguage } from '../../../App'
 
-const VioStandard = () => {
+interface VioStandardProps {
+  language: SiteLanguage
+}
+
+const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
   const [currentRotation, setCurrentRotation] = useState(0)
+
+  const copy = language === 'vi'
+    ? {
+        eyebrow: 'Vì sao VIO',
+        headingLead: 'Tiêu chuẩn',
+        headingAccent: 'VIO.',
+        intro: 'Bốn lý do giúp VIO Fitness trở thành lựa chọn khác biệt tại Đà Nẵng.',
+        highlights: ['Chuyên nghiệp', 'Tận tâm'],
+        quote: <>Hơn cả một phòng gym.<br />Một nơi để thuộc về.</>,
+        stats: ['Năm kinh nghiệm', 'Khách hàng thay đổi ngoại hình', 'Đánh giá Google Maps'],
+        cards: [
+          ['Mát mẻ & thoải mái', 'Mát mẻ. Thoải mái.'],
+          ['Thiết bị hiện đại', 'Tập tốt hơn. Mạnh mẽ hơn.'],
+          ['Cảm giác như ở nhà', 'Ai cũng thuộc về VIO.'],
+          ['Trải nghiệm trọn vẹn', 'Phục hồi. Nạp năng lượng. Cảm thấy khỏe khoắn.'],
+        ],
+      }
+    : {
+        eyebrow: 'Why VIO',
+        headingLead: 'The VIO',
+        headingAccent: 'Standard.',
+        intro: 'Four reasons travelers and expats choose VIO Fitness over every chain gym in Đà Nẵng.',
+        highlights: ['Professional', 'Dedicated'],
+        quote: <>More than a gym.<br />A place to belong.</>,
+        stats: ['Years of experience', 'Members transformed', 'Google Maps reviews'],
+        cards: [
+          ['Cool & Comfortable', 'Stay cool. Feel comfortable.'],
+          ['Modern Equipment', 'Move better. Get stronger.'],
+          ['Feel at Home', 'Everyone belongs at VIO.'],
+          ['Complete Experience', 'Recover. Refuel. Feel good.'],
+        ],
+      }
 
   const cards = [
     {
       num: '01.',
-      title: 'Prime Location',
-      desc: 'Steps away from the Hàn River — 15 Trần Phú, central Đà Nẵng.',
+      title: copy.cards[0][0],
+      desc: copy.cards[0][1],
       bg: 'bg-[#1A1A1A]',
       textColor: 'text-white'
     },
     {
       num: '02.',
-      title: 'Ultimate Flexibility',
-      desc: 'No long-term commitments. Day passes & short-term options available.',
+      title: copy.cards[1][0],
+      desc: copy.cards[1][1],
       bg: 'bg-[#2A2522]',
       textColor: 'text-white'
     },
     {
       num: '03.',
-      title: 'Premium Amenities',
-      desc: 'Free towels, saunas, secure lockers & InBody analysis included.',
+      title: copy.cards[2][0],
+      desc: copy.cards[2][1],
       bg: 'bg-[#C5A059]',
       textColor: 'text-[#1A1A1A]'
     },
     {
       num: '04.',
-      title: 'World-Class Equipment',
-      desc: 'Maintained Rogue, Hammer Strength & Impulse machines for a smooth workout.',
+      title: copy.cards[3][0],
+      desc: copy.cards[3][1],
       bg: 'bg-[#332E29]',
       textColor: 'text-white'
     }
@@ -82,7 +119,7 @@ const VioStandard = () => {
   }, [slideAngle])
 
   return (
-    <section id='Standards' className='py-24 bg-transparent relative z-10 overflow-hidden'>
+    <section id='Standards' className='py-24 bg-white relative z-10 overflow-hidden'>
       {/* SVG Clip Path definition */}
       <svg className="absolute w-0 h-0">
         <defs>
@@ -97,28 +134,28 @@ const VioStandard = () => {
         <div className='flex flex-col xl:flex-row items-center xl:items-start justify-between gap-20 xl:gap-8'>
 
           {/* Left Section: Text Content & Stats */}
-          <div className='max-w-2xl xl:max-w-lg flex-shrink-0 z-20 relative pt-12 xl:pt-20'>
+          <div className='max-w-2xl xl:max-w-lg flex-shrink-0 z-20 relative pt-12 xl:pt-24'>
             <div className='flex items-center gap-4 mb-6'>
               <div className='h-[1px] w-12 bg-[#C5A059]'></div>
               <span className='text-sm font-bold uppercase tracking-[0.2em] text-[#4A453F]'>
-                WHY VIO
+                {copy.eyebrow}
               </span>
             </div>
             <h2 className='flex flex-col leading-[0.9] mb-6'>
               <span className='font-serif italic text-4xl sm:text-5xl md:text-[5.5rem] lg:text-[6.5rem] text-[#332E29] font-light'>
-                The Vio
+                {copy.headingLead}
               </span>
               <span className='font-black text-5xl sm:text-[4rem] md:text-[5.5rem] lg:text-[6.5rem] text-[#1A1A1A] tracking-tighter uppercase'>
-                STANDARD.
+                {copy.headingAccent}
               </span>
             </h2>
             <p className='text-lg md:text-xl text-[#5A544A] font-light leading-relaxed max-w-sm mb-10'>
-              Four reasons travelers and expats choose Vio Fitness over every chain gym in Đà Nẵng.
+              {copy.intro}
             </p>
 
             <div className='flex flex-col sm:flex-row items-start sm:items-center gap-6 pb-12 mb-12 border-b border-gray-200'>
               <div className='flex flex-row items-center gap-6'>
-                {['NO CONTRACTS', 'NO HIDDEN FEES'].map((text, idx) => (
+                {copy.highlights.map((text, idx) => (
                   <div key={idx} className='flex items-center gap-2'>
                     <Icon icon='ph:check-bold' className='text-[#C5A059] text-xl' />
                     <span className='font-bold text-[10px] tracking-[0.1em] text-[#4A453F] whitespace-nowrap'>
@@ -133,9 +170,8 @@ const VioStandard = () => {
             <div className='mb-12 relative'>
               <span className='text-6xl text-[#C5A059] font-serif absolute -top-8 -left-4 opacity-50'>“</span>
               <h3 className='font-serif italic text-3xl md:text-4xl text-[#332E29] leading-tight'>
-                More than a gym.<br />A place to belong.
+                {copy.quote}
               </h3>
-              <span className='absolute right-0 lg:right-12 -top-20 text-[6rem] lg:text-[8rem] font-black text-gray-100 -z-10 tracking-tighter'>EST.<br />2015</span>
             </div>
 
             {/* Stats block */}
@@ -144,26 +180,30 @@ const VioStandard = () => {
               <div className='bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl flex-1 flex flex-col items-center text-center border border-gray-100 hover:-translate-y-1 transition-transform'>
                 <Icon icon="tabler:crown" className="text-3xl text-[#C5A059] mb-3" />
                 <span className="text-2xl lg:text-3xl font-black text-[#1A1A1A] leading-none mb-2">10+</span>
-                <span className="text-[9px] font-bold uppercase tracking-wider text-[#5A544A]">Năm Kinh Nghiệm</span>
+                <span className="text-[9px] font-bold uppercase tracking-wider text-[#5A544A]">{copy.stats[0]}</span>
               </div>
               {/* Stat 2 */}
               <div className='bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl flex-1 flex flex-col items-center text-center border border-gray-100 hover:-translate-y-1 transition-transform'>
                 <Icon icon="tabler:users" className="text-3xl text-[#C5A059] mb-3" />
-                <span className="text-2xl lg:text-3xl font-black text-[#1A1A1A] leading-none mb-2">5000+</span>
-                <span className="text-[9px] font-bold uppercase tracking-wider text-[#5A544A]">Phiên Tập Hiệu Quả</span>
+                <span className="text-2xl lg:text-3xl font-black text-[#1A1A1A] leading-none mb-2">500+</span>
+                <span className="text-[9px] font-bold uppercase tracking-wider text-[#5A544A]">{copy.stats[1]}</span>
               </div>
               {/* Stat 3 */}
               <div className='bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl flex-1 flex flex-col items-center text-center border border-gray-100 hover:-translate-y-1 transition-transform'>
                 <Icon icon="tabler:ticket" className="text-3xl text-[#C5A059] mb-3" />
-                <span className="text-2xl lg:text-3xl font-black text-[#1A1A1A] leading-none mb-2">140+</span>
-                <span className="text-[9px] font-bold uppercase tracking-wider text-[#5A544A]">Sự Kiện Độc Quyền</span>
+                <span className="text-2xl lg:text-3xl font-black text-[#1A1A1A] leading-none mb-2">500+</span>
+                <span className="text-[9px] font-bold uppercase tracking-wider text-[#5A544A]">{copy.stats[2]}</span>
               </div>
             </div>
           </div>
 
           {/* Center: Character Image Overlay */}
-          <div className='hidden xl:block absolute bottom-0 left-[45%] 2xl:left-[40%] z-30 pointer-events-none transform -translate-x-1/2 scale-[1.35] origin-bottom'>
-            <img src="/nhanvat.png" alt="Vio Fitness Coach" className="h-[750px] 2xl:h-[850px] object-contain drop-shadow-2xl" />
+          <div className='hidden xl:block absolute bottom-0 left-[53%] 2xl:left-[49%] z-30 pointer-events-none -translate-x-1/2 origin-bottom'>
+            <img
+              src="/webp/images/vio-coach-bao-cutout.png"
+              alt="Huấn luyện viên VIO Fitness"
+              className="h-[800px] 2xl:h-[920px] w-[532px] 2xl:w-[612px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.18)]"
+            />
           </div>
 
           {/* Right Section: Rotating Slider */}
@@ -171,7 +211,7 @@ const VioStandard = () => {
 
             {/* Wrapper for mobile scaling - the massive wheel needs scaling down on smaller screens */}
             <div
-              className="relative flex justify-center items-center transform scale-[0.4] sm:scale-[0.5] md:scale-[0.7] xl:scale-90 origin-center"
+              className="relative flex justify-center items-center transform scale-[0.4] sm:scale-[0.5] md:scale-[0.7] xl:scale-[0.64] origin-center"
               style={{ width: slideWidth, height: slideHeight }}
             >
 

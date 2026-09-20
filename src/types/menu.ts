@@ -5,6 +5,7 @@ export type SubmenuItem = {
 
 export type HeaderItem = {
   label: string
+  labelEn?: string
   href: string
   submenu?: SubmenuItem[]
 }

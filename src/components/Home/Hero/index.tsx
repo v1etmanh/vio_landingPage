@@ -1,10 +1,34 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Icon } from '@iconify/react'
 import Button from '../../ui/Button'
+import type { SiteLanguage } from '../../../App'
 
-const Hero = () => {
+interface HeroProps {
+  language: SiteLanguage
+}
+
+const Hero: React.FC<HeroProps> = ({ language }) => {
   const { scrollY } = useScroll()
   const backgroundY = useTransform(scrollY, [0, 600], ['0%', '15%'])
+  const content = language === 'vi'
+    ? {
+        location: '15 TRẦN PHÚ • HẢI CHÂU • ĐÀ NẴNG',
+        headline: ['PHÒNG GYM', 'ĐẲNG CẤP QUỐC TẾ', 'GIỮA LÒNG ĐÀ NẴNG'],
+        benefits: ['Huấn luyện cá nhân 1-1', 'Trang bị đầy đủ máy móc hiện đại, cao cấp', 'Đội ngũ tận tâm - thân thiện - chuyên nghiệp'],
+        explore: 'Khám phá dịch vụ',
+        book: 'Đặt lịch ngay',
+        instagram: 'Instagram',
+        facebook: 'Facebook',
+      }
+    : {
+        location: '15 TRAN PHU • HAI CHAU • DA NANG',
+        headline: ['A WORLD-CLASS GYM', 'IN THE HEART', 'OF DA NANG!'],
+        benefits: ['1-on-1 Personal Training', 'Fully equipped with modern, top-tier machines', 'Dedicated - Friendly - Professional staff'],
+        explore: 'Explore services',
+        book: 'Book now',
+        instagram: 'Instagram',
+        facebook: 'Facebook',
+      }
 
   return (
     <section
@@ -55,7 +79,7 @@ const Hero = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className='text-white/80 text-xs sm:text-sm font-bold tracking-[0.15em] uppercase mb-4 flex items-center gap-2'
               >
-                15 TRẦN PHÚ &bull; HẢI CHÂU &bull; ĐÀ NẴNG
+                {content.location}
               </motion.p>
 
               {/* Headline */}
@@ -66,13 +90,13 @@ const Hero = () => {
                 className='uppercase leading-[1.05] tracking-tight mb-8'
               >
                 <div className='text-white font-black text-[48px] sm:text-[60px] md:text-[72px] lg:text-[80px] mb-2 leading-none'>
-                  PHÒNG GYM
+                  {content.headline[0]}
                 </div>
                 <div className='text-[#B79B6C] font-semibold text-[36px] sm:text-[46px] md:text-[54px] lg:text-[60px] leading-tight'>
-                  Chuẩn Quốc Tế
+                  {content.headline[1]}
                 </div>
                 <div className='text-white font-semibold text-[36px] sm:text-[46px] md:text-[54px] lg:text-[60px] leading-tight'>
-                  Giữa Lòng Đà Nẵng
+                  {content.headline[2]}
                 </div>
               </motion.h1>
 
@@ -85,15 +109,15 @@ const Hero = () => {
               >
                 <li className="flex items-start gap-3">
                   <Icon icon="ph:check-circle-fill" className="text-[#B79B6C] text-2xl shrink-0 mt-1" />
-                  <span>PT cá nhân hóa 1-1 cùng HLV chuyên nghiệp</span>
+                  <span>{content.benefits[0]}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Icon icon="ph:check-circle-fill" className="text-[#B79B6C] text-2xl shrink-0 mt-1" />
-                  <span>Trang bị toàn bộ máy <strong>Panatta</strong></span>
+                  <span>{content.benefits[1]}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Icon icon="ph:check-circle-fill" className="text-[#B79B6C] text-2xl shrink-0 mt-1" />
-                  <span>Cùng dàn máy <strong>Hammer Strength</strong> nhập khẩu</span>
+                  <span>{content.benefits[2]}</span>
                 </li>
               </motion.ul>
 
@@ -104,15 +128,12 @@ const Hero = () => {
                 transition={{ duration: 0.6, delay: 0.65 }}
                 className='flex flex-col sm:flex-row items-center gap-4'
               >
-                {/* Primary CTA */}
-                <Button variant="gold" size="lg" className="w-full sm:w-auto text-sm uppercase tracking-wider h-[56px]" onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
-                  <Icon icon="tabler:calendar-event" className="text-xl" />
-                  ĐẶT LỊCH NGAY
+                <Button variant="outline" size="lg" className="w-full sm:w-auto h-[56px] bg-transparent border border-white text-white hover:bg-white/10" onClick={() => document.getElementById('Services')?.scrollIntoView({ behavior: 'smooth' })}>
+                  {content.explore}
+                  <Icon icon="tabler:arrow-right" className="text-xl" />
                 </Button>
-
-                {/* Secondary CTA - Hidden on very small screens */}
-                <Button variant="outline" size="lg" className="hidden sm:flex w-full sm:w-auto h-[56px] bg-transparent border border-white text-white hover:bg-white/10" onClick={() => document.getElementById('Services')?.scrollIntoView({ behavior: 'smooth' })}>
-                  Khám phá dịch vụ
+                <Button variant="gold" size="lg" className="w-full sm:w-auto text-sm uppercase tracking-wider h-[56px]" onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                  {content.book}
                   <Icon icon="tabler:arrow-right" className="text-xl" />
                 </Button>
               </motion.div>
@@ -138,15 +159,15 @@ const Hero = () => {
                 <div className='hidden sm:block text-white/20'>|</div>
 
                 <div className='flex items-center gap-3 md:gap-4 w-full sm:w-auto mt-2 sm:mt-0'>
-                  <div className='flex items-center gap-1.5'>
-                    <Icon icon="logos:google-icon" className="text-base md:text-lg" />
-                    <span className='text-xs md:text-sm font-semibold'>Google</span>
-                  </div>
+                  <a href='https://www.instagram.com/vio.gymfitness/' target='_blank' rel='noreferrer' className='flex items-center gap-1.5 transition-colors hover:text-white' aria-label='Instagram VIO Fitness'>
+                    <Icon icon="mdi:instagram" className="text-base md:text-lg" />
+                    <span className='text-xs md:text-sm font-semibold'>{content.instagram}</span>
+                  </a>
                   <span className='text-white/20'>|</span>
-                  <div className='flex items-center gap-1.5'>
-                    <Icon icon="logos:facebook" className="text-base md:text-lg" />
-                    <span className='text-xs md:text-sm font-semibold'>Facebook</span>
-                  </div>
+                  <a href='https://www.facebook.com/vio.gymfitness' target='_blank' rel='noreferrer' className='flex items-center gap-1.5 transition-colors hover:text-white' aria-label='Facebook VIO Fitness'>
+                    <Icon icon="mdi:facebook" className="text-base md:text-lg" />
+                    <span className='text-xs md:text-sm font-semibold'>{content.facebook}</span>
+                  </a>
                 </div>
               </motion.div>
             </div>

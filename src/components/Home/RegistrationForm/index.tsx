@@ -43,7 +43,7 @@ export const RegistrationForm: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-24 lg:py-32 bg-white relative z-10">
+    <section id="Registration" className="py-24 lg:py-32 bg-white relative z-10">
       <div className="container mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-0 overflow-hidden bg-[#111111] border border-white/5">
           
@@ -82,6 +82,22 @@ export const RegistrationForm: React.FC = () => {
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">Hotline / Zalo / WhatsApp</p>
                   <p className="text-lg font-medium text-white">{DISPLAY_PHONE}</p>
+                </div>
+              </div>
+              <div className="mt-6 grid gap-5 border-t border-white/10 pt-6 sm:grid-cols-2">
+                <div className="flex items-start gap-3">
+                  <Icon icon="ph:map-pin" className="mt-0.5 h-5 w-5 shrink-0 text-[#C5A059]" />
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Địa chỉ</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/85">15 Tran Phu, Hai Chau, Da Nang</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Icon icon="ph:clock" className="mt-0.5 h-5 w-5 shrink-0 text-[#C5A059]" />
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Giờ mở cửa</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/85">T2–T7: 5:30 AM – 8:30 PM<br />Chủ nhật: 8:00 AM – 7:00 PM</p>
+                  </div>
                 </div>
               </div>
             </div>

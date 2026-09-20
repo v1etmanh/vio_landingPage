@@ -4,91 +4,79 @@ import Button from '../../ui/Button'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { SiteLanguage } from '../../../App'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const Pricing = () => {
+interface PricingProps {
+  language: SiteLanguage
+}
+
+interface MembershipPlan {
+  name: string
+  tagline: string
+  priceVND: string
+  priceUSD: string
+  features: string[]
+  isPopular: boolean
+  btnText: string
+  bgImage: string
+}
+
+const plansByLanguage: Record<SiteLanguage, MembershipPlan[]> = {
+  en: [
+    {
+      name: 'DAY PASS', tagline: 'Quick & easy daily access', priceVND: '200,000 VND', priceUSD: '$8', isPopular: false, btnText: 'GET DAY PASS', bgImage: "url('/images/pricing/essential.png')",
+      features: ['Unlimited Gym Access', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately'],
+    },
+    {
+      name: '3-DAY PASS', tagline: 'Ideal for weekend getaways', priceVND: '500,000 VND', priceUSD: '$20', isPopular: false, btnText: 'GET 3-DAY PASS', bgImage: "url('/images/pricing/abstract_white.png')",
+      features: ['Unlimited gym access for 3 consecutive days', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately', 'Get a FREE 500ml bottle of water'],
+    },
+    {
+      name: 'WEEK PASS', tagline: 'Best choice for short trips', priceVND: '900,000 VND', priceUSD: '$24', isPopular: true, btnText: 'GET WEEK PASS', bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
+      features: ['Unlimited gym access for 7 consecutive days', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately', 'Get a FREE Americano or Monster Energy Drink'],
+    },
+    {
+      name: 'MONTH PASS', tagline: 'Save more, train more', priceVND: '1,650,000 VND', priceUSD: '$63', isPopular: false, btnText: 'GET MONTH PASS', bgImage: "url('/images/pricing/elite.png')",
+      features: ['Unlimited gym access for 30 days', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Free 2 one-to-one training sessions with a personal trainer', 'Get 1 free whey protein smoothie (for first-time members registering at VIO FITNESS)'],
+    },
+    {
+      name: '1-YEAR PASS', tagline: 'By your side every workout', priceVND: '10,200,000 VND', priceUSD: '$400', isPopular: false, btnText: 'GET 1-YEAR PASS', bgImage: "url('/images/pricing/abstract_gold.png')",
+      features: ['Unlimited gym access for 1 year', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Free 2 one-to-one training sessions with a personal trainer', 'Get 1 month membership free', 'Get 2 free whey protein smoothies', 'Get a relaxing stretching session'],
+    },
+  ],
+  vi: [
+    {
+      name: 'VÉ TẬP NGÀY', tagline: 'Truy cập nhanh, dễ dàng mỗi ngày', priceVND: '200.000 VND', priceUSD: '$8', isPopular: false, btnText: 'ĐĂNG KÝ VÉ NGÀY', bgImage: "url('/images/pricing/essential.png')",
+      features: ['Không giới hạn quyền sử dụng phòng gym', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay'],
+    },
+    {
+      name: 'VÉ 3 NGÀY', tagline: 'Lý tưởng cho kỳ nghỉ cuối tuần', priceVND: '500.000 VND', priceUSD: '$20', isPopular: false, btnText: 'ĐĂNG KÝ VÉ 3 NGÀY', bgImage: "url('/images/pricing/abstract_white.png')",
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 3 ngày liên tiếp', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay', 'Tặng 1 chai nước 500ml'],
+    },
+    {
+      name: 'VÉ TUẦN', tagline: 'Lựa chọn tốt nhất cho chuyến đi ngắn', priceVND: '900.000 VND', priceUSD: '$24', isPopular: true, btnText: 'ĐĂNG KÝ VÉ TUẦN', bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 7 ngày liên tiếp', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay', 'Tặng 1 Americano hoặc Monster Energy Drink'],
+    },
+    {
+      name: 'VÉ THÁNG', tagline: 'Tiết kiệm hơn, tập nhiều hơn', priceVND: '1.650.000 VND', priceUSD: '$63', isPopular: false, btnText: 'ĐĂNG KÝ VÉ THÁNG', bgImage: "url('/images/pricing/elite.png')",
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 30 ngày', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 2 buổi tập 1-1 cùng huấn luyện viên cá nhân', 'Tặng 1 whey protein smoothie (áp dụng cho hội viên lần đầu đăng ký tại VIO FITNESS)'],
+    },
+    {
+      name: 'VÉ 1 NĂM', tagline: 'Đồng hành trong mỗi buổi tập', priceVND: '10.200.000 VND', priceUSD: '$400', isPopular: false, btnText: 'ĐĂNG KÝ VÉ 1 NĂM', bgImage: "url('/images/pricing/abstract_gold.png')",
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 1 năm', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 2 buổi tập 1-1 cùng huấn luyện viên cá nhân', 'Tặng thêm 1 tháng hội viên', 'Tặng 2 whey protein smoothie', 'Tặng 1 buổi stretching thư giãn'],
+    },
+  ],
+}
+
+const Pricing: React.FC<PricingProps> = ({ language }) => {
   const [activePlanIndex, setActivePlanIndex] = useState(0)
   const mobileCardRef = useRef<HTMLDivElement>(null)
-
-  const plans = [
-    {
-      name: 'DAY PASS',
-      prefix: 'FLEXIBLE',
-      priceVND: '200K',
-      priceUSD: '$8',
-      period: '/ DAY',
-      features: [
-        'Unlimited Gym Access',
-        'Air-conditioned luxury training space',
-      ],
-      isPopular: false,
-      btnText: 'GET DAY PASS',
-      bgImage: "url('/images/pricing/essential.png')",
-    },
-    {
-      name: 'SHORT TERM',
-      prefix: 'VISITOR',
-      priceVND: '500K',
-      priceUSD: '$20',
-      period: '/ 3 DAYS',
-      features: [
-        'Unlimited Gym Access',
-        'Air-conditioned luxury training space',
-      ],
-      isPopular: false,
-      btnText: 'GET SHORT TERM',
-      bgImage: "url('/images/pricing/abstract_white.png')",
-    },
-    {
-      name: 'WEEKLY PASS',
-      prefix: 'TRAVELER',
-      priceVND: '900K',
-      priceUSD: '$36',
-      period: '/ 1 WK',
-      features: [
-        '2 Weeks: 1.25M VND / $50',
-        'Unlimited Gym Access',
-        'Air-conditioned luxury training space',
-      ],
-      isPopular: true,
-      btnText: 'GET WEEKLY PASS',
-      bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
-    },
-    {
-      name: 'MEMBERSHIP',
-      prefix: 'COMMITTED',
-      priceVND: '1.65M',
-      priceUSD: '$66',
-      period: '/ 1 MO',
-      features: [
-        '2 Months: 2.9M VND / $116',
-        '3 Months: 3.9M VND / $156',
-        '4 Months: 4.8M VND / $192',
-        '5 Months: 5.7M VND / $228',
-        '6 Months: 6.6M VND / $264',
-        'Unlimited Gym Access',
-        'Air-conditioned luxury space',
-      ],
-      isPopular: false,
-      btnText: 'JOIN MEMBERSHIP',
-      bgImage: "url('/images/pricing/elite.png')",
-    },
-    {
-      name: 'LONG TERM',
-      prefix: 'LIFESTYLE',
-      priceVND: '10.2M',
-      priceUSD: '$408',
-      period: '/ 12 MO',
-      features: [
-        'Unlimited Gym Access',
-        'Air-conditioned luxury training space',
-      ],
-      isPopular: false,
-      btnText: 'JOIN LONG TERM',
-      bgImage: "url('/images/pricing/abstract_gold.png')",
-    },
-  ]
+  const plans = plansByLanguage[language]
+  const copy = language === 'vi'
+    ? { popular: 'Lựa chọn nổi bật', eyebrow: 'Gói hội viên VIO FITNESS', title: 'Chọn gói phù hợp với bạn', tabLabel: 'Chọn gói tập' }
+    : { popular: 'Most popular', eyebrow: 'VIO FITNESS membership packages', title: 'Choose your membership', tabLabel: 'Choose a membership plan' }
 
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -183,26 +171,24 @@ const Pricing = () => {
         <div className='relative z-10 p-6 xl:p-8 flex flex-col h-full'>
           {plan.isPopular && (
             <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[var(--color-darkmode)] border border-[var(--color-primary)] text-[var(--color-primary)] px-6 py-2 rounded-b-md text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-lg'>
-              Most Popular
+              {copy.popular}
             </div>
           )}
 
           <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
-            <p className='text-gray-300 tracking-widest text-[11px] mb-2 uppercase font-sans font-bold'>{plan.prefix}</p>
-            <h3 className='text-2xl lg:text-3xl font-bold text-white mb-6'>{plan.name}</h3>
+            <p className='min-h-8 text-gray-200 tracking-[0.12em] text-[11px] leading-relaxed uppercase font-sans font-bold'>{plan.tagline}</p>
+            <h3 className='mt-3 text-2xl lg:text-3xl font-bold text-white mb-6'>{plan.name}</h3>
             <div className='flex items-baseline justify-center text-white'>
-              <span className='text-4xl lg:text-5xl font-black tracking-tight'>{plan.priceVND}</span>
-              <span className='text-gray-400 ml-2 text-sm font-medium tracking-wide font-sans'>{plan.period}</span>
+              <span className='text-2xl lg:text-3xl font-black tracking-tight'>{plan.priceVND}</span>
             </div>
             <div className='flex items-baseline justify-center text-[var(--color-primary)] mt-2'>
               <span className='text-xl lg:text-2xl font-bold tracking-tight'>{plan.priceUSD}</span>
-              <span className='text-[var(--color-primary)]/70 ml-1 text-xs font-medium tracking-wide font-sans'>{plan.period}</span>
             </div>
           </div>
 
-          <ul className='space-y-4 mb-8 flex-grow'>
+          <ul className='space-y-3 mb-8 flex-grow'>
             {plan.features.map((feature, featureIndex) => (
-              <li key={featureIndex} className='flex items-start text-gray-200 text-sm xl:text-[15px]'>
+              <li key={featureIndex} className='flex items-start text-gray-100 text-sm xl:text-[13px]'>
                 <Icon icon='tabler:check' className='text-[var(--color-primary)] text-xl mr-3 flex-shrink-0 mt-0.5' />
                 <span className='leading-relaxed font-sans'>{feature}</span>
               </li>
@@ -225,14 +211,14 @@ const Pricing = () => {
       <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center max-w-4xl mx-auto mb-10 xl:mb-32'>
           <p className='text-gray-600 text-xs sm:text-sm md:text-lg tracking-[0.1em] sm:tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
-            VIO FITNESS - MEMBERSHIP PACKAGES
+            {copy.eyebrow}
           </p>
           <h2 className='text-3xl sm:text-4xl md:text-6xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
-            ELEVATE YOUR FITNESS JOURNEY
+            {copy.title}
           </h2>
         </div>
 
-        <div className='md:hidden mb-10 overflow-x-auto scrollbar-hide -mx-4 px-4' role='tablist' aria-label='Choose a pricing plan'>
+        <div className='md:hidden mb-10 overflow-x-auto scrollbar-hide -mx-4 px-4' role='tablist' aria-label={copy.tabLabel}>
           <div className='flex min-w-max justify-center gap-2'>
             {plans.map((plan, index) => {
               const isActive = activePlanIndex === index

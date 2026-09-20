@@ -8,12 +8,12 @@ import { footerlinks } from '@/app/types/footerlinks'
 
 // header nav-links data
 export const headerData: HeaderItem[] = [
-  { label: 'Về chúng tôi', href: '#About' },
-  { label: 'Dịch vụ', href: '#Services' },
-  { label: 'Bảng giá', href: '#Pricing' },
-  { label: 'HLV', href: '#Trainers' },
-  { label: 'Đánh giá', href: '#Reviews' },
-  { label: 'Liên hệ', href: '#Contact' },
+  { label: 'Về chúng tôi', labelEn: 'About us', href: '#About' },
+  { label: 'Dịch vụ', labelEn: 'Services', href: '#Services' },
+  { label: 'HLV', labelEn: 'Trainers', href: '#Trainers' },
+  { label: 'Bảng giá', labelEn: 'Membership', href: '#Pricing' },
+  { label: 'Cẩm nang', labelEn: 'Knowledge', href: '#Knowledge' },
+  { label: 'Liên hệ', labelEn: 'Contact', href: '#Contact' },
 ]
 
 // about data

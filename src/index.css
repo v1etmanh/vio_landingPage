@@ -131,9 +131,129 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+/* Vietnamese accents need more vertical room than the condensed display face.
+   This applies automatically whenever the VIE toggle changes the document language. */
+html[lang='vi'] :is(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.08 !important;
+  padding-block: 0.04em;
+}
+
+html[lang='vi'] .font-heading {
+  line-height: 1.08 !important;
+}
+
 .bg-joinus {
   background-image: url('/images/joinus/horn.svg'),
     url('/images/joinus/paint.svg');
   background-repeat: no-repeat, no-repeat;
   background-position: 90% 100%, 2% 18%;
+}
+
+@keyframes trust-marquee-left {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes trust-marquee-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.trust-marquee-row {
+  overflow: hidden;
+}
+
+.trust-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 5.625rem;
+  width: max-content;
+  will-change: transform;
+}
+
+.trust-marquee-track-left {
+  animation: trust-marquee-left 30s linear infinite;
+}
+
+.trust-marquee-track-right {
+  animation: trust-marquee-right 34s linear infinite;
+}
+
+.coach-details-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.coach-client-gallery {
+  position: relative;
+  min-height: 19rem;
+  height: 19rem;
+  overflow: hidden;
+  background: #e8e4da;
+}
+
+.coach-testimonial-layout {
+  display: grid;
+}
+
+.coach-testimonial-title {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 1.75rem 0;
+}
+
+.coach-testimonial-copy {
+  padding: 1.5rem 0 1.75rem 1.25rem;
+}
+
+.coach-review-viewport {
+  overflow: hidden;
+  border-left: 2px solid #d0a54f;
+}
+
+.coach-portrait {
+  position: relative;
+  height: 29rem;
+  overflow: hidden;
+  background: #dedbd2;
+}
+
+.coach-portrait-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 640px) {
+  .coach-portrait {
+    height: 35rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .coach-details-grid {
+    grid-template-columns: minmax(0, 0.75fr) minmax(19rem, 1.25fr);
+    align-items: end;
+  }
+
+  .coach-testimonial-layout {
+    grid-template-columns: minmax(18rem, 0.55fr) minmax(0, 1.45fr);
+  }
+
+  .coach-testimonial-title {
+    min-height: 25.5rem;
+    justify-content: space-between;
+    padding: 2rem 2.5rem 2rem 0;
+  }
+
+  .coach-testimonial-copy {
+    padding: 1.25rem 0 1rem 2.75rem;
+  }
+
+  .coach-portrait {
+    height: 39rem;
+  }
 }

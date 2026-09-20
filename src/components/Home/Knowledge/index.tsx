@@ -5,10 +5,15 @@ const Slider = (SliderModule as any).default || SliderModule;
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { SiteLanguage } from '../../../App'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const Knowledge = () => {
+interface KnowledgeProps {
+  language: SiteLanguage
+}
+
+const Knowledge = ({ language }: KnowledgeProps) => {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null)
   const [slidesToShow, setSlidesToShow] = useState(3)
 
@@ -31,6 +36,9 @@ const Knowledge = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const sliderRef = useRef<HTMLDivElement>(null)
+  const copy = language === 'vi'
+    ? { eyebrow: 'Góc chuyên gia', title: <>HỌC HỎI TỪ<br className='hidden md:block' /> CHUYÊN GIA.</> }
+    : { eyebrow: 'Expert advice', title: <>LEARN FROM <br className='hidden md:block' /> THE PROS.</> }
 
   useGSAP(() => {
     gsap.set([headerRef.current?.children, sliderRef.current], {
@@ -106,10 +114,10 @@ const Knowledge = () => {
         <div ref={headerRef} className='flex flex-col md:flex-row justify-between items-start md:items-end mb-12 lg:mb-16 border-b border-white/10 pb-8'>
           <div className='max-w-2xl'>
             <p className='text-[#C5A059] text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 font-bold'>
-              EXPERT ADVICE
+              {copy.eyebrow}
             </p>
             <h2 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white font-heading uppercase tracking-tighter leading-[0.9]'>
-              LEARN FROM <br className='hidden md:block' /> THE PROS.
+              {copy.title}
             </h2>
           </div>
         </div>

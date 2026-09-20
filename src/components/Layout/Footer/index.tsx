@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Button from '../../ui/Button'
+import React from 'react'
 
 // ── Social SVGs ─────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
@@ -58,22 +57,12 @@ const quickLinks = [
 ]
 
 const hours = [
-  { day: 'Thứ 2 – Thứ 6', time: '05:30 – 22:30' },
-  { day: 'Thứ 7', time: '06:00 – 21:00' },
-  { day: 'Chủ nhật', time: '07:00 – 20:00' },
+  { day: 'Thứ 2 – Thứ 7', time: '05:30 – 20:30' },
+  { day: 'Chủ nhật', time: '08:00 – 19:00' },
 ]
 
 // ── Footer ───────────────────────────────────────────────────────────────────
 const Footer = () => {
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email.trim()) setSubmitted(true)
-  }
-
   return (
     <footer id='Contact' className='bg-[var(--color-deep-slate)] text-white'>
 
@@ -81,7 +70,7 @@ const Footer = () => {
 
       {/* Main footer grid */}
       <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-16'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+        <div className='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
 
           {/* COL 1 — Brand */}
           <div className='lg:col-span-1'>
@@ -107,7 +96,7 @@ const Footer = () => {
                 <FacebookIcon />
               </a>
               <a
-                href='https://www.tiktok.com/@vio.gymfitness'
+                href='https://www.tiktok.com/@viofitness.dn'
                 target='_blank'
                 rel='noreferrer'
                 id='footer-tiktok'
@@ -117,7 +106,7 @@ const Footer = () => {
                 <TikTokIcon />
               </a>
               <a
-                href='https://www.instagram.com/vio.gymfitness?igsh=MTc5djl0amFyNXBmYw=='
+                href='https://www.instagram.com/vio.gymfitness/'
                 target='_blank'
                 rel='noreferrer'
                 id='footer-instagram'
@@ -193,55 +182,6 @@ const Footer = () => {
                 </ul>
               </li>
             </ul>
-          </div>
-
-          {/* COL 4 — Newsletter / Tư vấn */}
-          <div>
-            <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-2'>
-              Đăng ký tư vấn
-            </p>
-            <p className='text-white/50 text-sm mb-6 leading-relaxed'>
-              Để lại thông tin — đội ngũ VIO sẽ liên hệ tư vấn gói tập phù hợp nhất cho bạn.
-            </p>
-
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className='space-y-3' id='footer-consult-form'>
-                <input
-                  type='text'
-                  placeholder='Họ và tên'
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  className='w-full bg-white/5 border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[var(--color-primary)] transition-colors duration-200'
-                  id='footer-input-name'
-                />
-                <input
-                  type='tel'
-                  placeholder='Số điện thoại *'
-                  required
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className='w-full bg-white/5 border border-white/15 text-white text-sm px-4 py-3 placeholder:text-white/30 focus:outline-none focus:border-[var(--color-primary)] transition-colors duration-200'
-                  id='footer-input-phone'
-                />
-                <Button
-                  type='submit'
-                  id='footer-submit-btn'
-                  variant='primary'
-                  className='w-full'
-                >
-                  Gửi yêu cầu tư vấn
-                </Button>
-              </form>
-            ) : (
-              <div className='border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 p-5 text-center'>
-                <p className='text-[var(--color-primary)] font-heading font-bold uppercase tracking-wider text-sm mb-1'>
-                  Đã nhận!
-                </p>
-                <p className='text-white/60 text-sm'>
-                  VIO sẽ liên hệ với bạn trong thời gian sớm nhất.
-                </p>
-              </div>
-            )}
           </div>
 
         </div>

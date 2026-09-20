@@ -8,6 +8,7 @@ import Button from '../../ui/Button'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { SiteLanguage } from '../../../App'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -31,7 +32,11 @@ const getAvatarBg = (name: string) => {
   return bgClasses[Math.abs(hash) % bgClasses.length]
 }
 
-const Testimonials = () => {
+interface TestimonialsProps {
+  language: SiteLanguage
+}
+
+const Testimonials = ({ language }: TestimonialsProps) => {
   const [slidesToShow, setSlidesToShow] = useState(3)
 
   useEffect(() => {
@@ -55,6 +60,19 @@ const Testimonials = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const sliderRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const copy = language === 'vi'
+    ? {
+        label: 'Khách quốc tế',
+        title: <>KHÁCH QUỐC TẾ NÓI GÌ<br className="hidden sm:block" /> VỀ VIO FITNESS.</>,
+        ratingCount: '(99+ đánh giá)',
+        moreReviews: 'Xem thêm đánh giá trên Google',
+      }
+    : {
+        label: 'International guests',
+        title: <>WHAT INTERNATIONAL<br className="hidden sm:block" /> GUESTS SAY ABOUT VIO FITNESS.</>,
+        ratingCount: '(99+ reviews)',
+        moreReviews: 'See more reviews on Google',
+      }
 
   useGSAP(() => {
     // Hardware acceleration
@@ -102,28 +120,40 @@ const Testimonials = () => {
 
   const reviews = [
     {
-      name: 'AKEMI MEDIA',
-      time: '1 month ago',
+      name: 'Eddy',
+      time: 'Hàn Quốc',
       rating: 5,
-      comment: 'One of the best gyms I’ve been to in Da Nang. So clean, vibey and has every piece of equipment you can think of. Awesome sauna too. The staff is always welcoming, and the overall atmosphere really pushes you to train harder. Highly recommend this place to anyone looking for a premium workout experience in the city.',
+      comment: '한국인 입맛에 딱 맞는 헬스장입니다. 오시게 되면 왜 이 장소가 평점 5.0인지 알게 됩니다. 에어컨이 엄청 강하고 한국 헬스장이랑 거의 비슷합니다. 수입산 머신부터 시작해서 샤워실이랑 엄청 좋습니다. 여기보다 좋은 곳은 없는 것 같아요 😀 직원들도 엄청 친절하고 기구 어떻게 쓰는지 물어보니까 친절하게 알려줍니다!!',
     },
     {
-      name: 'Niko gangadean',
-      time: '2 months ago',
+      name: '고건',
+      time: 'Hàn Quốc · Local Guide Cấp 3',
       rating: 5,
-      comment: 'Vio Fitness is a wonderful gym. Plenty of machines, great free weight options, all very clean and functional. It is the perfect temperature with fans running and good AirCon. Not too crowded, and incredible service. Henry was the one upfront at the time and was incredibly helpful and attentive.',
+      comment: '1. 에어컨, 선풍기 모두 틀어져있어 시원하게 운동가능\n\n2. 머신 (파나타, 해머스트랭스 바벨과 덤벨)이 가슴, 하체, 등, 어깨 뭐 할 것 없이 다 있고 찐인 것 같음. 자극이나 무게가 제대로 박힘\n\n3. 다낭에 프로틴 음료 파는 곳이 없어 먹고 싶어도 못 사먹는데 여기는 프로틴 웨이 쉐이크 스무디가 있어서 단백질 보충 바로 가능. 맛도 맛있음 (망고랑 바나나 맛 있음, 그 외 카페 음료도 많음)\n\n4. 직원들도 친절하고 운동 방해 안 하고 샤워시설이나 치안도 굉장히 좋음\n\n장점만 적은 것 같지만 단점이 없는 헬스장임. 다낭에서 헬스장 갈 거면 무조건 여기가야함. 여기 안 가면 인생 손해보는 거임.',
     },
     {
-      name: 'Hai Ha Thanh',
-      time: '3 weeks ago',
+      name: 'Scott Carter',
+      time: 'Mỹ · Local Guide Cấp 3',
       rating: 5,
-      comment: 'Great gym with a clean and modern environment. The equipment is new and well-maintained, with everything you need for a full workout. I especially like that they have a sauna, which is perfect for relaxing after training. The drinks are also delicious and provide great energy for workouts. Friendly atmosphere and a very comfortable place to work out. Highly recommended!',
+      comment: "Vio gym is awesome! Coming from the U.S. I've been to a lot of Gyms, this is one of the best! Equipment a gym rat would love. Staff was very nice and the place is spotless.",
     },
     {
-      name: 'Mikalil Kuncekli',
-      time: '1 month ago',
+      name: 'Carmela DOUANLA TIOUA',
+      time: 'Mỹ · Local Guide Cấp 5',
       rating: 5,
-      comment: 'I have trained in many gyms across Asia, but this is by far the friendliest, nicest, and most welcoming gym I’ve ever been to. The atmosphere is amazing and the staff are incredibly kind and helpful. The equipment is top-notch and the layout is very spacious, meaning you never feel crowded even during peak hours.',
+      comment: 'Vio Fitness is an excellent gym that I highly recommend! The facility is very functional, exceptionally clean, and equipped with a wide variety of modern, high-quality machines. Everything is well maintained, making every workout enjoyable.\n\nThe air conditioning is fantastic, which makes a huge difference during training, and the entire staff is welcoming, friendly, and professional.\n\nA special thank you to Vuong for taking such beautiful videos of me during my workout. I really appreciate the time and care you put into them — they turned out amazing!\n\nIf you’re looking for a clean, well-equipped gym with a great atmosphere and outstanding staff, Vio Fitness is definitely the place to train.',
+    },
+    {
+      name: 'Kanon Koide',
+      time: 'Nhật Bản · Local Guide Cấp 3',
+      rating: 5,
+      comment: '今回ダナンでの長期滞在中に、トレーニングできるジムを探していたところ、こちらを見つけました。施設は外観も内装も清潔感があり、とても快適に過ごせる空間でした。\n\n興味本位で1時間のパーソナルトレーニングも受けてみましたが、想像以上に充実した時間でした。英語でコミュニケーションを取りながら進めてくださり、丁寧にフォームやトレーニング内容を説明してくれたので、安心して参加できました。\n\n普段トレーニングをしている人はもちろん、海外でジムに行くのが初めての方でも通いやすい環境だと思います。スタッフの方も親切で、ダナン滞在中にまた利用したいと思える場所でした。ありがとうございました！',
+    },
+    {
+      name: 'Kasia Holysz',
+      time: 'International guest',
+      rating: 5,
+      comment: 'Really enjoyed this gym. It has a nice boutique feel and everything is clean, modern and looks pretty new. The day pass is 200,000 VND, and you can pay by card with a 3% surcharge.\n\nYou get two towels, and there’s also a sauna and the option to have a protein shake after your workout. Water is available to buy too.\n\nI went early in the morning and basically had the whole gym to myself, which was great. One of the staff members was really kind and showed me how to use a couple of machines I hadn’t used before.\n\nThe air conditioning is also a big plus in Da Nang! Overall, a really good experience and definitely somewhere I’d come back to.',
     }
   ]
 
@@ -144,10 +174,10 @@ const Testimonials = () => {
         <div ref={headerRef} className='text-center max-w-3xl mx-auto mb-16 sm:mb-20'>
           <div className='flex justify-center items-center gap-4 mb-4'>
             <Icon icon='logos:google-icon' className='text-2xl sm:text-3xl' />
-            <span className='text-xl sm:text-2xl font-bold text-gray-700 tracking-wider uppercase font-heading'>Reviews</span>
+            <span className='text-xl sm:text-2xl font-bold text-gray-700 tracking-wider uppercase font-heading'>{copy.label}</span>
           </div>
           <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 font-heading tracking-tighter uppercase leading-[0.9] text-gray-900'>
-            WHAT OUR <br className="hidden sm:block" />MEMBERS SAY.
+            {copy.title}
           </h2>
           <div className='flex flex-wrap items-center justify-center gap-2'>
             <span className='text-3xl sm:text-4xl font-bold font-heading text-gray-900'>5.0</span>
@@ -158,7 +188,7 @@ const Testimonials = () => {
               <Icon icon='ic:round-star' />
               <Icon icon='ic:round-star' />
             </div>
-            <span className='text-gray-500 font-medium text-sm sm:text-base ml-2'>(99+ reviews)</span>
+            <span className='text-gray-500 font-medium text-sm sm:text-base ml-2'>{copy.ratingCount}</span>
           </div>
         </div>
 
@@ -184,7 +214,7 @@ const Testimonials = () => {
                     </div>
                     <Icon icon='logos:google-icon' className='text-xl sm:text-2xl opacity-50 shrink-0 hidden sm:block' />
                   </div>
-                  <p className='text-gray-600 leading-relaxed text-sm sm:text-base'>"{review.comment}"</p>
+                  <p className='whitespace-pre-line text-gray-600 leading-relaxed text-sm sm:text-base'>“{review.comment}”</p>
                 </div>
               </div>
             ))}
@@ -200,7 +230,7 @@ const Testimonials = () => {
             icon="logos:google-icon"
             className="w-full sm:w-auto text-center justify-center"
           >
-            Xem thêm đánh giá trên Google
+            {copy.moreReviews}
           </Button>
         </div>
       </div>
