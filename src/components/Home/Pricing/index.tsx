@@ -113,13 +113,13 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
       });
 
       tl.to('.pricing-card-0, .pricing-card-4', {
-        x: 0, y: 64, scale: 0.95, opacity: 0.9, duration: 0.8, ease: 'power3.out'
+        x: 0, y: 44, scale: 0.9, opacity: 0.9, duration: 0.8, ease: 'power3.out'
       }, 0)
       .to('.pricing-card-1, .pricing-card-3', {
-        x: 0, y: 24, scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out'
+        x: 0, y: 18, scale: 0.96, opacity: 1, duration: 0.8, ease: 'power3.out'
       }, 0.1)
       .to('.pricing-card-2', {
-        x: 0, y: -32, scale: 1.15, opacity: 1, duration: 0.8, ease: 'power3.out'
+        x: 0, y: -18, scale: 1.06, opacity: 1, duration: 0.8, ease: 'power3.out'
       }, 0.2);
     });
 
@@ -140,11 +140,11 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
 
   const getCardStyle = (index: number) => {
     // Center card (Index 2)
-    if (index === 2) return 'border-[2px] border-[var(--color-primary)] shadow-[0_0_40px_rgba(140,120,83,0.4)] z-30 bg-[var(--color-darkmode)] min-h-[580px]'
+    if (index === 2) return 'border-[2px] border-[var(--color-primary)] shadow-[0_0_40px_rgba(140,120,83,0.4)] z-30 bg-[var(--color-darkmode)] min-h-[510px]'
     // Inner neighbors (Index 1 & 3)
-    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 bg-[var(--color-deep-slate)] min-h-[540px]'
+    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 bg-[var(--color-deep-slate)] min-h-[480px]'
     // Outer neighbors (Index 0 & 4)
-    return 'border border-gray-600 shadow-xl z-10 hover:opacity-100 bg-black/90 min-h-[500px]'
+    return 'border border-gray-600 shadow-xl z-10 hover:opacity-100 bg-black/90 min-h-[450px]'
   }
 
   type Plan = (typeof plans)[number]
@@ -168,29 +168,29 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
         />
         <div className='absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/85 to-[#111]' />
 
-        <div className='relative z-10 p-6 xl:p-8 flex flex-col h-full'>
+        <div className='relative z-10 p-4 xl:p-5 flex flex-col h-full'>
           {plan.isPopular && (
             <div className='absolute -top-1 left-1/2 -translate-x-1/2 bg-[var(--color-darkmode)] border border-[var(--color-primary)] text-[var(--color-primary)] px-6 py-2 rounded-b-md text-xs font-bold uppercase tracking-widest whitespace-nowrap shadow-lg'>
               {copy.popular}
             </div>
           )}
 
-          <div className={`text-center ${plan.isPopular ? 'mt-8' : 'mt-4'} mb-8 pb-6 border-b border-gray-600/50`}>
-            <p className='min-h-8 text-gray-200 tracking-[0.12em] text-[11px] leading-relaxed uppercase font-sans font-bold'>{plan.tagline}</p>
-            <h3 className='mt-3 text-2xl lg:text-3xl font-bold text-white mb-6'>{plan.name}</h3>
+          <div className={`text-center ${plan.isPopular ? 'mt-6' : 'mt-2'} mb-4 pb-4 border-b border-gray-600/50`}>
+            <p className='min-h-6 text-gray-200 tracking-[0.1em] text-[10px] leading-snug uppercase font-sans font-bold'>{plan.tagline}</p>
+            <h3 className='mt-2 text-xl lg:text-2xl font-bold text-white mb-3'>{plan.name}</h3>
             <div className='flex items-baseline justify-center text-white'>
-              <span className='text-2xl lg:text-3xl font-black tracking-tight'>{plan.priceVND}</span>
+              <span className='text-xl lg:text-2xl font-black tracking-tight'>{plan.priceVND}</span>
             </div>
-            <div className='flex items-baseline justify-center text-[var(--color-primary)] mt-2'>
-              <span className='text-xl lg:text-2xl font-bold tracking-tight'>{plan.priceUSD}</span>
+            <div className='flex items-baseline justify-center text-[var(--color-primary)] mt-1'>
+              <span className='text-lg lg:text-xl font-bold tracking-tight'>{plan.priceUSD}</span>
             </div>
           </div>
 
-          <ul className='space-y-3 mb-8 flex-grow'>
+          <ul className='space-y-2 mb-4 flex-grow'>
             {plan.features.map((feature, featureIndex) => (
-              <li key={featureIndex} className='flex items-start text-gray-100 text-sm xl:text-[13px]'>
-                <Icon icon='tabler:check' className='text-[var(--color-primary)] text-xl mr-3 flex-shrink-0 mt-0.5' />
-                <span className='leading-relaxed font-sans'>{feature}</span>
+              <li key={featureIndex} className='flex items-start text-gray-100 text-xs xl:text-[12px]'>
+                <Icon icon='tabler:check' className='text-[var(--color-primary)] text-base mr-2 flex-shrink-0 mt-0.5' />
+                <span className='leading-snug font-sans'>{feature}</span>
               </li>
             ))}
           </ul>

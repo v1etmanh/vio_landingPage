@@ -38,6 +38,7 @@ interface TestimonialsProps {
 
 const Testimonials = ({ language }: TestimonialsProps) => {
   const [slidesToShow, setSlidesToShow] = useState(3)
+  const [selectedReviewIndex, setSelectedReviewIndex] = useState<number | null>(null)
 
   useEffect(() => {
     const handleResize = () => {
@@ -66,12 +67,16 @@ const Testimonials = ({ language }: TestimonialsProps) => {
         title: <>KHÁCH QUỐC TẾ NÓI GÌ<br className="hidden sm:block" /> VỀ VIO FITNESS.</>,
         ratingCount: '(99+ đánh giá)',
         moreReviews: 'Xem thêm đánh giá trên Google',
+        readFull: 'Xem toàn bộ',
+        close: 'Đóng',
       }
     : {
         label: 'International guests',
         title: <>WHAT INTERNATIONAL<br className="hidden sm:block" /> GUESTS SAY ABOUT VIO FITNESS.</>,
         ratingCount: '(99+ reviews)',
         moreReviews: 'See more reviews on Google',
+        readFull: 'Read full review',
+        close: 'Close',
       }
 
   useGSAP(() => {
@@ -168,6 +173,8 @@ const Testimonials = ({ language }: TestimonialsProps) => {
     swipeToSlide: true,
   }
 
+  const selectedReview = selectedReviewIndex === null ? null : reviews[selectedReviewIndex]
+
   return (
     <section id='Reviews' ref={sectionRef} className='py-24 lg:py-32 overflow-hidden bg-white'>
       <div className='container mx-auto max-w-[1600px] px-4 sm:px-6 md:px-12 lg:px-8'>
@@ -196,8 +203,8 @@ const Testimonials = ({ language }: TestimonialsProps) => {
           <Slider {...settings} className='testimonial-slider'>
             {reviews.map((review, index) => (
               <div key={index} className='px-2 sm:px-4 pb-10'>
-                <div className='bg-white p-5 sm:p-8 rounded-2xl shadow-lg border border-gray-100'>
-                  <div className='flex flex-wrap items-center mb-4 gap-3'>
+                <div className='flex h-[23rem] flex-col rounded-2xl border border-gray-100 bg-white p-5 shadow-lg sm:h-[25rem] sm:p-7'>
+                  <div className='flex min-h-[3.5rem] flex-wrap items-center gap-3'>
                     <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 flex items-center justify-center font-bold text-white text-lg sm:text-xl font-heading shadow-md ${getAvatarBg(review.name)}`}>
                       {getInitials(review.name)}
                     </div>
@@ -214,12 +221,45 @@ const Testimonials = ({ language }: TestimonialsProps) => {
                     </div>
                     <Icon icon='logos:google-icon' className='text-xl sm:text-2xl opacity-50 shrink-0 hidden sm:block' />
                   </div>
-                  <p className='whitespace-pre-line text-gray-600 leading-relaxed text-sm sm:text-base'>“{review.comment}”</p>
+                  <div className='relative mt-4 flex-1 overflow-hidden'>
+                    <p className='line-clamp-7 whitespace-pre-line text-sm leading-relaxed text-gray-600 sm:text-base'>“{review.comment}”</p>
+                    <div className='pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white to-transparent' />
+                  </div>
+                  <button type='button' onClick={() => setSelectedReviewIndex(index)} className='mt-3 inline-flex w-fit items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-[var(--color-primary)] transition-colors hover:text-[var(--color-darkmode)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]'>
+                    {copy.readFull} <Icon icon='tabler:arrow-up-right' className='text-base' aria-hidden='true' />
+                  </button>
                 </div>
               </div>
             ))}
           </Slider>
         </div>
+
+        {selectedReview && (
+          <div className='fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm' role='dialog' aria-modal='true' aria-label={`${copy.readFull}: ${selectedReview.name}`} onMouseDown={() => setSelectedReviewIndex(null)}>
+            <div className='max-h-[88vh] w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl' onMouseDown={(event) => event.stopPropagation()}>
+              <div className='flex items-start justify-between gap-5 border-b border-black/10 p-5 sm:p-7'>
+                <div className='flex items-center gap-3'>
+                  <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-heading text-lg font-bold text-white ${getAvatarBg(selectedReview.name)}`}>
+                    {getInitials(selectedReview.name)}
+                  </div>
+                  <div>
+                    <p className='font-bold text-gray-900'>{selectedReview.name}</p>
+                    <p className='mt-1 text-xs text-gray-400'>{selectedReview.time}</p>
+                  </div>
+                </div>
+                <button type='button' onClick={() => setSelectedReviewIndex(null)} className='grid h-10 w-10 shrink-0 place-items-center rounded-full border border-black/10 text-gray-500 transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]' aria-label={copy.close} title={copy.close}>
+                  <Icon icon='tabler:x' className='text-xl' aria-hidden='true' />
+                </button>
+              </div>
+              <div className='max-h-[calc(88vh-7rem)] overflow-y-auto p-5 sm:p-7'>
+                <div className='mb-5 flex text-[#fbbc04] text-base' aria-label='5 stars'>
+                  {Array.from({ length: selectedReview.rating }).map((_, index) => <Icon key={index} icon='ic:round-star' />)}
+                </div>
+                <p className='whitespace-pre-line text-sm leading-relaxed text-gray-700 sm:text-base'>“{selectedReview.comment}”</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div ref={ctaRef} className='mt-8 sm:mt-12 flex justify-center px-4'>
           <Button 
