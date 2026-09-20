@@ -186,8 +186,8 @@ html[lang='vi'] .font-heading {
 
 .coach-client-gallery {
   position: relative;
-  min-height: 19rem;
-  height: 19rem;
+  min-height: 16rem;
+  height: 16rem;
   overflow: hidden;
   background: #e8e4da;
 }
@@ -207,6 +207,8 @@ html[lang='vi'] .font-heading {
 }
 
 .coach-review-viewport {
+  margin-left: 15.5%;
+  align-self: start;
   overflow: hidden;
   border-left: 2px solid #d0a54f;
 }
@@ -236,7 +238,7 @@ html[lang='vi'] .font-heading {
 @media (min-width: 1024px) {
   .coach-details-grid {
     grid-template-columns: minmax(0, 0.75fr) minmax(19rem, 1.25fr);
-    align-items: end;
+    align-items: start;
   }
 
   .coach-testimonial-layout {
@@ -244,13 +246,13 @@ html[lang='vi'] .font-heading {
   }
 
   .coach-testimonial-title {
-    min-height: 25.5rem;
-    justify-content: space-between;
-    padding: 2rem 2.5rem 2rem 0;
+    min-height: 0;
+    justify-content: flex-start;
+    padding: 1.5rem 2.5rem 0.75rem 0;
   }
 
   .coach-testimonial-copy {
-    padding: 1.25rem 0 1rem 2.75rem;
+    padding: 0.85rem 0 0.5rem 2.75rem;
   }
 
   .coach-portrait {

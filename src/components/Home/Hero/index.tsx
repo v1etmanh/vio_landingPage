@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Icon } from '@iconify/react'
 import Button from '../../ui/Button'
 import type { SiteLanguage } from '../../../App'
@@ -8,8 +8,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ language }) => {
-  const { scrollY } = useScroll()
-  const backgroundY = useTransform(scrollY, [0, 600], ['0%', '15%'])
+  const heroImage = '/ChatGPT%20Image%20Sep%2020,%202026,%2002_57_19%20PM.png'
   const content = language === 'vi'
     ? {
         location: '15 TRẦN PHÚ • HẢI CHÂU • ĐÀ NẴNG',
@@ -33,39 +32,25 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
   return (
     <section
       id='Home'
-      className='relative w-full min-h-[100vh] flex items-center overflow-hidden -mt-[80px]'
+      className='relative mt-[80px] flex min-h-[calc(100dvh-80px)] w-full items-center overflow-hidden'
     >
-      {/* ── Full-bleed Background Photo ── */}
-      <motion.div
-        className='absolute inset-0 w-full h-full z-0 pointer-events-none'
-        style={{ y: backgroundY }}
-      >
-        {/* Base bright image */}
-        <img
-          src='/webp/images/KSP02404-HDR-Edit.webp'
-          alt='VIO Fitness interior'
-          className='absolute inset-0 w-full h-full object-cover object-center scale-105'
-        />
-
-        {/* Dark Gradient Overlay for the background image to make foreground text pop */}
-        <div className='absolute inset-0 pointer-events-none bg-gradient-to-r from-black/80 via-black/50 to-transparent' />
-
-        {/* Premium Massive Typography Watermark */}
+      {/* Single supplied image across the full hero. */}
+      <div className='absolute inset-0 z-0 overflow-hidden bg-black'>
+        <img src={heroImage} alt='' className='h-full w-full object-cover object-center' fetchPriority='high' />
+        <div className='absolute inset-y-0 left-0 w-[78%] bg-gradient-to-r from-black/90 via-black/68 to-transparent sm:w-[66%] lg:w-[52%]' />
+        <div className='absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
         <div className='absolute inset-0 flex items-center justify-end pr-[5%] lg:pr-[8%] pointer-events-none'>
-          <h1 
-            className='font-black text-[35vw] md:text-[28vw] xl:text-[30vw] tracking-tighter select-none leading-none mix-blend-overlay opacity-80'
-            style={{ 
-              color: 'transparent',
-              WebkitTextStroke: '3px rgba(255, 255, 255, 0.8)',
-            }}
+          <span
+            className='select-none font-heading text-[38vw] font-black leading-none tracking-tighter mix-blend-overlay opacity-70 md:text-[29vw] xl:text-[30vw]'
+            style={{ color: 'transparent', WebkitTextStroke: '3px rgba(255, 255, 255, 0.72)' }}
           >
             VIO
-          </h1>
+          </span>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Content ── */}
-      <div className='relative z-10 w-full pt-[80px]'>
+      <div className='relative z-10 w-full'>
         <div className='container mx-auto max-w-[1700px] px-4 sm:px-6 lg:px-12 py-12 lg:py-24'>
 
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-8 items-center'>

@@ -212,7 +212,7 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
             <header className='coach-testimonial-title'>
               <div>
                 <p className='mb-3 text-[11px] font-extrabold uppercase tracking-[0.23em] text-[#a87e32]'>{copy.eyebrow}</p>
-                <h2 className='font-heading text-4xl font-black uppercase leading-[0.88] tracking-tight sm:text-5xl lg:text-[clamp(3.25rem,4vw,4.75rem)]'>{copy.title}</h2>
+                <h2 className='font-heading text-3xl font-black uppercase leading-[0.9] tracking-tight sm:text-4xl lg:text-[clamp(2.75rem,3.1vw,3.75rem)]'>{copy.title}</h2>
               </div>
               <p className='mt-8 max-w-[17rem] text-sm leading-relaxed text-black/55 lg:ml-auto lg:text-right'>{language === 'vi' ? 'Ba chuyên gia. Ba phương pháp. Một hành trình mạnh mẽ hơn.' : 'Three specialists. Three approaches. One stronger journey.'}</p>
             </header>
@@ -222,13 +222,13 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                   const reviewIndex = reviewIndexes[trainerIndex] ?? 0
                   const review = trainer.reviews[reviewIndex] ?? trainer.reviews[0]
                   return <div key={trainer.name} className='coach-testimonial-copy w-full shrink-0'>
-                    <p className='mb-3 text-xl leading-none tracking-[0.18em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
-                    <p className='font-heading max-w-4xl text-lg leading-[1.18] tracking-tight sm:text-xl lg:text-[clamp(1.35rem,1.65vw,1.9rem)]'>&ldquo;{review.quote}&rdquo;</p>
-                    <div className='mt-5 flex items-center gap-3'>
+                    <p className='mb-2 text-lg leading-none tracking-[0.18em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
+                    <p className='font-heading max-w-4xl text-base leading-[1.22] tracking-tight sm:text-lg lg:text-[clamp(1.15rem,1.3vw,1.5rem)]'>&ldquo;{review.quote}&rdquo;</p>
+                    <div className='mt-4 flex items-center gap-3'>
                       <span aria-hidden='true' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: avatarColour(review.name), color: '#ffffff', boxShadow: '0 0 0 3px #f0e2bf', fontFamily: 'Inter, sans-serif', lineHeight: 1, textAlign: 'center' }} className='h-11 w-11 shrink-0 rounded-full text-base font-black'>{review.name.trim().charAt(0).toUpperCase()}</span>
                       <p className='text-xs font-extrabold uppercase tracking-[0.16em] text-black/55'>{review.name}{review.from ? ` · ${review.from}` : ''}</p>
                     </div>
-                    {trainer.reviews.length > 1 && <div className='mt-5 flex flex-wrap gap-2'>
+                    {trainer.reviews.length > 1 && <div className='mt-4 flex flex-wrap gap-2'>
                       {trainer.reviews.map((item, index) => <button key={item.name} type='button' onClick={() => selectReview(trainerIndex, index)} aria-pressed={reviewIndex === index} className={`border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.13em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] ${reviewIndex === index ? 'border-[#171512] bg-[#171512] text-white' : 'border-black/15 text-black/55 hover:border-[#a87e32] hover:text-[#171512]'}`}>{item.name}</button>)}
                     </div>}
                   </div>
@@ -238,16 +238,21 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
           </div>
         </div>
 
-        <div className='mt-10 overflow-hidden lg:mt-12'>
+        <div className='-mt-6 overflow-hidden lg:-mt-20'>
           <div className='flex will-change-transform transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]' style={{ transform: `translate3d(-${activeTrainerIndex * 100}%, 0, 0)` }}>
             {trainers.map((trainer, trainerIndex) => (
               <article key={trainer.name} aria-label={trainer.name} className='w-full shrink-0'>
                 <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
                   <div className='grid gap-8 lg:grid-cols-12 lg:gap-12 xl:gap-16'>
-                  <figure className='coach-portrait lg:col-span-5'>
-                    <img src={trainer.portraitImage} alt={`${trainer.name}, ${trainer.role}`} className='coach-portrait-image' style={{ objectPosition: trainer.portraitPosition }} loading={trainerIndex === 0 ? 'eager' : 'lazy'} />
-                    <figcaption className='absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(20,17,13,.7),transparent)] px-6 pb-6 pt-20 text-[11px] font-extrabold uppercase tracking-[0.17em] text-white/85'>{trainer.focus}</figcaption>
-                  </figure>
+                  <div className='lg:col-span-5'>
+                    <figure className='coach-portrait'>
+                      <img src={trainer.portraitImage} alt={`${trainer.name}, ${trainer.role}`} className='coach-portrait-image' style={{ objectPosition: trainer.portraitPosition }} loading={trainerIndex === 0 ? 'eager' : 'lazy'} />
+                      <figcaption className='absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(20,17,13,.7),transparent)] px-6 pb-6 pt-20 text-[11px] font-extrabold uppercase tracking-[0.17em] text-white/85'>{trainer.focus}</figcaption>
+                    </figure>
+                    <a href='#Registration' className='mx-auto mt-4 flex w-fit items-center gap-3 bg-[#171512] px-5 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
+                      {copy.book} {trainer.name} <span aria-hidden='true'>↗</span>
+                    </a>
+                  </div>
 
                   <div className='flex flex-col justify-center py-1 lg:col-span-7 lg:py-5'>
                     <p className='text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#a87e32]'>{copy.meet}</p>
@@ -256,11 +261,11 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                     <p className='mt-7 max-w-2xl text-base leading-relaxed text-black/72 sm:text-lg'>{trainer.profile}</p>
                     <blockquote className='mt-7 max-w-xl border-l-2 border-[#d0a54f] pl-4 text-lg italic leading-relaxed text-black/80'>&ldquo;{trainer.quote}&rdquo;</blockquote>
 
-                    <div className='coach-details-grid mt-9'>
+                    <div className='coach-details-grid mt-6'>
                       <div>
-                        <p className='mb-3 text-[11px] font-extrabold uppercase tracking-[0.2em] text-black/50'>{copy.philosophy}</p>
-                        <ul className='space-y-3'>
-                          {trainer.specialties.map((specialty, index) => <li key={specialty} className='flex items-center gap-3 border-b border-black/10 py-3 text-xs font-extrabold leading-snug text-black/80'>
+                        <p className='mb-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-black/50'>{copy.philosophy}</p>
+                        <ul className='space-y-1'>
+                          {trainer.specialties.map((specialty, index) => <li key={specialty} className='flex items-center gap-3 border-b border-black/10 py-2 text-xs font-extrabold leading-snug text-black/80'>
                             <Icon icon={specialityIcons[index]} className='h-5 w-5 shrink-0 text-[#a87e32]' aria-hidden='true' />
                             {specialty}
                           </li>)}
@@ -270,10 +275,6 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                         {trainer.clientImages.map((image, index) => <img key={image} src={image} alt={`${trainer.name} coaching a VIO FITNESS member`} loading='lazy' style={clientImageStyle(index, trainer.clientImages.length)} className='absolute border-[3px] border-[#f7f6f1] object-cover shadow-[0_12px_24px_rgba(23,21,18,.18)]' />)}
                       </div>
                     </div>
-
-                    <a href='#Registration' className='mt-8 inline-flex w-fit items-center gap-3 bg-[#171512] px-5 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
-                      {copy.book} {trainer.name} <span aria-hidden='true'>↗</span>
-                    </a>
                   </div>
                   </div>
                 </div>
