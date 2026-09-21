@@ -140,11 +140,11 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
 
   const getCardStyle = (index: number) => {
     // Center card (Index 2)
-    if (index === 2) return 'border-[2px] border-[var(--color-primary)] shadow-[0_0_40px_rgba(140,120,83,0.4)] z-30 bg-[var(--color-darkmode)] min-h-[510px]'
+    if (index === 2) return 'border-[2px] border-[var(--color-primary)] shadow-[0_0_40px_rgba(140,120,83,0.4)] z-30 bg-[var(--color-darkmode)] min-h-[580px]'
     // Inner neighbors (Index 1 & 3)
-    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 bg-[var(--color-deep-slate)] min-h-[480px]'
+    if (index === 1 || index === 3) return 'border border-gray-600 shadow-2xl z-20 bg-[var(--color-deep-slate)] min-h-[550px]'
     // Outer neighbors (Index 0 & 4)
-    return 'border border-gray-600 shadow-xl z-10 hover:opacity-100 bg-black/90 min-h-[450px]'
+    return 'border border-gray-600 shadow-xl z-10 hover:opacity-100 bg-black/90 min-h-[520px]'
   }
 
   type Plan = (typeof plans)[number]
@@ -209,11 +209,11 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
   return (
     <section id='Pricing' ref={sectionRef} className='py-24 lg:py-32 bg-transparent relative z-10 overflow-hidden'>
       <div className='w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='text-center max-w-4xl mx-auto mb-10 xl:mb-32'>
+        <div className='text-center max-w-4xl mx-auto mb-8 xl:mb-16'>
           <p className='text-gray-600 text-xs sm:text-sm md:text-lg tracking-[0.1em] sm:tracking-[0.2em] uppercase mb-4 font-bold font-sans'>
             {copy.eyebrow}
           </p>
-          <h2 className='text-3xl sm:text-4xl md:text-6xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
+          <h2 className='text-2xl sm:text-3xl md:text-5xl font-black mb-6 text-[var(--color-darkmode)] tracking-tight'>
             {copy.title}
           </h2>
         </div>
@@ -248,7 +248,7 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
           {renderPlanCard(plans[activePlanIndex], activePlanIndex, 'pricing-card-mobile')}
         </div>
 
-        <div className='hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20 xl:pt-16 xl:pb-16'>
+        <div className='hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 xl:gap-4 items-stretch mb-20 xl:pt-6 xl:pb-16'>
           {plans.map((plan, index) => renderPlanCard(plan, index, 'pricing-card will-change-transform opacity-0'))}
         </div>
 
