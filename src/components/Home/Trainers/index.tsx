@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import type { CSSProperties, FC } from 'react'
-import { Icon } from '@iconify/react'
 import type { SiteLanguage } from '../../../App'
 
 interface TrainersProps { language: SiteLanguage }
@@ -16,7 +15,6 @@ interface Trainer {
   focus: string
   role: string
   profile: string
-  specialties: string[]
   quote: string
   portraitImage: string
   portraitPosition: string
@@ -46,7 +44,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       focus: 'Sức mạnh - Tăng cơ - Giảm mỡ',
       role: 'Huấn luyện viên cá nhân',
       profile: 'Coach Duy Bảo chuyên tăng cơ, giảm mỡ, sức mạnh và chuyển đổi vóc dáng. Phương pháp tập trung vào cơ chế vận động đúng, cải thiện tư thế và xây dựng một cơ thể bền bỉ.',
-      specialties: ['Tăng cơ và sức mạnh', 'Giảm mỡ và chuyển đổi vóc dáng', 'Cải thiện tư thế'],
       quote: 'Thêm một hiệp. Thêm một lần lặp. Mạnh mẽ hơn mỗi ngày.',
       portraitImage: '/webp/trainers/duy-bao.webp',
       portraitPosition: 'center 22%',
@@ -62,7 +59,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       focus: 'Vận động - Functional Training - Thể lực',
       role: 'Huấn luyện viên cá nhân',
       profile: 'Tốt nghiệp Cử nhân loại Giỏi Đại học Thể dục Thể thao Đà Nẵng, Coach Chí Công theo đuổi phương pháp tập luyện dựa trên nền tảng khoa học. Mỗi lộ trình được thiết kế theo thể trạng, mục tiêu và khả năng vận động của khách hàng.',
-      specialties: ['Kỹ năng vận động và kỹ thuật', 'Thể lực toàn diện', 'Mobility và phục hồi thể thao'],
       quote: 'Mỗi người có một mục tiêu tập luyện khác nhau. Tốt hơn mỗi ngày đã là một thành công.',
       portraitImage: '/webp/trainers/chi-cong.webp',
       portraitPosition: 'center 20%',
@@ -76,7 +72,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       focus: 'Chuyển đổi vóc dáng - Sức mạnh - Dinh dưỡng',
       role: 'Huấn luyện viên cá nhân',
       profile: 'Với hơn 5 năm trong ngành fitness, Mia chuyên chuyển đổi vóc dáng và xây nền tảng sức mạnh bền vững bằng phương pháp cá nhân hoá, có cơ sở khoa học. Mia tạo nên môi trường tập luyện ấm áp, giàu năng lượng bằng tiếng Việt, Anh và Trung.',
-      specialties: ['Chuyển đổi vóc dáng', 'Phát triển sức mạnh', 'Theo sát dinh dưỡng'],
       quote: 'Fitness không chỉ là nâng tạ. Đó là xây dựng sự tự tin, sức mạnh và niềm tin vào cơ thể của chính bạn.',
       portraitImage: '/webp/trainers/mia.webp',
       portraitPosition: 'center 20%',
@@ -94,7 +89,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       focus: 'Strength - Muscle Building - Fat Loss',
       role: 'Personal trainer',
       profile: 'Coach Duy Bao specialises in muscle hypertrophy, fat loss, strength conditioning, and body transformation. His approach prioritises movement mechanics and posture realignment for a balanced, powerful, resilient physique.',
-      specialties: ['Muscle building and strength', 'Fat loss and body transformation', 'Posture correction'],
       quote: 'One more set. One more rep. Become stronger.',
       portraitImage: '/webp/trainers/duy-bao.webp',
       portraitPosition: 'center 22%',
@@ -110,7 +104,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       focus: 'Movement - Functional Training - Conditioning',
       role: 'Personal trainer',
       profile: 'Coach Chi Cong graduated with distinction from Da Nang Sports University. His evidence-based programmes are built around each client’s condition and goals, from technique and body control to lasting confidence in independent training.',
-      specialties: ['Movement skills and technique', 'Physical conditioning', 'Mobility and sports recovery'],
       quote: 'Everyone has a different training goal. Becoming better every day is already a success.',
       portraitImage: '/webp/trainers/chi-cong.webp',
       portraitPosition: 'center 20%',
@@ -124,7 +117,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       focus: 'Body Transformation - Strength - Nutrition',
       role: 'Personal trainer',
       profile: 'With over five years in fitness, Mia specialises in body transformation and lasting strength through a personalised, science-backed approach. Fluent in Vietnamese, English, and Chinese, she creates a warm, high-energy setting where every client feels supported.',
-      specialties: ['Body transformation', 'Strength development', 'Nutrition accountability'],
       quote: 'Fitness is more than moving weights. It is sculpting confidence, building strength, and trusting your own body.',
       portraitImage: '/webp/trainers/mia.webp',
       portraitPosition: 'center 20%',
@@ -138,7 +130,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
   ],
 }
 
-const specialityIcons = ['tabler:barbell', 'tabler:bolt', 'tabler:target-arrow']
 const avatarColours = ['#b34b3d', '#1f6d68', '#47649f', '#9b4d79', '#b36b24', '#5d6f3d']
 
 const avatarColour = (name: string) => {
@@ -169,10 +160,10 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
   const nextIndex = (activeTrainerIndex + 1) % trainers.length
   const copy = language === 'vi'
     ? {
-        eyebrow: 'Đội ngũ huấn luyện viên', title: <>Đồng hành cùng<br />tiến bộ của bạn.</>, meet: 'Gặp gỡ HLV của bạn', philosophy: 'Triết lý huấn luyện', reviewLabel: 'Đánh giá từ khách hàng', reviewFor: 'Xem chia sẻ từ', previous: 'Trước', next: 'Tiếp', book: 'Đặt lịch cùng',
+        eyebrow: 'Đội ngũ huấn luyện viên', title: <>Đồng hành cùng tiến bộ của bạn.</>, meet: 'Gặp gỡ HLV của bạn', reviewLabel: 'Đánh giá từ khách hàng', reviewFor: 'Xem chia sẻ từ', previous: 'Trước', next: 'Tiếp', book: 'Đặt lịch cùng',
       }
     : {
-        eyebrow: 'Our coaches', title: <>Coaching your<br />progress.</>, meet: 'Meet your coach', philosophy: 'My philosophy', reviewLabel: 'Client testimonial', reviewFor: 'Read stories from', previous: 'Previous', next: 'Next', book: 'Book with',
+        eyebrow: 'Our coaches', title: <>Coaching your progress.</>, meet: 'Meet your coach', reviewLabel: 'Client testimonial', reviewFor: 'Read stories from', previous: 'Previous', next: 'Next', book: 'Book with',
       }
 
   const goToSlide = (index: number) => {
@@ -208,40 +199,22 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
         }}
       >
         <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
-          <div className='coach-testimonial-layout'>
-            <header className='coach-testimonial-title'>
-              <div>
-                <p className='mb-3 text-[11px] font-extrabold uppercase tracking-[0.23em] text-[#a87e32]'>{copy.eyebrow}</p>
-                <h2 className='font-heading text-3xl font-black uppercase leading-[0.9] tracking-tight sm:text-4xl lg:text-[clamp(2.75rem,3.1vw,3.75rem)]'>{copy.title}</h2>
-              </div>
-              <p className='mt-8 max-w-[17rem] text-sm leading-relaxed text-black/55 lg:ml-auto lg:text-right'>{language === 'vi' ? 'Ba chuyên gia. Ba phương pháp. Một hành trình mạnh mẽ hơn.' : 'Three specialists. Three approaches. One stronger journey.'}</p>
-            </header>
-            <div className='coach-review-viewport'>
-              <div className='flex will-change-transform transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]' style={{ transform: `translate3d(-${activeTrainerIndex * 100}%, 0, 0)` }}>
-                {trainers.map((trainer, trainerIndex) => {
-                  const reviewIndex = reviewIndexes[trainerIndex] ?? 0
-                  const review = trainer.reviews[reviewIndex] ?? trainer.reviews[0]
-                  return <div key={trainer.name} className='coach-testimonial-copy w-full shrink-0'>
-                    <p className='mb-2 text-lg leading-none tracking-[0.18em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
-                    <p className='font-heading max-w-4xl text-base leading-[1.22] tracking-tight sm:text-lg lg:text-[clamp(1.15rem,1.3vw,1.5rem)]'>&ldquo;{review.quote}&rdquo;</p>
-                    <div className='mt-4 flex items-center gap-3'>
-                      <span aria-hidden='true' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: avatarColour(review.name), color: '#ffffff', boxShadow: '0 0 0 3px #f0e2bf', fontFamily: 'Inter, sans-serif', lineHeight: 1, textAlign: 'center' }} className='h-11 w-11 shrink-0 rounded-full text-base font-black'>{review.name.trim().charAt(0).toUpperCase()}</span>
-                      <p className='text-xs font-extrabold uppercase tracking-[0.16em] text-black/55'>{review.name}{review.from ? ` · ${review.from}` : ''}</p>
-                    </div>
-                    {trainer.reviews.length > 1 && <div className='mt-4 flex flex-wrap gap-2'>
-                      {trainer.reviews.map((item, index) => <button key={item.name} type='button' onClick={() => selectReview(trainerIndex, index)} aria-pressed={reviewIndex === index} className={`border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.13em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] ${reviewIndex === index ? 'border-[#171512] bg-[#171512] text-white' : 'border-black/15 text-black/55 hover:border-[#a87e32] hover:text-[#171512]'}`}>{item.name}</button>)}
-                    </div>}
-                  </div>
-                })}
-              </div>
-            </div>
-          </div>
+          <header className='mx-auto w-full pb-16 text-center lg:pb-20'>
+            <p className='mb-3 text-[11px] font-extrabold uppercase tracking-[0.23em] text-[#a87e32]'>{copy.eyebrow}</p>
+            <h2 className='font-heading text-4xl font-black uppercase leading-[0.82] tracking-tighter sm:text-5xl md:text-6xl lg:text-8xl'>{copy.title}</h2>
+            <p className='mx-auto mt-8 max-w-md text-base leading-relaxed text-black/55 sm:text-lg'>{language === 'vi' ? 'Ba chuyên gia. Ba phương pháp. Một hành trình mạnh mẽ hơn.' : 'Three specialists. Three approaches. One stronger journey.'}</p>
+          </header>
         </div>
 
-        <div className='-mt-6 overflow-hidden lg:-mt-20'>
+        <div className='overflow-hidden'>
           <div className='flex will-change-transform transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]' style={{ transform: `translate3d(-${activeTrainerIndex * 100}%, 0, 0)` }}>
             {trainers.map((trainer, trainerIndex) => (
               <article key={trainer.name} aria-label={trainer.name} className='w-full shrink-0'>
+                {(() => {
+                  const reviewIndex = reviewIndexes[trainerIndex] ?? 0
+                  const review = trainer.reviews[reviewIndex] ?? trainer.reviews[0]
+
+                  return (
                 <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
                   <div className='grid gap-8 lg:grid-cols-12 lg:gap-12 xl:gap-16'>
                   <div className='lg:col-span-5'>
@@ -262,15 +235,18 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                     <blockquote className='mt-7 max-w-xl border-l-2 border-[#d0a54f] pl-4 text-lg italic leading-relaxed text-black/80'>&ldquo;{trainer.quote}&rdquo;</blockquote>
 
                     <div className='coach-details-grid mt-6'>
-                      <div>
-                        <p className='mb-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-black/50'>{copy.philosophy}</p>
-                        <ul className='space-y-1'>
-                          {trainer.specialties.map((specialty, index) => <li key={specialty} className='flex items-center gap-3 border-b border-black/10 py-2 text-xs font-extrabold leading-snug text-black/80'>
-                            <Icon icon={specialityIcons[index]} className='h-5 w-5 shrink-0 text-[#a87e32]' aria-hidden='true' />
-                            {specialty}
-                          </li>)}
-                        </ul>
-                      </div>
+                      <aside className='h-full border-l-2 border-[#d0a54f] bg-white/45 px-5 py-5 sm:px-6' aria-label={copy.reviewLabel}>
+                        <p className='mb-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#a87e32]'>{copy.reviewLabel}</p>
+                        <p className='mb-3 text-sm leading-none tracking-[0.16em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
+                        <blockquote className='font-heading text-sm leading-relaxed tracking-tight text-black/75 sm:text-[15px]'>&ldquo;{review.quote}&rdquo;</blockquote>
+                        <div className='mt-4 flex items-center gap-2.5'>
+                          <span aria-hidden='true' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: avatarColour(review.name), color: '#ffffff', boxShadow: '0 0 0 2px #f0e2bf', fontFamily: 'Inter, sans-serif', lineHeight: 1, textAlign: 'center' }} className='h-8 w-8 shrink-0 rounded-full text-xs font-black'>{review.name.trim().charAt(0).toUpperCase()}</span>
+                          <p className='text-[10px] font-extrabold uppercase tracking-[0.14em] text-black/55'>{review.name}{review.from ? ` · ${review.from}` : ''}</p>
+                        </div>
+                        {trainer.reviews.length > 1 && <div className='mt-4 flex flex-wrap gap-1.5'>
+                          {trainer.reviews.map((item, index) => <button key={item.name} type='button' onClick={() => selectReview(trainerIndex, index)} aria-pressed={reviewIndex === index} className={`border px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] ${reviewIndex === index ? 'border-[#171512] bg-[#171512] text-white' : 'border-black/15 text-black/55 hover:border-[#a87e32] hover:text-[#171512]'}`}>{item.name}</button>)}
+                        </div>}
+                      </aside>
                       <div className='coach-client-gallery'>
                         {trainer.clientImages.map((image, index) => <img key={image} src={image} alt={`${trainer.name} coaching a VIO FITNESS member`} loading='lazy' style={clientImageStyle(index, trainer.clientImages.length)} className='absolute border-[3px] border-[#f7f6f1] object-cover shadow-[0_12px_24px_rgba(23,21,18,.18)]' />)}
                       </div>
@@ -278,6 +254,8 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                   </div>
                   </div>
                 </div>
+                  )
+                })()}
               </article>
             ))}
           </div>
