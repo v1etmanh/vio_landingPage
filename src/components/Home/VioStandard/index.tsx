@@ -77,7 +77,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
   }
 
   return (
-    <section id='Standards' className='relative z-10 overflow-hidden bg-[#F5F2EC] py-16 sm:py-20 xl:py-28'>
+    <section id='Standards' className='relative z-10 overflow-hidden bg-[#F5F2EC] py-16 sm:py-20 xl:pt-28 xl:pb-0'>
       <div className='container relative mx-auto max-w-[1700px] px-4 sm:px-6 md:px-8 lg:px-12'>
         <div className='grid items-center gap-8 xl:grid-cols-[minmax(0,.9fr)_minmax(680px,1.1fr)] xl:gap-0'>
           <motion.div
@@ -135,7 +135,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
               </h3>
             </div>
 
-            <div className='grid max-w-xl grid-cols-3 gap-3 border-t border-[#26221F]/15 pt-5 sm:gap-6'>
+            <div className='grid max-w-[30rem] grid-cols-3 gap-3 border-t border-[#26221F]/15 pt-5 sm:gap-6'>
               {[
                 ['tabler:crown', '10+', copy.stats[0]],
                 ['tabler:users', '500+', copy.stats[1]],
