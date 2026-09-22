@@ -45,7 +45,7 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
       role: 'Huấn luyện viên cá nhân',
       profile: 'Coach Duy Bảo chuyên tăng cơ, giảm mỡ, sức mạnh và chuyển đổi vóc dáng. Phương pháp tập trung vào cơ chế vận động đúng, cải thiện tư thế và xây dựng một cơ thể bền bỉ.',
       quote: 'Thêm một hiệp. Thêm một lần lặp. Mạnh mẽ hơn mỗi ngày.',
-      portraitImage: '/webp/trainers/duy-bao.webp',
+      portraitImage: '/webp/trainers/bao.webp',
       portraitPosition: 'center 22%',
       clientImages: clientGalleries.duyBao,
       reviews: [
