@@ -197,6 +197,7 @@ const Pricing: React.FC<PricingProps> = ({ language }) => {
 
           <Button
             variant={plan.isPopular ? 'outline' : 'secondary'}
+            href='#Registration'
             className={`w-full mt-auto ${plan.isPopular ? 'border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white shadow-[0_0_15px_rgba(140,120,83,0.2)]' : ''}`}
           >
             {plan.btnText}
