@@ -13,6 +13,7 @@ import RegistrationForm from './components/Home/RegistrationForm'
 import Map from './components/Home/Map'
 import Header from './components/Layout/Header'
 import Footer from './components/Layout/Footer'
+import FloatingActions from './components/Layout/FloatingActions'
 import IntroScreen from './components/ui/IntroScreen'
 
 export type SiteLanguage = 'vi' | 'en'
@@ -50,6 +51,7 @@ function App() {
         <RegistrationForm language={language} />
         <Map language={language} />
       </main>
+      <FloatingActions language={language} />
       <Footer language={language} />
     </>
   )

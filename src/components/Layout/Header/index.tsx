@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ language, onLanguageChange }) => {
                 variant="gold"
                 size="sm"
                 className='!bg-[var(--color-primary)] hover:!bg-[#746243]'
-                onClick={() => document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('Registration')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {copy.trial}
               </Button>
@@ -177,7 +177,7 @@ const Header: React.FC<HeaderProps> = ({ language, onLanguageChange }) => {
                 size="md"
                 className="w-full justify-center"
                 onClick={() => {
-                  document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById('Registration')?.scrollIntoView({ behavior: 'smooth' })
                   setNavbarOpen(false)
                 }}>
                 {copy.trial}
