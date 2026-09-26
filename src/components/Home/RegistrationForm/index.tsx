@@ -1,41 +1,117 @@
 import React, { useState, useCallback } from 'react';
 import { Icon } from '@iconify/react';
 import Button from '../../ui/Button';
+import type { SiteLanguage } from '../../../App';
+
+type GoalId = 'muscle' | 'beginner' | 'personalTraining' | 'wellness' | 'visitor' | 'recovery';
 
 interface FormData {
   name: string;
   phone: string;
-  goal: string;
+  goal: GoalId;
   bookingDate: string;
 }
-
-const GOALS = [
-  'Tăng Cơ / Giảm Mỡ',
-  'Mới Bắt Đầu Tập Luyện',
-  'Huấn Luyện Viên 1-1 (PT)',
-  'Duy Trì Sức Khoẻ',
-  'Khách Du Lịch (Ngắn Ngày)',
-  'Phục Hồi & Trị Liệu'
-];
 
 const WHATSAPP_NUMBER = '84961119495'; // 0961 119 495
 const DISPLAY_PHONE = '0961 119 495';
 
-export const RegistrationForm: React.FC = () => {
+interface RegistrationFormProps {
+  language: SiteLanguage;
+}
+
+const content = {
+  vi: {
+    eyebrow: 'BẮT ĐẦU NGAY',
+    headingLead: 'Sẵn sàng',
+    headingAccent: 'thay đổi',
+    headingEnd: 'bản thân?',
+    intro: 'Đăng ký ngay hôm nay để nhận tư vấn lộ trình tập luyện cá nhân hóa và trải nghiệm không gian Fitness tiêu chuẩn quốc tế.',
+    addressLabel: 'Địa chỉ',
+    address: '15 Trần Phú, Hải Châu, Đà Nẵng',
+    hoursLabel: 'Giờ mở cửa',
+    weekdayHours: 'T2–T7: 5:30 AM – 8:30 PM',
+    sundayHours: 'Chủ nhật: 8:00 AM – 7:00 PM',
+    formTitle: 'Đăng ký buổi tập',
+    formIntro: 'Điền thông tin bên dưới, chuyên viên sẽ liên hệ sắp xếp lịch phù hợp nhất.',
+    nameLabel: 'Họ và tên',
+    namePlaceholder: 'Nhập tên của bạn',
+    phoneLabel: 'Số điện thoại',
+    phonePlaceholder: 'Nhập số điện thoại',
+    goalLabel: 'Mục tiêu tập luyện',
+    dateLabel: 'Lịch hẹn dự kiến (Tùy chọn)',
+    submit: 'Xác nhận đăng ký',
+    responseTime: 'Chuyên viên Vio Fitness sẽ liên hệ với bạn trong vòng 30 phút.',
+    missingDate: 'Chưa xác định',
+    whatsappGreeting: 'Chào Vio Fitness, tôi muốn đăng ký tư vấn:',
+    whatsappName: 'Tên',
+    whatsappPhone: 'Số điện thoại',
+    whatsappGoal: 'Mục tiêu',
+    whatsappDate: 'Lịch hẹn dự kiến',
+    goals: {
+      muscle: 'Tăng cơ / Giảm mỡ',
+      beginner: 'Mới bắt đầu tập luyện',
+      personalTraining: 'Huấn luyện viên 1-1 (PT)',
+      wellness: 'Duy trì sức khoẻ',
+      visitor: 'Khách du lịch (ngắn ngày)',
+      recovery: 'Phục hồi & trị liệu',
+    },
+  },
+  en: {
+    eyebrow: 'START TODAY',
+    headingLead: 'Ready to',
+    headingAccent: 'transform',
+    headingEnd: 'yourself?',
+    intro: 'Register today for a personalised training consultation and experience a world-class fitness space.',
+    addressLabel: 'Address',
+    address: '15 Tran Phu, Hai Chau, Da Nang',
+    hoursLabel: 'Opening hours',
+    weekdayHours: 'Mon–Sat: 5:30 AM – 8:30 PM',
+    sundayHours: 'Sunday: 8:00 AM – 7:00 PM',
+    formTitle: 'Book a workout',
+    formIntro: 'Share your details below and our team will arrange a time that works best for you.',
+    nameLabel: 'Full name',
+    namePlaceholder: 'Enter your name',
+    phoneLabel: 'Phone number',
+    phonePlaceholder: 'Enter your phone number',
+    goalLabel: 'Training goal',
+    dateLabel: 'Preferred appointment (optional)',
+    submit: 'Confirm booking',
+    responseTime: 'A Vio Fitness consultant will contact you within 30 minutes.',
+    missingDate: 'Not specified',
+    whatsappGreeting: 'Hello Vio Fitness, I would like to book a consultation:',
+    whatsappName: 'Name',
+    whatsappPhone: 'Phone number',
+    whatsappGoal: 'Goal',
+    whatsappDate: 'Preferred appointment',
+    goals: {
+      muscle: 'Muscle building / Fat loss',
+      beginner: 'New to training',
+      personalTraining: 'One-to-one personal training',
+      wellness: 'Maintain my health',
+      visitor: 'Short-term visitor',
+      recovery: 'Recovery & therapy',
+    },
+  },
+} satisfies Record<SiteLanguage, Record<string, unknown>>;
+
+const goalIds: GoalId[] = ['muscle', 'beginner', 'personalTraining', 'wellness', 'visitor', 'recovery'];
+
+export const RegistrationForm: React.FC<RegistrationFormProps> = ({ language }) => {
+  const copy = content[language];
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
-    goal: GOALS[0],
+    goal: 'muscle',
     bookingDate: ''
   });
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
-    const formattedDate = formData.bookingDate ? formData.bookingDate.replace('T', ' ') : 'Chưa xác định';
-    const message = `Chào Vio Fitness, tôi muốn đăng ký tư vấn:\n- Tên: ${formData.name}\n- Số điện thoại: ${formData.phone}\n- Mục tiêu: ${formData.goal}\n- Lịch hẹn dự kiến: ${formattedDate}`;
+    const formattedDate = formData.bookingDate ? formData.bookingDate.replace('T', ' ') : copy.missingDate;
+    const message = `${copy.whatsappGreeting}\n- ${copy.whatsappName}: ${formData.name}\n- ${copy.whatsappPhone}: ${formData.phone}\n- ${copy.whatsappGoal}: ${copy.goals[formData.goal]}\n- ${copy.whatsappDate}: ${formattedDate}`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
-  }, [formData]);
+  }, [copy, formData]);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -63,14 +139,14 @@ export const RegistrationForm: React.FC = () => {
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-[1px] w-12 bg-[#C5A059]"></div>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                  BẮT ĐẦU NGAY
+                  {copy.eyebrow}
                 </span>
               </div>
               <h2 className="font-heading font-bold text-white uppercase leading-[0.92] text-4xl md:text-5xl lg:text-6xl mb-6">
-                Sẵn sàng <br/> <span className="font-serif italic font-light text-[#C5A059] tracking-normal lowercase">thay đổi</span> <br/> bản thân?
+                {copy.headingLead} <br/> <span className="font-serif italic font-light text-[#C5A059] tracking-normal lowercase">{copy.headingAccent}</span> <br/> {copy.headingEnd}
               </h2>
               <p className="text-white/60 font-light leading-relaxed max-w-sm text-sm">
-                Đăng ký ngay hôm nay để nhận tư vấn lộ trình tập luyện cá nhân hóa và trải nghiệm không gian Fitness tiêu chuẩn quốc tế.
+                {copy.intro}
               </p>
             </div>
             
@@ -88,15 +164,15 @@ export const RegistrationForm: React.FC = () => {
                 <div className="flex items-start gap-3">
                   <Icon icon="ph:map-pin" className="mt-0.5 h-5 w-5 shrink-0 text-[#C5A059]" />
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Địa chỉ</p>
-                    <p className="mt-1 text-sm leading-relaxed text-white/85">15 Tran Phu, Hai Chau, Da Nang</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">{copy.addressLabel}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/85">{copy.address}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Icon icon="ph:clock" className="mt-0.5 h-5 w-5 shrink-0 text-[#C5A059]" />
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Giờ mở cửa</p>
-                    <p className="mt-1 text-sm leading-relaxed text-white/85">T2–T7: 5:30 AM – 8:30 PM<br />Chủ nhật: 8:00 AM – 7:00 PM</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">{copy.hoursLabel}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/85">{copy.weekdayHours}<br />{copy.sundayHours}</p>
                   </div>
                 </div>
               </div>
@@ -110,14 +186,14 @@ export const RegistrationForm: React.FC = () => {
                 
                 {/* Form Header */}
                 <div className="mb-2">
-                  <h3 className="text-2xl font-heading font-bold text-white mb-2">Đăng Ký Buổi Tập</h3>
-                  <p className="text-white/50 text-sm font-light">Điền thông tin bên dưới, chuyên viên sẽ liên hệ sắp xếp lịch phù hợp nhất.</p>
+                  <h3 className="text-2xl font-heading font-bold text-white mb-2">{copy.formTitle}</h3>
+                  <p className="text-white/50 text-sm font-light">{copy.formIntro}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-3">
                     <label htmlFor="name" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                      Họ và tên
+                      {copy.nameLabel}
                     </label>
                     <input
                       type="text"
@@ -127,13 +203,13 @@ export const RegistrationForm: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20"
-                      placeholder="Nhập tên của bạn"
+                      placeholder={copy.namePlaceholder}
                     />
                   </div>
 
                   <div className="flex flex-col gap-3">
                     <label htmlFor="phone" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                      Số điện thoại
+                      {copy.phoneLabel}
                     </label>
                     <input
                       type="tel"
@@ -143,14 +219,14 @@ export const RegistrationForm: React.FC = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors rounded-none placeholder:text-white/20"
-                      placeholder="Nhập số điện thoại"
+                      placeholder={copy.phonePlaceholder}
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <label htmlFor="goal" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                    Mục tiêu tập luyện
+                    {copy.goalLabel}
                   </label>
                   <div className="relative">
                     <select
@@ -161,8 +237,8 @@ export const RegistrationForm: React.FC = () => {
                       className="w-full pb-3 border-b border-white/20 bg-transparent text-white text-lg focus:outline-none focus:border-[#C5A059] transition-colors appearance-none cursor-pointer rounded-none"
                       style={{ colorScheme: 'dark' }}
                     >
-                      {GOALS.map(s => (
-                        <option key={s} value={s} className="bg-[#151515] text-white">{s}</option>
+                      {goalIds.map((goal) => (
+                        <option key={goal} value={goal} className="bg-[#151515] text-white">{copy.goals[goal]}</option>
                       ))}
                     </select>
                     <Icon icon="ph:caret-down" className="absolute right-0 top-1/2 -translate-y-[80%] text-white/50 pointer-events-none" />
@@ -171,7 +247,7 @@ export const RegistrationForm: React.FC = () => {
 
                 <div className="flex flex-col gap-3">
                   <label htmlFor="bookingDate" className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50 cursor-pointer">
-                    Lịch hẹn dự kiến (Tùy chọn)
+                    {copy.dateLabel}
                   </label>
                   <div className="relative">
                     <input
@@ -193,12 +269,12 @@ export const RegistrationForm: React.FC = () => {
                     icon="logos:whatsapp-icon"
                     className="w-full !py-5"
                   >
-                    Xác Nhận Đăng Ký
+                    {copy.submit}
                   </Button>
                 </div>
                 
                 <p className="text-center text-xs text-white/40 font-light mt-[-16px]">
-                  Chuyên viên Vio Fitness sẽ liên hệ với bạn trong vòng 30 phút.
+                  {copy.responseTime}
                 </p>
 
               </form>

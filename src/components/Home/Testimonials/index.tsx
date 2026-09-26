@@ -264,7 +264,7 @@ const Testimonials = ({ language }: TestimonialsProps) => {
         <div ref={ctaRef} className='mt-8 sm:mt-12 flex justify-center px-4'>
           <Button 
             variant="dark"
-            href="https://maps.app.goo.gl/pCEQfgEn4dRgezyh9" 
+            href="https://maps.app.goo.gl/MdoxWFiGfEnWens18"
             target="_blank" 
             rel="noopener noreferrer"
             icon="logos:google-icon"

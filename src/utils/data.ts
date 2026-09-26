@@ -12,7 +12,7 @@ export const headerData: HeaderItem[] = [
   { label: 'Dịch vụ', labelEn: 'Services', href: '#Services' },
   { label: 'HLV', labelEn: 'Trainers', href: '#Trainers' },
   { label: 'Bảng giá', labelEn: 'Membership', href: '#Pricing' },
-  { label: 'Cẩm nang', labelEn: 'Knowledge', href: '#Knowledge' },
+  { label: 'Câu hỏi thường gặp', labelEn: 'FAQ', href: '#FAQ' },
   { label: 'Liên hệ', labelEn: 'Contact', href: '#Contact' },
 ]
 

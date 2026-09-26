@@ -1,4 +1,5 @@
 import React from 'react'
+import type { SiteLanguage } from '../../../App'
 
 // ── Social SVGs ─────────────────────────────────────────────────────────────
 const FacebookIcon = () => (
@@ -46,23 +47,61 @@ const MailIcon = () => (
   </svg>
 )
 
-// ── Quick links ──────────────────────────────────────────────────────────────
-const quickLinks = [
-  { label: 'Về chúng tôi', href: '#About' },
-  { label: 'Dịch vụ', href: '#Services' },
-  { label: 'Bảng giá', href: '#Pricing' },
-  { label: 'Huấn luyện viên', href: '#Trainers' },
-  { label: 'Đánh giá', href: '#Testimonials' },
-  { label: 'Liên hệ', href: '#Contact' },
-]
+const content = {
+  vi: {
+    location: '& GYM ĐÀ NẴNG',
+    description: 'Phòng gym 3 tầng chuẩn quốc tế tại trung tâm Đà Nẵng. Nơi hội tụ thiết bị đỉnh cao và HLV chuyên nghiệp.',
+    quickLinksLabel: 'Liên kết nhanh',
+    quickLinks: [
+      { label: 'Về chúng tôi', href: '#About' },
+      { label: 'Dịch vụ', href: '#Services' },
+      { label: 'Bảng giá', href: '#Pricing' },
+      { label: 'Huấn luyện viên', href: '#Trainers' },
+      { label: 'Đánh giá', href: '#Reviews' },
+      { label: 'Liên hệ', href: '#Contact' },
+    ],
+    contactLabel: 'Thông tin liên hệ',
+    address: <>15 Trần Phú,<br />Hải Châu, Đà Nẵng</>,
+    openingHours: 'Giờ mở cửa',
+    hours: [
+      { day: 'Thứ 2 – Thứ 7', time: '05:30 – 20:30' },
+      { day: 'Chủ nhật', time: '08:00 – 19:00' },
+    ],
+    privacy: 'Chính sách riêng tư',
+    terms: 'Điều khoản sử dụng',
+  },
+  en: {
+    location: '& GYM DA NANG',
+    description: 'A three-floor, world-class gym in central Da Nang, bringing together premium equipment and professional coaches.',
+    quickLinksLabel: 'Quick links',
+    quickLinks: [
+      { label: 'About us', href: '#About' },
+      { label: 'Services', href: '#Services' },
+      { label: 'Membership', href: '#Pricing' },
+      { label: 'Trainers', href: '#Trainers' },
+      { label: 'Reviews', href: '#Reviews' },
+      { label: 'Contact', href: '#Contact' },
+    ],
+    contactLabel: 'Contact information',
+    address: <>15 Tran Phu,<br />Hai Chau, Da Nang</>,
+    openingHours: 'Opening hours',
+    hours: [
+      { day: 'Mon – Sat', time: '05:30 – 20:30' },
+      { day: 'Sunday', time: '08:00 – 19:00' },
+    ],
+    privacy: 'Privacy policy',
+    terms: 'Terms of use',
+  },
+} satisfies Record<SiteLanguage, Record<string, unknown>>
 
-const hours = [
-  { day: 'Thứ 2 – Thứ 7', time: '05:30 – 20:30' },
-  { day: 'Chủ nhật', time: '08:00 – 19:00' },
-]
+interface FooterProps {
+  language: SiteLanguage
+}
 
 // ── Footer ───────────────────────────────────────────────────────────────────
-const Footer = () => {
+const Footer = ({ language }: FooterProps) => {
+  const copy = content[language]
+
   return (
     <footer id='Contact' className='bg-[var(--color-deep-slate)] text-white'>
 
@@ -78,10 +117,10 @@ const Footer = () => {
               VIO FITNESS
             </p>
             <p className='text-[var(--color-primary)] text-xs font-bold tracking-[0.2em] uppercase mb-4'>
-              & GYM ĐÀ NẴNG
+              {copy.location}
             </p>
             <p className='text-white/50 text-sm leading-relaxed mb-6'>
-              Phòng gym 3 tầng chuẩn quốc tế tại trung tâm Đà Nẵng. Nơi hội tụ thiết bị đỉnh cao và HLV chuyên nghiệp.
+              {copy.description}
             </p>
             {/* Social icons */}
             <div className='flex items-center gap-3'>
@@ -121,10 +160,10 @@ const Footer = () => {
           {/* COL 2 — Quick links */}
           <div>
             <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-6'>
-              Liên kết nhanh
+              {copy.quickLinksLabel}
             </p>
             <ul className='space-y-3'>
-              {quickLinks.map((link, i) => (
+              {copy.quickLinks.map((link, i) => (
                 <li key={i}>
                   <a
                     href={link.href}
@@ -141,18 +180,18 @@ const Footer = () => {
           {/* COL 3 — Contact info */}
           <div>
             <p className='font-heading text-sm font-bold uppercase tracking-[0.2em] text-white/40 mb-6'>
-              Thông tin liên hệ
+              {copy.contactLabel}
             </p>
             <ul className='space-y-4'>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
                 <span className='text-[var(--color-primary)] mt-0.5'><MapPinIcon /></span>
                 <a
-                  href='https://maps.app.goo.gl/oF3KHEfNwWbVswZa7'
+                  href='https://maps.app.goo.gl/MdoxWFiGfEnWens18'
                   target='_blank'
                   rel='noreferrer'
                   className='hover:text-white transition-colors leading-relaxed'
                 >
-                  15 Trần Phú – 02 Nguyễn Du,<br />Hải Châu, Đà Nẵng
+                  {copy.address}
                 </a>
               </li>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
@@ -170,10 +209,10 @@ const Footer = () => {
               <li className='pt-2 border-t border-white/10'>
                 <p className='flex items-start gap-3 text-white/40 text-xs uppercase tracking-widest mb-3 font-bold'>
                   <span className='text-[var(--color-primary)]'><ClockIcon /></span>
-                  Giờ mở cửa
+                  {copy.openingHours}
                 </p>
                 <ul className='space-y-1.5 pl-6'>
-                  {hours.map((h, i) => (
+                  {copy.hours.map((h, i) => (
                     <li key={i} className='flex justify-between text-sm text-white/60'>
                       <span>{h.day}</span>
                       <span className='text-white/80 font-medium'>{h.time}</span>
@@ -190,11 +229,11 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className='border-t border-white/10'>
         <div className='container mx-auto max-w-7xl px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 text-sm'>
-          <p>© {new Date().getFullYear()} VIO FITNESS & GYM ĐÀ NẴNG. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} VIO FITNESS {copy.location}. All rights reserved.</p>
           <div className='flex items-center gap-6'>
-            <a href='#' className='hover:text-white/70 transition-colors'>Chính sách riêng tư</a>
+            <a href='#' className='hover:text-white/70 transition-colors'>{copy.privacy}</a>
             <span className='text-white/20'>|</span>
-            <a href='#' className='hover:text-white/70 transition-colors'>Điều khoản sử dụng</a>
+            <a href='#' className='hover:text-white/70 transition-colors'>{copy.terms}</a>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import Hero from './components/Home/Hero'
 import StudioInMotion from './components/Home/StudioInMotion'
-import Knowledge from './components/Home/Knowledge'
+import FAQ from './components/Home/FAQ'
 import Pricing from './components/Home/Pricing'
 import VioStandard from './components/Home/VioStandard'
 import TrustBar from './components/Home/TrustBar'
@@ -44,13 +44,13 @@ function App() {
         <Trainers language={language} />
         <Pricing language={language} />
         <StudioInMotion language={language} />
-        <Knowledge language={language} />
+        <FAQ language={language} />
         <Positioning />
         <Testimonial language={language} />
-        <RegistrationForm />
-        <Map />
+        <RegistrationForm language={language} />
+        <Map language={language} />
       </main>
-      <Footer />
+      <Footer language={language} />
     </>
   )
 }

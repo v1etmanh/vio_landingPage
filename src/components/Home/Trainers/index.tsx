@@ -24,16 +24,16 @@ interface Trainer {
 
 const clientGalleries = {
   duyBao: [
-    '/Ảnh PT với khách-20260919T154920Z-1-001/Ảnh PT với khách/duybao_k1.jpg',
-    '/Ảnh PT với khách-20260919T154920Z-1-001/Ảnh PT với khách/duybao_k2.png',
-    '/Ảnh PT với khách-20260919T154920Z-1-001/Ảnh PT với khách/duybao_k3.jpg',
+    '/webp/trainers/with-clients/duy-bao-k1.webp',
+    '/webp/trainers/with-clients/duy-bao-k2.webp',
+    '/webp/trainers/with-clients/duy-bao-k3.webp',
   ],
   chiCong: [
-    '/Ảnh PT với khách-20260919T154920Z-1-001/Ảnh PT với khách/chicong_k1.jpg',
+    '/webp/trainers/with-clients/chi-cong-k1.webp',
   ],
   mia: [
-    '/Ảnh PT với khách-20260919T154920Z-1-001/Ảnh PT với khách/mia_k1.jpg',
-    '/Ảnh PT với khách-20260919T154920Z-1-001/Ảnh PT với khách/mia_k2.jpg',
+    '/webp/trainers/with-clients/mia-k1.webp',
+    '/webp/trainers/with-clients/mia-k2.webp',
   ],
 }
 
