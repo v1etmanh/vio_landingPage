@@ -10,12 +10,11 @@ const messageClassName = 'font-heading tracking-widest uppercase font-semibold t
 const TrustBar: React.FC<TrustBarProps> = ({ language }) => {
   const messages = language === 'vi'
     ? [
-      '3C - MÁT MẺ - SẠCH SẼ - THOẢI MÁI',
-        'VIO FITNESS - NƠI THUỘC VỀ',
-        'TRẢI NGHIỆM CAO CẤP',
-        'HUẤN LUYỆN CÁ NHÂN',
-        'XÂY DỰNG PHIÊN BẢN MẠNH NHẤT',
+        'VIO FITNESS',
+        'MÁT MẺ - SẠCH SẼ - THOẢI MÁI',
+        'PHÒNG TẬP DÀNH CHO NGƯỜI MỚI',
         'ĐÁNH GIÁ 5 SAO',
+        'HUẤN LUYỆN VIÊN 1:1',
       ]
     : [
         '3C - COOL. CLEAN. COMFORTABLE',

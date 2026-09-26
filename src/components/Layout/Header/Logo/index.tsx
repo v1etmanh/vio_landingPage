@@ -6,7 +6,7 @@ const Logo: React.FC = () => {
       <motion.img 
         src='/webp/logo.webp' 
         alt='VIO FITNESS Logo' 
-        className='h-12 lg:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105'
+        className='h-14 lg:h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-105'
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

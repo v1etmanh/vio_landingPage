@@ -64,8 +64,8 @@ const content = {
     address: <>15 Trần Phú,<br />Hải Châu, Đà Nẵng</>,
     openingHours: 'Giờ mở cửa',
     hours: [
-      { day: 'Thứ 2 – Thứ 7', time: '05:30 – 20:30' },
-      { day: 'Chủ nhật', time: '08:00 – 19:00' },
+      { day: 'T2–T7', time: '5:30 AM – 8:30 PM' },
+      { day: 'Chủ nhật', time: '8:00 AM – 7:00 PM' },
     ],
     privacy: 'Chính sách riêng tư',
     terms: 'Điều khoản sử dụng',

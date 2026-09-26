@@ -14,7 +14,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
 
   const copy = language === 'vi'
     ? {
-        eyebrow: 'Vì sao VIO',
+        eyebrow: 'VÌ SAO CHỌN VIO',
         headingLead: 'Tiêu chuẩn',
         headingAccent: 'VIO.',
         intro: 'Bốn lý do giúp VIO Fitness trở thành lựa chọn khác biệt tại Đà Nẵng.',
@@ -22,10 +22,10 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
         quote: <>Hơn cả một phòng gym.<br />Một nơi để thuộc về.</>,
         stats: ['Năm kinh nghiệm', 'Khách hàng thay đổi ngoại hình', 'Đánh giá Google Maps'],
         cards: [
-          ['Mát mẻ & thoải mái', 'Mát mẻ. Thoải mái.'],
-          ['Thiết bị hiện đại', 'Tập tốt hơn. Mạnh mẽ hơn.'],
-          ['Cảm giác như ở nhà', 'Ai cũng thuộc về VIO.'],
-          ['Trải nghiệm trọn vẹn', 'Phục hồi. Nạp năng lượng. Cảm thấy khỏe khoắn.'],
+          ['KHÔNG GIAN TẬP LUYỆN ', 'Mát mẻ - sạch sẽ'],
+          ['TRANG THIẾT BỊ', 'Máy móc hiện đại - đa năng'],
+          ['HLV CÁ NHÂN CHUYÊN NGHIỆP', 'Nhiệt huyết - thấu hiểu'],
+          ['Trải nghiệm trọn vẹn', 'Phục hồi - thư giãn'],
         ],
       }
     : {
@@ -47,7 +47,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
   const cards = [
     { num: '01', keyword: 'SPACE', title: copy.cards[0][0], desc: copy.cards[0][1] },
     { num: '02', keyword: 'EQUIPMENT', title: copy.cards[1][0], desc: copy.cards[1][1] },
-    { num: '03', keyword: 'COACHING', title: copy.cards[2][0], desc: copy.cards[2][1] },
+    { num: '03', keyword: '', title: copy.cards[2][0], desc: copy.cards[2][1] },
     { num: '04', keyword: 'RECOVERY', title: copy.cards[3][0], desc: copy.cards[3][1] },
   ]
 
@@ -121,7 +121,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
               <span className='mb-2 block text-5xl font-black leading-none text-[#B9934B]'>
                 {activeCard.num}.
               </span>
-              <h3 className='mb-2 text-2xl font-black uppercase leading-none tracking-tight text-[#171717] sm:text-3xl'>
+              <h3 className='mb-2 whitespace-pre-line text-2xl font-black uppercase leading-none tracking-tight text-[#171717] sm:text-3xl'>
                 {activeCard.title}
               </h3>
               <p aria-live='polite' className='max-w-sm text-sm font-light leading-relaxed text-[#5A544A] sm:text-base'>
@@ -204,10 +204,12 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
                       <span className={`block text-4xl font-black leading-none tracking-tighter sm:text-6xl ${isActive ? 'text-[#B9934B]' : 'text-[#B9934B]/60 group-hover:text-[#B9934B]'}`}>
                         {card.num}.
                       </span>
-                      <span className='mt-1 block text-[9px] font-black uppercase leading-none tracking-[0.08em] text-[#F5F2EC] sm:text-xs'>
-                        {card.keyword}
-                      </span>
-                      <span className='mt-2 block text-[10px] font-black uppercase leading-tight text-[#F5F2EC] sm:text-sm'>
+                      {card.keyword && (
+                        <span className='mt-1 block text-[9px] font-black uppercase leading-none tracking-[0.08em] text-[#F5F2EC] sm:text-xs'>
+                          {card.keyword}
+                        </span>
+                      )}
+                      <span className='mt-2 block whitespace-pre-line text-[10px] font-black uppercase leading-tight text-[#F5F2EC] sm:text-sm'>
                         {card.title}
                       </span>
                       <span className='mt-1 block text-[9px] font-light leading-snug text-[#F5F2EC]/75 sm:text-xs'>

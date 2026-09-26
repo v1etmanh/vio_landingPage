@@ -13,7 +13,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
     ? {
         location: '15 TRẦN PHÚ • HẢI CHÂU • ĐÀ NẴNG',
         headline: ['PHÒNG GYM', 'ĐẲNG CẤP QUỐC TẾ', 'GIỮA LÒNG ĐÀ NẴNG'],
-        benefits: ['Huấn luyện cá nhân 1-1', 'Trang bị đầy đủ máy móc hiện đại, cao cấp', 'Đội ngũ tận tâm - thân thiện - chuyên nghiệp'],
+        benefits: ['Phòng tập dành cho người mới', 'Trang bị đầy đủ máy móc hiện đại, cao cấp', 'Đội ngũ tận tâm - thân thiện - chuyên nghiệp'],
         explore: 'Khám phá dịch vụ',
         book: 'Đặt lịch ngay',
         instagram: 'Instagram',

@@ -49,19 +49,19 @@ const plansByLanguage: Record<SiteLanguage, MembershipPlan[]> = {
   vi: [
     {
       name: 'VÉ TẬP NGÀY', tagline: 'Truy cập nhanh, dễ dàng mỗi ngày', priceVND: '200.000 VND', priceUSD: '$8', isPopular: false, btnText: 'ĐĂNG KÝ VÉ NGÀY', bgImage: "url('/images/pricing/essential.png')",
-      features: ['Không giới hạn quyền sử dụng phòng gym', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 1 chai nước 500ml', 'Đăng ký nhanh — bắt đầu ngay'],
+      features: ['Không giới hạn quyền sử dụng phòng gym', 'Không gian sang trọng, điều hoà mát mẻ', 'Tủ đồ cá nhân có chìa khóa riêng', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 1 chai nước 500ml', 'Đăng ký nhanh — bắt đầu ngay'],
     },
     {
       name: 'VÉ 3 NGÀY', tagline: 'Lý tưởng cho kỳ nghỉ cuối tuần', priceVND: '500.000 VND', priceUSD: '$20', isPopular: false, btnText: 'ĐĂNG KÝ VÉ 3 NGÀY', bgImage: "url('/images/pricing/abstract_white.png')",
-      features: ['Không giới hạn quyền sử dụng phòng gym trong 3 ngày liên tiếp', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay', 'Tặng 1 chai nước 500ml'],
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 3 ngày liên tiếp', 'Không gian sang trọng, điều hoà mát mẻ', 'Tủ đồ cá nhân có chìa khóa riêng', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay', 'Tặng 1 chai nước 500ml'],
     },
     {
       name: 'VÉ TUẦN', tagline: 'Lựa chọn tốt nhất cho chuyến đi ngắn', priceVND: '900.000 VND', priceUSD: '$24', isPopular: true, btnText: 'ĐĂNG KÝ VÉ TUẦN', bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
-      features: ['Không giới hạn quyền sử dụng phòng gym trong 7 ngày liên tiếp', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay', 'Tặng 1 Americano hoặc Monster Energy Drink (áp dụng cho hội viên lần đầu đăng ký tại VIO FITNESS)'],
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 7 ngày liên tiếp', 'Không gian sang trọng, điều hoà mát mẻ', 'Tủ đồ cá nhân có chìa khóa riêng', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Đăng ký nhanh — bắt đầu ngay', 'Tặng 1 Americano hoặc Monster Energy Drink (áp dụng cho hội viên lần đầu đăng ký tại VIO FITNESS)'],
     },
     {
       name: 'VÉ THÁNG', tagline: 'Tiết kiệm hơn, tập nhiều hơn', priceVND: '1.650.000 VND', priceUSD: '$63', isPopular: false, btnText: 'ĐĂNG KÝ VÉ THÁNG', bgImage: "url('/images/pricing/elite.png')",
-      features: ['Không giới hạn quyền sử dụng phòng gym trong 30 ngày', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 2 buổi tập 1-1 cùng huấn luyện viên cá nhân', 'Bảo lưu hội viên 1 lần, tối đa 30 ngày', 'Tặng 1 whey protein smoothie (áp dụng cho hội viên lần đầu đăng ký tại VIO FITNESS)'],
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 30 ngày', 'Không gian sang trọng, điều hoà mát mẻ', 'Tủ đồ cá nhân có chìa khóa riêng', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 2 buổi tập 1-1 cùng huấn luyện viên cá nhân', 'Bảo lưu hội viên 1 lần, tối đa 30 ngày', 'Tặng 1 whey protein smoothie (áp dụng cho hội viên lần đầu đăng ký tại VIO FITNESS)'],
     },
     {
       name: 'VÉ 1 NĂM', tagline: 'Đồng hành trong mỗi buổi tập', priceVND: '10.200.000 VND', priceUSD: '$400', isPopular: false, btnText: 'ĐĂNG KÝ VÉ 1 NĂM', bgImage: "url('/images/pricing/abstract_gold.png')",

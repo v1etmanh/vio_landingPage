@@ -77,10 +77,10 @@ const servicesData: ServiceItem[] = [
 
 const localizedServiceContent: Record<SiteLanguage, Array<Pick<ServiceItem, 'title' | 'subtitle' | 'tag' | 'description' | 'detail'>>> = {
   vi: [
-    { title: 'Trang Thiết Bị', subtitle: '', tag: '01 · TRANG THIẾT BỊ', description: '100% máy móc nhập khẩu hiện đại, được thiết kế chính xác cho từng nhóm cơ và tối đa hóa độ an toàn trong buổi tập.', detail: '' },
-    { title: 'Không Gian Luyện Tập', subtitle: '', tag: '02 · KHÔNG GIAN', description: 'Không gian rộng rãi, cao cấp như spa, được thiết kế để đảm bảo sự riêng tư, tập trung và năng lượng.', detail: '' },
-    { title: 'Phục Hồi Và Trị Liệu', subtitle: '', tag: '03 · PHỤC HỒI', description: 'Liệu pháp kéo giãn chuyên biệt và giải phóng cân mạc, được hướng dẫn bởi HLV giàu kinh nghiệm, giúp phục hồi nhanh và giảm căng cơ.', detail: '' },
-    { title: 'Phòng Xông Hơi', subtitle: '', tag: '04 · THƯ GIÃN', description: 'Phòng xông hơi cao cấp giúp thanh lọc cơ thể, làm dịu cơ bắp mỏi và thư giãn sau buổi tập cường độ cao.', detail: '' },
+    { title: 'Trang Thiết Bị', subtitle: '', tag: '01 · TRANG THIẾT BỊ', description: '100% máy móc mới, hiện đại, được thiết kế chuẩn xác cho từng nhóm cơ và tối đa hóa độ an toàn trong suốt buổi tập.', detail: '' },
+    { title: 'Không Gian Luyện Tập', subtitle: '', tag: '02 · KHÔNG GIAN', description: 'Không gian tập luyện phù hợp với mọi đối tượng, đảm bảo tính riêng tư mà vẫn tạo cảm giác thoải mái, dễ chịu', detail: '' },
+    { title: 'Phục Hồi Và\nThư Giãn', subtitle: '', tag: '03 · PHỤC HỒI', description: 'Giải tỏa cơn đau mỏi, phòng tránh chấn thương, giúp lưu thông máu và tái tạo cơ bắp sau giờ tập thông qua liệu trình giãn cơ thư giãn.', detail: '' },
+    { title: 'Phòng Xông Hơi', subtitle: '', tag: '04 · THƯ GIÃN', description: 'Không gian lý tưởng để giải tỏa mọi áp lực căng thẳng, thư giãn tâm trí và tái tạo nguồn năng lượng.', detail: '' },
     { title: 'Nạp Dinh Dưỡng', subtitle: '', tag: '05 · DINH DƯỠNG', description: 'Quầy dinh dưỡng lành mạnh với Protein Shake pha tươi, tiếp năng lượng cho quá trình tăng cơ và chuyển đổi vóc dáng.', detail: '' },
   ],
   en: [
@@ -188,7 +188,7 @@ export default function Services({ language }: ServicesProps) {
                 <div className="text-[var(--color-primary)] font-bold tracking-widest text-xs md:text-sm uppercase mb-3 service-line">
                   {item.tag}
                 </div>
-                <div className="font-heading text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-2 text-white leading-none service-line">
+                <div className="font-heading whitespace-pre-line text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-2 text-white leading-none service-line">
                   {language === 'vi' && item.id === 2 ? <>Không Gian<br />Luyện Tập</> : item.title}
                 </div>
                 {item.subtitle && (
