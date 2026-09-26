@@ -30,7 +30,7 @@ const FloatingActions = ({ language }: FloatingActionsProps) => {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       onClick={() => document.getElementById('Registration')?.scrollIntoView({ behavior: 'smooth' })}
-      className={`fixed right-2 top-[55%] z-[999] flex h-[72px] w-[72px] items-center justify-center rounded-full border border-[#C5A059] bg-[#1A1A1A] p-2 shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300 md:hidden ${
+      className={`fixed right-2 top-[85%] z-[999] flex h-[60px] w-[60px] items-center justify-center rounded-full border border-[#C5A059] bg-[#1A1A1A] p-2 shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300 md:hidden ${
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-6 opacity-0'
       }`}
     >
