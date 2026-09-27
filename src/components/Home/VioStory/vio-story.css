@@ -1,0 +1,36 @@
+/* Bỏ đoạn @import này nếu 'Archivo Black' đã được nạp global rồi, tránh load 2 lần */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+/* Fallback nếu tailwind.config chưa khai báo fontFamily.archivo */
+.font-archivo {
+  font-family: 'Archivo Black', 'Inter', system-ui, sans-serif;
+}
+
+/* Ghim layer GPU cho cả section: giảm giật/flicker khi clip-path + scale animate
+   (tương đương trick [data-transition='container'] { transform: translateZ(0) } của repo gốc) */
+.vio-story-root {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Stage chứa 2 article chồng nhau lúc chuyển chương: báo trước cho trình duyệt
+   để nó tạo compositing layer sẵn, animation mượt hơn ngay từ frame đầu tiên */
+.vio-story-stage {
+  will-change: contents;
+}
+
+.vio-story-article {
+  will-change: transform, opacity, clip-path;
+}
+
+/* Mũi tên timeline: mượt hơn khi GSAP set transform y liên tục */
+.vio-story-arrow {
+  will-change: transform;
+}
+
+/* Safari cũ cần prefix -webkit cho clip-path (GSAP tự set inline style,
+   nhưng khai báo sẵn property gốc này giúp Safari không bỏ qua transition ban đầu) */
+.vio-story-article {
+  -webkit-clip-path: inset(0% 0% 0% 0%);
+  clip-path: inset(0% 0% 0% 0%);
+}

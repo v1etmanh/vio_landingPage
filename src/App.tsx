@@ -3,6 +3,7 @@ import Hero from './components/Home/Hero'
 import StudioInMotion from './components/Home/StudioInMotion'
 import FAQ from './components/Home/FAQ'
 import Pricing from './components/Home/Pricing'
+import VioStory from './components/Home/VioStory'
 import VioStandard from './components/Home/VioStandard'
 import TrustBar from './components/Home/TrustBar'
 import Positioning from './components/Home/Positioning'
@@ -44,6 +45,7 @@ function App() {
         <Services language={language} />
         <Trainers language={language} />
         <Pricing language={language} />
+        <VioStory language={language} />
         <StudioInMotion language={language} />
         <FAQ language={language} />
         <Positioning />
