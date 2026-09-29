@@ -48,7 +48,7 @@ function App() {
         <VioStory language={language} />
         <StudioInMotion language={language} />
         <FAQ language={language} />
-        <Positioning />
+        <Positioning language={language} />
         <Testimonial language={language} />
         <RegistrationForm language={language} />
         <Map language={language} />

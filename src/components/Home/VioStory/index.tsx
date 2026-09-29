@@ -30,6 +30,7 @@ const storyContent = {
       number: '01',
       label: 'THE BEGINNING',
       title: 'Every lasting journey begins with an idea.',
+      titleLines: ['Every lasting journey', 'begins with an idea.'],
       paragraphs: [
         'VIO Fitness began with a desire to create a considered place to train, where quality and experience carry equal weight.',
         'In early 2026, VIO opened in Da Nang and welcomed its first members.',
@@ -39,6 +40,7 @@ const storyContent = {
       number: '02',
       label: 'THE EXPERIENCE',
       title: 'A good gym offers more than equipment.',
+      titleLines: ['A good gym offers', 'more than equipment'],
       paragraphs: [
         'People need a clean, cool and private place to focus on themselves, while still feeling open enough to meet and connect.',
         'That need is especially clear in Da Nang, where many ways of life come together.',
@@ -48,6 +50,7 @@ const storyContent = {
       number: '03',
       label: 'THE VISION',
       title: 'VIO takes a more welcoming approach to training.',
+      titleLines: ['VIO takes a more welcoming', 'approach to training.'],
       paragraphs: [
         'We created a modern, open and friendly space to help you care for your body, restore your energy and keep an active rhythm.',
         'VIO is a place to experience progress and meet people with the same spirit.',
@@ -57,6 +60,7 @@ const storyContent = {
       number: '04',
       label: 'GYM IS HOME',
       title: 'VIO Fitness - Where people connect.',
+      titleLines: ['VIO Fitness', 'Where people connect.'],
       paragraphs: [
         'Whether you are just starting, have trained for years, live in Da Nang or are visiting the city, every visit should begin with a warm welcome.',
         'To us, a gym is a place to train, share and belong.',
@@ -68,6 +72,7 @@ const storyContent = {
       number: '01',
       label: 'KHỞI ĐẦU',
       title: 'Mọi hành trình bền vững đều bắt đầu từ một ý tưởng.',
+      titleLines: ['Mọi hành trình bền vững', 'đều bắt đầu từ một ý tưởng.'],
       paragraphs: [
         'VIO Fitness được ấp ủ từ mong muốn tạo nên một không gian tập luyện chỉn chu, nơi chất lượng và trải nghiệm được đặt ngang nhau.',
         'Đầu năm 2026, VIO mở cửa tại Đà Nẵng và chào đón những thành viên đầu tiên.',
@@ -76,8 +81,8 @@ const storyContent = {
     {
       number: '02',
       label: 'TRẢI NGHIỆM',
-      title: 'Một phòng gym tốt không chỉ có đủ máy.',
-      titleLines: ['Một phòng gym tốt', 'không chỉ có đủ máy.'],
+      title: 'Một phòng gym tốt không chỉ có đủ máy',
+      titleLines: ['Một phòng gym tốt', 'không chỉ có đủ máy'],
       paragraphs: [
         'Mọi người cần một nơi sạch sẽ, mát mẻ và riêng tư để tập trung vào chính mình, nhưng vẫn đủ cởi mở để gặp gỡ và kết nối.',
         'Đây là nhu cầu rõ nét ở Đà Nẵng, nơi nhiều nhịp sống cùng gặp nhau.',
@@ -87,6 +92,7 @@ const storyContent = {
       number: '03',
       label: 'TẦM NHÌN',
       title: 'VIO chọn một cách tập luyện gần gũi hơn.',
+      titleLines: ['VIO chọn một cách', 'tập luyện gần gũi hơn.'],
       paragraphs: [
         'Chúng tôi xây dựng một không gian hiện đại, thân thiện và mở để bạn chăm sóc cơ thể, lấy lại năng lượng và duy trì nhịp sống tích cực.',
         'VIO là nơi để trải nghiệm, tiến bộ và gặp những người cùng tinh thần.',
@@ -96,6 +102,7 @@ const storyContent = {
       number: '04',
       label: 'GYM LÀ NHÀ',
       title: 'VIO Fitness - Nơi mọi người kết nối.',
+      titleLines: ['VIO Fitness', 'Nơi mọi người kết nối.'],
       paragraphs: [
         'Dù bạn mới bắt đầu, đã tập lâu năm, đang sống hay chỉ ghé thăm Đà Nẵng, mỗi lần đến VIO đều nên bắt đầu bằng cảm giác được chào đón.',
         'Với chúng tôi, gym là nơi tập luyện, sẻ chia và trở về.',

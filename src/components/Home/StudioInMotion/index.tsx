@@ -151,7 +151,13 @@ const StudioInMotion = ({ language }: StudioInMotionProps) => {
               {copy.title}
             </h2>
           </div>
-          <a href='#' className='group flex items-center gap-4 cursor-pointer mt-8 md:mt-0'>
+          <a
+            href='https://www.facebook.com/viofitnessdanang'
+            target='_blank'
+            rel='noreferrer'
+            aria-label='Facebook VIO Fitness'
+            className='group flex items-center gap-4 cursor-pointer mt-8 md:mt-0'
+          >
             <span className='relative font-bold text-sm xl:text-base tracking-[0.2em] uppercase text-gray-300 overflow-hidden py-1 group-hover:text-white transition-colors duration-300'>
               {copy.more}
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#C5A059] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
