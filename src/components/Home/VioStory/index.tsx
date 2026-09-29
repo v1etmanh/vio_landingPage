@@ -9,8 +9,8 @@ import './vio-story.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const storyTitleClass = 'font-heading max-w-3xl !text-white text-3xl font-black uppercase leading-[1.12] tracking-tight sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,3.8vw,4.25rem)]'
-const storyChapterTitleClass = 'font-heading max-w-3xl !text-white text-xl font-black uppercase leading-[1.2] tracking-tight sm:text-2xl md:text-3xl lg:text-[clamp(1.75rem,2.4vw,2.75rem)]'
+const storyTitleClass = 'font-heading max-w-3xl !text-white text-3xl font-black uppercase tracking-tight sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,3.8vw,4.25rem)] leading-[1.2] sm:leading-[1.2] lg:leading-[1.2]'
+const storyChapterTitleClass = 'font-heading max-w-3xl !text-white text-xl font-black uppercase tracking-tight sm:text-2xl md:text-3xl lg:text-[clamp(1.75rem,2.4vw,2.75rem)] leading-[1.35] sm:leading-[1.35] md:leading-[1.38] lg:leading-[1.4]'
 
 interface VioStoryProps {
   language: SiteLanguage
@@ -759,11 +759,11 @@ const VioStory = ({ language }: VioStoryProps) => {
                   </div>
 
                   {/* Animated Chapter Title (Words reveal gradually with smooth stagger) */}
-                  <h3 aria-label={step.title} className={storyChapterTitleClass}>
+                  <h3 aria-label={step.title} className={`vio-story-chapter-title ${storyChapterTitleClass}`}>
                     {titleLines.map((line, lineIndex) => {
                       const titleWords = line.split(' ')
                       return (
-                        <span key={lineIndex} className='block'>
+                        <span key={lineIndex} className='vio-story-title-line block mb-2 sm:mb-2.5 lg:mb-3 last:mb-0'>
                           {titleWords.map((word, wordIndex) => (
                             <span
                               key={wordIndex}

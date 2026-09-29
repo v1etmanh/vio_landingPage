@@ -40,4 +40,32 @@
   -webkit-clip-path: inset(0% 0% 0% 0%);
   clip-path: inset(0% 0% 0% 0%);
 }
+
+/* Đảm bảo khoảng cách hàng an toàn cho tiêu đề chương trong VioStory, 
+   tránh chữ tiếng Việt in hoa có dấu mũ/dấu nặng bị chạm hoặc đè lên nhau */
+.vio-story-chapter-title {
+  line-height: 1.35 !important;
+}
+
+.vio-story-title-line {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.vio-story-title-line:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .vio-story-title-line {
+    margin-bottom: 0.625rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vio-story-title-line {
+    margin-bottom: 0.75rem;
+  }
+}
+
 
