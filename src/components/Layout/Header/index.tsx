@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ language, onLanguageChange }) => {
     : { trial: 'Book a trial', menu: 'Open menu', close: 'Close menu' }
 
   const socialLinks = [
-    { href: 'https://www.facebook.com/vio.gymfitness', icon: 'mdi:facebook', label: 'Facebook VIO Fitness' },
+    { href: 'https://www.facebook.com/viofitnessdanang', icon: 'mdi:facebook', label: 'Facebook VIO Fitness' },
     { href: 'https://www.instagram.com/vio.gymfitness/', icon: 'mdi:instagram', label: 'Instagram VIO Fitness' },
     { href: 'https://www.tiktok.com/@viofitness.dn', icon: 'ic:baseline-tiktok', label: 'TikTok VIO Fitness' },
     { href: 'tel:0961119495', icon: 'tabler:phone-filled', label: language === 'vi' ? 'Gọi VIO Fitness' : 'Call VIO Fitness' },

@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { Icon } from '@iconify/react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { CustomEase } from 'gsap/CustomEase'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { SiteLanguage } from '../../../App'
 import './vio-story.css'
 
-gsap.registerPlugin(ScrollTrigger, CustomEase)
+gsap.registerPlugin(ScrollTrigger)
 
-const pageTransition = CustomEase.create('vio-story-page-transition', 'M0,0 C0.38,0.05 0.48,0.58 0.65,0.82 0.82,1 1,1 1,1')
+const storyTitleClass = 'font-archivo max-w-3xl !text-white text-3xl font-black uppercase leading-[1.12] tracking-tight sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,3.8vw,4.25rem)]'
+const storyChapterTitleClass = 'font-archivo max-w-3xl !text-white text-xl font-black uppercase leading-[1.2] tracking-tight sm:text-2xl md:text-3xl lg:text-[clamp(1.75rem,2.4vw,2.75rem)]'
 
 interface VioStoryProps {
   language: SiteLanguage
@@ -20,14 +20,8 @@ interface StoryStep {
   number: string
   label: string
   title: string
+  titleLines?: string[]
   paragraphs: string[]
-}
-
-interface StoryArticleElements {
-  article: HTMLElement
-  chars: HTMLSpanElement[]
-  words: HTMLSpanElement[]
-  ruleFill: HTMLSpanElement
 }
 
 const storyContent = {
@@ -83,6 +77,7 @@ const storyContent = {
       number: '02',
       label: 'TRẢI NGHIỆM',
       title: 'Một phòng gym tốt không chỉ có đủ máy.',
+      titleLines: ['Một phòng gym tốt', 'không chỉ có đủ máy.'],
       paragraphs: [
         'Mọi người cần một nơi sạch sẽ, mát mẻ và riêng tư để tập trung vào chính mình, nhưng vẫn đủ cởi mở để gặp gỡ và kết nối.',
         'Đây là nhu cầu rõ nét ở Đà Nẵng, nơi nhiều nhịp sống cùng gặp nhau.',
@@ -109,289 +104,112 @@ const storyContent = {
   ],
 } satisfies Record<SiteLanguage, StoryStep[]>
 
-const createStoryArticle = (step: StoryStep): StoryArticleElements => {
-  const article = document.createElement('article')
-  article.className = 'vio-story-article max-w-4xl'
-
-  const mobileMeta = document.createElement('div')
-  mobileMeta.className = 'mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-[#C5A059] lg:hidden'
-  const mobileNumber = document.createElement('span')
-  mobileNumber.textContent = step.number
-  const mobileRule = document.createElement('span')
-  mobileRule.className = 'h-px w-8 bg-[#C5A059]'
-  const mobileLabel = document.createElement('span')
-  mobileLabel.textContent = step.label
-  mobileMeta.append(mobileNumber, mobileRule, mobileLabel)
-
-  const desktopLabel = document.createElement('p')
-  desktopLabel.className = 'mb-4 hidden text-xs font-bold uppercase tracking-[0.22em] text-[#C5A059] lg:block'
-  desktopLabel.textContent = step.label
-
-  const rule = document.createElement('div')
-  rule.className = 'relative my-4 h-px w-full max-w-56 overflow-hidden bg-white/15 sm:my-5'
-  const ruleFill = document.createElement('span')
-  ruleFill.setAttribute('aria-hidden', 'true')
-  ruleFill.className = 'absolute inset-0 bg-[#C5A059]'
-  rule.appendChild(ruleFill)
-
-  const title = document.createElement('h3')
-  title.setAttribute('aria-label', step.title)
-  title.className = 'font-heading max-w-3xl !text-white text-4xl font-black uppercase leading-[0.88] tracking-tighter sm:text-5xl md:text-6xl lg:text-[clamp(3.75rem,4.2vw,5.25rem)]'
-  const chars: HTMLSpanElement[] = []
-  Array.from(step.title).forEach((character) => {
-    const clip = document.createElement('span')
-    clip.setAttribute('aria-hidden', 'true')
-    clip.className = 'inline-block overflow-hidden align-top [perspective:800px]'
-    const char = document.createElement('span')
-    char.className = 'inline-block'
-    char.textContent = character === ' ' ? '\u00a0' : character
-    clip.appendChild(char)
-    title.appendChild(clip)
-    chars.push(char)
-  })
-
-  const paragraphGroup = document.createElement('div')
-  paragraphGroup.className = 'mt-5 max-w-3xl space-y-2.5 text-sm leading-relaxed text-white/65 sm:mt-7 sm:text-base lg:text-lg'
-  const words: HTMLSpanElement[] = []
-  step.paragraphs.forEach((copy) => {
-    const clip = document.createElement('div')
-    clip.className = 'overflow-hidden'
-    const paragraph = document.createElement('p')
-    copy.split(/(\s+)/).forEach((part) => {
-      if (/^\s+$/.test(part)) {
-        paragraph.appendChild(document.createTextNode(part))
-        return
-      }
-
-      const word = document.createElement('span')
-      word.className = 'inline-block'
-      word.textContent = part
-      paragraph.appendChild(word)
-      words.push(word)
-    })
-    clip.appendChild(paragraph)
-    paragraphGroup.appendChild(clip)
-  })
-
-  article.append(mobileMeta, desktopLabel, rule, title, paragraphGroup)
-  return { article, chars, words, ruleFill }
-}
+// 4 Luxury Milestone Icons matching reference
+const milestoneIcons = [
+  // 01: Sprout / Seedling (The Beginning)
+  <svg key="sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M12 20v-8" />
+    <path d="M12 12c-2.5-3.5-7-3.5-8 0 1.2 4.5 5 4.5 8 0z" />
+    <path d="M12 12c2.5-3.5 7-3.5 8 0-1.2 4.5-5 4.5-8 0z" />
+    <path d="M7 20c2.5 1 7.5 1 10 0" />
+  </svg>,
+  // 02: Faceted Diamond (The Experience)
+  <svg key="diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M6 4h12l4 6-10 11L2 10l4-6z" />
+    <path d="M2 10h20" />
+    <path d="M10 4l-2 6 4 11 4-11-2-6" />
+  </svg>,
+  // 03: Community / People (The Vision)
+  <svg key="community" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="10" cy="7" r="3.5" />
+    <path d="M20 21v-2a3.5 3.5 0 0 0-2.5-3.3" />
+    <path d="M15.5 3.7a3.5 3.5 0 0 1 0 6.6" />
+  </svg>,
+  // 04: Mountain Peak (Gym is Home)
+  <svg key="mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M2 20h20L13 4l-4 7-3-4-4 13z" />
+    <path d="M9.5 14l2.5-3 3.5 5" />
+  </svg>,
+]
 
 const VioStory = ({ language }: VioStoryProps) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [revealedThrough, setRevealedThrough] = useState(0)
+  const [curvePath, setCurvePath] = useState('')
+  const [beadPositions, setBeadPositions] = useState<Array<{ topY: number; botY: number }>>([])
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down')
+
   const sectionRef = useRef<HTMLElement>(null)
-  const stageRef = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
-  const timelineTrackRef = useRef<HTMLSpanElement>(null)
-  const timelineFillRef = useRef<HTMLSpanElement>(null)
-  const timelineArrowRef = useRef<HTMLSpanElement>(null)
-  const dotRefs = useRef<Array<HTMLSpanElement | null>>([])
+  const timelineListRef = useRef<HTMLDivElement>(null)
+  const progressPathRef = useRef<SVGPathElement>(null)
+  const timelineArrowRef = useRef<HTMLButtonElement>(null)
+  const badgeRefs = useRef<Array<HTMLDivElement | null>>([])
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null)
-  const visibleArticleRef = useRef<StoryArticleElements | null>(null)
-  const visibleIndexRef = useRef(0)
   const activeIndexRef = useRef(0)
-  const queuedIndexRef = useRef<number | null>(null)
-  const isTransitioningRef = useRef(false)
-  const storyHasEnteredRef = useRef(false)
-  const wheelLockedRef = useRef(false)
-  const touchStartYRef = useRef<number | null>(null)
-  const touchStartXRef = useRef<number | null>(null)
-  const touchAxisRef = useRef<'horizontal' | 'vertical' | null>(null)
-  const revealTimelineRef = useRef<gsap.core.Timeline | null>(null)
-  const slideTimelineRef = useRef<gsap.core.Timeline | null>(null)
-  const requestSlideRef = useRef<(index: number) => void>(() => undefined)
+  const scrollDirectionRef = useRef<'down' | 'up'>('down')
+  const centerYsRef = useRef<number[]>([])
+
   const reduceMotion = useReducedMotion()
   const steps = storyContent[language]
 
-  const prepareArticleReveal = useCallback((elements: StoryArticleElements) => {
-    if (reduceMotion) {
-      gsap.set(elements.chars, { opacity: 0 })
-      gsap.set(elements.words, { opacity: 0 })
-      return
-    }
-    gsap.set(elements.chars, { yPercent: 120, rotateX: 70, transformOrigin: '0% 100%' })
-    gsap.set(elements.words, { yPercent: 100, opacity: 0 })
-    gsap.set(elements.ruleFill, { xPercent: -100 })
-  }, [reduceMotion])
-
-  const revealArticle = useCallback((elements: StoryArticleElements, delay = 0) => {
-    prepareArticleReveal(elements)
-
-    const timeline = gsap.timeline({ delay, defaults: { force3D: true } })
-    if (reduceMotion) {
-      timeline
-        .to(elements.chars, { opacity: 1, duration: 0.08, stagger: 0.025, ease: 'none' }, 0)
-        .to(elements.words, { opacity: 1, duration: 0.12, stagger: 0.035, ease: 'none' }, 0.3)
-    } else {
-      timeline
-        .to(elements.chars, { yPercent: 0, rotateX: 0, duration: 1.1, stagger: 0.022, ease: 'expo.out' }, 0)
-        .to(elements.ruleFill, { xPercent: 0, duration: 0.7, ease: 'power2.inOut' }, 0)
-        .to(elements.words, { yPercent: 0, opacity: 1, duration: 0.35, stagger: 0.022, ease: 'power3.out' }, 0.15)
-    }
-
-    revealTimelineRef.current = timeline
-    timeline.eventCallback('onComplete', () => {
-      if (revealTimelineRef.current === timeline) revealTimelineRef.current = null
-    })
-    return timeline
-  }, [prepareArticleReveal, reduceMotion])
-
-  const showArticle = useCallback((index: number, shouldReveal: boolean) => {
-    const stage = stageRef.current
-    if (!stage) return
-
-    slideTimelineRef.current?.kill()
-    revealTimelineRef.current?.kill()
-    const elements = createStoryArticle(steps[index])
-    stage.replaceChildren(elements.article)
-    stage.style.minHeight = ''
-    visibleArticleRef.current = elements
-    visibleIndexRef.current = index
-    isTransitioningRef.current = false
-    queuedIndexRef.current = null
-
-    if (shouldReveal) revealArticle(elements, 0.15)
-    else prepareArticleReveal(elements)
-  }, [prepareArticleReveal, revealArticle, steps])
-
-  const transitionTo = useCallback((index: number) => {
-    const stage = stageRef.current
-    const outgoing = visibleArticleRef.current
-
-    if (!stage || !outgoing) {
-      showArticle(index, false)
-      return
-    }
-
-    if (visibleIndexRef.current === index) return
-
-    if (reduceMotion) {
-      showArticle(index, true)
-      return
-    }
-
-    isTransitioningRef.current = true
-    revealTimelineRef.current?.kill()
-    const incoming = createStoryArticle(steps[index])
-    const stageHeight = Math.ceil(stage.getBoundingClientRect().height)
-    stage.style.minHeight = `${stageHeight}px`
-
-    gsap.set(outgoing.article, { position: 'absolute', top: 0, left: 0, width: '100%' })
-    gsap.set(incoming.article, {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      clipPath: 'inset(100% 0% 0% 0%)',
-      opacity: 1,
-      zIndex: 10,
-    })
-    stage.appendChild(incoming.article)
-    revealArticle(incoming, 0.35)
-
-    const timeline = gsap.timeline({ defaults: { force3D: true } })
-      .to(outgoing.article, { y: '-6%', scale: 0.94, opacity: 0.35, duration: 0.9, ease: pageTransition }, 0)
-      .to(incoming.article, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: pageTransition }, 0)
-
-    slideTimelineRef.current = timeline
-    timeline.eventCallback('onComplete', () => {
-      outgoing.article.remove()
-      gsap.set(incoming.article, { clearProps: 'position,top,left,width,zIndex,clipPath,opacity' })
-      stage.style.minHeight = ''
-      visibleArticleRef.current = incoming
-      visibleIndexRef.current = index
-      slideTimelineRef.current = null
-      isTransitioningRef.current = false
-
-      const queuedIndex = queuedIndexRef.current
-      queuedIndexRef.current = null
-      if (queuedIndex !== null && queuedIndex !== index) {
-        window.requestAnimationFrame(() => requestSlideRef.current(queuedIndex))
-      }
-    })
-  }, [reduceMotion, revealArticle, showArticle, steps])
-
-  const requestSlide = useCallback((index: number) => {
-    const nextIndex = Math.max(0, Math.min(index, steps.length - 1))
-    if (activeIndexRef.current === nextIndex) return
-
-    activeIndexRef.current = nextIndex
-    setActiveIndex(nextIndex)
-
-    if (isTransitioningRef.current) {
-      queuedIndexRef.current = nextIndex
-      return
-    }
-
-    transitionTo(nextIndex)
-  }, [steps.length, transitionTo])
-
-  useEffect(() => {
-    requestSlideRef.current = requestSlide
-  }, [requestSlide])
-
-  const revealStoryOnEnter = useCallback(() => {
-    if (storyHasEnteredRef.current) return
-
-    const currentArticle = visibleArticleRef.current
-    if (!currentArticle) return
-
-    storyHasEnteredRef.current = true
-    revealTimelineRef.current?.kill()
-    revealArticle(currentArticle, 0.15)
-  }, [revealArticle])
-
-  const syncDesktopTimeline = useCallback((animate: boolean) => {
-    const timeline = timelineRef.current
-    const track = timelineTrackRef.current
-    const fill = timelineFillRef.current
+  // Measure badge positions and generate serpentine S-curve path
+  const updateRailDimensions = useCallback(() => {
+    const list = timelineListRef.current
+    const badges = badgeRefs.current.filter((b): b is HTMLDivElement => Boolean(b))
+    const path = progressPathRef.current
     const arrow = timelineArrowRef.current
-    const dots = dotRefs.current.filter((dot): dot is HTMLSpanElement => Boolean(dot))
-    if (!timeline || !track || !fill || !arrow || dots.length !== steps.length) return
+    if (!list || badges.length !== steps.length) return
 
-    const timelineTop = timeline.getBoundingClientRect().top
-    const centers = dots.map((dot) => {
-      const bounds = dot.getBoundingClientRect()
-      return bounds.top - timelineTop + bounds.height / 2
+    const listRect = list.getBoundingClientRect()
+    const centers = badges.map((badge) => {
+      const r = badge.getBoundingClientRect()
+      return r.top - listRect.top + r.height / 2
     })
-    const firstCenter = centers[0]
-    const trackHeight = centers[centers.length - 1] - firstCenter
-    const progress = activeIndexRef.current / (steps.length - 1)
-    const fillHeight = trackHeight * progress
 
-    track.style.top = `${firstCenter}px`
-    track.style.height = `${trackHeight}px`
-    fill.style.top = `${firstCenter}px`
-    arrow.style.top = `${firstCenter - arrow.getBoundingClientRect().height / 2}px`
+    centerYsRef.current = centers
+    const y0 = centers[0]
+    const y1 = centers[1]
+    const y2 = centers[2]
+    const y3 = centers[3]
 
-    gsap.killTweensOf([fill, arrow])
-    if (animate && !reduceMotion) {
-      gsap.to(fill, { height: fillHeight, duration: 0.6, ease: 'power3.out' })
-      gsap.to(arrow, { y: fillHeight, duration: 0.6, ease: 'power3.out' })
-    } else {
-      gsap.set(fill, { height: fillHeight })
-      gsap.set(arrow, { y: fillHeight })
+    // Organic S-curve weaving through the centers of badges (x = 52px)
+    const d = `M 52,${Math.max(0, y0 - 32)}
+      C 52,${y0 - 16} 52,${y0} 52,${y0}
+      C 68,${(y0 * 2 + y1) / 3} 68,${(y0 + y1 * 2) / 3} 52,${y1}
+      C 36,${(y1 * 2 + y2) / 3} 36,${(y1 + y2 * 2) / 3} 52,${y2}
+      C 68,${(y2 * 2 + y3) / 3} 68,${(y2 + y3 * 2) / 3} 52,${y3}
+      C 52,${y3 + 30} 70,${y3 + 52} 96,${y3 + 68}`
+
+    setCurvePath(d)
+    setBeadPositions([
+      { topY: y0 - 28, botY: y0 + 28 },
+      { topY: y1 - 28, botY: y1 + 28 },
+      { topY: y2 - 28, botY: y2 + 28 },
+      { topY: y3 - 28, botY: y3 + 28 },
+    ])
+
+    // Update active light thread and arrow if not in the middle of active scrub
+    if (path) {
+      const len = path.getTotalLength()
+      path.style.strokeDasharray = `${len}`
+      if (!scrollTriggerRef.current?.isActive) {
+        const p = activeIndexRef.current / (steps.length - 1)
+        path.style.strokeDashoffset = `${len * (1 - p)}`
+        if (arrow) {
+          const pt = path.getPointAtLength(p * len)
+          arrow.style.transform = `translate3d(${pt.x - 16}px, ${pt.y - 16}px, 0)`
+        }
+      }
     }
-  }, [reduceMotion, steps.length])
+  }, [steps.length])
 
   useLayoutEffect(() => {
-    const initialIndex = Math.max(0, Math.min(activeIndexRef.current, steps.length - 1))
-    activeIndexRef.current = initialIndex
-    setActiveIndex(initialIndex)
-    showArticle(initialIndex, !reduceMotion && storyHasEnteredRef.current)
-
-    return () => {
-      revealTimelineRef.current?.kill()
-      slideTimelineRef.current?.kill()
-    }
-  }, [language, reduceMotion, showArticle, steps.length])
-
-  useLayoutEffect(() => {
-    const frame = window.requestAnimationFrame(() => syncDesktopTimeline(false))
-    const handleResize = () => syncDesktopTimeline(false)
-    const observer = timelineRef.current ? new ResizeObserver(handleResize) : null
-    if (timelineRef.current) observer?.observe(timelineRef.current)
+    const frame = window.requestAnimationFrame(updateRailDimensions)
+    const handleResize = () => updateRailDimensions()
+    const observer = timelineListRef.current ? new ResizeObserver(handleResize) : null
+    if (timelineListRef.current) observer?.observe(timelineListRef.current)
     window.addEventListener('resize', handleResize)
     document.fonts?.ready.then(handleResize).catch(() => undefined)
 
@@ -400,26 +218,215 @@ const VioStory = ({ language }: VioStoryProps) => {
       window.removeEventListener('resize', handleResize)
       observer?.disconnect()
     }
-  }, [syncDesktopTimeline])
+  }, [updateRailDimensions])
 
-  useEffect(() => {
-    syncDesktopTimeline(true)
-  }, [activeIndex, syncDesktopTimeline])
+  // Services-style scrub timeline on desktop
+  useGSAP(() => {
+    const section = sectionRef.current
+    if (!section) return
 
-  useEffect(() => {
-    if (activeIndex <= revealedThrough) return
-    if (reduceMotion) {
-      setRevealedThrough(activeIndex)
-      return
+    const media = gsap.matchMedia()
+
+    media.add('(min-width: 1024px)', () => {
+      // 1. Initial visual state for slide 0 (visible)
+      gsap.set('.vio-story-article-0', {
+        opacity: 1,
+        y: 0,
+        pointerEvents: 'auto',
+        force3D: true,
+      })
+      gsap.set('.vio-story-article-0 .story-title-word', { y: 0, opacity: 1, force3D: true })
+      gsap.set('.vio-story-article-0 .story-rule-fill', { scaleX: 1, transformOrigin: 'left center', force3D: true })
+      gsap.set('.vio-story-article-0 .story-para', { y: 0, opacity: 1, force3D: true })
+
+      // Initial visual state for slides 1, 2, 3 (hidden)
+      gsap.set('.vio-story-article:not(.vio-story-article-0)', {
+        opacity: 0,
+        y: 25,
+        pointerEvents: 'none',
+        force3D: true,
+      })
+      gsap.set('.vio-story-article:not(.vio-story-article-0) .story-title-word', {
+        y: 20,
+        opacity: 0,
+        force3D: true,
+      })
+      gsap.set('.vio-story-article:not(.vio-story-article-0) .story-rule-fill', {
+        scaleX: 0,
+        transformOrigin: 'left center',
+        force3D: true,
+      })
+      gsap.set('.vio-story-article:not(.vio-story-article-0) .story-para', {
+        y: 15,
+        opacity: 0,
+        force3D: true,
+      })
+
+      updateRailDimensions()
+
+      // 2. Entrance reveal when section enters 80% of viewport
+      let entered = false
+      const entranceTrigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'top 80%',
+        once: true,
+        onEnter: () => {
+          if (entered || reduceMotion) return
+          entered = true
+          gsap.fromTo(
+            '.vio-story-article-0 .story-rule-fill',
+            { scaleX: 0, transformOrigin: 'left center' },
+            { scaleX: 1, duration: 0.6, ease: 'power2.out' }
+          )
+          gsap.fromTo(
+            '.vio-story-article-0 .story-title-word',
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.025, duration: 0.6, ease: 'power2.out' }
+          )
+          gsap.fromTo(
+            '.vio-story-article-0 .story-para',
+            { y: 15, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power2.out', delay: 0.15 }
+          )
+        },
+      })
+
+      // 3. Create the scrub master timeline (matching Services section)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: () => `+=${window.innerHeight * steps.length * 1.0}`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const p = self.progress
+
+            // Animate SVG golden light thread along the curve
+            const path = progressPathRef.current
+            const arrow = timelineArrowRef.current
+            if (path) {
+              const len = path.getTotalLength()
+              path.style.strokeDasharray = `${len}`
+              path.style.strokeDashoffset = `${len * (1 - p)}`
+
+              // Navigation chevron orb follows the exact S-curve coordinates
+              if (arrow) {
+                const pt = path.getPointAtLength(p * len)
+                arrow.style.transform = `translate3d(${pt.x - 16}px, ${pt.y - 16}px, 0)`
+              }
+            }
+
+            // Update scroll direction for chevron rotation (pointing up when scrolling up)
+            const dir = self.direction >= 0 ? 'down' : 'up'
+            if (dir !== scrollDirectionRef.current) {
+              scrollDirectionRef.current = dir
+              setScrollDirection(dir)
+            }
+
+            // Balanced segment thresholds for 4 slides
+            let current = 0
+            if (p >= 0.80) current = 3
+            else if (p >= 0.52) current = 2
+            else if (p >= 0.24) current = 1
+            else current = 0
+
+            if (current !== activeIndexRef.current) {
+              activeIndexRef.current = current
+              setActiveIndex(current)
+              setRevealedThrough((prev) => Math.max(prev, current))
+            }
+          },
+        },
+      })
+
+      scrollTriggerRef.current = tl.scrollTrigger ?? null
+
+      // Hold slide 0 for initial reading
+      tl.to({}, { duration: 0.8 })
+
+      // Build transition sequence between slides
+      for (let i = 1; i < steps.length; i++) {
+        const prev = i - 1
+        const label = `slide${i}`
+
+        // 1. Outgoing slide fades and glides up slightly
+        tl.to(
+          `.vio-story-article-${prev}`,
+          { y: -30, opacity: 0, duration: 0.6, ease: 'power2.in' },
+          label
+        )
+        tl.set(`.vio-story-article-${prev}`, { pointerEvents: 'none' }, `${label}+=0.6`)
+
+        // 2. Incoming slide becomes active and glides into position
+        tl.set(`.vio-story-article-${i}`, { pointerEvents: 'auto' }, label)
+        tl.to(
+          `.vio-story-article-${i}`,
+          { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
+          `${label}+=0.1`
+        )
+
+        // 3. Rule fill expands from left to right
+        tl.to(
+          `.vio-story-article-${i} .story-rule-fill`,
+          { scaleX: 1, duration: 0.5, ease: 'power2.out' },
+          `${label}+=0.15`
+        )
+
+        // 4. Title words reveal gradually with smooth stagger ("hiện từ từ")
+        tl.to(
+          `.vio-story-article-${i} .story-title-word`,
+          { y: 0, opacity: 1, stagger: 0.025, duration: 0.5, ease: 'power2.out' },
+          `${label}+=0.2`
+        )
+
+        // 5. Paragraphs fade in smoothly
+        tl.to(
+          `.vio-story-article-${i} .story-para`,
+          { y: 0, opacity: 1, stagger: 0.08, duration: 0.5, ease: 'power2.out' },
+          `${label}+=0.35`
+        )
+
+        // 6. Hold frame so user can comfortably read the slide
+        tl.to({}, { duration: 0.8 })
+      }
+
+      return () => {
+        entranceTrigger.kill()
+        tl.kill()
+        if (scrollTriggerRef.current === tl.scrollTrigger) {
+          scrollTriggerRef.current = null
+        }
+      }
+    })
+
+    return () => {
+      media.revert()
     }
+  }, { scope: sectionRef, dependencies: [language, reduceMotion, updateRailDimensions] })
 
-    const revealTimer = window.setTimeout(() => {
-      setRevealedThrough((currentIndex) => Math.min(currentIndex + 1, activeIndex))
-    }, 180)
+  // Navigate to slide when clicking dots/cards or using keyboard
+  const goToSlide = useCallback((index: number) => {
+    const targetIndex = Math.max(0, Math.min(index, steps.length - 1))
 
-    return () => window.clearTimeout(revealTimer)
-  }, [activeIndex, reduceMotion, revealedThrough])
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+      const trigger = scrollTriggerRef.current
+      if (trigger) {
+        // Centers of each slide's hold period in scrub timeline:
+        const slideProgresses = [0.07, 0.35, 0.64, 0.93]
+        const targetScroll = trigger.start + (trigger.end - trigger.start) * slideProgresses[targetIndex]
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' })
+      }
+    } else {
+      activeIndexRef.current = targetIndex
+      setActiveIndex(targetIndex)
+      setRevealedThrough((prev) => Math.max(prev, targetIndex))
+    }
+  }, [steps.length])
 
+  // Mobile horizontal scroll tracking
   const revealMobileChapterOnScroll = () => {
     const timeline = timelineRef.current
     if (!timeline || window.matchMedia('(min-width: 1024px)').matches) return
@@ -436,198 +443,7 @@ const VioStory = ({ language }: VioStoryProps) => {
     if (visibleIndex > revealedThrough) setRevealedThrough(visibleIndex)
   }
 
-  const goToSlide = useCallback((index: number) => {
-    const nextIndex = Math.max(0, Math.min(index, steps.length - 1))
-    if (nextIndex === activeIndexRef.current) return
-
-    requestSlide(nextIndex)
-
-    const trigger = scrollTriggerRef.current
-    if (trigger) {
-      const progress = nextIndex / (steps.length - 1)
-      const target = trigger.start + (trigger.end - trigger.start) * progress
-      window.scrollTo({ top: target, behavior: 'auto' })
-    }
-  }, [requestSlide, steps.length])
-
-  const changeSlide = (direction: 1 | -1) => goToSlide(activeIndexRef.current + direction)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    let unlockTimer: number | undefined
-    const setWheelLock = (duration = 900) => {
-      wheelLockedRef.current = true
-      window.clearTimeout(unlockTimer)
-      unlockTimer = window.setTimeout(() => {
-        wheelLockedRef.current = false
-      }, duration)
-    }
-
-    const handleWheel = (event: WheelEvent) => {
-      if (!window.matchMedia('(min-width: 1024px)').matches) return
-      if (!scrollTriggerRef.current?.isActive) return
-      if (Math.abs(event.deltaY) < 12) return
-
-      const nextIndex = activeIndexRef.current + (event.deltaY > 0 ? 1 : -1)
-      if (nextIndex < 0 || nextIndex >= steps.length) return
-
-      event.preventDefault()
-      const wasLocked = wheelLockedRef.current
-      setWheelLock()
-      if (wasLocked) return
-      goToSlide(nextIndex)
-    }
-
-    const handleTouchStart = (event: TouchEvent) => {
-      if (!(event.target instanceof Node) || !section.contains(event.target)) {
-        touchStartYRef.current = null
-        touchStartXRef.current = null
-        touchAxisRef.current = null
-        return
-      }
-      const touch = event.touches[0]
-      touchStartYRef.current = wheelLockedRef.current ? null : touch?.clientY ?? null
-      touchStartXRef.current = wheelLockedRef.current ? null : touch?.clientX ?? null
-      touchAxisRef.current = null
-    }
-
-    const handleTouchMove = (event: TouchEvent) => {
-      const startY = touchStartYRef.current
-      const startX = touchStartXRef.current
-      if (startY === null || startX === null) return
-
-      const touch = event.touches[0]
-      const distanceY = startY - (touch?.clientY ?? startY)
-      const distanceX = startX - (touch?.clientX ?? startX)
-      if (touchAxisRef.current === null) {
-        if (Math.max(Math.abs(distanceX), Math.abs(distanceY)) < 12) return
-        touchAxisRef.current = Math.abs(distanceX) > Math.abs(distanceY) ? 'horizontal' : 'vertical'
-      }
-      if (touchAxisRef.current === 'horizontal' || Math.abs(distanceY) < 12) return
-
-      const nextIndex = activeIndexRef.current + (distanceY > 0 ? 1 : -1)
-      if (nextIndex >= 0 && nextIndex < steps.length) event.preventDefault()
-    }
-
-    const handleTouchEnd = (event: TouchEvent) => {
-      const startY = touchStartYRef.current
-      const startX = touchStartXRef.current
-      touchStartYRef.current = null
-      touchStartXRef.current = null
-      const axis = touchAxisRef.current
-      touchAxisRef.current = null
-      if (startY === null || wheelLockedRef.current) return
-
-      const touch = event.changedTouches[0]
-      const distanceY = startY - (touch?.clientY ?? startY)
-      const distanceX = startX === null ? 0 : startX - (touch?.clientX ?? startX)
-      if (axis === 'horizontal' || (axis === null && Math.abs(distanceX) > Math.abs(distanceY))) return
-      if (Math.abs(distanceY) < 40) return
-
-      const nextIndex = activeIndexRef.current + (distanceY > 0 ? 1 : -1)
-      if (nextIndex < 0 || nextIndex >= steps.length) return
-
-      setWheelLock(350)
-      goToSlide(nextIndex)
-    }
-
-    window.addEventListener('wheel', handleWheel, { passive: false })
-    window.addEventListener('touchstart', handleTouchStart, { passive: true, capture: true })
-    window.addEventListener('touchmove', handleTouchMove, { passive: false, capture: true })
-    window.addEventListener('touchend', handleTouchEnd, { passive: true, capture: true })
-
-    return () => {
-      window.clearTimeout(unlockTimer)
-      window.removeEventListener('wheel', handleWheel)
-      window.removeEventListener('touchstart', handleTouchStart, true)
-      window.removeEventListener('touchmove', handleTouchMove, true)
-      window.removeEventListener('touchend', handleTouchEnd, true)
-    }
-  }, [goToSlide, steps.length])
-
-  useGSAP(() => {
-    if (reduceMotion) return
-
-    const rings = gsap.to('.story-rings', {
-      rotation: 360,
-      svgOrigin: '1260 220',
-      duration: 60,
-      repeat: -1,
-      ease: 'none',
-    })
-    const bar = gsap.to('.story-bar', {
-      y: -14,
-      duration: 2.4,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    })
-
-    return () => {
-      rings.kill()
-      bar.kill()
-    }
-  }, { scope: sectionRef, dependencies: [reduceMotion] })
-
-  useGSAP(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const media = gsap.matchMedia()
-    const entranceTrigger = ScrollTrigger.create({
-      trigger: section,
-      start: 'top 80%',
-      once: true,
-      onEnter: revealStoryOnEnter,
-    })
-    const refreshFrame = window.requestAnimationFrame(() => {
-      const bounds = section.getBoundingClientRect()
-      if (bounds.top < window.innerHeight * 0.8 && bounds.bottom > 0) revealStoryOnEnter()
-      ScrollTrigger.refresh()
-    })
-
-    media.add('(min-width: 1024px)', () => {
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${window.innerHeight * (steps.length - 1)}`,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        snap: {
-          snapTo: 1 / (steps.length - 1),
-          delay: 0.05,
-          duration: { min: 0.15, max: 0.5 },
-          ease: 'power2.out',
-        },
-        onUpdate: (self) => {
-          if (wheelLockedRef.current) return
-          const chapterProgress = self.progress * (steps.length - 1)
-          const nextIndex = self.direction >= 0
-            ? Math.ceil(chapterProgress - 0.001)
-            : Math.floor(chapterProgress + 0.001)
-          requestSlide(nextIndex)
-        },
-      })
-
-      scrollTriggerRef.current = trigger
-
-      return () => {
-        if (scrollTriggerRef.current === trigger) scrollTriggerRef.current = null
-        trigger.kill()
-      }
-    })
-
-    return () => {
-      window.cancelAnimationFrame(refreshFrame)
-      entranceTrigger.kill()
-      media.revert()
-    }
-  }, { scope: sectionRef, dependencies: [language, reduceMotion, requestSlide, revealStoryOnEnter, steps.length] })
-
+  // Keyboard navigation when section is active in view
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].includes(event.key)) return
@@ -660,39 +476,306 @@ const VioStory = ({ language }: VioStoryProps) => {
       ref={sectionRef}
       className='vio-story-root relative !flex min-h-[100dvh] items-stretch overflow-hidden !py-0 bg-[#171717] text-white lg:h-[100dvh] lg:min-h-0'
     >
-      <img src='/images/story_asset/background.webp' alt='' aria-hidden='true' className='pointer-events-none absolute inset-0 h-full w-full object-cover object-center' />
+      <img
+        src='/images/story_asset/background.webp'
+        alt=''
+        aria-hidden='true'
+        className='pointer-events-none absolute inset-0 h-full w-full object-cover object-center'
+      />
       <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,.82)_0%,rgba(10,10,10,.72)_54%,rgba(10,10,10,.34)_100%)]' />
 
       <div className='relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[1600px] flex-col px-5 py-7 sm:px-8 sm:py-8 lg:h-full lg:min-h-0 lg:px-14 lg:pb-8 lg:pt-30 xl:px-20'>
         <header className='shrink-0 lg:mb-2'>
-          <h2 className='!text-white font-heading text-4xl font-black uppercase leading-[0.82] tracking-tighter sm:text-5xl md:text-6xl lg:text-[clamp(3.75rem,4.2vw,5.25rem)]'>
+          <h2 className={storyTitleClass}>
             {language === 'vi' ? 'Câu chuyện của VIO' : 'The story of VIO'}
           </h2>
         </header>
 
-        <div className='grid min-h-0 flex-1 items-center gap-6 py-6 lg:grid-cols-[minmax(17rem,.82fr)_minmax(0,2fr)] lg:gap-12 xl:gap-16'>
-          <div ref={timelineRef} onScroll={revealMobileChapterOnScroll} role='group' aria-label={language === 'vi' ? 'Các mốc câu chuyện VIO' : 'VIO story chapters'} className='relative flex gap-3 overflow-x-auto py-1 lg:flex-col lg:gap-4 lg:overflow-visible lg:py-0 lg:pl-[3.25rem]'>
-            <span ref={timelineTrackRef} className='absolute left-[5px] top-0 z-0 hidden w-0.5 rounded-full bg-white/25 lg:block' />
-            <span ref={timelineFillRef} className='absolute left-[5px] top-0 z-[1] hidden w-0.5 rounded-full bg-[#C5A059] lg:block' />
-            <span ref={timelineArrowRef} className='vio-story-arrow absolute -left-2 top-0 z-10 hidden h-7 w-7 items-center justify-center rounded-full border border-[#C5A059] bg-[#171717]/90 text-[#C5A059] shadow-[0_0_14px_rgba(197,160,89,.35)] lg:flex'>
-              <Icon icon='tabler:arrow-down' aria-hidden='true' className='h-4 w-4' />
-            </span>
+        <div className='grid min-h-0 flex-1 items-center gap-6 py-6 lg:grid-cols-[minmax(21rem,1fr)_minmax(0,1.9fr)] lg:gap-12 xl:gap-16'>
+          {/* Luxury Interactive Timeline Rail & Cards */}
+          <div
+            ref={timelineRef}
+            onScroll={revealMobileChapterOnScroll}
+            role='group'
+            aria-label={language === 'vi' ? 'Các mốc câu chuyện VIO' : 'VIO story chapters'}
+            className='relative flex flex-col gap-2 overflow-x-auto py-1 lg:overflow-visible lg:py-0'
+          >
+            {/* Progress Header Badge */}
+            <div className='hidden lg:flex items-center justify-between pb-3 mb-2 border-b border-white/10 text-xs font-mono tracking-widest text-[#C5A059]'>
+              <div className='flex items-center gap-2'>
+                <span className='inline-block w-2 h-2 rounded-full bg-[#FFE08A] shadow-[0_0_8px_rgba(229,180,98,0.8)] animate-pulse' />
+                <span className='font-bold uppercase tracking-[0.2em]'>
+                  {language === 'vi' ? 'Hành Trình VIO' : 'VIO Journey'}
+                </span>
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='text-white font-bold text-sm'>0{activeIndex + 1}</span>
+                <span className='text-white/40'>/ 04</span>
+                <span className='ml-1 text-[11px] px-2 py-0.5 rounded-full bg-[#C5A059]/15 border border-[#C5A059]/40 text-[#FFE08A] font-semibold'>
+                  {Math.round(((activeIndex + 1) / 4) * 100)}%
+                </span>
+              </div>
+            </div>
+
+            {/* Timeline List with Serpentine Golden Light Thread */}
+            <div ref={timelineListRef} className='relative flex gap-3 lg:flex-col lg:gap-4'>
+              {/* Desktop Curved Golden Thread SVG */}
+              <svg
+                className='absolute left-0 top-0 w-[100px] h-full pointer-events-none z-0 hidden lg:block overflow-visible'
+                aria-hidden='true'
+              >
+                <defs>
+                  <linearGradient id='goldCurveTrack' x1='0%' y1='0%' x2='0%' y2='100%'>
+                    <stop offset='0%' stopColor='#C5A059' stopOpacity='0.25' />
+                    <stop offset='50%' stopColor='#8E6D28' stopOpacity='0.18' />
+                    <stop offset='100%' stopColor='#4E3E18' stopOpacity='0.12' />
+                  </linearGradient>
+                  <linearGradient id='goldCurveActive' x1='0%' y1='0%' x2='0%' y2='100%'>
+                    <stop offset='0%' stopColor='#FFF2C6' />
+                    <stop offset='35%' stopColor='#FFE08A' />
+                    <stop offset='75%' stopColor='#E5B462' />
+                    <stop offset='100%' stopColor='#C5A059' />
+                  </linearGradient>
+                  <filter id='goldCurveGlow' x='-50%' y='-50%' width='200%' height='200%'>
+                    <feDropShadow dx='0' dy='0' stdDeviation='4' floodColor='#FFE08A' floodOpacity='0.65' />
+                  </filter>
+                </defs>
+
+                {/* Inactive Track */}
+                {curvePath && (
+                  <path
+                    d={curvePath}
+                    fill='none'
+                    stroke='url(#goldCurveTrack)'
+                    strokeWidth='2.5'
+                    strokeLinecap='round'
+                  />
+                )}
+
+                {/* Active Light Thread */}
+                {curvePath && (
+                  <path
+                    ref={progressPathRef}
+                    d={curvePath}
+                    fill='none'
+                    stroke='url(#goldCurveActive)'
+                    strokeWidth='3.2'
+                    strokeLinecap='round'
+                    filter='url(#goldCurveGlow)'
+                  />
+                )}
+
+                {/* Glowing Connector Pearls above and below nodes */}
+                {beadPositions.map((pos, idx) => {
+                  const isReached = activeIndex >= idx
+                  return (
+                    <g key={idx}>
+                      <circle
+                        cx='52'
+                        cy={pos.topY}
+                        r='3'
+                        className={`transition-all duration-500 ${
+                          isReached
+                            ? 'fill-[#FFE08A] drop-shadow-[0_0_6px_rgba(229,180,98,0.9)]'
+                            : 'fill-[#C5A059]/30'
+                        }`}
+                      />
+                      <circle
+                        cx='52'
+                        cy={pos.botY}
+                        r='3'
+                        className={`transition-all duration-500 ${
+                          isReached
+                            ? 'fill-[#FFE08A] drop-shadow-[0_0_6px_rgba(229,180,98,0.9)]'
+                            : 'fill-[#C5A059]/30'
+                        }`}
+                      />
+                    </g>
+                  )
+                })}
+              </svg>
+
+              {/* Navigation Chevron Orb Traveler following the curve */}
+              <button
+                type='button'
+                onClick={() => {
+                  if (scrollDirectionRef.current === 'up') {
+                    goToSlide(Math.max(0, activeIndexRef.current - 1))
+                  } else {
+                    goToSlide(Math.min(steps.length - 1, activeIndexRef.current + 1))
+                  }
+                }}
+                aria-label={
+                  scrollDirection === 'up'
+                    ? (language === 'vi' ? 'Lên mốc trước' : 'Previous chapter')
+                    : (language === 'vi' ? 'Xuống mốc tiếp theo' : 'Next chapter')
+                }
+                ref={timelineArrowRef}
+                className='vio-story-arrow absolute left-0 top-0 z-20 hidden lg:flex h-8 w-8 items-center justify-center rounded-full border border-[#FFE08A] bg-[#141414]/90 text-[#FFE08A] backdrop-blur-md shadow-[0_0_18px_rgba(229,180,98,0.55)] transition-shadow hover:scale-115 active:scale-95 cursor-pointer'
+              >
+                <Icon
+                  icon='tabler:chevron-down'
+                  aria-hidden='true'
+                  className={`h-4 w-4 transition-transform duration-300 ${
+                    scrollDirection === 'up' ? '-rotate-180' : 'rotate-0'
+                  }`}
+                />
+              </button>
+
+              {/* 4 Interactive Chapter Milestones */}
+              {steps.map((step, index) => {
+                const isActive = activeIndex === index
+                const isPassed = activeIndex > index
+                const isRevealed = index <= revealedThrough
+
+                return (
+                  <button
+                    key={step.number}
+                    data-story-index={index}
+                    type='button'
+                    onClick={() => goToSlide(index)}
+                    aria-label={step.label}
+                    aria-current={isActive ? 'step' : undefined}
+                    aria-hidden={!isRevealed}
+                    tabIndex={isRevealed ? 0 : -1}
+                    className={`group relative flex items-center gap-4 w-[min(56vw,16rem)] shrink-0 text-left transition-[opacity,transform] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C5A059] lg:w-full ${
+                      isRevealed ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+                    }`}
+                  >
+                    {/* Left Ribbon: Number + Glowing Milestone Badge */}
+                    <div className='relative shrink-0 hidden lg:flex items-center gap-2 w-[86px]'>
+                      {/* Step Number */}
+                      <span className={`w-6 text-xs font-mono font-bold tracking-widest text-right transition-colors duration-300 ${
+                        isActive ? 'text-[#FFE08A] scale-105' : 'text-white/40 group-hover:text-white/70'
+                      }`}>
+                        {step.number}
+                      </span>
+
+                      {/* Glowing Circular Badge */}
+                      <div
+                        ref={(el) => { badgeRefs.current[index] = el }}
+                        className={`relative flex items-center justify-center w-12 h-12 rounded-full border transition-all duration-500 z-10 ${
+                          isActive
+                            ? 'border-[#FFE08A] bg-[#141414] text-[#FFE08A] shadow-[0_0_25px_rgba(229,180,98,0.6),inset_0_0_12px_rgba(229,180,98,0.35)] scale-110'
+                            : isPassed
+                            ? 'border-[#C5A059]/60 bg-[#141414]/90 text-[#FFE08A]/85 shadow-[0_0_12px_rgba(197,160,89,0.2)]'
+                            : 'border-white/20 bg-[#141414]/90 text-white/40 group-hover:border-[#C5A059]/60 group-hover:text-white/80'
+                        }`}
+                      >
+                        {/* Inner concentric luxury ring */}
+                        <span className={`absolute inset-[3px] rounded-full border pointer-events-none transition-colors duration-500 ${
+                          isActive ? 'border-[#FFE08A]/50' : 'border-white/5'
+                        }`} />
+
+                        {/* Active pulsing double ring halo */}
+                        {isActive && (
+                          <span className='absolute -inset-1.5 rounded-full border border-[#FFE08A]/40 animate-ping opacity-35 pointer-events-none' />
+                        )}
+
+                        {/* Icon */}
+                        <span className='relative z-10 transition-transform duration-300 group-hover:scale-110'>
+                          {milestoneIcons[index]}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Thumbnail Card with Luxury Golden Border and Ambient Glow */}
+                    <div
+                      className={`relative flex-1 aspect-[2/1] overflow-hidden rounded-lg border transition-all duration-500 lg:aspect-auto lg:h-[clamp(5rem,13.5vh,6.75rem)] ${
+                        isActive
+                          ? 'border-[#FFE08A] shadow-[0_0_24px_rgba(229,180,98,0.35)] ring-1 ring-[#FFE08A]/40 scale-[1.02] opacity-100'
+                          : 'border-white/15 opacity-60 hover:opacity-90 hover:border-white/40'
+                      }`}
+                    >
+                      {/* Mobile milestone badge header */}
+                      <div className='absolute left-2 top-2 z-10 flex items-center gap-1.5 rounded bg-black/70 px-1.5 py-0.5 backdrop-blur-sm lg:hidden'>
+                        <span className='scale-75 text-[#FFE08A]'>{milestoneIcons[index]}</span>
+                        <span className={`text-[10px] font-bold tracking-wider ${isActive ? 'text-[#FFE08A]' : 'text-white/70'}`}>
+                          {step.number} · {step.label}
+                        </span>
+                      </div>
+
+                      <img
+                        src={`/images/story_asset/${index + 1}.webp`}
+                        alt={step.label}
+                        className='h-full w-full object-cover transition-transform duration-700 group-hover:scale-105'
+                      />
+                      <div
+                        className={`absolute inset-0 transition-opacity duration-500 ${
+                          isActive ? 'bg-gradient-to-t from-black/40 via-transparent to-transparent' : 'bg-black/35'
+                        }`}
+                      />
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Stage with stacked Story Articles */}
+          <div
+            className='vio-story-stage relative min-w-0 max-w-4xl lg:justify-self-center grid grid-cols-1 grid-rows-1 items-start'
+            aria-live='polite'
+          >
             {steps.map((step, index) => {
-              const isActive = activeIndex === index
-              const isRevealed = index <= revealedThrough
+              const isMobileActive = activeIndex === index
+              const titleLines = step.titleLines ?? [step.title]
+
               return (
-                <button key={step.number} data-story-index={index} type='button' onClick={() => goToSlide(index)} aria-label={step.label} aria-current={isActive ? 'step' : undefined} aria-hidden={!isRevealed} tabIndex={isRevealed ? 0 : -1} className={`group relative block w-[min(56vw,16rem)] shrink-0 text-left transition-[opacity,transform] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C5A059] lg:w-full lg:max-w-64 ${isRevealed ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'}`}>
-                  <span ref={(element) => { dotRefs.current[index] = element }} className={`absolute -left-[2.9rem] top-1/2 z-[2] hidden h-3.5 w-3.5 -translate-y-1/2 rounded-full border transition-all lg:block ${isActive ? 'scale-110 border-[#C5A059] bg-[#C5A059]' : 'border-white/45 bg-[#171717] group-hover:border-white'}`} />
-                  <span className={`absolute left-2 top-2 z-[2] rounded-sm px-1.5 py-0.5 text-xs font-bold tracking-[0.12em] lg:-left-[2.1rem] lg:top-2 ${isActive ? 'text-white' : 'text-white/55'}`}>{step.number}</span>
-                  <span className={`block aspect-[2/1] overflow-hidden rounded-md border bg-black/40 transition-all duration-300 lg:aspect-auto lg:h-[clamp(5.25rem,16vh,7.5rem)] ${isActive ? 'border-[#C5A059] shadow-[0_0_18px_rgba(197,160,89,.28)]' : 'border-white/20 group-hover:border-white/60'}`}>
-                    <img src={`/images/story_asset/${index + 1}.webp`} alt={step.label} className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]' />
-                  </span>
-                </button>
+                <article
+                  key={step.number}
+                  className={`vio-story-article vio-story-article-${index} col-start-1 row-start-1 max-w-4xl ${
+                    isMobileActive ? 'block' : 'hidden lg:block'
+                  }`}
+                >
+                  {/* Mobile Chapter Meta */}
+                  <div className='mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-[#C5A059] lg:hidden'>
+                    <span>{step.number}</span>
+                    <span className='h-px w-8 bg-[#C5A059]' />
+                    <span>{step.label}</span>
+                  </div>
+
+                  {/* Desktop Chapter Label */}
+                  <p className='mb-4 hidden text-xs font-bold uppercase tracking-[0.22em] text-[#C5A059] lg:block'>
+                    {step.label}
+                  </p>
+
+                  {/* Gold Rule Line */}
+                  <div className='relative my-4 h-px w-full max-w-56 overflow-hidden bg-white/15 sm:my-5'>
+                    <span aria-hidden='true' className='story-rule-fill absolute inset-0 origin-left bg-[#C5A059]' />
+                  </div>
+
+                  {/* Animated Chapter Title (Words reveal gradually with smooth stagger) */}
+                  <h3 aria-label={step.title} className={storyChapterTitleClass}>
+                    {titleLines.map((line, lineIndex) => {
+                      const titleWords = line.split(' ')
+                      return (
+                        <span key={lineIndex} className='block'>
+                          {titleWords.map((word, wordIndex) => (
+                            <span
+                              key={wordIndex}
+                              className='story-title-word inline-block mr-[0.25em]'
+                            >
+                              {word}
+                            </span>
+                          ))}
+                        </span>
+                      )
+                    })}
+                  </h3>
+
+                  {/* Animated Paragraphs */}
+                  <div className='mt-5 max-w-3xl space-y-3 text-sm leading-relaxed text-white/75 sm:mt-7 sm:text-base lg:text-lg'>
+                    {step.paragraphs.map((copy, pIdx) => (
+                      <p key={pIdx} className='story-para'>
+                        {copy}
+                      </p>
+                    ))}
+                  </div>
+                </article>
               )
             })}
           </div>
-
-          <div ref={stageRef} className='vio-story-stage relative min-w-0 max-w-4xl lg:justify-self-center' aria-live='polite' />
         </div>
       </div>
     </section>

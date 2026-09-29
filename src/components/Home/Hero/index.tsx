@@ -149,7 +149,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
                     <span className='text-xs md:text-sm font-semibold'>{content.instagram}</span>
                   </a>
                   <span className='text-white/20'>|</span>
-                  <a href='https://www.facebook.com/vio.gymfitness' target='_blank' rel='noreferrer' className='flex items-center gap-1.5 transition-colors hover:text-white' aria-label='Facebook VIO Fitness'>
+                  <a href='https://www.facebook.com/viofitnessdanang' target='_blank' rel='noreferrer' className='flex items-center gap-1.5 transition-colors hover:text-white' aria-label='Facebook VIO Fitness'>
                     <Icon icon="mdi:facebook" className="text-base md:text-lg" />
                     <span className='text-xs md:text-sm font-semibold'>{content.facebook}</span>
                   </a>

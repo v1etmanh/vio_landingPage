@@ -50,7 +50,7 @@ const MailIcon = () => (
 const content = {
   vi: {
     location: '& GYM ĐÀ NẴNG',
-    description: 'Phòng gym 3 tầng chuẩn quốc tế tại trung tâm Đà Nẵng. Nơi hội tụ thiết bị đỉnh cao và HLV chuyên nghiệp.',
+    description: 'Phòng gym dành cho người mới ngay giữa lòng Đà Nẵng. Một trải nghiệm mới giúp nâng tầm không gian tập luyện của bạn.',
     quickLinksLabel: 'Liên kết nhanh',
     quickLinks: [
       { label: 'Về chúng tôi', href: '#About' },
@@ -72,7 +72,7 @@ const content = {
   },
   en: {
     location: '& GYM DA NANG',
-    description: 'A three-floor, world-class gym in central Da Nang, bringing together premium equipment and professional coaches.',
+    description: 'A beginner-friendly gym in the heart of Da Nang. A fresh experience that elevates your workout space.',
     quickLinksLabel: 'Quick links',
     quickLinks: [
       { label: 'About us', href: '#About' },
@@ -125,7 +125,7 @@ const Footer = ({ language }: FooterProps) => {
             {/* Social icons */}
             <div className='flex items-center gap-3'>
               <a
-                href='https://www.facebook.com/vio.gymfitness'
+                href='https://www.facebook.com/viofitnessdanang'
                 target='_blank'
                 rel='noreferrer'
                 id='footer-facebook'
@@ -202,8 +202,8 @@ const Footer = ({ language }: FooterProps) => {
               </li>
               <li className='flex items-start gap-3 text-white/70 text-sm'>
                 <span className='text-[var(--color-primary)] mt-0.5'><MailIcon /></span>
-                <a href='mailto:info@viofitness.vn' className='hover:text-white transition-colors'>
-                  info@viofitness.vn
+                <a href='mailto:viofitness0961119495@gmail.com' className='hover:text-white transition-colors'>
+                  viofitness0961119495@gmail.com
                 </a>
               </li>
               <li className='pt-2 border-t border-white/10'>
