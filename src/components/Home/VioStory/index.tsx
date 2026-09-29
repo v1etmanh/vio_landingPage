@@ -9,8 +9,8 @@ import './vio-story.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const storyTitleClass = 'font-archivo max-w-3xl !text-white text-3xl font-black uppercase leading-[1.12] tracking-tight sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,3.8vw,4.25rem)]'
-const storyChapterTitleClass = 'font-archivo max-w-3xl !text-white text-xl font-black uppercase leading-[1.2] tracking-tight sm:text-2xl md:text-3xl lg:text-[clamp(1.75rem,2.4vw,2.75rem)]'
+const storyTitleClass = 'font-heading max-w-3xl !text-white text-3xl font-black uppercase leading-[1.12] tracking-tight sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,3.8vw,4.25rem)]'
+const storyChapterTitleClass = 'font-heading max-w-3xl !text-white text-xl font-black uppercase leading-[1.2] tracking-tight sm:text-2xl md:text-3xl lg:text-[clamp(1.75rem,2.4vw,2.75rem)]'
 
 interface VioStoryProps {
   language: SiteLanguage
@@ -227,6 +227,13 @@ const VioStory = ({ language }: VioStoryProps) => {
     }
   }, [updateRailDimensions])
 
+  // Ensure mobile timeline starts at scrollLeft = 0 without clipping initial card
+  useEffect(() => {
+    if (timelineRef.current) {
+      timelineRef.current.scrollLeft = 0
+    }
+  }, [])
+
   // Services-style scrub timeline on desktop
   useGSAP(() => {
     const section = sectionRef.current
@@ -430,6 +437,13 @@ const VioStory = ({ language }: VioStoryProps) => {
       activeIndexRef.current = targetIndex
       setActiveIndex(targetIndex)
       setRevealedThrough((prev) => Math.max(prev, targetIndex))
+
+      // Center active thumbnail smoothly on mobile so it never gets clipped or lost
+      const timeline = timelineRef.current
+      const targetBtn = timeline?.querySelector<HTMLElement>(`[data-story-index="${targetIndex}"]`)
+      if (timeline && targetBtn) {
+        targetBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+      }
     }
   }, [steps.length])
 
@@ -491,7 +505,7 @@ const VioStory = ({ language }: VioStoryProps) => {
       />
       <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,.82)_0%,rgba(10,10,10,.72)_54%,rgba(10,10,10,.34)_100%)]' />
 
-      <div className='relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[1600px] flex-col px-5 py-7 sm:px-8 sm:py-8 lg:h-full lg:min-h-0 lg:px-14 lg:pb-8 lg:pt-30 xl:px-20'>
+      <div className='relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-[1600px] flex-col px-5 pt-20 pb-8 sm:px-8 sm:pt-24 sm:pb-10 lg:h-full lg:min-h-0 lg:px-14 lg:pb-8 lg:pt-30 xl:px-20'>
         <header className='shrink-0 lg:mb-2'>
           <h2 className={storyTitleClass}>
             {language === 'vi' ? 'Câu chuyện của VIO' : 'The story of VIO'}
@@ -505,7 +519,7 @@ const VioStory = ({ language }: VioStoryProps) => {
             onScroll={revealMobileChapterOnScroll}
             role='group'
             aria-label={language === 'vi' ? 'Các mốc câu chuyện VIO' : 'VIO story chapters'}
-            className='relative flex flex-col gap-2 overflow-x-auto py-1 lg:overflow-visible lg:py-0'
+            className='vio-story-timeline-scroll relative w-full overflow-x-auto py-4 px-2 lg:px-0 lg:overflow-visible lg:py-0 snap-x snap-mandatory scroll-smooth'
           >
             {/* Progress Header Badge */}
             <div className='hidden lg:flex items-center justify-between pb-3 mb-2 border-b border-white/10 text-xs font-mono tracking-widest text-[#C5A059]'>
@@ -525,7 +539,7 @@ const VioStory = ({ language }: VioStoryProps) => {
             </div>
 
             {/* Timeline List with Serpentine Golden Light Thread */}
-            <div ref={timelineListRef} className='relative flex gap-3 lg:flex-col lg:gap-4'>
+            <div ref={timelineListRef} className='relative flex gap-4 pl-3 pr-8 lg:px-0 lg:flex-col lg:gap-4'>
               {/* Desktop Curved Golden Thread SVG */}
               <svg
                 className='absolute left-0 top-0 w-[100px] h-full pointer-events-none z-0 hidden lg:block overflow-visible'
@@ -645,7 +659,7 @@ const VioStory = ({ language }: VioStoryProps) => {
                     aria-current={isActive ? 'step' : undefined}
                     aria-hidden={!isRevealed}
                     tabIndex={isRevealed ? 0 : -1}
-                    className={`group relative flex items-center gap-4 w-[min(56vw,16rem)] shrink-0 text-left transition-[opacity,transform] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C5A059] lg:w-full ${
+                    className={`group relative flex items-center gap-4 w-[min(65vw,17rem)] shrink-0 snap-start text-left transition-[opacity,transform] duration-500 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C5A059] lg:w-full ${
                       isRevealed ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
                     }`}
                   >
@@ -688,20 +702,12 @@ const VioStory = ({ language }: VioStoryProps) => {
 
                     {/* Thumbnail Card with Luxury Golden Border and Ambient Glow */}
                     <div
-                      className={`relative flex-1 aspect-[2/1] overflow-hidden rounded-lg border transition-all duration-500 lg:aspect-auto lg:h-[clamp(5rem,13.5vh,6.75rem)] ${
+                      className={`relative flex-1 aspect-[16/10] overflow-hidden rounded-lg border transition-all duration-500 lg:aspect-auto lg:h-[clamp(5rem,13.5vh,6.75rem)] ${
                         isActive
-                          ? 'border-[#FFE08A] shadow-[0_0_24px_rgba(229,180,98,0.35)] ring-1 ring-[#FFE08A]/40 scale-[1.02] opacity-100'
+                          ? 'border-[#FFE08A] shadow-[0_0_24px_rgba(229,180,98,0.35)] ring-1 ring-[#FFE08A]/40 lg:scale-[1.02] opacity-100'
                           : 'border-white/15 opacity-60 hover:opacity-90 hover:border-white/40'
                       }`}
                     >
-                      {/* Mobile milestone badge header */}
-                      <div className='absolute left-2 top-2 z-10 flex items-center gap-1.5 rounded bg-black/70 px-1.5 py-0.5 backdrop-blur-sm lg:hidden'>
-                        <span className='scale-75 text-[#FFE08A]'>{milestoneIcons[index]}</span>
-                        <span className={`text-[10px] font-bold tracking-wider ${isActive ? 'text-[#FFE08A]' : 'text-white/70'}`}>
-                          {step.number} · {step.label}
-                        </span>
-                      </div>
-
                       <img
                         src={`/images/story_asset/${index + 1}.webp`}
                         alt={step.label}

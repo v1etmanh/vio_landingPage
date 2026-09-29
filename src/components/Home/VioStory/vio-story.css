@@ -1,9 +1,15 @@
-/* Bỏ đoạn @import này nếu 'Archivo Black' đã được nạp global rồi, tránh load 2 lần */
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-
-/* Fallback nếu tailwind.config chưa khai báo fontFamily.archivo */
+/* Fallback font nếu tailwind.config chưa khai báo fontFamily.heading */
 .font-archivo {
-  font-family: 'Archivo Black', 'Oswald', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-heading, 'Oswald', sans-serif);
+}
+
+/* Ẩn thanh cuộn xấu trên mobile mà vẫn cho phép vuốt ngang mượt mà */
+.vio-story-timeline-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.vio-story-timeline-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 /* Ghim layer GPU cho cả section: giảm giật/flicker khi clip-path + scale animate

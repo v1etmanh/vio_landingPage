@@ -227,8 +227,8 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                       <img src={trainer.portraitImage} alt={`${trainer.name}, ${trainer.role}`} className='coach-portrait-image' style={{ objectPosition: trainer.portraitPosition }} loading={trainerIndex === 0 ? 'eager' : 'lazy'} />
                       <figcaption className='absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(20,17,13,.7),transparent)] px-6 pb-6 pt-20 text-[11px] font-extrabold uppercase tracking-[0.17em] text-white/85'>{trainer.focus}</figcaption>
                     </figure>
-                    <a href='#Registration' className='mx-auto mt-4 flex w-fit items-center gap-3 bg-[#171512] px-5 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
-                      {copy.book} {trainer.name} <span aria-hidden='true'>↗</span>
+                    <a href='#Registration' className='mx-auto mt-4 flex w-fit items-center justify-center bg-[#171512] px-6 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
+                      {copy.book} {trainer.name}
                     </a>
                   </div>
 
@@ -274,8 +274,8 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
       <div className='mx-auto mt-10 max-w-[1440px] px-4 text-center sm:px-8 lg:mt-12 lg:px-16 xl:px-20'>
         <div className='border-y border-black/10 py-9 sm:py-11'>
           <p className='font-heading mx-auto max-w-3xl text-3xl leading-tight tracking-tight text-[#171512] sm:text-4xl'>{language === 'vi' ? 'Bạn ấn tượng nhất với HLV nào? Hãy cho VIO biết nhé!' : 'Which coach were you most impressed with? Let me know!'}</p>
-          <a href='#Registration' className='mt-6 inline-flex items-center gap-3 bg-[#a87e32] px-6 py-4 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#171512] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
-            {language === 'vi' ? 'Để lại thông tin' : 'Leave your details'} <span aria-hidden='true'>↗</span>
+          <a href='#Registration' className='mt-6 inline-flex items-center justify-center bg-[#a87e32] px-6 py-4 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#171512] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
+            {language === 'vi' ? 'Để lại thông tin' : 'Leave your details'}
           </a>
         </div>
       </div>
