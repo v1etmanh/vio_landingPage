@@ -86,8 +86,8 @@ const content = {
     address: <>15 Tran Phu,<br />Hai Chau, Da Nang</>,
     openingHours: 'Opening hours',
     hours: [
-      { day: 'Mon – Sat', time: '05:30 – 20:30' },
-      { day: 'Sunday', time: '08:00 – 19:00' },
+      { day: 'Mon – Sat', time: '5:30 AM – 8:30 PM' },
+      { day: 'Sunday', time: '8:00 AM – 7:00 PM' },
     ],
     privacy: 'Privacy policy',
     terms: 'Terms of use',

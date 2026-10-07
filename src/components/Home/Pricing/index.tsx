@@ -27,23 +27,23 @@ const plansByLanguage: Record<SiteLanguage, MembershipPlan[]> = {
   en: [
     {
       name: 'DAY PASS', tagline: 'Quick & easy daily access', priceVND: '200,000 VND', priceUSD: '$8', isPopular: false, btnText: 'GET DAY PASS', bgImage: "url('/images/pricing/essential.png')",
-      features: ['Unlimited Gym Access', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Get a FREE 500ml bottle of water', 'Quick Registration — Start Immediately'],
+      features: ['Unlimited Gym Access', 'Luxurious Air-Conditioned Space', 'Private Lockers with Keys', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Get a FREE 500ml bottle of water', 'Quick Registration — Start Immediately'],
     },
     {
       name: '3-DAY PASS', tagline: 'Ideal for weekend getaways', priceVND: '500,000 VND', priceUSD: '$20', isPopular: false, btnText: 'GET 3-DAY PASS', bgImage: "url('/images/pricing/abstract_white.png')",
-      features: ['Unlimited gym access for 3 consecutive days', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately', 'Get a FREE 500ml bottle of water'],
+      features: ['Unlimited gym access for 3 consecutive days', 'Luxurious Air-Conditioned Space', 'Private Lockers with Keys', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately', 'Get a FREE 500ml bottle of water'],
     },
     {
       name: 'WEEK PASS', tagline: 'Best choice for short trips', priceVND: '900,000 VND', priceUSD: '$24', isPopular: true, btnText: 'GET WEEK PASS', bgImage: "url('/output_ms/abstract_kinetic_energy.png')",
-      features: ['Unlimited gym access for 7 consecutive days', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately', 'Get a FREE Americano or Monster Energy Drink (for first-time members registering at VIO FITNESS)'],
+      features: ['Unlimited gym access for 7 consecutive days', 'Luxurious Air-Conditioned Space', 'Private Lockers with Keys', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Quick Registration — Start Immediately', 'Get a FREE Americano or Monster Energy Drink (for first-time members registering at VIO FITNESS)'],
     },
     {
       name: 'MONTH PASS', tagline: 'Save more, train more', priceVND: '1,650,000 VND', priceUSD: '$63', isPopular: false, btnText: 'GET MONTH PASS', bgImage: "url('/images/pricing/elite.png')",
-      features: ['Unlimited gym access for 30 days', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Free 2 one-to-one training sessions with a personal trainer', '1 membership freeze of up to 30 days', 'Get 1 free whey protein smoothie (for first-time members registering at VIO FITNESS)'],
+      features: ['Unlimited gym access for 30 days', 'Luxurious Air-Conditioned Space', 'Private Lockers with Keys', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Free 2 one-to-one training sessions with a personal trainer', '1 membership freeze of up to 30 days', 'Get 1 free whey protein smoothie (for first-time members registering at VIO FITNESS)'],
     },
     {
       name: '1-YEAR PASS', tagline: 'By your side every workout', priceVND: '10,200,000 VND', priceUSD: '$400', isPopular: false, btnText: 'GET 1-YEAR PASS', bgImage: "url('/images/pricing/abstract_gold.png')",
-      features: ['Unlimited gym access for 1 year', 'Luxurious Air-Conditioned Space', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Free 2 one-to-one training sessions with a personal trainer', '3 membership freezes of up to 30 days each', 'Get 1 month membership free', 'Get 2 free whey protein smoothies', 'Get a relaxing stretching session'],
+      features: ['Unlimited gym access for 1 year', 'Luxurious Air-Conditioned Space', 'Private Lockers with Keys', '2 clean workout towels provided per visit', 'Free InBody Analysis', 'Sauna Access Included', 'Free 2 one-to-one training sessions with a personal trainer', '3 membership freezes of up to 30 days each', 'Get 1 month membership free', 'Get 2 free whey protein smoothies', 'Get a relaxing stretching session'],
     },
   ],
   vi: [
@@ -65,7 +65,7 @@ const plansByLanguage: Record<SiteLanguage, MembershipPlan[]> = {
     },
     {
       name: 'VÉ 1 NĂM', tagline: 'Đồng hành trong mỗi buổi tập', priceVND: '10.200.000 VND', priceUSD: '$400', isPopular: false, btnText: 'ĐĂNG KÝ VÉ 1 NĂM', bgImage: "url('/images/pricing/abstract_gold.png')",
-      features: ['Không giới hạn quyền sử dụng phòng gym trong 1 năm', 'Không gian sang trọng, điều hoà mát mẻ', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 2 buổi tập 1-1 cùng huấn luyện viên cá nhân', 'Bảo lưu hội viên 3 lần, tối đa 30 ngày mỗi lần', 'Tặng thêm 1 tháng hội viên', 'Tặng 2 whey protein smoothie', 'Tặng 1 buổi stretching thư giãn'],
+      features: ['Không giới hạn quyền sử dụng phòng gym trong 1 năm', 'Không gian sang trọng, điều hoà mát mẻ', 'Tủ đồ cá nhân có chìa khóa riêng', '2 khăn tập sạch cho mỗi lượt ghé thăm', 'Phân tích chỉ số InBody miễn phí', 'Đã bao gồm phòng xông hơi', 'Tặng 2 buổi tập 1-1 cùng huấn luyện viên cá nhân', 'Bảo lưu hội viên 3 lần, tối đa 30 ngày mỗi lần', 'Tặng thêm 1 tháng hội viên', 'Tặng 2 whey protein smoothie', 'Tặng 1 buổi stretching thư giãn'],
     },
   ],
 }

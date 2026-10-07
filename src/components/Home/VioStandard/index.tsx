@@ -34,19 +34,19 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
         headingAccent: 'Standard.',
         intro: 'Four reasons travelers and expats choose VIO Fitness over every chain gym in Đà Nẵng.',
         highlights: ['Professional', 'Dedicated'],
-        quote: <>More than a gym.<br />A place to belong.</>,
+        quote: <>More than a gym.<br />A place you can call home</>,
         stats: ['Years of experience', 'Members transformed', 'Google Maps reviews'],
         cards: [
-          ['Cool & Comfortable', 'Stay cool. Feel comfortable.'],
-          ['Modern Equipment', 'Move better. Get stronger.'],
-          ['Feel at Home', 'Everyone belongs at VIO.'],
-          ['Complete Experience', 'Recover. Refuel. Feel good.'],
+          ['Workout space', 'Clean and spacious'],
+          ['Equipment: Modern & Versatile Machines', ''],
+          ['Professional Personal Trainers', 'Passionate & Empathetic'],
+          ['A complete experience.', 'Recovery & relaxation'],
         ],
       }
 
   const cards = [
     { num: '01', keyword: 'SPACE', title: copy.cards[0][0], desc: copy.cards[0][1] },
-    { num: '02', keyword: 'EQUIPMENT', title: copy.cards[1][0], desc: copy.cards[1][1] },
+    { num: '02', keyword: language === 'vi' ? 'EQUIPMENT' : '', title: copy.cards[1][0], desc: copy.cards[1][1] },
     { num: '03', keyword: '', title: copy.cards[2][0], desc: copy.cards[2][1] },
     { num: '04', keyword: 'RECOVERY', title: copy.cards[3][0], desc: copy.cards[3][1] },
   ]
@@ -124,9 +124,11 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
               <h3 className='mb-2 whitespace-pre-line text-2xl font-black uppercase leading-none tracking-tight text-[#171717] sm:text-3xl'>
                 {activeCard.title}
               </h3>
-              <p aria-live='polite' className='max-w-sm text-sm font-light leading-relaxed text-[#5A544A] sm:text-base'>
-                {activeCard.desc}
-              </p>
+              {activeCard.desc && (
+                <p aria-live='polite' className='max-w-sm text-sm font-light leading-relaxed text-[#5A544A] sm:text-base'>
+                  {activeCard.desc}
+                </p>
+              )}
             </div>
 
             <div className='mb-10 max-w-md border-l border-[#26221F]/25 pl-5'>
@@ -194,7 +196,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
                     onMouseEnter={() => selectCard(index)}
                     onFocus={() => selectCard(index)}
                     aria-pressed={isActive}
-                    aria-label={`${card.num}. ${card.title}. ${card.desc}`}
+                    aria-label={`${card.num}. ${[card.title, card.desc].filter(Boolean).join('. ')}`}
                     className={`group absolute z-20 w-[30%] text-left transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)] motion-reduce:transition-none ${labelPositions[index].position} ${isActive ? 'text-[#F5F2EC]' : 'text-[#F5F2EC]/60 hover:text-[#F5F2EC]'}`}
                   >
                     <span
@@ -212,9 +214,11 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
                       <span className='mt-2 block whitespace-pre-line text-[10px] font-black uppercase leading-tight text-[#F5F2EC] sm:text-sm'>
                         {card.title}
                       </span>
-                      <span className='mt-1 block text-[9px] font-light leading-snug text-[#F5F2EC]/75 sm:text-xs'>
-                        {card.desc}
-                      </span>
+                      {card.desc && (
+                        <span className='mt-1 block text-[9px] font-light leading-snug text-[#F5F2EC]/75 sm:text-xs'>
+                          {card.desc}
+                        </span>
+                      )}
                     </span>
                   </button>
                 )

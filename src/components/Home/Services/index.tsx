@@ -84,10 +84,10 @@ const localizedServiceContent: Record<SiteLanguage, Array<Pick<ServiceItem, 'tit
     { title: 'Nạp Dinh Dưỡng', subtitle: '', tag: '05 · DINH DƯỠNG', description: 'Quầy dinh dưỡng lành mạnh với Protein Shake pha tươi, tiếp năng lượng cho quá trình tăng cơ và chuyển đổi vóc dáng.', detail: '' },
   ],
   en: [
-    { title: 'Modern Equipment', subtitle: '', tag: '01 · EQUIPMENT', description: '100% modern imported machinery, precision-engineered for every muscle group and maximum workout safety.', detail: '' },
-    { title: 'Training Atmosphere', subtitle: '', tag: '02 · ATMOSPHERE', description: 'A spacious, premium spa-like atmosphere designed for ultimate privacy, focus, and energy.', detail: '' },
-    { title: 'Recovery & Therapy', subtitle: '', tag: '03 · RECOVERY', description: 'Specialized stretch therapy and myofascial release guided by expert coaches to speed up recovery and ease tension.', detail: '' },
-    { title: 'Sauna & Relaxation', subtitle: '', tag: '04 · RELAXATION', description: 'Premium sauna facilities to detoxify, soothe sore muscles, and unwind after an intense training session.', detail: '' },
+    { title: 'Modern Equipment', subtitle: '', tag: '01 · EQUIPMENT', description: '100% new, state-of-the-art machines precision-built for all muscle groups and engineered for your ultimate safety.', detail: '' },
+    { title: 'Workout Environment', subtitle: '', tag: '02 · SPACE', description: 'Designed for all fitness levels, our workout space combines personal privacy with a welcoming, comfortable vibe.', detail: '' },
+    { title: 'Unwind & Rejuvenate', subtitle: '', tag: '03 · RECOVERY & RELAXATION', description: 'Soothe soreness, prevent injuries, improve circulation, and speed up muscle recovery after workouts through our relaxing stretch therapy.', detail: '' },
+    { title: 'Sauna Room', subtitle: '', tag: '04 · RELAXATION', description: 'The ideal space to relieve stress, unwind your mind, and recharge your energy.', detail: '' },
     { title: 'Nutrition & Refuel Bar', subtitle: '', tag: '05 · NUTRITION', description: 'Healthy nutrition bar featuring freshly blended Protein Shakes to power your gains and body transformation.', detail: '' },
   ],
 }

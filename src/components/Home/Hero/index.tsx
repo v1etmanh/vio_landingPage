@@ -22,7 +22,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
     : {
         location: '15 TRAN PHU • HAI CHAU • DA NANG',
         headline: ['A WORLD-CLASS GYM', 'IN THE HEART', 'OF DA NANG!'],
-        benefits: ['1-on-1 Personal Training', 'Fully equipped with modern, top-tier machines', 'Dedicated - Friendly - Professional staff'],
+        benefits: ['A Gym for Beginners', 'Fully equipped with modern, top-tier machines', 'Dedicated - Friendly - Professional staff'],
         explore: 'Explore services',
         book: 'Book now',
         instagram: 'Instagram',

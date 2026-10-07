@@ -17,12 +17,11 @@ const TrustBar: React.FC<TrustBarProps> = ({ language }) => {
         'HUẤN LUYỆN VIÊN 1:1',
       ]
     : [
-        '3C - COOL. CLEAN. COMFORTABLE',
-        'VIO FITNESS - IT’S HOME',
-        'PREMIUM EXPERIENCE',
-        'PERSONAL TRAINING',
-        'BUILD YOUR STRONGEST',
+        'VIO FITNESS',
+        'COOL • CLEAN • COMFORTABLE',
+        'BEGINNER FRIENDLY GYM',
         '5 STAR RATING',
+        'PERSONAL TRAINING 1:1',
       ]
 
   const renderTrack = (items: string[]) =>
