@@ -40,6 +40,19 @@ const clientGalleries = {
 const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
   vi: [
     {
+      name: 'Chí Công',
+      focus: 'Vận động - Functional Training - Thể lực',
+      role: 'Huấn luyện viên cá nhân',
+      profile: 'Tốt nghiệp Cử nhân loại Giỏi Đại học Thể dục Thể thao Đà Nẵng, Coach Chí Công theo đuổi phương pháp tập luyện dựa trên nền tảng khoa học. Mỗi lộ trình được thiết kế theo thể trạng, mục tiêu và khả năng vận động của khách hàng.',
+      quote: 'Mỗi người có một mục tiêu tập luyện khác nhau. Tốt hơn mỗi ngày đã là một thành công.',
+      portraitImage: '/webp/trainers/chi-cong.webp',
+      portraitPosition: 'center 20%',
+      clientImages: clientGalleries.chiCong,
+      reviews: [
+        { name: 'Valeria', from: 'Nga', quote: 'Coach Chí Công hướng dẫn rất chuyên nghiệp, giải thích rõ ràng và luôn chú ý đến kỹ thuật cùng mục tiêu riêng của tôi. Tôi đã thấy tiến bộ thực sự nhờ những buổi tập này.' },
+      ],
+    },
+    {
       name: 'Duy Bảo',
       focus: 'Sức mạnh - Tăng cơ - Giảm mỡ',
       role: 'Huấn luyện viên cá nhân',
@@ -52,19 +65,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
         { name: 'Tuyết Anh', from: 'Đà Nẵng, Việt Nam', quote: 'Chỉ trong 6 ngày tại VIO, tôi đã học được rất nhiều bài tập và kỹ thuật mới. Coach Duy Bảo hiểu rõ chuyên môn, thân thiện và luôn hướng dẫn tận tình.' },
         { name: 'Michael Tiongson', from: 'Philippines', quote: 'Sau chương trình 1-1 kéo dài 5 tuần, tôi giảm 4kg mỡ. Coach Bảo giúp tôi tự tin từ những ngày đầu chưa biết sử dụng máy tập.' },
         { name: 'Veronique Vysotskaya', from: 'Nga', quote: 'Tôi thấy kết quả rõ rệt chỉ sau một tháng. Coach Duy Bảo chú ý kỹ thuật và giúp tôi cảm nhận cơ thể khỏe hơn từng buổi tập.' },
-      ],
-    },
-    {
-      name: 'Chí Công',
-      focus: 'Vận động - Functional Training - Thể lực',
-      role: 'Huấn luyện viên cá nhân',
-      profile: 'Tốt nghiệp Cử nhân loại Giỏi Đại học Thể dục Thể thao Đà Nẵng, Coach Chí Công theo đuổi phương pháp tập luyện dựa trên nền tảng khoa học. Mỗi lộ trình được thiết kế theo thể trạng, mục tiêu và khả năng vận động của khách hàng.',
-      quote: 'Mỗi người có một mục tiêu tập luyện khác nhau. Tốt hơn mỗi ngày đã là một thành công.',
-      portraitImage: '/webp/trainers/chi-cong.webp',
-      portraitPosition: 'center 20%',
-      clientImages: clientGalleries.chiCong,
-      reviews: [
-        { name: 'Valeria', from: 'Nga', quote: 'Coach Chí Công hướng dẫn rất chuyên nghiệp, giải thích rõ ràng và luôn chú ý đến kỹ thuật cùng mục tiêu riêng của tôi. Tôi đã thấy tiến bộ thực sự nhờ những buổi tập này.' },
       ],
     },
     {
@@ -85,6 +85,19 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
   ],
   en: [
     {
+      name: 'Chi Cong',
+      focus: 'Movement - Functional Training - Conditioning',
+      role: 'Personal trainer',
+      profile: 'Coach Chi Cong graduated with distinction from Da Nang Sports University. His evidence-based programmes are built around each client’s condition and goals, from technique and body control to lasting confidence in independent training.',
+      quote: 'Everyone has a different training goal. Becoming better every day is already a success.',
+      portraitImage: '/webp/trainers/chi-cong.webp',
+      portraitPosition: 'center 20%',
+      clientImages: clientGalleries.chiCong,
+      reviews: [
+        { name: 'Valeria', from: 'Russia', quote: 'Coach Chi Cong is professional, explains everything clearly, and pays attention to technique and individual goals. I saw real progress thanks to his training.' },
+      ],
+    },
+    {
       name: 'Duy Bảo',
       focus: 'Strength - Muscle Building - Fat Loss',
       role: 'Personal trainer',
@@ -97,19 +110,6 @@ const trainersByLanguage: Record<SiteLanguage, Trainer[]> = {
         { name: 'Tuyet Anh', from: 'Da Nang, Vietnam', quote: 'In only six days at VIO, I learned so many new exercises and techniques. Coach Duy Bao is knowledgeable, approachable, and always ready to guide me.' },
         { name: 'Michael Tiongson', from: 'Philippines', quote: 'After a five-week one-to-one programme, I lost 4kg of fat. Coach Bao made me feel comfortable from the first day when I knew nothing about gym equipment.' },
         { name: 'Veronique Vysotskaya', from: 'Russia', quote: 'I saw amazing results in just one month. Coach Duy Bao pays close attention to technique and has helped me feel stronger and fitter.' },
-      ],
-    },
-    {
-      name: 'Chi Cong',
-      focus: 'Movement - Functional Training - Conditioning',
-      role: 'Personal trainer',
-      profile: 'Coach Chi Cong graduated with distinction from Da Nang Sports University. His evidence-based programmes are built around each client’s condition and goals, from technique and body control to lasting confidence in independent training.',
-      quote: 'Everyone has a different training goal. Becoming better every day is already a success.',
-      portraitImage: '/webp/trainers/chi-cong.webp',
-      portraitPosition: 'center 20%',
-      clientImages: clientGalleries.chiCong,
-      reviews: [
-        { name: 'Valeria', from: 'Russia', quote: 'Coach Chi Cong is professional, explains everything clearly, and pays attention to technique and individual goals. I saw real progress thanks to his training.' },
       ],
     },
     {
