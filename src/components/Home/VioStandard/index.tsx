@@ -38,7 +38,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
         stats: ['Years of experience', 'Members transformed', 'Google Maps reviews'],
         cards: [
           ['Workout space', 'Clean and spacious'],
-          ['Equipment: Modern & Versatile Machines', ''],
+          ['Equipment', 'Modern & Versatile Machines'],
           ['Professional Personal Trainers', 'Passionate & Empathetic'],
           ['A complete experience.', 'Recovery & relaxation'],
         ],
@@ -236,7 +236,7 @@ const VioStandard: React.FC<VioStandardProps> = ({ language }) => {
           </div>
         </div>
 
-        <div className='pointer-events-none absolute bottom-0 left-[42%] z-20 hidden -translate-x-1/2 xl:block'>
+        <div className='pointer-events-none absolute bottom-0 left-[50%] z-20 hidden -translate-x-1/2 xl:block'>
           <img
             src='/webp/images/vio-coach-bao-cutout.png'
             alt='Huấn luyện viên VIO Fitness'
