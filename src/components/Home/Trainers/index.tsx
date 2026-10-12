@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Icon } from '@iconify/react'
 import type { CSSProperties, FC } from 'react'
 import type { SiteLanguage } from '../../../App'
 
@@ -20,6 +21,13 @@ interface Trainer {
   portraitPosition: string
   clientImages: string[]
   reviews: ClientReview[]
+}
+
+interface TrainerDetailDialogProps {
+  trainer: Trainer
+  language: SiteLanguage
+  open: boolean
+  onClose: () => void
 }
 
 const clientGalleries = {
@@ -149,24 +157,224 @@ const clientImageStyle = (index: number, imageCount: number): CSSProperties => {
   return { bottom: 0, right: 0, height: '54%', width: '54%', zIndex: 30 }
 }
 
+const TrainerDetailDialog: FC<TrainerDetailDialogProps> = ({ trainer, language, open, onClose }) => {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const galleryRef = useRef<HTMLDivElement>(null)
+  const [reviewIndex, setReviewIndex] = useState(0)
+  const reviews = trainer.reviews.filter(({ quote }) => quote.trim().length > 0)
+  const selectedReview = reviews[Math.min(reviewIndex, reviews.length - 1)]
+  const copy = language === 'vi'
+    ? {
+        close: 'Đóng hồ sơ',
+        gallery: 'HLV đồng hành cùng khách hàng',
+        image: 'Ảnh',
+        profile: 'Hồ sơ chuyên môn',
+        philosophy: 'Triết lý huấn luyện',
+        reviews: 'Khách hàng nói gì',
+        book: 'Đặt lịch cùng',
+      }
+    : {
+        close: 'Close profile',
+        gallery: 'Coaching in action',
+        image: 'Photo',
+        profile: 'Professional profile',
+        philosophy: 'Coaching philosophy',
+        reviews: 'Client feedback',
+        book: 'Book with',
+      }
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+
+    if (open && !dialog.open) dialog.showModal()
+    if (!open && dialog.open) dialog.close()
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [open])
+
+  useEffect(() => {
+    setReviewIndex(0)
+    galleryRef.current?.scrollTo({ left: 0 })
+  }, [trainer.name])
+
+  const goToImage = (index: number) => {
+    const gallery = galleryRef.current
+    if (!gallery) return
+    gallery.scrollTo({
+      left: gallery.clientWidth * index,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    })
+  }
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className='trainer-dialog'
+      aria-labelledby='trainer-dialog-title'
+      aria-describedby='trainer-dialog-focus'
+      onClose={onClose}
+      onMouseDown={(event) => {
+        if (event.target === dialogRef.current) onClose()
+      }}
+    >
+      <div className='trainer-dialog-panel' onMouseDown={(event) => event.stopPropagation()}>
+        <header className='trainer-dialog-header'>
+          <div className='min-w-0'>
+            <p className='text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#a87e32]'>{trainer.role}</p>
+            <h3 id='trainer-dialog-title' className='font-heading mt-1 truncate text-3xl font-black uppercase tracking-tight text-[#171512]'>{trainer.name}</h3>
+          </div>
+          <button
+            type='button'
+            onClick={onClose}
+            className='grid h-11 w-11 shrink-0 place-items-center border border-black/15 text-[#171512] transition-colors hover:border-[#a87e32] hover:text-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] active:scale-[0.98]'
+            aria-label={copy.close}
+            title={copy.close}
+          >
+            <Icon icon='tabler:x' className='text-2xl' aria-hidden='true' />
+          </button>
+        </header>
+
+        <div className='trainer-dialog-body'>
+          <section className='p-0' aria-labelledby='trainer-gallery-title'>
+            <h4 id='trainer-gallery-title' className='sr-only'>{copy.gallery}</h4>
+            <div ref={galleryRef} className='trainer-dialog-gallery'>
+              {trainer.clientImages.map((image, index) => (
+                <figure key={image} className='trainer-dialog-gallery-slide'>
+                  <img
+                    src={image}
+                    alt={`${trainer.name} ${language === 'vi' ? 'đang hướng dẫn hội viên VIO FITNESS' : 'coaching a VIO FITNESS member'}`}
+                    className='h-full w-full object-cover'
+                    loading='lazy'
+                    width='720'
+                    height='900'
+                  />
+                  <figcaption className='sr-only'>{copy.image} {index + 1}</figcaption>
+                </figure>
+              ))}
+            </div>
+
+            {trainer.clientImages.length > 1 && (
+              <div className='mt-3 grid grid-cols-3 gap-2' aria-label={copy.gallery}>
+                {trainer.clientImages.map((image, index) => (
+                  <button
+                    key={image}
+                    type='button'
+                    onClick={() => goToImage(index)}
+                    className='aspect-[4/3] overflow-hidden border border-black/10 bg-[#e8e4da] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] active:scale-[0.98]'
+                    aria-label={`${copy.image} ${index + 1}`}
+                  >
+                    <img src={image} alt='' className='h-full w-full object-cover' loading='lazy' width='240' height='180' />
+                  </button>
+                ))}
+              </div>
+            )}
+          </section>
+
+          <div className='px-5 pb-8 pt-8'>
+            <p id='trainer-dialog-focus' className='text-xs font-extrabold uppercase leading-relaxed tracking-[0.14em] text-[#a87e32]'>{trainer.focus}</p>
+
+            <section className='mt-8 border-t border-black/10 pb-0 pt-6' aria-labelledby='trainer-profile-title'>
+              <h4 id='trainer-profile-title' className='font-heading text-2xl font-black uppercase tracking-tight text-[#171512]'>{copy.profile}</h4>
+              <p className='mt-3 text-[15px] leading-7 text-black/70'>{trainer.profile}</p>
+            </section>
+
+            <section className='mt-8 border-l-2 border-[#d0a54f] py-0 pl-5' aria-labelledby='trainer-philosophy-title'>
+              <h4 id='trainer-philosophy-title' className='text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#a87e32]'>{copy.philosophy}</h4>
+              <blockquote className='mt-3 text-lg italic leading-8 text-black/80'>&ldquo;{trainer.quote}&rdquo;</blockquote>
+            </section>
+
+            {selectedReview && (
+              <section className='mt-9 border-t border-black/10 pb-0 pt-7' aria-labelledby='trainer-reviews-title'>
+                <h4 id='trainer-reviews-title' className='font-heading text-2xl font-black uppercase tracking-tight text-[#171512]'>{copy.reviews}</h4>
+                <div className='mt-5 bg-white/60 p-5'>
+                  <p className='text-sm leading-none tracking-[0.16em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
+                  <blockquote className='mt-4 text-[15px] leading-7 text-black/75'>&ldquo;{selectedReview.quote}&rdquo;</blockquote>
+                  <div className='mt-5 flex items-center gap-3'>
+                    <span
+                      aria-hidden='true'
+                      style={{ backgroundColor: avatarColour(selectedReview.name) }}
+                      className='grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-black text-white shadow-[0_0_0_2px_#f0e2bf]'
+                    >
+                      {selectedReview.name.trim().charAt(0).toUpperCase()}
+                    </span>
+                    <p className='text-[10px] font-extrabold uppercase leading-relaxed tracking-[0.12em] text-black/55'>
+                      {selectedReview.name}{selectedReview.from ? `, ${selectedReview.from}` : ''}
+                    </p>
+                  </div>
+                </div>
+
+                {reviews.length > 1 && (
+                  <div className='mt-3 flex flex-wrap gap-2' aria-label={copy.reviews}>
+                    {reviews.map((review, index) => (
+                      <button
+                        key={review.name}
+                        type='button'
+                        onClick={() => setReviewIndex(index)}
+                        aria-pressed={reviewIndex === index}
+                        className={`border px-3 py-2 text-[9px] font-extrabold uppercase tracking-[0.1em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] active:scale-[0.98] ${reviewIndex === index ? 'border-[#171512] bg-[#171512] text-white' : 'border-black/15 text-black/60 hover:border-[#a87e32] hover:text-[#171512]'}`}
+                      >
+                        {review.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </section>
+            )}
+          </div>
+        </div>
+
+        <footer className='trainer-dialog-footer'>
+          <a
+            href='#Registration'
+            onClick={onClose}
+            className='flex min-h-12 w-full items-center justify-center bg-[#171512] px-5 py-3.5 text-center text-[11px] font-extrabold uppercase tracking-[0.13em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] active:scale-[0.99]'
+          >
+            {copy.book} {trainer.name}
+          </a>
+        </footer>
+      </div>
+    </dialog>
+  )
+}
+
 const Trainers: FC<TrainersProps> = ({ language }) => {
   const trainers = trainersByLanguage[language]
   const [activeTrainerIndex, setActiveTrainerIndex] = useState(0)
+  const [detailTrainerIndex, setDetailTrainerIndex] = useState(0)
+  const [detailOpen, setDetailOpen] = useState(false)
   const [reviewIndexes, setReviewIndexes] = useState([0, 0, 0])
   const dragStart = useRef<number | null>(null)
   const wheelLocked = useRef(false)
   const previousIndex = (activeTrainerIndex - 1 + trainers.length) % trainers.length
   const nextIndex = (activeTrainerIndex + 1) % trainers.length
+  const activeTrainer = trainers[activeTrainerIndex]
+  const detailTrainer = trainers[detailTrainerIndex]
   const copy = language === 'vi'
     ? {
         eyebrow: 'Đội ngũ huấn luyện viên', title: <>Đồng hành cùng tiến bộ của bạn.</>, meet: 'Gặp gỡ HLV của bạn', reviewLabel: 'Đánh giá từ khách hàng', previous: 'Trước', next: 'Tiếp', book: 'Đặt lịch cùng',
+        mobileActionFor: 'Xem hồ sơ HLV', trainerSelector: 'Chọn huấn luyện viên',
       }
     : {
         eyebrow: 'Our coaches', title: <>Coaching your progress.</>, meet: 'Meet your coach', reviewLabel: 'Client testimonial', previous: 'Previous', next: 'Next', book: 'Book with',
+        mobileActionFor: 'View trainer profile', trainerSelector: 'Choose a trainer',
       }
 
   const goToSlide = (index: number) => {
     setActiveTrainerIndex(index)
+  }
+
+  const openTrainerDetail = (index: number) => {
+    setDetailTrainerIndex(index)
+    setDetailOpen(true)
   }
 
   const selectReview = (trainerIndex: number, reviewIndex: number) => {
@@ -177,10 +385,65 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
     target instanceof HTMLElement && Boolean(target.closest('button, a'))
 
   return (
-    <section id='Trainers' className='overflow-hidden bg-[#f7f6f1] py-14 text-[#171512] sm:py-16 lg:py-20'>
+    <section id='Trainers' className='overflow-hidden bg-[#f7f6f1] py-10 text-[#171512] sm:py-14 md:py-16 lg:py-20'>
+      <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
+        <header className='mx-auto w-full pb-8 text-center md:pb-16 lg:pb-20'>
+          <p className='mb-3 hidden text-[11px] font-extrabold uppercase tracking-[0.23em] text-[#a87e32] md:block'>{copy.eyebrow}</p>
+          <h2 className='font-heading text-[2rem] font-black uppercase leading-[0.95] tracking-tighter sm:text-[2.35rem] md:text-6xl lg:whitespace-nowrap lg:text-[clamp(3.75rem,4.2vw,5.25rem)]'>{copy.title}</h2>
+          <p className='mx-auto mt-8 hidden text-sm leading-relaxed text-black/55 md:block md:text-base lg:whitespace-nowrap'>{language === 'vi' ? 'Ba chuyên gia. Ba phương pháp. Một hành trình mạnh mẽ hơn.' : 'Three specialists. Three approaches. One stronger journey.'}</p>
+        </header>
+
+        <div className='md:hidden'>
+          <div className='grid grid-cols-3 border-y border-black/10' role='tablist' aria-label={copy.trainerSelector}>
+            {trainers.map((trainer, index) => (
+              <button
+                key={trainer.name}
+                type='button'
+                role='tab'
+                aria-selected={activeTrainerIndex === index}
+                aria-controls='mobile-active-trainer'
+                onClick={() => goToSlide(index)}
+                className={`min-h-12 border-r border-black/10 px-1.5 py-3 text-[10px] font-extrabold uppercase tracking-[0.08em] transition-colors last:border-r-0 focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] active:scale-[0.98] ${activeTrainerIndex === index ? 'bg-[#171512] text-white' : 'text-black/55 hover:text-[#171512]'}`}
+              >
+                {trainer.name}
+              </button>
+            ))}
+          </div>
+
+          <article id='mobile-active-trainer' role='tabpanel' aria-label={activeTrainer.name} className='pt-5'>
+            <div className='group relative'>
+              <span className='block aspect-[4/5] max-h-[58svh] w-full overflow-hidden bg-[#dedbd2]'>
+                <img
+                  src={activeTrainer.portraitImage}
+                  alt={`${activeTrainer.name}, ${activeTrainer.role}`}
+                  className='h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.015]'
+                  style={{ objectPosition: activeTrainer.portraitPosition }}
+                  loading={activeTrainerIndex === 0 ? 'eager' : 'lazy'}
+                  width='720'
+                  height='900'
+                />
+              </span>
+              <div className='flex min-h-24 items-center justify-between gap-5 border-x border-b border-black/10 bg-white/45 px-4 py-4'>
+                <div className='min-w-0'>
+                  <h3 className='font-heading text-4xl font-black uppercase leading-none tracking-tight'>{activeTrainer.name}</h3>
+                  <p className='mt-2 max-w-[30rem] text-[10px] font-extrabold uppercase leading-relaxed tracking-[0.1em] text-black/55'>{activeTrainer.focus}</p>
+                </div>
+                <Icon icon='tabler:arrow-up-right' className='shrink-0 text-2xl text-[#a87e32] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' aria-hidden='true' />
+              </div>
+              <button
+                type='button'
+                onClick={() => openTrainerDetail(activeTrainerIndex)}
+                className='absolute inset-0 w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a87e32] active:scale-[0.995]'
+                aria-label={`${copy.mobileActionFor} ${activeTrainer.name}`}
+              />
+            </div>
+          </article>
+        </div>
+      </div>
+
       <div
         aria-label={copy.eyebrow}
-        className='cursor-grab overflow-hidden select-none active:cursor-grabbing'
+        className='relative hidden cursor-grab overflow-hidden select-none active:cursor-grabbing md:block'
         onPointerDown={(event) => {
           if (isInteractiveTarget(event.target)) return
           dragStart.current = event.clientX
@@ -202,14 +465,6 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
           window.setTimeout(() => { wheelLocked.current = false }, 650)
         }}
       >
-        <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
-          <header className='mx-auto w-full pb-16 text-center lg:pb-20'>
-            <p className='mb-3 text-[11px] font-extrabold uppercase tracking-[0.23em] text-[#a87e32]'>{copy.eyebrow}</p>
-            <h2 className='font-heading text-4xl font-black uppercase leading-[0.82] tracking-tighter sm:text-5xl md:text-6xl lg:whitespace-nowrap lg:text-[clamp(3.75rem,4.2vw,5.25rem)]'>{copy.title}</h2>
-            <p className='mx-auto mt-8 text-sm leading-relaxed text-black/55 sm:text-base lg:whitespace-nowrap'>{language === 'vi' ? 'Ba chuyên gia. Ba phương pháp. Một hành trình mạnh mẽ hơn.' : 'Three specialists. Three approaches. One stronger journey.'}</p>
-          </header>
-        </div>
-
         <div className='relative overflow-hidden'>
           <div className='flex will-change-transform transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]' style={{ transform: `translate3d(-${activeTrainerIndex * 100}%, 0, 0)` }}>
             {trainers.map((trainer, trainerIndex) => (
@@ -220,45 +475,45 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
                   const review = reviews[reviewIndex]
 
                   return (
-                <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
-                  <div className='grid gap-8 lg:grid-cols-12 lg:gap-12 xl:gap-16'>
-                  <div className='lg:col-span-5'>
-                    <figure className='coach-portrait'>
-                      <img src={trainer.portraitImage} alt={`${trainer.name}, ${trainer.role}`} className='coach-portrait-image' style={{ objectPosition: trainer.portraitPosition }} loading={trainerIndex === 0 ? 'eager' : 'lazy'} />
-                      <figcaption className='absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(20,17,13,.7),transparent)] px-6 pb-6 pt-20 text-[11px] font-extrabold uppercase tracking-[0.17em] text-white/85'>{trainer.focus}</figcaption>
-                    </figure>
-                    <a href='#Registration' className='mx-auto mt-4 flex w-fit items-center justify-center bg-[#171512] px-6 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
-                      {copy.book} {trainer.name}
-                    </a>
-                  </div>
-
-                  <div className='flex flex-col justify-center py-1 lg:col-span-7 lg:py-5'>
-                    <p className='text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#a87e32]'>{copy.meet}</p>
-                    <h3 className='font-heading mt-3 text-5xl font-black uppercase leading-[0.88] tracking-tight sm:text-6xl lg:text-7xl'>{trainer.name}</h3>
-                    <p className='mt-4 text-xs font-extrabold uppercase tracking-[0.15em] text-black/55'>{trainer.focus}</p>
-                    <p className='mt-7 max-w-2xl text-base leading-relaxed text-black/72 sm:text-lg'>{trainer.profile}</p>
-                    <blockquote className='mt-7 max-w-xl border-l-2 border-[#d0a54f] pl-4 text-lg italic leading-relaxed text-black/80'>&ldquo;{trainer.quote}&rdquo;</blockquote>
-
-                    <div className='coach-details-grid mt-6'>
-                      {review && <aside className='h-full border-l-2 border-[#d0a54f] bg-white/45 px-5 py-5 sm:px-6' aria-label={copy.reviewLabel}>
-                        <p className='mb-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#a87e32]'>{copy.reviewLabel}</p>
-                        <p className='mb-3 text-sm leading-none tracking-[0.16em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
-                        <blockquote className='font-heading text-sm leading-relaxed tracking-tight text-black/75 sm:text-[15px]'>&ldquo;{review.quote}&rdquo;</blockquote>
-                        <div className='mt-4 flex items-center gap-2.5'>
-                          <span aria-hidden='true' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: avatarColour(review.name), color: '#ffffff', boxShadow: '0 0 0 2px #f0e2bf', fontFamily: 'Inter, sans-serif', lineHeight: 1, textAlign: 'center' }} className='h-8 w-8 shrink-0 rounded-full text-xs font-black'>{review.name.trim().charAt(0).toUpperCase()}</span>
-                          <p className='text-[10px] font-extrabold uppercase tracking-[0.14em] text-black/55'>{review.name}{review.from ? ` · ${review.from}` : ''}</p>
+                    <div className='mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16 xl:px-20'>
+                      <div className='grid gap-8 lg:grid-cols-12 lg:gap-12 xl:gap-16'>
+                        <div className='lg:col-span-5'>
+                          <figure className='coach-portrait'>
+                            <img src={trainer.portraitImage} alt={`${trainer.name}, ${trainer.role}`} className='coach-portrait-image' style={{ objectPosition: trainer.portraitPosition }} loading={trainerIndex === 0 ? 'eager' : 'lazy'} />
+                            <figcaption className='absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(20,17,13,.7),transparent)] px-6 pb-6 pt-20 text-[11px] font-extrabold uppercase tracking-[0.17em] text-white/85'>{trainer.focus}</figcaption>
+                          </figure>
+                          <a href='#Registration' className='mx-auto mt-4 flex w-fit items-center justify-center bg-[#171512] px-6 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[#a87e32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
+                            {copy.book} {trainer.name}
+                          </a>
                         </div>
-                        {reviews.length > 1 && <div className='mt-4 flex flex-wrap gap-1.5'>
-                          {reviews.map((item, index) => <button key={item.name} type='button' onClick={() => selectReview(trainerIndex, index)} aria-pressed={reviewIndex === index} className={`border px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] ${reviewIndex === index ? 'border-[#171512] bg-[#171512] text-white' : 'border-black/15 text-black/55 hover:border-[#a87e32] hover:text-[#171512]'}`}>{item.name}</button>)}
-                        </div>}
-                      </aside>}
-                      <div className='coach-client-gallery'>
-                        {trainer.clientImages.map((image, index) => <img key={image} src={image} alt={`${trainer.name} coaching a VIO FITNESS member`} loading='lazy' style={clientImageStyle(index, trainer.clientImages.length)} className='absolute border-[3px] border-[#f7f6f1] object-cover shadow-[0_12px_24px_rgba(23,21,18,.18)]' />)}
+
+                        <div className='flex flex-col justify-center py-1 lg:col-span-7 lg:py-5'>
+                          <p className='text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#a87e32]'>{copy.meet}</p>
+                          <h3 className='font-heading mt-3 text-5xl font-black uppercase leading-[0.88] tracking-tight sm:text-6xl lg:text-7xl'>{trainer.name}</h3>
+                          <p className='mt-4 text-xs font-extrabold uppercase tracking-[0.15em] text-black/55'>{trainer.focus}</p>
+                          <p className='mt-7 max-w-2xl text-base leading-relaxed text-black/72 sm:text-lg'>{trainer.profile}</p>
+                          <blockquote className='mt-7 max-w-xl border-l-2 border-[#d0a54f] pl-4 text-lg italic leading-relaxed text-black/80'>&ldquo;{trainer.quote}&rdquo;</blockquote>
+
+                          <div className='coach-details-grid mt-6'>
+                            {review && <aside className='h-full border-l-2 border-[#d0a54f] bg-white/45 px-5 py-5 sm:px-6' aria-label={copy.reviewLabel}>
+                              <p className='mb-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#a87e32]'>{copy.reviewLabel}</p>
+                              <p className='mb-3 text-sm leading-none tracking-[0.16em] text-[#d0a54f]' aria-label='5 stars'>★★★★★</p>
+                              <blockquote className='font-heading text-sm leading-relaxed tracking-tight text-black/75 sm:text-[15px]'>&ldquo;{review.quote}&rdquo;</blockquote>
+                              <div className='mt-4 flex items-center gap-2.5'>
+                                <span aria-hidden='true' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: avatarColour(review.name), color: '#ffffff', boxShadow: '0 0 0 2px #f0e2bf', fontFamily: 'Inter, sans-serif', lineHeight: 1, textAlign: 'center' }} className='h-8 w-8 shrink-0 rounded-full text-xs font-black'>{review.name.trim().charAt(0).toUpperCase()}</span>
+                                <p className='text-[10px] font-extrabold uppercase tracking-[0.14em] text-black/55'>{review.name}{review.from ? ` · ${review.from}` : ''}</p>
+                              </div>
+                              {reviews.length > 1 && <div className='mt-4 flex flex-wrap gap-1.5'>
+                                {reviews.map((item, index) => <button key={item.name} type='button' onClick={() => selectReview(trainerIndex, index)} aria-pressed={reviewIndex === index} className={`border px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32] ${reviewIndex === index ? 'border-[#171512] bg-[#171512] text-white' : 'border-black/15 text-black/55 hover:border-[#a87e32] hover:text-[#171512]'}`}>{item.name}</button>)}
+                              </div>}
+                            </aside>}
+                            <div className='coach-client-gallery'>
+                              {trainer.clientImages.map((image, index) => <img key={image} src={image} alt={`${trainer.name} coaching a VIO FITNESS member`} loading='lazy' style={clientImageStyle(index, trainer.clientImages.length)} className='absolute border-[3px] border-[#f7f6f1] object-cover shadow-[0_12px_24px_rgba(23,21,18,.18)]' />)}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  </div>
-                </div>
                   )
                 })()}
               </article>
@@ -271,7 +526,7 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
         </div>
       </div>
 
-      <div className='mx-auto mt-10 max-w-[1440px] px-4 text-center sm:px-8 lg:mt-12 lg:px-16 xl:px-20'>
+      <div className='mx-auto mt-10 hidden max-w-[1440px] px-4 text-center sm:px-8 md:block lg:mt-12 lg:px-16 xl:px-20'>
         <div className='border-y border-black/10 py-9 sm:py-11'>
           <p className='font-heading mx-auto max-w-3xl text-3xl leading-tight tracking-tight text-[#171512] sm:text-4xl'>{language === 'vi' ? 'Bạn ấn tượng nhất với HLV nào? Hãy cho VIO biết nhé!' : 'Which coach were you most impressed with? Let me know!'}</p>
           <a href='#Registration' className='mt-6 inline-flex items-center justify-center bg-[#a87e32] px-6 py-4 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#171512] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a87e32]'>
@@ -279,6 +534,8 @@ const Trainers: FC<TrainersProps> = ({ language }) => {
           </a>
         </div>
       </div>
+
+      <TrainerDetailDialog trainer={detailTrainer} language={language} open={detailOpen} onClose={() => setDetailOpen(false)} />
     </section>
   )
 }
