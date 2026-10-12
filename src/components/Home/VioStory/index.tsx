@@ -419,7 +419,14 @@ const VioStory = ({ language }: VioStoryProps) => {
     return () => {
       media.revert()
     }
-  }, { scope: sectionRef, dependencies: [language, reduceMotion, updateRailDimensions] })
+  }, {
+    scope: sectionRef,
+    dependencies: [language, reduceMotion, updateRailDimensions],
+    // Language changes replace the animated title nodes. Revert the previous
+    // pin/timeline first so ScrollTrigger cannot leave stale pin spacing or
+    // transforms on the section before it measures the translated content.
+    revertOnUpdate: true,
+  })
 
   // Navigate to slide when clicking dots/cards or using keyboard
   const goToSlide = useCallback((index: number) => {
